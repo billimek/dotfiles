@@ -11,11 +11,11 @@ if ! zgen saved; then
   # https://github.com/tarjoilija/zgen/issues/74
   export ZGEN_PREZTO_LOAD_DEFAULT=0
 
-    # prezto options
-    zgen prezto editor key-bindings 'emacs'
+  # prezto options
+  zgen prezto editor key-bindings 'emacs'
 
-    # prezto and modules
-    zgen prezto
+  # prezto and modules
+  zgen prezto
 
   # Default plugins
   zgen load sorin-ionescu/prezto modules/environment
@@ -40,23 +40,20 @@ if ! zgen saved; then
   zgen load zsh-users/zsh-completions
   zgen load chriskempson/base16-shell
 
-#    zgen prezto homebrew
-#    zgen prezto archive
-    zgen prezto command-not-found
-    zgen prezto osx
-    zgen prezto tmux
-    zgen prezto ssh
+  # zgen prezto homebrew
+  # zgen prezto archive
+  zgen prezto command-not-found
+  zgen prezto osx
+  zgen prezto tmux
+  zgen prezto ssh
 
     # completions
-#    zgen load zsh-users/zsh-completions src
+  # zgen load zsh-users/zsh-completions src
 
     zgen load unixorn/autoupdate-zgen
-
     zgen load zsh-users/zsh-syntax-highlighting
-
     zgen load denysdovhan/spaceship-prompt spaceship
 
     # save all to init script
     zgen save
 fi
-
