@@ -46,7 +46,7 @@ if [ "$system_type" = "Darwin" ]; then
 # elif [ "$system_type" = "Linux" ]; then
 #   # install fonts under linux
 #   mkdir -p $HOME/.fonts && cp $HOME/.yadm/fonts/*.otf $HOME/.fonts && fc-cache -vf $HOME/.fonts
-# fi
+fi
 
 # make zsh default shell
 if [[ ! "$SHELL" =~ "zsh" && -f /etc/shells ]]; then
