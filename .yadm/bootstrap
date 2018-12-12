@@ -53,7 +53,7 @@ if [[ ! "$SHELL" =~ "zsh" && -f /etc/shells ]]; then
     if $(grep -q "/usr/local/bin/zsh" /etc/shells); then
       echo "=============== setting /usr/local/bin/zsh as your default shell"
       chsh -s /usr/local/bin/zsh
-    elif if $(grep -q "/bin/zsh" /etc/shells); then
+    elif $(grep -q "/bin/zsh" /etc/shells); then
       echo "=============== setting /bin/zsh as your default shell"
       chsh -s /bin/zsh
     fi
