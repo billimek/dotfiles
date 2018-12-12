@@ -60,4 +60,4 @@ if [[ ! "$SHELL" =~ "zsh" && -f /etc/shells ]]; then
 fi
 
 # all done!
-echo "=============== all done bootstrapping"
+echo "=============== all done bootstrapping! restart your session to pick-up the changes"
