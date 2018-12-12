@@ -39,6 +39,7 @@ if ! zgen saved; then
   zgen load zsh-users/zsh-autosuggestions
   zgen load zsh-users/zsh-completions
   zgen load chriskempson/base16-shell
+  zgen load martinlindhe/base16-iterm2
 
   # zgen prezto homebrew
   # zgen prezto archive
@@ -50,10 +51,10 @@ if ! zgen saved; then
     # completions
   # zgen load zsh-users/zsh-completions src
 
-    zgen load unixorn/autoupdate-zgen
-    zgen load zsh-users/zsh-syntax-highlighting
-    zgen load denysdovhan/spaceship-prompt spaceship
+  zgen load unixorn/autoupdate-zgen
+  zgen load zsh-users/zsh-syntax-highlighting
+  zgen load denysdovhan/spaceship-prompt spaceship
 
-    # save all to init script
-    zgen save
+  # save all to init script
+  zgen save
 fi

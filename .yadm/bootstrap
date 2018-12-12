@@ -1,1 +1,62 @@
-echo "bootstrapping"
+#!/bin/bash
+
+## list of things to bootstrap
+# TODO: iterm2 stuff (themes, etc) - is this necessary with cloud-based iterm config settings?
+# TODO: extra vim configuration (plugins)???
+# TODO: macos defaults code settings ?
+
+# Because Git submodule commands cannot operate without a work tree, they must
+# be run from within $HOME (assuming this is the root of your dotfiles)
+cd "$HOME"
+
+echo "Init submodules"
+yadm submodule update --recursive --init
+
+system_type=$(uname -s)
+
+if [ "$system_type" = "Darwin" ]; then
+
+  # install homebrew if it's missing
+  if ! command -v brew >/dev/null 2>&1; then
+    echo "Installing homebrew"
+    /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+  fi
+
+  # install things in .Brewfile
+  if [ -f "$HOME/.Brewfile" ]; then
+    echo "Updating homebrew bundle from $HOME/.Brewfile"
+    brew tap Homebrew/bundle
+    brew bundle --global
+    # brew cleanup
+    # brew prune
+    # brew doctor
+ 
+  fi
+
+  # install fonts
+  cp -f $HOME/.yadm/fonts/*.otf $HOME/Library/Fonts && cp -f $HOME/.yadm/fonts/*.ttf $HOME/Library/Fonts
+
+  # set-up iterm2 stuff
+  if [ -d "$HOME/.iterm2" ]; then
+    echo "Setting iTerm preference folder"
+    defaults write com.googlecode.iterm2 PrefsCustomFolder "$HOME/.iterm2"
+  fi
+
+elif [ "$system_type" = "Linux" ]; then
+  # install fonts under linux
+  mkdir -p $HOME/.fonts && cp $HOME/.yadm/fonts/*.otf $HOME/.fonts && fc-cache -vf $HOME/.fonts
+fi
+
+# make zsh default shell
+if [[ ! "$SHELL" =~ "zsh" && -f /etc/shells ]]; then
+    if [[ grep -q "/usr/local/bin/zsh" /etc/shells ]]; then
+      echo "setting zsh as your default shell"
+      chsh -s /usr/local/bin/zsh
+    elif [[ grep -q "/bin/zsh" /etc/shells ]]; then
+      echo "setting zsh as your default shell"
+      chsh -s /bin/zsh
+    fi
+fi
+
+# all done!
+echo "all done bootstrapping"
