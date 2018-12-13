@@ -1,4 +1,3 @@
-
 # Uncomment following line if you want red dots to be displayed while waiting for completion
 export COMPLETION_WAITING_DOTS="true"
 
@@ -112,6 +111,7 @@ zstyle ':completion:*' accept-exact '*(N)'
 zstyle ':completion:*' use-cache on
 zstyle ':completion:*' cache-path ~/.zsh/cache
 zstyle -e ':completion:*:default' list-colors 'reply=("${PREFIX:+=(#bi)($PREFIX:t)*==34=34}:${(s.:.)LS_COLORS}")';
+zstyle ':prezto:*:*' case-sensitive 'no'
 
 zstyle ':prezto:*:*' color 'yes'
 zstyle ':prezto:module:ssh-agent' forwarding 'yes'
@@ -143,4 +143,8 @@ if [ -n "$(/bin/ls ~/.zshrc.d)" ]; then
     fi
   done
 fi
+
+## Spaceship Prompt Customizations
+export SPACESHIP_EXIT_CODE_SHOW=true
+
 
