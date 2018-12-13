@@ -49,6 +49,14 @@ yadm clone https://github.com/billimek/dotfiles-next.git
 
 TBD
 
+### Migrating from old yadr dotfiles approach to this repo
+
+Before doing `yadm clone ...`, remove all of the old symlinks from the home directory first.  Take care not to delete any legitimate links!
+
+```shell
+find "$HOME" -maxdepth 1 -type l -name ".*" -delete
+```
+
 ## TODO
 
 * iterm2 stuff (themes, etc) - is this necessary with cloud-based iterm config settings?
