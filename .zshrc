@@ -7,6 +7,7 @@ export COMPLETION_WAITING_DOTS="true"
 
 ## Spaceship Prompt Customizations
 export SPACESHIP_EXIT_CODE_SHOW=true
+export SPACESHIP_HOST_SHOW=always
 
 # Correct spelling for commands
 setopt correct
