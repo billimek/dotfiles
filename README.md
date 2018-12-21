@@ -49,6 +49,17 @@ yadm clone https://github.com/billimek/dotfiles-next.git
 
 TBD
 
+### Updating
+
+TBD
+
+### Components
+
+TBD
+
+### Customization
+
+
 ### Migrating from old yadr dotfiles approach to this repo
 
 Before doing `yadm clone ...`, remove all of the old symlinks from the home directory first.  Take care not to delete any legitimate links!

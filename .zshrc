@@ -1,5 +1,12 @@
+##############################################################################
+# Customizations
+##############################################################################
+
 # Uncomment following line if you want red dots to be displayed while waiting for completion
 export COMPLETION_WAITING_DOTS="true"
+
+## Spaceship Prompt Customizations
+export SPACESHIP_EXIT_CODE_SHOW=true
 
 # Correct spelling for commands
 setopt correct
@@ -33,6 +40,14 @@ done
 export LSCOLORS='Exfxcxdxbxegedabagacad'
 export LS_COLORS='di=1;34;40:ln=35;40:so=32;40:pi=33;40:ex=31;40:bd=34;46:cd=34;43:su=0;41:sg=0;46:tw=0;42:ow=0;43:'
 
+##############################################################################
+# SSH Handling (TODO)
+##############################################################################
+#echo
+#echo "Current SSH Keys:"
+#ssh-add -l
+#echo
+
 # Fun with SSH
 #if [ $(ssh-add -l | grep -c "The agent has no identities." ) -eq 1 ]; then
 #  if [[ "$(uname -s)" == "Darwin" ]]; then
@@ -54,11 +69,12 @@ export LS_COLORS='di=1;34;40:ln=35;40:so=32;40:pi=33;40:ex=31;40:bd=34;46:cd=34;
 
 # Now that we have $PATH set up and ssh keys loaded, configure zgen.
 
-# start zgen
+##############################################################################
+# zgen
+##############################################################################
 if [ -f ~/.zgen-setup ]; then
   source ~/.zgen-setup
 fi
-# end zgen
 
 # Keep a ton of history.
 HISTSIZE=100000
@@ -93,8 +109,6 @@ if [ -r ~/.zsh_functions ]; then
   source ~/.zsh_functions
 fi
 
-export LOCATE_PATH=/var/db/locate.database
-
 if [[ "$(uname -s)" == "Darwin" ]]; then
   # We're on osx
   [ -f ~/.osx_aliases ] && source ~/.osx_aliases
@@ -106,6 +120,11 @@ if [[ "$(uname -s)" == "Darwin" ]]; then
   fi
 fi
 
+export LOCATE_PATH=/var/db/locate.database
+
+##############################################################################
+# zstyle stuff
+##############################################################################
 # Speed up autocomplete, force prefix mapping
 zstyle ':completion:*' accept-exact '*(N)'
 zstyle ':completion:*' use-cache on
@@ -127,11 +146,11 @@ if [ -d ~/.zsh-completions ]; then
   done
 fi
 
-#echo
-#echo "Current SSH Keys:"
-#ssh-add -l
-#echo
 
+
+##############################################################################
+# .zshrc.d/ files loading
+##############################################################################
 # Make it easy to append your own customizations that override the above by
 # loading all files from the ~/.zshrc.d directory
 mkdir -p ~/.zshrc.d
@@ -143,8 +162,5 @@ if [ -n "$(/bin/ls ~/.zshrc.d)" ]; then
     fi
   done
 fi
-
-## Spaceship Prompt Customizations
-export SPACESHIP_EXIT_CODE_SHOW=true
 
 
