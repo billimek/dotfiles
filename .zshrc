@@ -9,6 +9,8 @@ export COMPLETION_WAITING_DOTS="true"
 export SPACESHIP_EXIT_CODE_SHOW=true
 export SPACESHIP_HOST_SHOW=always
 
+export ZSH_CACHE_DIR="$HOME/.cache"
+
 # Correct spelling for commands
 setopt correct
 

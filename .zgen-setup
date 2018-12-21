@@ -35,6 +35,7 @@ if ! zgen saved; then
 
   # 3rd Party plugins
   zgen load robbyrussell/oh-my-zsh plugins/docker
+  zgen load robbyrussell/oh-my-zsh plugins/fasd
 #  zgen load zsh-users/zaw
   zgen load zsh-users/zsh-autosuggestions
   zgen load zsh-users/zsh-completions
