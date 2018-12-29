@@ -14,6 +14,9 @@ export ZSH_CACHE_DIR="$HOME/.cache"
 # Correct spelling for commands
 setopt correct
 
+# allow tab-completion of aliases
+setopt no_complete_aliases
+
 # turn off the infernal correctall for filenames
 unsetopt correctall
 
