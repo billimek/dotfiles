@@ -56,7 +56,8 @@ alias gpl='git pull'
 alias gplr='git pull --rebase'
 alias gps='git push'
 alias gpc='git push -u origin `git rev-parse --abbrev-ref HEAD`'
-alias gnb='git nb' # new branch aka checkout -b
+alias gpf='git push --force-with-lease'
+alias gbc='git nb' # new branch aka checkout -b
 alias gsm='git submodule'
 alias gdmb='git branch --merged | grep -v "\*" | xargs -n 1 git branch -d'
 
