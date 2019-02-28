@@ -70,6 +70,7 @@ alias lh='ls -alt | head' # see the last modified files
 alias sc='tmux detach;tmux attach'
 alias scc='tmux -CC attach'
 alias cl='clear'
+alias watch='watch '
 
 # Docker
 alias dps='docker ps --format "table {{.Names}}\t{{.Status}}"'
