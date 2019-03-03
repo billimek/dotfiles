@@ -21,7 +21,7 @@ setopt no_complete_aliases
 unsetopt correctall
 
 # Base PATH
-PATH=/usr/local/bin:/usr/local/sbin:/sbin:/usr/sbin:/bin:/usr/bin
+PATH=/usr/local/bin:/usr/local/sbin:/sbin:/usr/sbin:/bin:/usr/bin:/Users/jeff/google-cloud-sdk/bin
 
 # Conditional PATH additions
 for path_candidate in /opt/local/sbin \
