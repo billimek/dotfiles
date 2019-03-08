@@ -46,7 +46,7 @@ brew 'reattach-to-user-namespace'
 brew 'ruby'
 brew 'screenfetch'
 brew 'spark'
-brew 'the_silver_searcher'
+brew 'shellcheck'
 brew 'tmux'
 brew 'terraform'
 brew 'vim', args: ['with-lua']
