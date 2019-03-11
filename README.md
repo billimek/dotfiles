@@ -42,7 +42,7 @@ apt-get install -y yadm
 ### Install dotfiles via yadm
 
 ```shell
-yadm clone https://github.com/billimek/dotfiles-next.git
+yadm clone https://github.com/billimek/dotfiles.git
 ```
 
 ## Details
