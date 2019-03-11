@@ -115,8 +115,14 @@ set ignorecase      " Ignore case when searching...
 set smartcase       " ...unless we type a capital
 
 " ================ Custom Settings ========================
-if filereadable(expand("~/.yadr/vim/settings.vim"))
-  so ~/.yadr/vim/settings.vim
+"if filereadable(expand("~/.yadr/vim/settings.vim"))
+"  so ~/.yadr/vim/settings.vim
+"endif
+
+" Uncomment the following to have Vim jump to the last position when
+" reopening a file
+if has("autocmd")
+  au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 endif
 
 set pastetoggle=<F2>
