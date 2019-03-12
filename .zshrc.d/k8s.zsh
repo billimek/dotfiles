@@ -2,7 +2,10 @@ kapply() {envsubst < "$@" | kubectl apply -f -}
 
 kseal() {
     name=$(basename -s .txt "$@")
-    envsubst < "$@" >! values.yaml | kubectl -n kube-system create secret generic "$name" --from-file=values.yaml --dry-run -o json | kubeseal --format=yaml --cert=../pub-cert.pem && rm  values.yaml
+    if [[ -z "$NS" ]]; then
+      NS=default
+    fi
+    envsubst < "$@" > values.yaml | kubectl -n "$NS" create secret generic "$name" --from-file=values.yaml --dry-run -o json | kubeseal --format=yaml --cert=../pub-cert.pem && rm values.yaml
 }
 
 alias k='kubectl'

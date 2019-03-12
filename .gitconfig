@@ -32,6 +32,7 @@
   ci = commit --signoff                      # commit
   amend = commit --amend            # ammend your last commit
   ammend = commit --amend           # ammend your last commit
+  commit = commit --signoff
 
   # checkout
   co = checkout                     # checkout
