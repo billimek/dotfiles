@@ -8,6 +8,8 @@ export COMPLETION_WAITING_DOTS="true"
 ## Spaceship Prompt Customizations
 export SPACESHIP_EXIT_CODE_SHOW=true
 export SPACESHIP_HOST_SHOW=always
+export SPACESHIP_KUBECTL_SHOW=true
+export SPACESHIP_KUBECTL_VERSION_SHOW=false
 
 export ZSH_CACHE_DIR="$HOME/.cache"
 
