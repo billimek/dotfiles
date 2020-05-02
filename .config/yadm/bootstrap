@@ -35,7 +35,7 @@ if [ "$system_type" = "Darwin" ]; then
 
   # install fonts
   echo "=============== installing fonts to $HOME/Library/Fonts"
-  cp -vf $HOME/.yadm/fonts/*.ttf $HOME/Library/Fonts
+  cp -vf $HOME/.config/yadm/fonts/*.ttf $HOME/Library/Fonts
 
   # set-up iterm2 stuff
   if [ -d "$HOME/.iterm2" ]; then
