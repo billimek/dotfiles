@@ -1,5 +1,7 @@
 # Dotfiles
 
+![Terminal Screenshot](.config/yadm/screenshot.png)
+
 ## Introduction
 
 @billimek dotfiles implementation leveraging the following:
@@ -12,10 +14,13 @@
 
 ### One-liner
 
-**TBD**
-(need to write shell script to detect system type, possibly download homebrew, & install yadm)
+```console
+curl -fsSL https://raw.githubusercontent.com/billimek/dotfiles/master/.config/yadm/setup.sh | sh -
+```
 
-### Prerequisites
+### Manual installation
+
+Prerequisites:
 
 #### MacOS
 
@@ -44,21 +49,6 @@ apt-get install -y yadm
 ```shell
 yadm clone https://github.com/billimek/dotfiles.git
 ```
-
-## Details
-
-TBD
-
-### Updating
-
-TBD
-
-### Components
-
-TBD
-
-### Customization
-
 
 ### Migrating from old yadr dotfiles approach to this repo
 
