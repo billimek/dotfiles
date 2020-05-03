@@ -16,7 +16,7 @@ if [[ "$OSTYPE" = "darwin"* ]]; then
 
   print_header "Install yadm and clone the dotfiles repo"
   brew install yadm
-  yadm clone git@github.com:billimek/dotfiles.git
+  yadm clone https://github.com/billimek/dotfiles.git
   yadm submodule init
   yadm submodule update --recursive
 else
@@ -24,7 +24,7 @@ else
   if ! which yadm; then
     sudo apt-get install yadm -y
   fi
-  yadm clone git@github.com:billimek/dotfiles.git
+  yadm clone https://github.com/billimek/dotfiles.git
   yadm submodule init
   yadm submodule update --recursive
 fi
