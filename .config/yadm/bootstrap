@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 ## list of things to bootstrap
 # TODO: iterm2 stuff (themes, etc) - is this necessary with cloud-based iterm config settings?
@@ -18,7 +18,7 @@ system_type=$(uname -s)
 if [ "$system_type" = "Darwin" ]; then
 
   # install homebrew if it's missing
-  if ! command -v brew >/dev/null 2>&1; then
+  if ! which brew; then
     echo "=============== Installing homebrew"
     /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
   fi
@@ -28,9 +28,6 @@ if [ "$system_type" = "Darwin" ]; then
     echo "=============== Updating homebrew bundle from $HOME/.Brewfile"
     brew tap Homebrew/bundle
     brew bundle --global
-    # brew cleanup
-    # brew prune
-    # brew doctor
   fi
 
   # install fonts
