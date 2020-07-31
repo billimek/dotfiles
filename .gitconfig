@@ -109,6 +109,8 @@
   # 'git push' will push the current branch to its tracking branch
   # the usual default is to push all branches
   default = upstream
+[pull]
+  ff = only
 [core]
 	autocrlf = false
   editor = vim
