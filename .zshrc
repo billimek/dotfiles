@@ -34,7 +34,8 @@ for path_candidate in /opt/local/sbin \
   ~/.cargo/bin \
   ~/.rbenv/bin \
   ~/bin \
-  ~/src/gocode/bin
+  ~/src/gocode/bin \
+  ~/.krew/bin
 do
   if [ -d ${path_candidate} ]; then
     export PATH=${PATH}:${path_candidate}
