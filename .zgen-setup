@@ -58,6 +58,8 @@ if ! zgen saved; then
 
   zgen load johanhaleby/kubetail
 
+  zgen load twang817/zsh-ssh-agent
+
   # save all to init script
   zgen save
 fi
