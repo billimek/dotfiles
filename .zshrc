@@ -149,7 +149,7 @@ zstyle ':prezto:*:*' color 'yes'
 #zstyle ':prezto:module:ssh-agent' forwarding 'yes'
 #zstyle :omz:plugins:ssh-agent osx-use-launchd-ssh-agent yes
 #zstyle :omz:plugins:ssh-agent agent-forwarding on
-zstyle ':prezto:module:gpg-agent:auto-start' remote 'no'
+# zstyle ':prezto:module:gpg-agent:auto-start' remote 'no'
 
 zstyle ':prezto:module:terminal' auto-title 'yes'
 zstyle ':prezto:module:tmux:iterm' integrate 'yes'
