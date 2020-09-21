@@ -47,7 +47,8 @@ if ! zgen saved; then
   zgen prezto command-not-found
   zgen prezto osx
   zgen prezto tmux
-  zgen prezto ssh
+  # zgen prezto ssh
+  zgen prezto gpg
 
     # completions
   # zgen load zsh-users/zsh-completions src
@@ -58,7 +59,7 @@ if ! zgen saved; then
 
   zgen load johanhaleby/kubetail
 
-  zgen load twang817/zsh-ssh-agent
+  # zgen load twang817/zsh-ssh-agent
 
   # save all to init script
   zgen save
