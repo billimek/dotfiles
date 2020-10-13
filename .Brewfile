@@ -47,6 +47,7 @@ brew 'ruby'
 brew 'screenfetch'
 brew 'spark'
 brew 'shellcheck'
+brew 'starship'
 brew 'tmux'
 brew 'terraform'
 brew 'vim', args: ['with-lua']

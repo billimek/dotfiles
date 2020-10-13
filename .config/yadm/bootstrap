@@ -40,9 +40,12 @@ if [ "$system_type" = "Darwin" ]; then
     defaults write com.googlecode.iterm2 PrefsCustomFolder "$HOME/.iterm2"
   fi
 
-# elif [ "$system_type" = "Linux" ]; then
-#   # install fonts under linux
-#   mkdir -p $HOME/.fonts && cp $HOME/.yadm/fonts/*.otf $HOME/.fonts && fc-cache -vf $HOME/.fonts
+elif [ "$system_type" = "Linux" ]; then
+  # install fonts under linux
+  # mkdir -p $HOME/.fonts && cp $HOME/.yadm/fonts/*.otf $HOME/.fonts && fc-cache -vf $HOME/.fonts
+
+  # install starship
+  curl -fsSL https://starship.rs/install.sh | bash
 fi
 
 # make zsh default shell

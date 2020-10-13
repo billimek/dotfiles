@@ -1,0 +1,10 @@
+[status]
+disabled = false
+
+[hostname]
+ssh_only = true
+disabled = false
+
+[kubernetes]
+disabled = false
+

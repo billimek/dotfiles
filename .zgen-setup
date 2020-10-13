@@ -56,7 +56,7 @@ if ! zgen saved; then
 
   zgen load unixorn/autoupdate-zgen
   zgen load zsh-users/zsh-syntax-highlighting
-  zgen load denysdovhan/spaceship-prompt spaceship
+  # zgen load denysdovhan/spaceship-prompt spaceship
 
   zgen load johanhaleby/kubetail
 
