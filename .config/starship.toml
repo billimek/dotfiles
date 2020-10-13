@@ -8,3 +8,9 @@ disabled = false
 [kubernetes]
 disabled = false
 
+[ocaml]
+disabled = true
+
+[perl]
+disabled = true
+
