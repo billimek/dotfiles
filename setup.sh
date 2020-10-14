@@ -8,19 +8,19 @@ print_header() {
 }
 
 # OS Specific Setup with yadm
-if [[ "$OSTYPE" = "darwin"* ]]; then
+if [ "$OSTYPE" = "darwin"* ]; then
   if ! which brew; then
     echo "=============== Installing homebrew"
     /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
   fi
 
-  print_header "Install yadm and clone the dotfiles repo"
+  print_header "Install yadm and clone the dotfiles repo (MacOS)"
   brew install yadm
   yadm clone https://github.com/billimek/dotfiles.git
   yadm submodule init
   yadm submodule update --recursive
 else
-  print_header "Install yadm and clone the dotfiles repo"
+  print_header "Install yadm and clone the dotfiles repo (linux)"
   if ! which yadm; then
     sudo apt-get install yadm -y
   fi
