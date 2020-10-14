@@ -22,6 +22,8 @@ if [ "$CODESPACES" = "true" ]; then
 
     echo "initialize yadm"
     /usr/local/bin/yadm clone https://github.com/billimek/dotfiles.git --no-bootstrap
+    /usr/local/bin/yadm submodule init
+    /usr/local/bin/yadm submodule update --recursive
 
     echo "install starship prompt"
     curl -fsSL https://starship.rs/install.sh | bash -s -- -f
