@@ -15,7 +15,7 @@
 ### One-liner
 
 ```console
-curl -fsSL https://raw.githubusercontent.com/billimek/dotfiles/master/.config/yadm/setup.sh | sh -
+curl -fsSL https://raw.githubusercontent.com/billimek/dotfiles/master/setup.sh | sh -
 ```
 
 ### Manual installation
