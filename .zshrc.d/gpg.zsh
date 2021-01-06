@@ -3,6 +3,9 @@ export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
 gpgconf --launch gpg-agent
 gpg-connect-agent updatestartuptty /bye > /dev/null
 
+export GPG_AGENT_INFO="$(gpgconf --list-dirs agent-socket):0:1"
+
+
 #if [[ $OSTYPE == darwin* ]]; then
 #  _GPG_AGENT_SOCK="${HOME}/.gnupg/S.gpg-agent"
 #  _GPG_AGENT_SSH_SOCK="${HOME}/.gnupg/S.gpg-agent.ssh"
