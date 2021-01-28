@@ -146,9 +146,10 @@ zstyle ':prezto:*:*' case-sensitive 'no'
 
 zstyle ':prezto:*:*' color 'yes'
 
-#zstyle ':prezto:module:ssh-agent' forwarding 'yes'
+zstyle ':prezto:module:ssh-agent' forwarding 'yes'
 #zstyle :omz:plugins:ssh-agent osx-use-launchd-ssh-agent yes
 #zstyle :omz:plugins:ssh-agent agent-forwarding on
+#zstyle :omz:plugins:ssh-agent identities id_ed25519
 # zstyle ':prezto:module:gpg-agent:auto-start' remote 'no'
 
 zstyle ':prezto:module:terminal' auto-title 'yes'
