@@ -165,8 +165,15 @@ fi
 
 ##############################################################################
 # Handle starship prompt
-##############################################################################
-eval "$(starship init zsh)"
+##############################################################################a
+if [[ "$OSTYPE" == "freebsd12.0"* ]]; then
+  if [ -f /mnt/tank/iocage/jails/ports/root/usr/local/bin/starship ]; then
+    export LD_LIBRARY_PATH=/mnt/tank/iocage/jails/ports/root/usr/local/lib
+    eval "$(/mnt/tank/iocage/jails/ports/root/usr/local/bin/starship init zsh)"
+  fi
+else
+  eval "$(starship init zsh)"
+fi
 
 ##############################################################################
 # .zshrc.d/ files loading
