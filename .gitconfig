@@ -139,3 +139,5 @@
 	gpgsign = true
 [includeIf "gitdir:~/src.github/"]
 	path = ~/.gitconfig.user.github
+[fetch]
+	prune = true
