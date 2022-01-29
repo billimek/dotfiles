@@ -136,7 +136,7 @@
   required = true
 
 [commit]
-	gpgsign = true
+  #gpgsign = true
 [includeIf "gitdir:~/src.github/"]
 	path = ~/.gitconfig.user.github
 [fetch]
