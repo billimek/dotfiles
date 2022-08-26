@@ -35,10 +35,10 @@ if [ "$CODESPACES" = "true" ]; then
   exit 0
 fi
 
-if [ "$OSTYPE" = "darwin"* ]; then
+if [ "$OSTYPE" ~= "darwin.*" ]; then
   if ! which brew; then
     echo "=============== Installing homebrew"
-    /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
   fi
 
   print_header "Install yadm and clone the dotfiles repo (MacOS)"
