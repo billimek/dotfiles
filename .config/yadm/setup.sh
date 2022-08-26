@@ -36,13 +36,13 @@ if [[ "$CODESPACES" = "true" ]]; then
 fi
 
 if [[ "$OSTYPE" == "darwin"* ]]; then
-  if ! which brew; then
+  if ! which /opt/homebrew/bin/brew; then
     echo "=============== Installing homebrew"
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
   fi
 
   print_header "Install yadm and clone the dotfiles repo (MacOS)"
-  brew install yadm
+  /opt/homebrew/bin/brew install yadm
   yadm clone https://github.com/billimek/dotfiles.git
   yadm submodule init
   yadm submodule update --recursive
