@@ -43,9 +43,9 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
 
   print_header "Install yadm and clone the dotfiles repo (MacOS)"
   /opt/homebrew/bin/brew install yadm
-  yadm clone https://github.com/billimek/dotfiles.git
-  yadm submodule init
-  yadm submodule update --recursive
+  /opt/homebrew/bin/yadm clone https://github.com/billimek/dotfiles.git
+  /opt/homebrew/bin/yadm submodule init
+  /opt/homebrew/bin/yadm submodule update --recursive
 else
   print_header "Install yadm and clone the dotfiles repo (linux)"
   if ! which yadm; then
