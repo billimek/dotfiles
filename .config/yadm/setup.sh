@@ -9,7 +9,7 @@ print_header() {
 
 # OS Specific Setup with yadm
 
-if [ "$CODESPACES" = "true" ]; then
+if [[ "$CODESPACES" = "true" ]]; then
   print_header "In a codespaces environment"
   # only execute if this is the first time
   if ! which yadm; then
@@ -35,7 +35,7 @@ if [ "$CODESPACES" = "true" ]; then
   exit 0
 fi
 
-if [ "$OSTYPE" ~= "darwin.*" ]; then
+if [[ "$OSTYPE" == "darwin"* ]]; then
   if ! which brew; then
     echo "=============== Installing homebrew"
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
