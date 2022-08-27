@@ -155,6 +155,3 @@ if [ -n "$(/bin/ls ~/.zshrc.d)" ]; then
   done
 fi
 
-
-source /Users/JKB2462/google-cloud-sdk/path.zsh.inc
-source /Users/JKB2462/google-cloud-sdk/completion.zsh.inc
