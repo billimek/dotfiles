@@ -40,7 +40,7 @@ for path_candidate in /opt/local/sbin \
   /home/jeff/.local/bin/
 do
   if [ -d ${path_candidate} ]; then
-    export PATH=${PATH}:${path_candidate}
+    export PATH=${path_candidate}:${PATH}
   fi
 done
 
@@ -48,39 +48,9 @@ done
 # tool that makes it easy to customize your color scheme and keep them in sync
 # across Linux and OS X/*BSD at http://geoff.greer.fm/lscolors/
 
-#export LSCOLORS='Exfxcxdxbxegedabagacad'
 export LSCOLORS='exfxcxdxbxegedabagacad'
-#export LS_COLORS='di=1;34;40:ln=35;40:so=32;40:pi=33;40:ex=31;40:bd=34;46:cd=34;43:su=0;41:sg=0;46:tw=0;42:ow=0;43:'
 export LS_COLORS='di=34:ln=35:so=32:pi=33:ex=31:bd=34;46:cd=34;43:su=30;41:sg=30;46:tw=30;42:ow=30;43'
 
-##############################################################################
-# SSH Handling (TODO)
-##############################################################################
-#echo
-#echo "Current SSH Keys:"
-#ssh-add -l
-#echo
-
-# Fun with SSH
-#if [ $(ssh-add -l | grep -c "The agent has no identities." ) -eq 1 ]; then
-#  if [[ "$(uname -s)" == "Darwin" ]]; then
-#    # We're on OS X. Try to load ssh keys using pass phrases stored in
-#    # the OSX keychain.
-#    #
-#    # You can use ssh-add -K /path/to/key to store pass phrases into
-#    # the OSX keychain
-#    ssh-add -k
-#  fi
-#fi
-
-#for key in $(find ~/.ssh -type f -a \( -name id_rsa -o -name id_dsa -name id_ecdsa \))
-#do
-#  if [ -f ${key} -a $(ssh-add -l | grep -c "${key//$HOME\//}" ) -eq 0 ]; then
-#    ssh-add ${key}
-#  fi
-#done
-
-# Now that we have $PATH set up and ssh keys loaded, configure zgen.
 
 ##############################################################################
 # zgen
@@ -147,12 +117,6 @@ zstyle ':prezto:*:*' case-sensitive 'no'
 
 zstyle ':prezto:*:*' color 'yes'
 
-zstyle ':prezto:module:ssh-agent' forwarding 'yes'
-#zstyle :omz:plugins:ssh-agent osx-use-launchd-ssh-agent yes
-#zstyle :omz:plugins:ssh-agent agent-forwarding on
-#zstyle :omz:plugins:ssh-agent identities id_ed25519
-# zstyle ':prezto:module:gpg-agent:auto-start' remote 'no'
-
 zstyle ':prezto:module:terminal' auto-title 'yes'
 zstyle ':prezto:module:tmux:iterm' integrate 'yes'
 
@@ -192,3 +156,5 @@ if [ -n "$(/bin/ls ~/.zshrc.d)" ]; then
 fi
 
 
+source /Users/JKB2462/google-cloud-sdk/path.zsh.inc
+source /Users/JKB2462/google-cloud-sdk/completion.zsh.inc

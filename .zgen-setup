@@ -47,9 +47,7 @@ if ! zgen saved; then
   zgen prezto command-not-found
   zgen prezto osx
   zgen prezto tmux
-  # zgen prezto gpg
-  zgen prezto ssh
-  # zgen load laggardkernel/zsh-gpg-agent
+  # zgen prezto ssh
 
     # completions
   # zgen load zsh-users/zsh-completions src
