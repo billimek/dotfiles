@@ -15,7 +15,7 @@ yadm submodule update --recursive --init
 
 system_type=$(uname -s)
 
-if [[ "$system_type" = "Darwin" ]]; then
+if [ "$system_type" = "Darwin" ]; then
 
   # install homebrew if it's missing
   if ! which /opt/homebrew/bin/brew; then
@@ -24,7 +24,7 @@ if [[ "$system_type" = "Darwin" ]]; then
   fi
 
   # install things in .Brewfile
-  if [[ -f "$HOME/.Brewfile" ]]; then
+  if [ -f "$HOME/.Brewfile" ]; then
     echo "=============== Updating homebrew bundle from $HOME/.Brewfile"
     /opt/homebrew/bin/brew tap Homebrew/bundle
     /opt/homebrew/bin/brew bundle --global
@@ -40,23 +40,29 @@ if [[ "$system_type" = "Darwin" ]]; then
   #   defaults write com.googlecode.iterm2 PrefsCustomFolder "$HOME/.iterm2"
   # fi
 
-elif [[ "$system_type" = "Linux" ]]; then
+elif [ "$system_type" = "Linux" ]; then
   # install fonts under linux
   # mkdir -p $HOME/.fonts && cp $HOME/.yadm/fonts/*.otf $HOME/.fonts && fc-cache -vf $HOME/.fonts
 
   # install starship
-  curl -fsSL https://starship.rs/install.sh | bash -s -- -f
+  if ! which starship; then
+    echo "installing starship prompt"
+    curl -fsSL https://starship.rs/install.sh | sh -s -- -f
+  fi
 fi
 
 # make zsh default shell
-if [[ ! "$SHELL" =~ "zsh" && -f /etc/shells && -z ${CODESPACES+x} ]]; then
-    if $(grep -q "/usr/local/bin/zsh" /etc/shells); then
-      echo "=============== setting /usr/local/bin/zsh as your default shell"
-      chsh -s /usr/local/bin/zsh
-    elif $(grep -q "/bin/zsh" /etc/shells); then
-      echo "=============== setting /bin/zsh as your default shell"
-      chsh -s /bin/zsh
-    fi
+if [ ! "$SHELL" = "zsh" ] && [ -f /etc/shells ] && [ -z ${CODESPACES+x} ]; then
+  if ! which zsh; then
+    sudo apt install zsh
+  fi
+  if eval grep -q "/usr/local/bin/zsh" /etc/shells; then
+    echo "=============== setting /usr/local/bin/zsh as your default shell"
+    chsh -s /usr/local/bin/zsh
+  elif eval grep -q "/bin/zsh" /etc/shells; then
+    echo "=============== setting /bin/zsh as your default shell"
+    chsh -s /bin/zsh
+  fi
 fi
 
 # all done!
