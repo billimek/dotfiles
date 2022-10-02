@@ -143,3 +143,5 @@
   path = ~/.gitconfig.user
 [fetch]
 	prune = true
+[gpg "ssh"]
+	allowedSignersFile = /Users/jeff/.ssh/allowed_signers
