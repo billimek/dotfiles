@@ -136,10 +136,10 @@
   required = true
 
 [commit]
-	gpgsign = false
+	gpgsign = true
 [includeIf "gitdir:~/src.github/"]
 	path = ~/.gitconfig.user.github
 [includeIf "gitdir:~/src/"]
-  path = ~/.gitconfig.user.ghec
+  path = ~/.gitconfig.user
 [fetch]
 	prune = true
