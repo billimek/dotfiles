@@ -26,7 +26,6 @@ if ! zgen saved; then
   zgen load sorin-ionescu/prezto modules/spectrum
   zgen load sorin-ionescu/prezto modules/utility
   zgen load sorin-ionescu/prezto modules/completion
-#  zgen load sorin-ionescu/prezto modules/prompt
 
   # Extra plugins
 #  zgen load sorin-ionescu/prezto modules/git
@@ -36,7 +35,6 @@ if ! zgen saved; then
   # 3rd Party plugins
   zgen load robbyrussell/oh-my-zsh plugins/docker
   zgen load robbyrussell/oh-my-zsh plugins/fasd
-#  zgen load zsh-users/zaw
   zgen load zsh-users/zsh-autosuggestions
   zgen load zsh-users/zsh-completions
   zgen load chriskempson/base16-shell
@@ -47,18 +45,14 @@ if ! zgen saved; then
   zgen prezto command-not-found
   zgen prezto osx
   zgen prezto tmux
-  # zgen prezto ssh
 
-    # completions
+  # completions
   # zgen load zsh-users/zsh-completions src
 
   zgen load unixorn/autoupdate-zgen
   zgen load zsh-users/zsh-syntax-highlighting
-  # zgen load denysdovhan/spaceship-prompt spaceship
 
   zgen load johanhaleby/kubetail
-
-  # zgen load twang817/zsh-ssh-agent
 
   # save all to init script
   zgen save
