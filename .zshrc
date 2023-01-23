@@ -30,6 +30,7 @@ for path_candidate in /opt/local/sbin \
   /Applications/Xcode.app/Contents/Developer/usr/bin \
   /opt/local/bin \
   /opt/homebrew/bin \
+  /home/linuxbrew/.linuxbrew/bin \
   /usr/local/share/npm/bin \
   ~/.cabal/bin \
   ~/.cargo/bin \
