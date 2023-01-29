@@ -7,5 +7,5 @@ function update_environment_from_tmux() {
 add-zsh-hook precmd update_environment_from_tmux
 
 
-eval "$(op completion zsh)"; compdef _op o
+eval "$(op completion zsh)"; compdef _op op
 
