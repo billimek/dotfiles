@@ -139,6 +139,8 @@
 	gpgsign = true
 [includeIf "gitdir:~/src.github/"]
 	path = ~/.gitconfig.user.github
+[includeIf "gitdir:~/.local/share/yadm/"]
+	path = ~/.gitconfig.user.github
 [includeIf "gitdir:~/src/"]
   path = ~/.gitconfig.user
 [fetch]
