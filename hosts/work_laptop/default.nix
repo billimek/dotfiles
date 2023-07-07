@@ -1,0 +1,21 @@
+{ config, pkgs, lib, home-manager, ... }:
+let
+  secrets = import ../../secrets.nix;
+in
+{
+  imports = [
+    ../common/darwin/defaults.nix
+    ./homebrew.nix
+    ../common/optional/fish.nix
+  ];
+
+  # Use a custom configuration.nix location.
+  # $ darwin-rebuild switch -I darwin-config=$HOME/.config/nixpkgs/darwin/configuration.nix
+  environment.darwinConfig = "$HOME/src.github/nix-config/hosts/work_laptop/default.nix";
+
+  security.pki.certificateFiles = [ secrets.work_certpath ];
+
+  # Used for backwards compatibility, please read the changelog before changing.
+  # $ darwin-rebuild changelog
+  system.stateVersion = 4;
+}
