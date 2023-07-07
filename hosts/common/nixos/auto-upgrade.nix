@@ -12,6 +12,6 @@ in
     flags = [
       "--refresh"
     ];
-    flake = "github:billimek/nix-config";
+    flake = "github:billimek/dotfiles";
   };
 }

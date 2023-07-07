@@ -65,13 +65,13 @@ Here is where I will normally try and setup all the hardware and import the prof
 ```shell
 nix-shell -p git vim
 cd /etc/nixos
-git clone https://github.com/billimek/nix-config.git
+git clone https://github.com/billimek/dotfiles.git
 ```
 
 I will then copy in the new machine basic config into a new machine folder and setup the configuration.nix in root. I will then replace the generated config with the new setup.
 
 ```shell
-cd nix-config
+cd dotfiles
 mkdir -p hosts/home
 mv ../configuration.nix hosts/home/default.nix
 mv ../hardware-configuration.nix hosts/home/hardware-configuration.nix
@@ -80,7 +80,7 @@ vim hosts/home/default.nix
 mv ./* ..
 mv ./.* ..
 cd ../
-rm -rf nix-config
+rm -rf dotfiles
 reboot
 ```
 

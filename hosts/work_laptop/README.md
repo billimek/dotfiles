@@ -32,15 +32,15 @@ Homebrew is used to install GUI packages that we don't want to install via nix.
 ```shell
 mkdir -p ~/src
 cd ~/src
-git clone https://github.com/billimek/nix-config.git
+git clone https://github.com/billimek/dotfiles.git
 ```
 
 Install the flake
 
 
 ```shell
-darwin-rebuild switch --flake $HOME/src.github/nix-config/.#work-laptop
-home-manager switch --flake $HOME/src.github/nix-config/.#jeff@work-laptop
+darwin-rebuild switch --flake $HOME/src.github/dotfiles/.#work-laptop
+home-manager switch --flake $HOME/src.github/dotfiles/.#jeff@work-laptop
 ```
 
 ## Things that need secrets

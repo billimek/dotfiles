@@ -40,7 +40,7 @@
   programs.fish = {
     shellAbbrs = rec {
       # override with machine-specific values
-      rehome = lib.mkForce "home-manager switch --flake $HOME/src/nix-config/.#jeff@honeypot";
+      rehome = lib.mkForce "home-manager switch --flake $HOME/src/dotfiles/.#jeff@honeypot";
     };
     functions = {
       _1password_agent_wsl = {

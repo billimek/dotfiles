@@ -76,8 +76,8 @@ in
   programs.fish = {
     shellAbbrs = rec {
       # override with machine-specific values
-      rehome = lib.mkForce "home-manager switch --flake $HOME/src.github/nix-config/.#jeff@work-laptop";
-      rebuild = lib.mkForce "darwin-rebuild switch --flake $HOME/src.github/nix-config/.#work-laptop";
+      rehome = lib.mkForce "home-manager switch --flake $HOME/src.github/dotfiles/.#jeff@work-laptop";
+      rebuild = lib.mkForce "darwin-rebuild switch --flake $HOME/src.github/dotfiles/.#work-laptop";
       tf = "terraform";
     };
     shellAliases = {

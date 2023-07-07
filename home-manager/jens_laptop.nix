@@ -41,8 +41,8 @@
   programs.fish = {
     shellAbbrs = rec {
       # override with machine-specific values
-      rehome = lib.mkForce "home-manager switch --flake $HOME/src/nix-config/.#(whoami)@(hostname)";
-      rebuild = lib.mkForce "darwin-rebuild switch --flake $HOME/src/nix-config/.#";
+      rehome = lib.mkForce "home-manager switch --flake $HOME/src/dotfiles/.#(whoami)@(hostname)";
+      rebuild = lib.mkForce "darwin-rebuild switch --flake $HOME/src/dotfiles/.#";
     };
     shellAliases = {
     };
