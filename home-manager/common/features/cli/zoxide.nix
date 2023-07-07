@@ -1,0 +1,5 @@
+{
+  programs.zoxide = {
+    enable = true;
+  };
+}
