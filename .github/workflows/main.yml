@@ -27,7 +27,7 @@ jobs:
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
           commit_message: Bump flake.lock
-          branch: main
+          branch: master
           commit_options: '--no-verify --signoff'
           file_pattern: flake.lock
           skip_dirty_check: false    
