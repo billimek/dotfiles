@@ -13,7 +13,7 @@ in
   # $ darwin-rebuild switch -I darwin-config=$HOME/.config/nixpkgs/darwin/configuration.nix
   environment.darwinConfig = "$HOME/src.github/dotfiles/hosts/work_laptop/default.nix";
 
-  security.pki.certificateFiles = [ secrets.work_certpath ];
+  # security.pki.certificateFiles = [ secrets.work_certpath ];
 
   # Used for backwards compatibility, please read the changelog before changing.
   # $ darwin-rebuild changelog
