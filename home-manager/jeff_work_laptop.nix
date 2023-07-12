@@ -79,13 +79,14 @@ in
       rehome = lib.mkForce "home-manager switch --flake $HOME/src.github/dotfiles/.#jeff@work-laptop";
       rebuild = lib.mkForce "darwin-rebuild switch --flake $HOME/src.github/dotfiles/.#work-laptop";
       tf = "terraform";
+      sshblock = secrets.work_sshblock;
     };
     shellAliases = {
-      sshblock = secrets.work_sshblock;
       code = "/Applications/Visual\\ Studio\\ Code.app/Contents/Resources/app/bin/code";
     };
     shellInit = ''
       # set -gx SSH_AUTH_SOCK '$HOME/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock'
+      set -gx NIX_SSL_CERT_FILE ${secrets.work_certpath}
     '';
 
     loginShellInit = ''for p in (string split " " $NIX_PROFILES); fish_add_path --prepend --move $p/bin; end'';
