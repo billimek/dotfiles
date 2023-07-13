@@ -4,6 +4,7 @@ let
   hasPackage = pname: lib.any (p: p ? pname && p.pname == pname) config.home.packages;
   hasRipgrep = hasPackage "ripgrep";
   hasExa = hasPackage "exa";
+  hasKubecolor = hasPackage "kubecolor";
   hasNeovim = config.programs.neovim.enable;
 in
 {
@@ -93,6 +94,7 @@ in
     shellAliases = {
       # Clear screen and scrollback
       # clear = "printf '\\033[2J\\033[3J\\033[1;1H'";
+      kubectl = mkIf hasKubecolor "kubecolor";
     };
     functions = {
       # Disable greeting
