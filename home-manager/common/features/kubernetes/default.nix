@@ -1,10 +1,17 @@
 { pkgs, ... }: {
   home.packages = with pkgs; [
     fluxcd # flux CLI
-    go-task
+    go-task # task runner
     k9s # kubernetes viewer tool
-    kubectl
-    kubernetes-helm
-    kustomize
+    kail # kubernetes tail
+    ktop # kubernetes top
+    kubectl # kubernetes CLI
+    kubectl-doctor # kubernetes doctor
+    kubectl-example # output example kubernetes types
+    kubectl-view-allocations # view kubernetes allocations
+    kubectl-view-secret # view kubernetes secrets without piping and decoding
+    kubecolor # colorize kubectl output
+    kubernetes-helm # helm CLI
+    kustomize # kustomize CLI for sadists
   ];
 }
