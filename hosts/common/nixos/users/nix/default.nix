@@ -6,6 +6,7 @@ in
   users.users.nix = {
     isNormalUser = true;
     shell = pkgs.fish;
+    initialPassword = "correcthorsebatterystaple";
     extraGroups = [
       "wheel"
     ] ++ ifTheyExist [
