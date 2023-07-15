@@ -1,3 +1,4 @@
+{ config, pkgs, lib, ... }:
 {
   # This is required so that pod can reach the API server (running on port 6443 by default)
   networking.firewall.allowedTCPPorts = [ 6443 ];
