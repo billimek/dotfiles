@@ -18,7 +18,7 @@
 
   networking = {
     hostName = "k3s-g";
-    networkmanager.enable = true;  # Easiest to use and most distros use this by default.
+    networkmanager.enable = false;  # Does disabling this help with proper DHCP assignment with vlans?
   };
 
   systemd.services.NetworkManager-wait-online.enable = lib.mkForce false;
