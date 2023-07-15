@@ -6,7 +6,8 @@ in
   users.users.nix = {
     isNormalUser = true;
     shell = pkgs.fish;
-    initialPassword = "correcthorsebatterystaple";
+    # this gets reset on every rebuild - need to find a better way to set the password without going down the path of sops
+    # initialPassword = "nix";
     extraGroups = [
       "wheel"
     ] ++ ifTheyExist [
