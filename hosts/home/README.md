@@ -86,8 +86,7 @@ reboot
 
 Now it should be possible to login as the defined non-root user (i.e. `jeff`).  Be mindful that there is no password set for this user and only ssh-style key logins work. _May want to revisit this decision for situations where an ssh key is not available._
 
-
-I will then be able to update the nixos-configuration repo in github and just pull/rebuild as needed on the machine. 
+I will then be able to update the nixos-configuration repo in github and just pull/rebuild as needed on the machine.
 
 ```shell
 sudo sh -c "cd /etc/nixos && git pull && nixos-rebuild switch"
