@@ -101,6 +101,7 @@
       homeConfigurations = {
         # VMs
         "jeff@home" = mkHome [ ./home-manager/jeff_home.nix ] nixpkgs.legacyPackages."x86_64-linux";
+        "nix@k3s-g" = mkHome [ ./home-manager/nix_k3s-g.nix ] nixpkgs.legacyPackages."x86_64-linux";
         # Laptops
         "jeff@work-laptop" = mkHome [ ./home-manager/jeff_work_laptop.nix ] nixpkgs.legacyPackages."aarch64-darwin";
         "jeff@Jens-Air-M2" = mkHome [ ./home-manager/jens_laptop.nix ] nixpkgs.legacyPackages."aarch64-darwin";

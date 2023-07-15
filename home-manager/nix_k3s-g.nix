@@ -11,6 +11,7 @@
     sessionPath = [ "$HOME/.local/bin" ];
     packages = with pkgs; [
       _1password
+      gcc
     ];
   };
 

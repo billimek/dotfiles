@@ -2,12 +2,13 @@
 let ifTheyExist = groups: builtins.filter (group: builtins.hasAttr group config.users.groups) groups;
 in
 {
-  users.mutableUsers = false;
+# this needs to be true in order to allow manual password setting via 'passwd' command
+  users.mutableUsers = true;
   users.users.nix = {
     isNormalUser = true;
     shell = pkgs.fish;
-    # this gets reset on every rebuild - need to find a better way to set the password without going down the path of sops
-    # initialPassword = "nix";
+    # this needs to be set to a proper password using 'passwd' after initial build
+    initialPassword = "nix";
     extraGroups = [
       "wheel"
     ] ++ ifTheyExist [
