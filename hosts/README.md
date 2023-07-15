@@ -9,5 +9,6 @@ These configurations generally reference a [home-manager](../home-manager) confi
 ##  Configurations
 
 - [home](home/README.md) (NixOS VM running in TrueNAS)
+- [k3s-g](k3s-g/README.md) (NixOS running on an N100 tiny PC as a k3s node)
 - [work_laptop](work_laptop/README.md) nix-darwin running on a MacBook Pro
 - [jens_laptop](jens_laptop/README.md) nix-darwin running on a Macbook Air
