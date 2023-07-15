@@ -1,18 +1,15 @@
-# Bootstrapping NixOS on 'home' VM
+# Bootstrapping NixOS on 'k3s-g' kubernetes node
 
-'home' is a TrueNAS qemu VM with the following configuration:
+'k3s-g' is an intel N100 ['T9 Plus mini PC'](https://liliputing.com/t9-plus-is-a-palm-sized-pc-with-intel-n100-and-triple-display-support-for-117-and-up/) from China.
 
 * CPU:
-  * 1 CPU
-  * 2 Cores
-  * 4 Threads
+  * 4 Cores
 * Memory:
-  * 4GB
+  * 16GB
 * Disk:
-  * 150GB 
-  * VirtIO
+  * 1TB onboard ssd
 * NIC:
-  * VirtIO
+  * 1GBe dual nic
 
 It is installed with the NixOS iso installation media.  These are the steps initially taken to install NixOS, though once the config is setup it can just be re-used for future re-installs if needed. This assumes you have booted into a NixOS install image from a USB stick and that we will be using systemd-boot.  Following the [manual installation steps](https://nixos.org/manual/nixos/stable/index.html#sec-installation-manual):
 
@@ -25,18 +22,18 @@ sudo -i
 Creates 3 partitions on the virtual drive, one for EFI Boot, one for swap, and one for the primary partition.
 
 ```shell
-parted /dev/vda -- mklabel gpt
-parted /dev/vda -- mkpart primary 512MB -8GB
-parted /dev/vda -- mkpart primary linux-swap -8GB 100%
-parted /dev/vda -- mkpart ESP fat32 1MB 512MB
-parted /dev/vda -- set 3 esp on
-mkfs.ext4 -L nixos /dev/vda1
-mkswap -L swap /dev/vda2
-mkfs.fat -F 32 -n boot /dev/vda3
+parted /dev/nvme0n1 -- mklabel gpt
+parted /dev/nvme0n1 -- mkpart primary 512MB -8GB
+parted /dev/nvme0n1 -- mkpart primary linux-swap -8GB 100%
+parted /dev/nvme0n1 -- mkpart ESP fat32 1MB 512MB
+parted /dev/nvme0n1 -- set 3 esp on
+mkfs.ext4 -L nixos /dev/nvme0n1p1
+mkswap -L swap /dev/nvme0n1p2
+mkfs.fat -F 32 -n boot /dev/nvme0n1p3
 mount /dev/disk/by-label/nixos /mnt
 mkdir -p /mnt/boot
 mount /dev/disk/by-label/boot /mnt/boot
-swapon /dev/vda2
+swapon /dev/nvme0n1p2
 ```
 
 ## NixOS Install
@@ -68,15 +65,8 @@ cd /etc/nixos
 git clone https://github.com/billimek/dotfiles.git
 ```
 
-I will then copy in the new machine basic config into a new machine folder and setup the configuration.nix in root. I will then replace the generated config with the new setup.
-
 ```shell
 cd dotfiles
-mkdir -p hosts/home
-mv ../configuration.nix hosts/home/default.nix
-mv ../hardware-configuration.nix hosts/home/hardware-configuration.nix
-vim hosts/home/default.nix
-> add all modules/profiles as required.
 mv ./* ..
 mv ./.* ..
 cd ../
@@ -84,8 +74,7 @@ rm -rf dotfiles
 reboot
 ```
 
-Now it should be possible to login as the defined non-root user (i.e. `jeff`).  Be mindful that there is no password set for this user and only ssh-style key logins work. _May want to revisit this decision for situations where an ssh key is not available._
-
+Now it should be possible to login as the defined non-root user (i.e. `nix`).  Be mindful that there is no password set for this user and only ssh-style key logins work. _May want to revisit this decision for situations where an ssh key is not available.
 
 I will then be able to update the nixos-configuration repo in github and just pull/rebuild as needed on the machine. 
 
