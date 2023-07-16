@@ -1,8 +1,12 @@
-{ outputs, lib, ... }:
+{ outputs, lib, pkgs, ... }:
 {
   programs.neovim = {
     enable = true;
   };
+
+  home.packages = with pkgs; [
+    gcc # neovim needs this to work properly with some of the plugins it uses
+  ];
 
   # hacky lazyvim configuration - replicating what https://github.com/LazyVim/starter does
 
