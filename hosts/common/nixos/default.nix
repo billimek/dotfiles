@@ -5,6 +5,7 @@
     ./auto-upgrade.nix
     ./locale.nix
     ./nix.nix
+    ./nfs.nix
     ./openssh.nix
     ./systemd-initrd.nix
     ./tailscale.nix

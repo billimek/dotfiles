@@ -6,7 +6,7 @@
     ../common/nixos/users/jeff
     ../common/optional/docker.nix
     ../common/optional/fish.nix
-    ../common/optional/nfs.nix
+    ../common/optional/nfs-media.nix
     ../common/optional/qemu.nix
   ];
 
