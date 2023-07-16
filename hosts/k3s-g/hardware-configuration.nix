@@ -6,7 +6,7 @@
 {
   boot.initrd.availableKernelModules = [ "xhci_pci" "nvme" "usbhid" "usb_storage" "sd_mod" ];
   boot.initrd.kernelModules = [ ];
-  boot.kernelModules = [ "kvm-intel" ];
+  boot.kernelModules = [ "kvm-intel" "rbd" ];
   boot.extraModulePackages = [ ];
   boot.loader = {
     systemd-boot.enable = true;
@@ -34,7 +34,7 @@
   # still possible to use this option, but it's recommended to use it in conjunction
   # with explicit per-interface declarations with `networking.interfaces.<interface>.useDHCP`.
   networking.useDHCP = lib.mkDefault true;
-  networking.interfaces.enp4s0.useDHCP = lib.mkDefault false;
+  networking.interfaces.enp4s0.useDHCP = lib.mkDefault true;
 
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";

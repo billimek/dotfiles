@@ -7,14 +7,11 @@
     ../common/nixos
     ../common/nixos/users/nix
     ../common/optional/fish.nix
-    # ../common/optional/k3s-agent.nix
+    ../common/optional/k3s-agent.nix
+    ../common/optional/nfs.nix
   ];
 
   time.timeZone = lib.mkForce "UTC";
-
-  environment.systemPackages = [
-    pkgs.nfs-utils
-  ];
 
   networking = {
     hostName = "k3s-g";
