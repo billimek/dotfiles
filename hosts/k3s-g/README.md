@@ -86,26 +86,3 @@ I will then be able to update the nixos-configuration repo in github and just pu
 ```shell
 sudo sh -c "cd /etc/nixos && git pull && nixos-rebuild switch"
 ```
-
-## Things that need secrets
-
-### 1Password bootstrapping auth
-
-```shell
-eval $(op signin --account <redacted>.1password.com)
-```
-
-### atuin login
-
-```shell
-atuin login --username $(op item get "atuin" --fields label=username) --password $(op item get "atuin" --fields label=password) --key "$(op item get "atuin" --fields label=key)"
-atuin import auto
-atuin sync
-```
-
-### kubeconfig
-
-```shell
-mkdir -p ~/.kube
-op document get --vault kubernetes 'k3s.yaml' --out-file ~/.kube/config
-```
