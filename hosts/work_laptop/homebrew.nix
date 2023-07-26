@@ -22,7 +22,6 @@
       "flameshot"
       "fly"
       "gather"
-      "karabiner-elements"
       "microsoft-remote-desktop"
       # "moonlight"
       "obs"

@@ -22,7 +22,6 @@
       # "google-chrome"
       "iterm2"
       "flameshot"
-      "karabiner-elements"
       "microsoft-remote-desktop"
       "moonlight"
       "obs"
