@@ -18,7 +18,9 @@
     casks = [
       "1password"
       "1password-cli" # need to install CLI via brew too to make biometric unlock work with GUI app 
+      "arc"
       "discord"
+      "firefox"
       "flameshot"
       "fly"
       "gather"
