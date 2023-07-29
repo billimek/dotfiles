@@ -10,6 +10,7 @@
     ../common/optional/docker.nix
     ../common/optional/fish.nix
     ../common/optional/nfs-media.nix
+    ../common/optional/oracle-cloud.nix
     ../common/optional/qemu.nix
   ];
 
