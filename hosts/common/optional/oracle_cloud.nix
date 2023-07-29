@@ -9,8 +9,8 @@
   systemd.timers."oci-arm-host-capacity" = {
     wantedBy = [ "timers.target" ];
       timerConfig = {
-        OnBootSec = "1m";
-        OnUnitActiveSec = "1m";
+        OnBootSec = "5m";
+        OnUnitActiveSec = "5m";
         Unit = "oci-arm-host-capacity.service";
       };
   };
