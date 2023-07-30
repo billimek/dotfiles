@@ -1,8 +1,6 @@
-# Bootstrapping NixOS on 'k3s-g' kubernetes node
+# Bootstrapping NixOS on 'k3s-f' kubernetes node
 
-![](https://i.imgur.com/GYiae0G.png)
-
-'k3s-g' is an intel N100 ['T9 Plus mini PC'](https://liliputing.com/t9-plus-is-a-palm-sized-pc-with-intel-n100-and-triple-display-support-for-117-and-up/) from China.
+'k3s-f' is an intel N100 ['T9 Plus mini PC'](https://liliputing.com/t9-plus-is-a-palm-sized-pc-with-intel-n100-and-triple-display-support-for-117-and-up/) from China.
 
 * CPU:
   * 4 Cores
