@@ -1,5 +1,7 @@
 # Bootstrapping NixOS on 'k3s-f' kubernetes node
 
+![](https://i.imgur.com/Qm5U9ZM.png)
+
 'k3s-f' is an intel N100 ['T9 Plus mini PC'](https://liliputing.com/t9-plus-is-a-palm-sized-pc-with-intel-n100-and-triple-display-support-for-117-and-up/) from China.
 
 * CPU:
@@ -60,16 +62,26 @@ sudo nixos-install
 sudo reboot
 ```
 
+... after reboot, login as root on the console and set the password for the nix user
+
+```shell
+<login as root from the console>
+passwd nix
+```
+
 ## First Run
 
 Here is where I will normally try and setup all the hardware and import the profiles/modules I want from this repo. Since I use the minimal install, I will kick things off like so:
 
 ```shell
-nix-shell -p git vim
+ssh -A nix@<ip of host>
+nix-shell -p git vim git-crypt
 cd /etc/nixos
 # these should no longer be needed if we already have the proper configurations already defined in the repo
-sudo rm configuration.nix hardware-configuration.nix
+sudo mv configuration.nix hardware-configuration.nix /tmp/
 sudo git clone https://github.com/billimek/dotfiles.git .
+sudo chown -R nix:users .
+git-crypt unlock ~/.ssh/git-crypt-dotfiles.key # this came from an early undocumented step of copying the key to the host
 ```
 
 Make any edits where necessary or desired, then build the configuration and _set the nix user password_.  Once all is 'clean', it should be possible to reboot and login as the nix user as a complete system.
