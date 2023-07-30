@@ -74,7 +74,9 @@
         # VMs
         home = mkNixos [ ./hosts/home ];
         # k8s nodes
+        k3s-f = mkNixos [ ./hosts/k3s-f ];
         k3s-g = mkNixos [ ./hosts/k3s-g ];
+        k3s-h = mkNixos [ ./hosts/k3s-h ];
       };
 
       # Build darwin flake using:
