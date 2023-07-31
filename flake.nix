@@ -73,6 +73,7 @@
       nixosConfigurations = {
         # VMs
         home = mkNixos [ ./hosts/home ];
+        cloud = mkNixos [ ./hosts/cloud ];
         # k8s nodes
         k3s-f = mkNixos [ ./hosts/k3s-f ];
         k3s-g = mkNixos [ ./hosts/k3s-g ];
@@ -103,6 +104,7 @@
       homeConfigurations = {
         # VMs
         "jeff@home" = mkHome [ ./home-manager/jeff_home.nix ] nixpkgs.legacyPackages."x86_64-linux";
+        "jeff@cloud" = mkHome [ ./home-manager/jeff_cloud.nix ] nixpkgs.legacyPackages."aarch64-linux";
         # k8s nodes
         "nix@k3s-f" = mkHome [ ./home-manager/nix_k3s-f.nix ] nixpkgs.legacyPackages."x86_64-linux";
         "nix@k3s-g" = mkHome [ ./home-manager/nix_k3s-g.nix ] nixpkgs.legacyPackages."x86_64-linux";
