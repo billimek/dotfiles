@@ -9,7 +9,7 @@
   home = {
     username = lib.mkDefault "jeff";
     homeDirectory = lib.mkDefault "/home/${config.home.username}";
-    stateVersion = lib.mkDefault "23.11";
+    stateVersion = lib.mkDefault "23.05";
     sessionPath = [ "$HOME/.local/bin" ];
     packages = with pkgs; [
       _1password
