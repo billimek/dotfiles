@@ -1,5 +1,7 @@
 # Bootstrapping NixOS on 'cloud' VM
 
+![](https://i.imgur.com/9RaCuKF.png)
+
 'cloud' is an Oracle Cloud free-tier VM:
 
 * CPU:
@@ -29,7 +31,7 @@ Make any edits where necessary or desired, then build the configuration and _set
 
 ```shell
 sudo sh -c "cd /etc/nixos && git pull && nixos-rebuild switch"
-passwd nix
+passwd jeff
 reboot
 ```
 
