@@ -9,11 +9,13 @@
     ../common/nixos/users/jeff
     ../common/optional/docker.nix
     ../common/optional/fish.nix
+    ../common/optional/nfs-media.nix
     ../common/optional/qemu.nix
   ];
 
   networking = {
     hostName = "cloud";
+    firewall.enable = false;
     networkmanager.enable = true;  # Easiest to use and most distros use this by default.
   };
 
