@@ -49,7 +49,7 @@ Everyone keeps gushing about how amazing Nix is and I want to get in on the hype
 - [budimanjojo/dotfiles](https://github.com/budimanjojo/dotfiles/tree/master/nixos)
 - [wrmilling/nixos-configuration](https://github.com/wrmilling/nixos-configuration)
 - [gshpychka/dotfiles-nix](https://github.com/gshpychka/dotfiles-nix)
-
+- [wimpysworld/nix-config](https://github.com/wimpysworld/nix-config)
 
 ## Old Dotfiles
 

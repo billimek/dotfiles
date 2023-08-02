@@ -4,6 +4,7 @@
     ./common/global
     ./common/features/dev
     ./common/features/kubernetes
+    inputs.nix-ld-vscode.nixosModules.default
   ];
 
   home = {

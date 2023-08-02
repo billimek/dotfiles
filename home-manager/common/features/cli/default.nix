@@ -18,7 +18,7 @@
     # _1password # password manager CLI - installing this break op CLI on macbooks
     age # encryption tool
     bottom # better top "WRITTEN IN RUST" 
-    curl # get things from URLs
+    # curl # get things from URLs
     dig # DNS lookups
     du-dust # better 'du' "WRITTEN IN RUST"
     duf # better 'df' "WRITTEN IN RUST"
