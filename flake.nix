@@ -20,6 +20,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # for VSCode remote-ssh
     nix-ld-vscode = {
       url = "github:scottstephens/nix-ld-vscode/main";
       inputs.nixpkgs.follows = "nixpkgs";
