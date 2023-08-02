@@ -3,7 +3,6 @@
 {
   imports = [
     ./hardware-configuration.nix
-
     ../common/nixos
     ../common/nixos/auto-upgrade.nix
     ../common/nixos/users/jeff
