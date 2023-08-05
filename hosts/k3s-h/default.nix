@@ -16,7 +16,7 @@
     hostName = "k3s-h";
     timeServers = [ "10.0.7.1" ];
     firewall.enable = false;
-    networkmanager.false = true;  # Easiest to use and most distros use this by default.
+    networkmanager.enable = false;  # Easiest to use and most distros use this by default.
   };
 
   # may fix issues with network service failing during a nixos-rebuild
