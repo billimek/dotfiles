@@ -9,6 +9,7 @@
     ../common/optional/docker.nix
     ../common/optional/fish.nix
     ../common/optional/nfs-media.nix
+    ../common/optional/nfs-ssdtank.nix
     ../common/optional/qemu.nix
     ../common/optional/vscode-server.nix
   ];
