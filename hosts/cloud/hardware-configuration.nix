@@ -14,6 +14,7 @@
   boot.extraModulePackages = [ ];
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+  boot.binfmt.emulatedSystems = [ "x86_64-linux" ];
 
   fileSystems."/" =
     { device = "/dev/disk/by-uuid/d20157c6-faac-48a0-a47f-b2471da6053d";
