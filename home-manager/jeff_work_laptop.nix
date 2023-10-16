@@ -18,7 +18,9 @@ in
   };
 
   home.packages = with pkgs; [
+    azure-cli
     cloudfoundry-cli
+    jwt-cli
     rancher
     terminal-notifier # send notifications to macOS notification center
     terraform
