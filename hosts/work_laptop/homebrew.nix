@@ -27,6 +27,7 @@
       "microsoft-remote-desktop"
       # "moonlight"
       "obs"
+      "obsidian"
       "plex"
       "rancher"
       "spotify"
