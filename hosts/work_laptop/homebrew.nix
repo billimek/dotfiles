@@ -21,7 +21,6 @@
       "arc"
       "discord"
       "flameshot"
-      "fly"
       "gather"
       "microsoft-remote-desktop"
       # "moonlight"
