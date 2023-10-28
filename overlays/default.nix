@@ -11,13 +11,13 @@
     # example = prev.example.overrideAttrs (oldAttrs: rec {
     # ...
     # });
-    acorn = prev.acorn.overrideAttrs (oldAttrs: rec {
-      # pname = "acorn";
+    acorn-override = prev.acorn.overrideAttrs (oldAttrs: rec {
       version = "0.9.1";
       src = prev.fetchFromGitHub {
         owner = "acorn-io";
         repo = "acorn";
         rev = "v0.9.1";
+        # obtained from `nix-prefetch-github acorn-io acorn --rev v0.9.1`
         hash = "sha256-FPnKmWKnEFVDXbDI+An3EKzleP43NEC9/dq4SJfWQrU=";
       };
     });
