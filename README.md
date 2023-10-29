@@ -36,6 +36,7 @@ Everyone keeps gushing about how amazing Nix is and I want to get in on the hype
 - [x] Replace existing ubunut-based 'home VM'
 - [x] Expand usage to other shell environments such as WSL, Macbook, etc
 - [x] handle secrets - ideally using 1Password and not SOPS - using git-crypt for now
+- [ ] try agenix for secrets handling
 - [ ] introduce the concept of [impermanence](https://github.com/nix-community/impermanence) where appropriate
 
 ## References

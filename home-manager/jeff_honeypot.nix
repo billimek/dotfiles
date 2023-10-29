@@ -1,5 +1,11 @@
-{ inputs, lib, pkgs, config, ... }:
 {
+  inputs,
+  outputs,
+  lib,
+  config,
+  pkgs,
+  ...
+}: {
   imports = [
     ./common/global
     ./common/features/dev

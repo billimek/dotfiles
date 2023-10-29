@@ -30,98 +30,101 @@
     nix-colors.url = "github:misterio77/nix-colors";
   };
 
-  outputs = { self, nixpkgs, home-manager, nix-darwin, nixpkgs-unstable, ... }@inputs:
-    let
-      inherit (self) outputs;
-      forAllSystems = nixpkgs.lib.genAttrs [
-        "aarch64-linux"
-        "i686-linux"
-        "x86_64-linux"
-        "aarch64-darwin"
-        "x86_64-darwin"
-      ];
+  outputs = {
+    self,
+    nixpkgs,
+    home-manager,
+    nix-darwin,
+    nixpkgs-unstable,
+    ...
+  } @ inputs: let
+    inherit (self) outputs;
+    # Supported systems for your flake packages, shell, etc.
+    systems = [
+      "aarch64-linux"
+      "i686-linux"
+      "x86_64-linux"
+      "aarch64-darwin"
+      "x86_64-darwin"
+    ];
+    # This is a function that generates an attribute by calling a function you
+    # pass to it, with each system as an argument
+    forAllSystems = nixpkgs.lib.genAttrs systems;
 
-      mkNixos = modules: nixpkgs.lib.nixosSystem {
-        inherit modules;
-        specialArgs = { inherit inputs outputs; };
-      };        
-      mkHome = modules: pkgs: home-manager.lib.homeManagerConfiguration {
-        inherit modules pkgs;
-        extraSpecialArgs = { inherit inputs outputs; };
+    mkNixos = modules: nixpkgs.lib.nixosSystem {
+      inherit modules;
+      specialArgs = { inherit inputs outputs; };
+    };        
+    mkHome = modules: pkgs: home-manager.lib.homeManagerConfiguration {
+      inherit modules pkgs;
+      extraSpecialArgs = { inherit inputs outputs; };
+    };
+
+  in {
+    # Your custom packages
+    # Acessible through 'nix build', 'nix shell', etc
+    packages = forAllSystems (system: import ./pkgs nixpkgs.legacyPackages.${system});
+    # Formatter for your nix files, available through 'nix fmt'
+    # Other options beside 'alejandra' include 'nixpkgs-fmt'
+    formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.alejandra);
+
+    # Your custom packages and modifications, exported as overlays
+    overlays = import ./overlays {inherit inputs;};
+    # Reusable nixos modules you might want to export
+    # These are usually stuff you would upstream into nixpkgs
+    nixosModules = import ./modules/nixos;
+    # Reusable home-manager modules you might want to export
+    # These are usually stuff you would upstream into home-manager
+    homeManagerModules = import ./modules/home-manager;
+
+    # NixOS configuration entrypoint
+    # Available through 'nixos-rebuild --flake .#your-hostname'
+    nixosConfigurations = {
+      # VMs
+      home = mkNixos [ ./hosts/home ];
+      cloud = mkNixos [ ./hosts/cloud ];
+      # k8s nodes
+      k3s-f = mkNixos [ ./hosts/k3s-f ];
+      k3s-g = mkNixos [ ./hosts/k3s-g ];
+      k3s-h = mkNixos [ ./hosts/k3s-h ];
+    };
+
+    # Build darwin flake using:
+    # $ darwin-rebuild build --flake .#<hostname>
+    darwinConfigurations = {
+      work-laptop = nix-darwin.lib.darwinSystem {
+        specialArgs = inputs;
+        system = "aarch64-darwin";
+        modules = [
+          ./hosts/work_laptop
+        ];
       };
-
-    in
-    {
-      # Your custom packages
-      # Acessible through 'nix build', 'nix shell', etc
-      packages = forAllSystems (system:
-        let pkgs = nixpkgs.legacyPackages.${system};
-        in import ./pkgs { inherit pkgs; }
-      );
-      # Devshell for bootstrapping
-      # Acessible through 'nix develop' or 'nix-shell' (legacy)
-      devShells = forAllSystems (system:
-        let pkgs = nixpkgs.legacyPackages.${system};
-        in import ./shell.nix { inherit pkgs; }
-      );
-
-      # Your custom packages and modifications, exported as overlays
-      overlays = import ./overlays { inherit inputs; };
-      # Reusable nixos modules you might want to export
-      # These are usually stuff you would upstream into nixpkgs
-      nixosModules = import ./modules/nixos;
-      # Reusable home-manager modules you might want to export
-      # These are usually stuff you would upstream into home-manager
-      homeManagerModules = import ./modules/home-manager;
-
-      # NixOS configuration entrypoint
-      # Available through 'nixos-rebuild --flake .#your-hostname'
-      nixosConfigurations = {
-        # VMs
-        home = mkNixos [ ./hosts/home ];
-        cloud = mkNixos [ ./hosts/cloud ];
-        # k8s nodes
-        k3s-f = mkNixos [ ./hosts/k3s-f ];
-        k3s-g = mkNixos [ ./hosts/k3s-g ];
-        k3s-h = mkNixos [ ./hosts/k3s-h ];
-      };
-
-      # Build darwin flake using:
-      # $ darwin-rebuild build --flake .#<hostname>
-      darwinConfigurations = {
-        work-laptop = nix-darwin.lib.darwinSystem {
-          specialArgs = inputs;
-          system = "aarch64-darwin";
-          modules = [
-            ./hosts/work_laptop
-          ];
-        };
-        Jens-Air-M2 = nix-darwin.lib.darwinSystem {
-          specialArgs = inputs;
-          system = "aarch64-darwin";
-          modules = [
-            ./hosts/jens_laptop
-          ];
-        };
-      };
-
-      # Standalone home-manager configuration entrypoint
-      # Available through 'home-manager --flake .#your-username@your-hostname'
-      homeConfigurations = {
-        # VMs
-        "jeff@home" = mkHome [ ./home-manager/jeff_home.nix ] nixpkgs.legacyPackages."x86_64-linux";
-        "jeff@cloud" = mkHome [ ./home-manager/jeff_cloud.nix ] nixpkgs.legacyPackages."aarch64-linux";
-        # k8s nodes
-        "nix@k3s-f" = mkHome [ ./home-manager/nix_k3s-f.nix ] nixpkgs.legacyPackages."x86_64-linux";
-        "nix@k3s-g" = mkHome [ ./home-manager/nix_k3s-g.nix ] nixpkgs.legacyPackages."x86_64-linux";
-        "nix@k3s-h" = mkHome [ ./home-manager/nix_k3s-h.nix ] nixpkgs.legacyPackages."x86_64-linux";
-        # Laptops
-        "jeff@work-laptop" = mkHome [ ./home-manager/jeff_work_laptop.nix ] nixpkgs.legacyPackages."aarch64-darwin";
-        "jeff@Jens-Air-M2" = mkHome [ ./home-manager/jens_laptop.nix ] nixpkgs.legacyPackages."aarch64-darwin";
-        # Windows
-        "jeff@honeypot" = mkHome [ ./home-manager/jeff_honeypot.nix ] nixpkgs.legacyPackages."x86_64-linux";
-        # Other
-        "root@truenas" = mkHome [ ./home-manager/root_truenas.nix ] nixpkgs.legacyPackages."x86_64-linux";
+      Jens-Air-M2 = nix-darwin.lib.darwinSystem {
+        specialArgs = inputs;
+        system = "aarch64-darwin";
+        modules = [
+          ./hosts/jens_laptop
+        ];
       };
     };
+
+    # Standalone home-manager configuration entrypoint
+    # Available through 'home-manager --flake .#your-username@your-hostname'
+    homeConfigurations = {
+      # VMs
+      "jeff@home" = mkHome [ ./home-manager/jeff_home.nix ] nixpkgs.legacyPackages."x86_64-linux";
+      "jeff@cloud" = mkHome [ ./home-manager/jeff_cloud.nix ] nixpkgs.legacyPackages."aarch64-linux";
+      # k8s nodes
+      "nix@k3s-f" = mkHome [ ./home-manager/nix_k3s-f.nix ] nixpkgs.legacyPackages."x86_64-linux";
+      "nix@k3s-g" = mkHome [ ./home-manager/nix_k3s-g.nix ] nixpkgs.legacyPackages."x86_64-linux";
+      "nix@k3s-h" = mkHome [ ./home-manager/nix_k3s-h.nix ] nixpkgs.legacyPackages."x86_64-linux";
+      # Laptops
+      "jeff@work-laptop" = mkHome [ ./home-manager/jeff_work_laptop.nix ] nixpkgs.legacyPackages."aarch64-darwin";
+      "jeff@Jens-Air-M2" = mkHome [ ./home-manager/jens_laptop.nix ] nixpkgs.legacyPackages."aarch64-darwin";
+      # Windows
+      "jeff@honeypot" = mkHome [ ./home-manager/jeff_honeypot.nix ] nixpkgs.legacyPackages."x86_64-linux";
+      # Other
+      "root@truenas" = mkHome [ ./home-manager/root_truenas.nix ] nixpkgs.legacyPackages."x86_64-linux";
+    };
+  };
 }
