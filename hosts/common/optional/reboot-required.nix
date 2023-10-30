@@ -4,9 +4,9 @@
     wantedBy = [ "timers.target" ];
       timerConfig = {
         # start at boot
-        OnBootSec = 0min;
+        OnBootSec = "0m";
         # check every hour
-        OnUnitActiveSec = 1h;
+        OnUnitActiveSec = "1h";
         Unit = "reboot-required-check.service";
 
       };
