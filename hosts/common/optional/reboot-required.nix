@@ -3,8 +3,7 @@
   systemd.timers."reboot-required-check" = {
     wantedBy = [ "timers.target" ];
       timerConfig = {
-        OnBootSec = "5m";
-        OnUnitActiveSec = "5m";
+        OnCalendar = "*-*-* *:00:00";
         Unit = "reboot-required-check.service";
       };
   };
@@ -15,11 +14,13 @@
 
       # compare current system with booted sysetm to determine if a reboot is required
       if [[ "$(readlink /run/booted-system/{initrd,kernel,kernel-modules})" == "$(readlink /run/current-system/{initrd,kernel,kernel-modules})" ]]; then
-              echo "no reboot required"
-              rm /var/run/reboot-required
+        # check if the '/var/run/reboot-required' file exists and if it does, remove it
+        if [[ -f /var/run/reboot-required ]]; then
+          rm /var/run/reboot-required || { echo "Failed to remove /var/run/reboot-required"; exit 1; }
+        fi
       else
-              echo "reboot requierd"
-              touch /var/run/reboot-required
+        echo "reboot required"
+        touch /var/run/reboot-required || { echo "Failed to create /var/run/reboot-required"; exit 1; }
       fi
     '';
     serviceConfig = {
