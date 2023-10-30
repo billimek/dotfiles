@@ -14,7 +14,7 @@
       #!/usr/bin/env bash
 
       # compare current system with booted sysetm to determine if a reboot is required
-      if [[ $(readlink /run/booted-system/{initrd,kernel,kernel-modules})" == "$(readlink /run/current-system/{initrd,kernel,kernel-modules})" ]]; then
+      if [[ "$(readlink /run/booted-system/{initrd,kernel,kernel-modules})" == "$(readlink /run/current-system/{initrd,kernel,kernel-modules})" ]]; then
               echo "no reboot required"
               rm /var/run/reboot-required
       else
