@@ -3,8 +3,12 @@
   systemd.timers."reboot-required-check" = {
     wantedBy = [ "timers.target" ];
       timerConfig = {
-        OnCalendar = "*-*-* *:00:00";
+        # start at boot
+        OnBootSec = 0min;
+        # check every hour
+        OnUnitActiveSec = 1h;
         Unit = "reboot-required-check.service";
+
       };
   };
 
