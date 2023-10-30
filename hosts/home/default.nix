@@ -10,6 +10,7 @@
     ../common/optional/fish.nix
     ../common/optional/nfs-media.nix
     ../common/optional/qemu.nix
+    ../common/optional/reboot-required.nix
     ../common/optional/vscode-server.nix
   ];
 
