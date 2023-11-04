@@ -10,15 +10,17 @@
     # example = prev.example.overrideAttrs (oldAttrs: rec {
     # ...
     # });
-    acorn-override = prev.acorn.overrideAttrs (oldAttrs: rec {
-      version = "0.9.1";
+    # nota-bene: this doesn't actually build, it fails with "/build/source/go.mod:3: invalid go version '1.21.0': must match format 1.23""
+    acorn-next = prev.acorn.overrideAttrs (oldAttrs: {
+      version = "v0.9.2-rc2";
       src = prev.fetchFromGitHub {
         owner = "acorn-io";
         repo = "acorn";
-        rev = "v0.9.1";
-        # obtained from `nix-prefetch-github acorn-io acorn --rev v0.9.1`
-        hash = "sha256-FPnKmWKnEFVDXbDI+An3EKzleP43NEC9/dq4SJfWQrU=";
+        rev = "v0.9.2-rc2";
+        # obtained from `nix-shell -p nix-prefetch-github --run "nix-prefetch-github acorn-io acorn --rev v0.9.2-rc2"`
+        hash = "sha256-l9V6URc5wY30z6W76n3xrGMHC43kDWfx0+1eznmcVi4=";
       };
+      buildInputs = oldAttrs.buildInputs or [] ++ [ final.unstable.go ];
     });
   };
 
