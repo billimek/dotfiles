@@ -21,5 +21,8 @@ in
     if [ ! -e /usr/bin/test ]; then
       ln -s ${pkgs.coreutils}/bin/test /usr/bin/test
     fi
+    if [ ! -e /usr/bin/systemctl ]; then
+      ln -s ${pkgs.systemd}/bin/systemctl /usr/bin/systemctl
+    fi
   '';
 }
