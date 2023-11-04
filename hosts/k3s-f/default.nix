@@ -8,6 +8,7 @@
     ../common/nixos/users/nix
     ../common/optional/fish.nix
     ../common/optional/k3s-agent.nix
+    ../common/optional/reboot-required.nix
   ];
 
   time.timeZone = lib.mkForce "UTC";
