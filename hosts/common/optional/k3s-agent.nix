@@ -15,4 +15,11 @@ in
   };
 
   environment.systemPackages = [ pkgs.unstable.k3s ];
+
+  # create symlink from /run/current-system/sw/bin/test to /usr/bin/test for kured to work
+  system.activationScripts.test = ''
+    if [ ! -e /usr/bin/test ]; then
+      ln -s ${pkgs.coreutils}/bin/test /usr/bin/test
+    fi
+  '';
 }
