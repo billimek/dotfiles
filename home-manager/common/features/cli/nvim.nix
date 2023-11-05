@@ -6,7 +6,7 @@
 
   home.packages = with pkgs; [
     gcc # neovim needs this to work properly with some of the plugins it uses
-    nodejs
+    nodejs # needed for some plugins
   ];
 
   # hacky lazyvim configuration - replicating what https://github.com/LazyVim/starter does
@@ -66,6 +66,7 @@
         -- { import = "lazyvim.plugins.extras.lang.typescript" },
         -- { import = "lazyvim.plugins.extras.lang.json" },
         -- { import = "lazyvim.plugins.extras.ui.mini-animate" },
+        { import = "lazyvim.plugins.extras.coding.copilot" },
         -- import/override with your plugins
         { import = "plugins" },
     },
