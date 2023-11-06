@@ -13,6 +13,11 @@ in
   # $ darwin-rebuild switch -I darwin-config=$HOME/.config/nixpkgs/darwin/configuration.nix
   environment.darwinConfig = "$HOME/src.github/dotfiles/hosts/work_laptop/default.nix";
 
+  # Create a system-wide alias for git so that keychain certs are properly used for https operations
+  environment.shellAliases = {
+    git = "/usr/bin/git";
+  };
+
   # security.pki.certificateFiles = [ secrets.work_certpath ];
 
   # Used for backwards compatibility, please read the changelog before changing.

@@ -86,6 +86,8 @@ in
     };
     shellAliases = {
       code = "/Applications/Visual\\ Studio\\ Code.app/Contents/Resources/app/bin/code";
+      # alias git to the default macOS version so that keychain certs are properly used for https operations
+      git = "/usr/bin/git";
     };
     shellInit = ''
       # set -gx SSH_AUTH_SOCK '$HOME/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock'
