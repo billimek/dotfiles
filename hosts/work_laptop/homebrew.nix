@@ -28,6 +28,7 @@
       "obsidian"
       "plex"
       "rancher"
+      "rectangle"
       "spotify"
       "steam"
       "VIA"
