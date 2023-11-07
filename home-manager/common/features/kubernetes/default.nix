@@ -13,6 +13,6 @@
     kubecolor # colorize kubectl output
     kubernetes-helm # helm CLI
     kustomize # kustomize CLI for sadists
-    # acorn # kubernetes config parser
+    # acorn-next # kubernetes config parser
   ];
 }
