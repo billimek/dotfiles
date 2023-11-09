@@ -1,9 +1,11 @@
-{ pkgs, lib, config, ... }:
-let 
-  ssh = "${pkgs.openssh}/bin/ssh";
-
-in
 {
+  pkgs,
+  lib,
+  config,
+  ...
+}: let
+  ssh = "${pkgs.openssh}/bin/ssh";
+in {
   programs.git = {
     enable = true;
     package = pkgs.gitAndTools.gitFull;
@@ -36,8 +38,8 @@ in
         autocrlf = false;
         editor = "nvim";
         pager = "less -x2";
-       };
-       fetch.prune = true;
+      };
+      fetch.prune = true;
       format.pretty = "format:%C(blue)%ad%Creset %C(yellow)%h%C(green)%d%Creset %C(blue)%s %C(magenta) [%an]%Creset";
       gpg = {
         format = "ssh";
@@ -49,6 +51,6 @@ in
       push.default = "upstream";
       pull.ff = "only";
     };
-    ignores = [ ".direnv" "result" ];
+    ignores = [".direnv" "result"];
   };
 }

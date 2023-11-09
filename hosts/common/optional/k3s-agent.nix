@@ -1,10 +1,13 @@
-{ config, pkgs, lib, ... }:
-let
-  secrets = import ../../../secrets.nix;
-in
 {
+  config,
+  pkgs,
+  lib,
+  ...
+}: let
+  secrets = import ../../../secrets.nix;
+in {
   # This is required so that pod can reach the API server (running on port 6443 by default)
-  networking.firewall.allowedTCPPorts = [ 6443 ];
+  networking.firewall.allowedTCPPorts = [6443];
   services.k3s = {
     enable = true;
     package = pkgs.unstable.k3s;
@@ -14,7 +17,7 @@ in
     extraFlags = "--node-label \"k3s-upgrade=false\""; # Optionally add additional args to k3s
   };
 
-  environment.systemPackages = [ pkgs.unstable.k3s ];
+  environment.systemPackages = [pkgs.unstable.k3s];
 
   # create symlink from /run/current-system/sw/bin/test to /usr/bin/test for kured to work
   system.activationScripts.test = ''

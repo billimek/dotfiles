@@ -1,5 +1,9 @@
-{ pkgs, lib, config, ... }:
 {
+  pkgs,
+  lib,
+  config,
+  ...
+}: {
   programs.atuin = {
     enable = true;
     package = pkgs.unstable.atuin;

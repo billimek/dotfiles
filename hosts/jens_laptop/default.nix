@@ -1,6 +1,10 @@
-{ config, pkgs, lib, home-manager, ... }:
-
 {
+  config,
+  pkgs,
+  lib,
+  home-manager,
+  ...
+}: {
   imports = [
     ../common/darwin/defaults.nix
     ./homebrew.nix

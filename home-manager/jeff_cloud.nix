@@ -1,5 +1,10 @@
-{ inputs, lib, pkgs, config, ... }:
 {
+  inputs,
+  lib,
+  pkgs,
+  config,
+  ...
+}: {
   imports = [
     ./common/global
     ./common/features/dev
@@ -11,7 +16,7 @@
     username = lib.mkDefault "jeff";
     homeDirectory = lib.mkDefault "/home/${config.home.username}";
     stateVersion = lib.mkDefault "23.05";
-    sessionPath = [ "$HOME/.local/bin" ];
+    sessionPath = ["$HOME/.local/bin"];
     packages = with pkgs; [
       _1password
       nfs-utils
@@ -28,5 +33,4 @@
       };
     };
   };
-
 }

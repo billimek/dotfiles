@@ -17,7 +17,7 @@
     username = lib.mkDefault "jeff";
     homeDirectory = lib.mkDefault "/home/${config.home.username}";
     stateVersion = lib.mkDefault "23.05";
-    sessionPath = [ "$HOME/.local/bin" ];
+    sessionPath = ["$HOME/.local/bin"];
     packages = with pkgs; [
       _1password
       nfs-utils
@@ -80,12 +80,11 @@
     interactiveShellInit =
       # run 1password agent bride
       ''
-      # .config/.agent-bridge.sh
-      _1password_agent_wsl
+        # .config/.agent-bridge.sh
+        _1password_agent_wsl
       '';
   };
 
   # WSL doesn't have systemd, so we need to null-this out here.
   systemd.user.startServices = lib.mkForce false;
-
 }

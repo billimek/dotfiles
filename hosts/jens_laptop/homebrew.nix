@@ -1,6 +1,8 @@
-{ config, pkgs, ... }:
-
 {
+  config,
+  pkgs,
+  ...
+}: {
   #homebrew packages
   homebrew = {
     enable = true;
@@ -17,7 +19,7 @@
     ];
     casks = [
       "1password"
-      "1password-cli" # need to install CLI via brew too to make biometric unlock work with GUI app 
+      "1password-cli" # need to install CLI via brew too to make biometric unlock work with GUI app
       "discord"
       # "google-chrome"
       "iterm2"

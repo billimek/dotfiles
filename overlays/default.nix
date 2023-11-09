@@ -20,7 +20,7 @@
         # obtained from `nix-shell -p nix-prefetch-github --run "nix-prefetch-github acorn-io acorn --rev v0.9.2"`
         hash = "sha256-l9V6URc5wY30z6W76n3xrGMHC43kDWfx0+1eznmcVi4=";
       };
-      buildInputs = oldAttrs.buildInputs or [] ++ [ final.unstable.go ];
+      buildInputs = oldAttrs.buildInputs or [] ++ [final.unstable.go];
     });
   };
 

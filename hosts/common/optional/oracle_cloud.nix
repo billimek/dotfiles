@@ -1,5 +1,8 @@
-{ config, pkgs, ... }:
 {
+  config,
+  pkgs,
+  ...
+}: {
   # adopting automation from https://github.com/hitrov/oci-arm-host-capacity
   environment.systemPackages = [
     pkgs.php
@@ -7,12 +10,12 @@
   ];
 
   systemd.timers."oci-arm-host-capacity" = {
-    wantedBy = [ "timers.target" ];
-      timerConfig = {
-        OnBootSec = "5m";
-        OnUnitActiveSec = "5m";
-        Unit = "oci-arm-host-capacity.service";
-      };
+    wantedBy = ["timers.target"];
+    timerConfig = {
+      OnBootSec = "5m";
+      OnUnitActiveSec = "5m";
+      Unit = "oci-arm-host-capacity.service";
+    };
   };
 
   systemd.services."oci-arm-host-capacity" = {
@@ -25,5 +28,4 @@
       WorkingDirectory = "/home/jeff/src/oci-arm-host-capacity/";
     };
   };
-
 }

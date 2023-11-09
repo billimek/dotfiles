@@ -1,5 +1,8 @@
-{ outputs, lib, ... }:
 {
+  outputs,
+  lib,
+  ...
+}: {
   programs.ssh = {
     enable = true;
     # add custom settings to config

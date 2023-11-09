@@ -1,5 +1,11 @@
-{ inputs, lib, pkgs, config, outputs, ... }:
 {
+  inputs,
+  lib,
+  pkgs,
+  config,
+  outputs,
+  ...
+}: {
   imports = [
     ./common/global
     ./common/features/dev
@@ -10,7 +16,7 @@
     username = lib.mkDefault "jeff";
     homeDirectory = lib.mkDefault "/Users/${config.home.username}";
     stateVersion = lib.mkDefault "23.05";
-    sessionPath = [ "$HOME/.local/bin" ];
+    sessionPath = ["$HOME/.local/bin"];
   };
 
   home.packages = with pkgs; [
@@ -55,7 +61,7 @@
     interactiveShellInit =
       # fix brew path (should not be needed but somehow is?)
       ''
-      eval (/opt/homebrew/bin/brew shellenv)
+        eval (/opt/homebrew/bin/brew shellenv)
       '';
   };
 }

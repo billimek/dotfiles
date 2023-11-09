@@ -1,5 +1,10 @@
-{ inputs, lib, pkgs, config, ... }:
 {
+  inputs,
+  lib,
+  pkgs,
+  config,
+  ...
+}: {
   imports = [
     ./common/global
     #./common/features/dev
@@ -10,7 +15,7 @@
     username = lib.mkDefault "root";
     homeDirectory = lib.mkDefault "/${config.home.username}";
     stateVersion = lib.mkDefault "23.05";
-    sessionPath = [ "$HOME/.local/bin" ];
+    sessionPath = ["$HOME/.local/bin"];
     packages = with pkgs; [
       _1password
     ];
@@ -36,15 +41,16 @@
   nixpkgs.overlays = [
     (final: prev: {
       fish = prev.fish.overrideAttrs (o: {
-      patches = (o.patches or [ ]) ++ [
-        (pkgs.fetchpatch {
-          name = "fix-zfs-completion.path";
-          url = "https://github.com/fish-shell/fish-shell/commit/85504ca694ae099f023ae0febb363238d9c64e8d.patch";
-          sha256 = "sha256-lA0M7E/Z0NjuvppC7GZA5rWdL7c+5l+3SF5yUe7nEz8=";
-        })
-      ];
-    });
+        patches =
+          (o.patches or [])
+          ++ [
+            (pkgs.fetchpatch {
+              name = "fix-zfs-completion.path";
+              url = "https://github.com/fish-shell/fish-shell/commit/85504ca694ae099f023ae0febb363238d9c64e8d.patch";
+              sha256 = "sha256-lA0M7E/Z0NjuvppC7GZA5rWdL7c+5l+3SF5yUe7nEz8=";
+            })
+          ];
+      });
     })
   ];
-
 }

@@ -1,8 +1,13 @@
-{ inputs, lib, pkgs, config, outputs, ... }:
-let
-  secrets = import ../secrets.nix;
-in
 {
+  inputs,
+  lib,
+  pkgs,
+  config,
+  outputs,
+  ...
+}: let
+  secrets = import ../secrets.nix;
+in {
   imports = [
     ./common/global
     ./common/features/dev
@@ -14,7 +19,7 @@ in
     username = lib.mkDefault secrets.work_username;
     homeDirectory = lib.mkDefault "/Users/${config.home.username}";
     stateVersion = lib.mkDefault "23.05";
-    sessionPath = [ "$HOME/.local/bin" ];
+    sessionPath = ["$HOME/.local/bin"];
   };
 
   home.packages = with pkgs; [
@@ -99,16 +104,18 @@ in
     interactiveShellInit =
       # fix brew path (should not be needed but somehow is?)
       ''
-      eval (/opt/homebrew/bin/brew shellenv)
-      '' +
+        eval (/opt/homebrew/bin/brew shellenv)
+      ''
+      +
       # handle gcloud CLI
       ''
-      bass source ~/google-cloud-sdk/path.bash.inc
-      bass source ~/google-cloud-sdk/completion.bash.inc
-      '' +
+        bass source ~/google-cloud-sdk/path.bash.inc
+        bass source ~/google-cloud-sdk/completion.bash.inc
+      ''
+      +
       # add custom localized paths
       ''
-      fish_add_path $HOME/.rd/bin
+        fish_add_path $HOME/.rd/bin
       '';
   };
 }

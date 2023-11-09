@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{pkgs, ...}: {
   imports = [
     ./atuin.nix
     ./bash.nix
@@ -17,7 +17,7 @@
   home.packages = with pkgs; [
     # _1password # password manager CLI - installing this break op CLI on macbooks
     # age # encryption tool
-    bottom # better top "WRITTEN IN RUST" 
+    bottom # better top "WRITTEN IN RUST"
     # curl # get things from URLs
     dig # DNS lookups
     du-dust # better 'du' "WRITTEN IN RUST"

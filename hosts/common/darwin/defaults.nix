@@ -1,11 +1,14 @@
-{ config, pkgs, lib, ... }:
-
 {
+  config,
+  pkgs,
+  lib,
+  ...
+}: {
   #package config
   nixpkgs = {
     config = {
       allowUnfree = true;
-      allowUnfreePredicate = (_: true);
+      allowUnfreePredicate = _: true;
     };
   };
 
@@ -13,7 +16,7 @@
     # package = lib.mkDefault pkgs.nix;
     package = pkgs.nix;
     settings = {
-      experimental-features = [ "nix-command" "flakes" "repl-flake" ];
+      experimental-features = ["nix-command" "flakes" "repl-flake"];
       warn-dirty = false;
       sandbox = "relaxed";
     };
@@ -22,7 +25,11 @@
 
     gc = {
       automatic = true;
-      interval = { Weekday = 0; Hour = 2; Minute = 0; };
+      interval = {
+        Weekday = 0;
+        Hour = 2;
+        Minute = 0;
+      };
       options = "--delete-older-than 30d";
     };
   };
@@ -33,13 +40,13 @@
 
   environment = {
     systemPackages = [
-        pkgs.coreutils
-        pkgs.fish
-        pkgs.git
-        pkgs.vim
-        pkgs.home-manager
-        ];
-    shells = [ pkgs.bashInteractive pkgs.fish ];
+      pkgs.coreutils
+      pkgs.fish
+      pkgs.git
+      pkgs.vim
+      pkgs.home-manager
+    ];
+    shells = [pkgs.bashInteractive pkgs.fish];
     variables.EDITOR = "${lib.getBin pkgs.neovim}/bin/nvim";
     variables.SSH_AUTH_SOCK = "$HOME/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock";
   };
@@ -50,11 +57,10 @@
     zsh.enable = true;
   };
 
-
   # add nerd fonts
   fonts.fontDir.enable = true;
   fonts.fonts = with pkgs; [
-    (nerdfonts.override { fonts = [ "Hack" ]; })
+    (nerdfonts.override {fonts = ["Hack"];})
   ];
 
   #system-defaults.nix
@@ -70,7 +76,6 @@
     dock = {
       autohide = true;
       tilesize = 64;
-
     };
     finder = {
       AppleShowAllExtensions = true;

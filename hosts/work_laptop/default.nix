@@ -1,8 +1,12 @@
-{ config, pkgs, lib, home-manager, ... }:
-let
-  secrets = import ../../secrets.nix;
-in
 {
+  config,
+  pkgs,
+  lib,
+  home-manager,
+  ...
+}: let
+  secrets = import ../../secrets.nix;
+in {
   imports = [
     ../common/darwin/defaults.nix
     ./homebrew.nix
