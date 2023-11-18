@@ -17,6 +17,7 @@ Leveraging nix, nix-os, nix-darwin, and home-manager to apply machine and home c
     - [k3s-f](hosts/k3s-f/README.md) (NixOS running on an N100 tiny PC as a k3s node)
     - [k3s-g](hosts/k3s-g/README.md) (NixOS running on an N100 tiny PC as a k3s node)
     - [k3s-h](hosts/k3s-h/README.md) (NixOS running on an N100 tiny PC as a k3s node)
+    - [jeffs_laptop](hosts/jeffs_laptop/README.md) (nix-darwin running on a MacBook Pro)
     - [jens_laptop](hosts/jens_laptop/README.md) (nix-darwin running on a MacBook Air)
     - [work_laptop](hosts/work_laptop/README.md) (nix-darwin running on a MacBook Pro)
   - [modules](modules) (Custom NixOS and home-manager modules)
@@ -36,7 +37,7 @@ Everyone keeps gushing about how amazing Nix is and I want to get in on the hype
 - [x] Replace existing ubunut-based 'home VM'
 - [x] Expand usage to other shell environments such as WSL, Macbook, etc
 - [x] handle secrets - ideally using 1Password and not SOPS - using git-crypt for now
-- [ ] try agenix for secrets handling
+- [x] try agenix for secrets handling
 - [ ] introduce the concept of [impermanence](https://github.com/nix-community/impermanence) where appropriate
 
 ## References
