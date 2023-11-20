@@ -37,7 +37,6 @@ git clone https://github.com/billimek/dotfiles.git
 
 Install the flake
 
-
 ```shell
 darwin-rebuild switch --flake $HOME/src.github/dotfiles/.#work-laptop
 home-manager switch --flake $HOME/src.github/dotfiles/.#jeff@work-laptop

@@ -26,18 +26,21 @@
       "microsoft-remote-desktop"
       "moonlight"
       "obs"
+      "OrbStack"
       "plex"
       "slack"
       "spotify"
       "steam"
       "VIA"
       "visual-studio-code"
-      "webex"
       "zoom"
     ];
     masApps = {
       "1Password for Safari" = 1569813296;
-      Tailscale = 1475387142;
+      "Tailscale" = 1475387142;
+      "consent-o-matic" = 1606897889;
+      "Kagi Search for Safari" = 1622835804;
+      "AdGuard for Safari" = 1440147259;
     };
   };
 }
