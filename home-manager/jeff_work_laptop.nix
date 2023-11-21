@@ -12,7 +12,6 @@ in {
     ./common/global
     ./common/features/dev
     ./common/features/kubernetes
-    ./common/features/alacritty.nix
   ];
 
   home = {

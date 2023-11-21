@@ -39,6 +39,6 @@ in {
     git.enable = true;
   };
 
-  colorscheme = lib.mkDefault colorSchemes.tomorrow-night;
+  colorscheme = lib.mkDefault colorSchemes.dracula;
   home.file.".colorscheme".text = config.colorscheme.slug;
 }
