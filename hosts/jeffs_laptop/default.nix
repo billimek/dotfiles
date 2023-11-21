@@ -22,6 +22,7 @@
 
   users.users.jeff = {
     description = "Jeff Billimek";
+    # The shell setting currently does not work, see https://github.com/LnL7/nix-darwin/issues/811
     shell = pkgs.fish;
     home = "/Users/jeff";
   };

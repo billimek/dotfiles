@@ -100,6 +100,13 @@
           ./hosts/work_laptop
         ];
       };
+      Jeffs-M3Pro = nix-darwin.lib.darwinSystem {
+        specialArgs = inputs;
+        system = "aarch64-darwin";
+        modules = [
+          ./hosts/jeffs_laptop
+        ];
+      };
       Jens-Air-M2 = nix-darwin.lib.darwinSystem {
         specialArgs = inputs;
         system = "aarch64-darwin";
