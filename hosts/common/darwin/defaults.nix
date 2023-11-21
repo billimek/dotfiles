@@ -81,6 +81,10 @@
       AppleShowAllExtensions = true;
       FXEnableExtensionChangeWarning = false;
       _FXShowPosixPathInTitle = true;
+      # default to details view
+      FXPreferredViewStyle = "Nlsv";
+      FXDefaultSearchScope = "SCcf";
+      ShowPathbar = true;
     };
     trackpad = {
       Clicking = true;
