@@ -33,6 +33,7 @@
       "spotify"
       "steam"
       "VIA"
+      "vmware-fusion"
       "visual-studio-code"
       "zoom"
     ];
