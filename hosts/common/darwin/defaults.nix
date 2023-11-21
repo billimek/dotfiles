@@ -2,6 +2,7 @@
   config,
   pkgs,
   lib,
+  pkgs-unstable,
   ...
 }: {
   #package config
@@ -60,7 +61,7 @@
   # add nerd fonts
   fonts.fontDir.enable = true;
   fonts.fonts = with pkgs; [
-    (nerdfonts.override {fonts = ["Hack"];})
+    (pkgs-unstable.nerdfonts.override {fonts = ["Hack"];})
   ];
 
   #system-defaults.nix

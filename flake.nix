@@ -94,21 +94,30 @@
     # $ darwin-rebuild build --flake .#<hostname>
     darwinConfigurations = {
       work-laptop = nix-darwin.lib.darwinSystem {
-        specialArgs = inputs;
+        specialArgs = {
+          inherit inputs outputs;
+          pkgs-unstable = import nixpkgs-unstable { system = "aarch64-darwin"; config.allowUnfree = true; };
+        };
         system = "aarch64-darwin";
         modules = [
           ./hosts/work_laptop
         ];
       };
       Jeffs-M3Pro = nix-darwin.lib.darwinSystem {
-        specialArgs = inputs;
         system = "aarch64-darwin";
+        specialArgs = {
+          inherit inputs outputs;
+          pkgs-unstable = import nixpkgs-unstable { system = "aarch64-darwin"; config.allowUnfree = true; };
+        };
         modules = [
           ./hosts/jeffs_laptop
         ];
       };
       Jens-Air-M2 = nix-darwin.lib.darwinSystem {
-        specialArgs = inputs;
+        specialArgs = {
+          inherit inputs outputs;
+          pkgs-unstable = import nixpkgs-unstable { system = "aarch64-darwin"; config.allowUnfree = true; };
+        };
         system = "aarch64-darwin";
         modules = [
           ./hosts/jens_laptop
