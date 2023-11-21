@@ -23,6 +23,7 @@
       "discord"
       "iterm2"
       "flameshot"
+      "microsoft-office"
       "microsoft-remote-desktop"
       "moonlight"
       "obs"
