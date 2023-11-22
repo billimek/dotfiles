@@ -96,7 +96,10 @@
       work-laptop = nix-darwin.lib.darwinSystem {
         specialArgs = {
           inherit inputs outputs;
-          pkgs-unstable = import nixpkgs-unstable { system = "aarch64-darwin"; config.allowUnfree = true; };
+          pkgs-unstable = import nixpkgs-unstable {
+            system = "aarch64-darwin";
+            config.allowUnfree = true;
+          };
         };
         system = "aarch64-darwin";
         modules = [
@@ -107,7 +110,10 @@
         system = "aarch64-darwin";
         specialArgs = {
           inherit inputs outputs;
-          pkgs-unstable = import nixpkgs-unstable { system = "aarch64-darwin"; config.allowUnfree = true; };
+          pkgs-unstable = import nixpkgs-unstable {
+            system = "aarch64-darwin";
+            config.allowUnfree = true;
+          };
         };
         modules = [
           ./hosts/jeffs_laptop
@@ -116,7 +122,10 @@
       Jens-Air-M2 = nix-darwin.lib.darwinSystem {
         specialArgs = {
           inherit inputs outputs;
-          pkgs-unstable = import nixpkgs-unstable { system = "aarch64-darwin"; config.allowUnfree = true; };
+          pkgs-unstable = import nixpkgs-unstable {
+            system = "aarch64-darwin";
+            config.allowUnfree = true;
+          };
         };
         system = "aarch64-darwin";
         modules = [

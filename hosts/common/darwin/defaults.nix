@@ -105,7 +105,6 @@
       # Dragging = true;
     };
 
-    
     SoftwareUpdate.AutomaticallyInstallMacOSUpdates = true;
 
     NSGlobalDomain = {
