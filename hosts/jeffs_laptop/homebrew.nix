@@ -35,6 +35,7 @@
       "spotify"
       "steam"
       "VIA"
+      "vlc" # video player
       "vmware-fusion"
       "visual-studio-code"
       "zoom"
