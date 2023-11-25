@@ -8,6 +8,7 @@
     ./nvim.nix
     ./gh.nix
     ./git.nix
+    ./lsd.nix
     ./ssh.nix
     ./starship.nix
     ./tealdeer.nix
@@ -23,7 +24,7 @@
     du-dust # better 'du' "WRITTEN IN RUST"
     duf # better 'df' "WRITTEN IN RUST"
     envsubst # sub env vars
-    exa # Better ls "WRITTEN IN RUST"
+    unstable.eza # replacement for exa "WRITTEN IN RUST"
     fd # better find "WRITTEN IN RUST""
     file # inspect file types
     fzf # fuzzy matcher

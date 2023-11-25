@@ -7,7 +7,8 @@
   inherit (lib) mkIf;
   hasPackage = pname: lib.any (p: p ? pname && p.pname == pname) config.home.packages;
   hasRipgrep = hasPackage "ripgrep";
-  hasExa = hasPackage "exa";
+  hasEza = hasPackage "eza";
+  hasLsd = hasPackage "lsd";
   hasKubecolor = hasPackage "kubecolor";
   hasNeovim = config.programs.neovim.enable;
 in {
@@ -80,11 +81,14 @@ in {
       vi = vim;
       v = vim;
 
-      # exa
-      ls = mkIf hasExa "exa";
-      ll = mkIf hasExa "exa -laag --git --icons --sort=type";
-      llrt = mkIf hasExa "exa -laag --git --icons -snew";
-      l = mkIf hasExa "exa -l --git --icons --sort=type";
+      # eza
+      # ls = mkIf hasEza "eza";
+      # ll = mkIf hasEza "eza -laag --git --icons --sort=type";
+      # llrt = mkIf hasEza "eza -laag --git --icons -snew";
+      # l = mkIf hasEza "eza -l --git --icons --sort=type";
+
+      # lsd
+      ls = mkIf hasLsd "lsd";
 
       # nix
       n = "nix";
@@ -116,6 +120,8 @@ in {
       # Clear screen and scrollback
       # clear = "printf '\\033[2J\\033[3J\\033[1;1H'";
       kubectl = mkIf hasKubecolor "kubecolor";
+      ll = "ls -la";
+      llrt = "ls -lart";
     };
     functions = {
       # Disable greeting
