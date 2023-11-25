@@ -120,8 +120,8 @@ in {
       # Clear screen and scrollback
       # clear = "printf '\\033[2J\\033[3J\\033[1;1H'";
       kubectl = mkIf hasKubecolor "kubecolor";
-      ll = "ls -la";
-      llrt = "ls -lart";
+      ll = "lsd -la";
+      llrt = "lsd -lart";
     };
     functions = {
       # Disable greeting
