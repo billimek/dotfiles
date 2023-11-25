@@ -21,6 +21,7 @@
     bottom # better top "WRITTEN IN RUST"
     # curl # get things from URLs
     dig # DNS lookups
+    dogdns # DNS lookups "WRITTEN IN RUST"
     du-dust # better 'du' "WRITTEN IN RUST"
     duf # better 'df' "WRITTEN IN RUST"
     envsubst # sub env vars
