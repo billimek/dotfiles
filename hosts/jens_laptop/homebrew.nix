@@ -20,14 +20,16 @@
     casks = [
       "1password"
       "1password-cli" # need to install CLI via brew too to make biometric unlock work with GUI app
+      "betterzip" # zip/unzip for quicklook
       "discord"
-      # "google-chrome"
       "iterm2"
-      "flameshot"
       "microsoft-remote-desktop"
       "obs"
+      "qlmarkdown" # markdown preview in quicklook
       "slack"
       "spotify"
+      "shottr" # screenshot tool
+      "vlc" # video player
       "visual-studio-code"
       "webex"
       "zoom"
