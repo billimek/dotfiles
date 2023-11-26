@@ -88,10 +88,9 @@
     };
 
     finder = {
-      AppleShowAllExtensions = true;
-      FXEnableExtensionChangeWarning = false;
-      _FXShowPosixPathInTitle = true;
-      # default to details view
+      AppleShowAllExtensions = true; # show all file extensions
+      FXEnableExtensionChangeWarning = false; # disable warning when changing file extensions
+      _FXShowPosixPathInTitle = false; # show full path in title bar
       FXPreferredViewStyle = "Nlsv"; # list view
       FXDefaultSearchScope = "SCcf"; # search current folder by default
       ShowStatusBar = true; # show status bar
