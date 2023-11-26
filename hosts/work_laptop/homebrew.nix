@@ -21,17 +21,17 @@
       "1password"
       "1password-cli" # need to install CLI via brew too to make biometric unlock work with GUI app
       "arc"
+      "betterzip" # zip/unzip for quicklook
       "discord"
-      "flameshot"
       "gather"
       "microsoft-remote-desktop"
       "obs"
-      "obsidian"
       "plex"
-      "rancher"
-      "rectangle"
+      "qlmarkdown" # markdown preview in quicklook
       "spotify"
+      "shottr" # screenshot tool
       "VIA"
+      "vlc" # video player
     ];
     masApps = {
       "1Password for Safari" = 1569813296;
