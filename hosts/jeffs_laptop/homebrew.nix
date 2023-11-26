@@ -27,6 +27,7 @@
       "microsoft-office"
       "microsoft-remote-desktop"
       "moonlight"
+      "mudlet" # MUD client
       "obs"
       "OrbStack"
       "plex"
