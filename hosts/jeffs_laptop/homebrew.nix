@@ -23,7 +23,6 @@
       "betterzip" # zip/unzip for quicklook
       "discord"
       "iterm2"
-      "flameshot"
       "microsoft-office"
       "microsoft-remote-desktop"
       "moonlight"
@@ -34,6 +33,7 @@
       "qlmarkdown" # markdown preview in quicklook
       "slack"
       "spotify"
+      "shottr" # screenshot tool
       "steam"
       "VIA"
       "vlc" # video player
