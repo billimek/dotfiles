@@ -114,7 +114,6 @@ in {
       jqless = "jq -C | less -r";
       k = "kubectl";
       sc = "tmux detach;tmux attach";
-      dps = "docker ps --format \"table {{.Names}}\t{{.Status}}\"";
     };
     shellAliases = {
       # Clear screen and scrollback
@@ -153,6 +152,13 @@ in {
         description = "convert epub files to mobi files";
         body = ''
           for i in *.epub; echo $i;ebook-convert  "$i" "$(basename "$i" .epub).mobi"; end
+        '';
+      };
+
+      dps = {
+        description = "formatted `docker ps` command";
+        body = ''
+          docker ps --format 'table {{.Names}}\t{{.Status}}' 
         '';
       };
     };
