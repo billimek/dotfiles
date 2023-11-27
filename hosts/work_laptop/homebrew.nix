@@ -26,8 +26,11 @@
       "gather"
       "microsoft-remote-desktop"
       "obs"
+      "obsidian" # note taking app
       "plex"
       "qlmarkdown" # markdown preview in quicklook
+      "rancher"
+      "rectangle" # window manager
       "spotify"
       "shottr" # screenshot tool
       "VIA"
