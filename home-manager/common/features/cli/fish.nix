@@ -158,7 +158,7 @@ in {
       dps = {
         description = "formatted `docker ps` command";
         body = ''
-          docker ps --format 'table {{.Names}}\t{{.Status}}' 
+          docker ps --format 'table {{.Names}}\t{{.Status}}'
         '';
       };
     };

@@ -7,4 +7,7 @@
     nodejs
     rustc # compiler
   ];
+  home.sessionPath = [
+    "$HOME/.cargo/bin"
+  ];
 }

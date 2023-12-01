@@ -41,4 +41,6 @@ in {
 
   colorscheme = lib.mkDefault colorSchemes.dracula;
   home.file.".colorscheme".text = config.colorscheme.slug;
+
+  home.sessionPath = ["$HOME/.local/bin"];
 }
