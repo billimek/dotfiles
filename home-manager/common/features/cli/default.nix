@@ -34,6 +34,7 @@
     hyperfine # benchmarking tool "WRITTEN IN RUST"
     jq # JSON pretty printer and manipulator
     jwt-cli # JWT tool
+    lazygit
     neofetch # show system info
     ouch # better unzip "WRITTEN IN RUST"
     procs # better ps "WRITTEN IN RUST"
