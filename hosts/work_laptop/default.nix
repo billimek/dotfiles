@@ -22,7 +22,7 @@ in {
     git = "/usr/bin/git";
   };
 
-  # security.pki.certificateFiles = [ secrets.work_certpath ];
+  security.pki.certificateFiles = [ secrets.work_certpath ];
 
   # Used for backwards compatibility, please read the changelog before changing.
   # $ darwin-rebuild changelog
