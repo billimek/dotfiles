@@ -39,7 +39,6 @@
       "steam"
       "VIA"
       "vlc" # video player
-      "vmware-fusion"
       "visual-studio-code"
       "wowup" # WoW addon manager
       "zoom"
