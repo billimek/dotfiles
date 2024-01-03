@@ -148,8 +148,6 @@
       "jeff@work-laptop" = mkHome [./home-manager/jeff_work_laptop.nix] nixpkgs.legacyPackages."aarch64-darwin";
       "jeff@Jeffs-M3Pro" = mkHome [./home-manager/jeffs_laptop.nix] nixpkgs.legacyPackages."aarch64-darwin";
       "jeff@Jens-Air-M2" = mkHome [./home-manager/jens_laptop.nix] nixpkgs.legacyPackages."aarch64-darwin";
-      # Windows
-      "jeff@honeypot" = mkHome [./home-manager/jeff_honeypot.nix] nixpkgs.legacyPackages."x86_64-linux";
       # Other
       "root@truenas" = mkHome [./home-manager/root_truenas.nix] nixpkgs.legacyPackages."x86_64-linux";
     };
