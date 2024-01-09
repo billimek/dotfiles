@@ -19,6 +19,7 @@
     # _1password # password manager CLI - installing this break op CLI on macbooks
     # age # encryption tool
     bottom # better top "WRITTEN IN RUST"
+    btop
     # curl # get things from URLs
     dig # DNS lookups
     dogdns # DNS lookups "WRITTEN IN RUST"
