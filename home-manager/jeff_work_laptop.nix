@@ -25,6 +25,7 @@ in {
     cloudfoundry-cli
     unstable.fly
     jwt-cli
+    python3
     rancher
     terminal-notifier # send notifications to macOS notification center
     terraform
