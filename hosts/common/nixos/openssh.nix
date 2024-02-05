@@ -18,6 +18,8 @@ in {
       StreamLocalBindUnlink = "yes";
       # Allow forwarding ports to everywhere
       GatewayPorts = "clientspecified";
+      # Allow X11 forwarding
+      X11Forwarding = true;
     };
   };
 
