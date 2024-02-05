@@ -41,6 +41,7 @@
       "vlc" # video player
       "visual-studio-code"
       "wowup" # WoW addon manager
+      "XQuartz" # X11 for macOS
       "zoom"
     ];
     masApps = {
