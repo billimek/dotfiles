@@ -20,6 +20,7 @@ in {
         "network"
         "docker"
         "git"
+        "libvirtd"
       ];
 
     openssh.authorizedKeys.keys = [
