@@ -67,21 +67,13 @@ sudo reboot
 Here is where I will normally try and setup all the hardware and import the profiles/modules I want from this repo. Since I use the minimal install, I will kick things off like so:
 
 ```shell
-ssh -A root@<ip of host>
 nix-shell -p git vim
 cd /etc/nixos
 # these should no longer be needed if we already have the proper configurations already defined in the repo
-sudo mv configuration.nix hardware-configuration.nix /tmp/
-sudo git clone https://github.com/billimek/dotfiles.git .
+mv configuration.nix hardware-configuration.nix /tmp/
+git clone https://github.com/billimek/dotfiles.git .
 nixos-rebuild switch
-sudo chown -R nix:users .
-```
-
-Make any edits where necessary or desired, then build the configuration and _set the nix user password_.  Once all is 'clean', it should be possible to reboot and login as the nix user as a complete system.
-
-```shell
-sudo sh -c "cd /etc/nixos && git pull && nixos-rebuild switch"
-passwd nix
+chown -R nix:users .
 reboot
 ```
 
