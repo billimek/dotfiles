@@ -81,6 +81,7 @@
     # NixOS configuration entrypoint
     # Available through 'nixos-rebuild --flake .#your-hostname'
     nixosConfigurations = {
+      nas = mkNixos [./hosts/nas];
       # VMs
       home = mkNixos [./hosts/home];
       cloud = mkNixos [./hosts/cloud];
@@ -137,6 +138,7 @@
     # Standalone home-manager configuration entrypoint
     # Available through 'home-manager --flake .#your-username@your-hostname'
     homeConfigurations = {
+      "nix@nas" = mkHome [./home-manager/nix_nas.nix] nixpkgs.legacyPackages."x86_64-linux";
       # VMs
       "jeff@home" = mkHome [./home-manager/jeff_home.nix] nixpkgs.legacyPackages."x86_64-linux";
       "jeff@cloud" = mkHome [./home-manager/jeff_cloud.nix] nixpkgs.legacyPackages."aarch64-linux";
