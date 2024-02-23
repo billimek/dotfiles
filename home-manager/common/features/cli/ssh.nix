@@ -22,6 +22,14 @@
         is_vscode = 1;
       };
     };
+    matchBlocks."nas-lan" = {
+      hostname = "nas-lan.home";
+      user = "nix";
+      forwardAgent = true;
+      setEnv = {
+        is_vscode = 1;
+      };
+    };
   };
 
   # place ~/.ssh/rc file
