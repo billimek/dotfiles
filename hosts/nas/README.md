@@ -15,6 +15,12 @@
   * built-in 1GB LAN
   * Mellanox MT26448 PCI 10GB SFP+
 
+### supermicro X11SCA-F notes
+
+* in order to have working IPMI video and iGPU passthrough in the BIOS configuration set `Primary Display : PCI` and `Internal Graphics: Enable` (**more to add to this laster as experiments continue**)
+* in IPMI, set fan control to "standard speed" to avoid blasting the fans at 100%
+* to adjust the fan speed alerting thresholds for larger slower fans, use `sudo ipmitool sensor thresh CPU_FAN1 lower 300 300 400` to set the lower, upper, and critical thresholds for the fan speed sensor
+
 It is installed with the NixOS iso installation media.  These are the steps initially taken to install NixOS, though once the config is setup it can just be re-used for future re-installs if needed. This assumes you have booted into a NixOS install image from a USB stick and that we will be using systemd-boot.  Following the [manual installation steps](https://nixos.org/manual/nixos/stable/index.html#sec-installation-manual):
 
 root shell and set password to continue from ssh session:
