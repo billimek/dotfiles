@@ -31,14 +31,20 @@
     {device = "/dev/disk/by-label/swap";}
   ];
 
-  # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
-  # (the default) this is the recommended approach. When using systemd-networkd it's
-  # still possible to use this option, but it's recommended to use it in conjunction
-  # with explicit per-interface declarations with `networking.interfaces.<interface>.useDHCP`.
-  networking.useDHCP = lib.mkDefault true;
-  networking.interfaces.eno1.useDHCP = lib.mkDefault true;
-  networking.interfaces.eno2.useDHCP = lib.mkDefault true;
-  networking.interfaces.enp2s0.useDHCP = lib.mkDefault true;
+  networking = {
+    useDHCP = false; # Disable global DHCP
+    interfaces.eno2.useDHCP = lib.mkDefault true;
+    interfaces.enp2s0.useDHCP = lib.mkDefault true;
+    interfaces.eno1.useDHCP = false; # Disable DHCP for the interface you want to add to the bridge
+    interfaces.br0.useDHCP = true;
+    interfaces.br0.macAddress = "3c:ec:ef:b5:bf:6e"; # Set the MAC address of the bridge from eno1
+    bridges = {
+      "br0" = {
+        interfaces = [ "eno1" ];
+      };
+    };
+
+  };
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
