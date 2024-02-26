@@ -86,6 +86,9 @@
           Bridge = "br0";
           DHCP = "no";
         };
+        vlan = [
+          "vlk8s20"
+        ];
         linkConfig.RequiredForOnline = "enslaved";
       };
       "40-vlk8s20" = {
