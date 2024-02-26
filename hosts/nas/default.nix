@@ -14,10 +14,12 @@
     ../common/optional/reboot-required.nix
     ../common/optional/virtulization.nix
     ../common/optional/vscode-server.nix
+    ../common/optional/zfs.nix
   ];
 
   networking = {
     hostName = "nas";
+    hostId = "07aca0a7"; # generated from 'head -c 8 /etc/machine-id'
     networkmanager.enable = true; # Easiest to use and most distros use this by default.
   };
 
