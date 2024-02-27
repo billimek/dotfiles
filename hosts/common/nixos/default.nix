@@ -2,6 +2,7 @@
 {
   inputs,
   outputs,
+  pkgs,
   ...
 }: {
   imports =
@@ -63,5 +64,12 @@
       type = "hard";
       value = "1048576";
     }
+  ];
+
+# always install these for all users on nixos systems
+environment.systemPackages = [
+    pkgs.git
+    pkgs.htop
+    pkgs.vim
   ];
 }
