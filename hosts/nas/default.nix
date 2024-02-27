@@ -11,6 +11,7 @@
     ../common/nixos/auto-upgrade.nix
     ../common/nixos/users/nix
     ../common/optional/fish.nix
+    ../common/optional/nfs.nix
     ../common/optional/reboot-required.nix
     ../common/optional/virtulization.nix
     ../common/optional/vscode-server.nix
