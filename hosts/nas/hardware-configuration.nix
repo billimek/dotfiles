@@ -57,8 +57,7 @@
         netdevConfig = {
           Kind = "bridge";
           Name = "br0";
-          # TODO: change this to the MAC address of the existing mellanox card that will actually be used when installed to the new case
-          MACAddress = "3c:ec:ef:b5:bf:6f";
+          MACAddress = "00:02:c9:56:ff:6a";
           Description = "br0 bridged interface for eno1";
         };
       };
@@ -89,9 +88,20 @@
           RequiredForOnline = false;
         };
       };
-      # TODO: change this to enp2s0 when installed to the new case
+      # TODO: remove this when installed to the new case (enp2s0)
       "30-eno2" = {
-        matchConfig.Name = "eno2"; # will eventually be enp2s0
+        matchConfig.Name = "eno2";
+        networkConfig = {
+          Bridge = "br0";
+          DHCP = "no";
+        };
+        vlan = [
+          "vlk8s20"
+        ];
+        linkConfig.RequiredForOnline = "enslaved";
+      };
+      "30-enp2s0" = {
+        matchConfig.Name = "enp2s0";
         networkConfig = {
           Bridge = "br0";
           DHCP = "no";
