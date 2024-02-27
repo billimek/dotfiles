@@ -14,6 +14,7 @@
         ovmf.packages = [ pkgs.OVMFFull.fd ];
       };
     };
+    kvmgt.enable = true;
   };
 
   programs.virt-manager.enable = true;

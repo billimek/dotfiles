@@ -11,6 +11,16 @@
   boot.initrd.kernelModules = [];
   boot.kernelModules = ["kvm-intel usb_storage"];
   boot.extraModulePackages = [];
+
+  # TODO: not certain we actually need to blacklist i915 here..
+  boot.kernelParams = [ "i915.disable_display=1" "module_blacklist=i915" ];
+
+  virtualisation.kvmgt.vgpus = {
+    "i915-GVTg_V5_8" = {
+      uuid = [ "9f905394-d4d7-11ee-9a00-937582b91b7c" "31cb043a-d4e1-11ee-9357-7b7a0730baf4" ]; # uuid generated with 'nix shell nixpkgs#libossp_uuid -c uuid'
+    };
+  };
+
   boot.loader = {
     systemd-boot.enable = true;
     efi.canTouchEfiVariables = true;
