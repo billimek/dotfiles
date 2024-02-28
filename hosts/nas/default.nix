@@ -12,6 +12,7 @@
     ../common/nixos/users/nix
     ../common/optional/avahi.nix
     ../common/optional/fish.nix
+    ../common/optional/monitoring.nix
     ../common/optional/nfs.nix
     ../common/optional/reboot-required.nix
     ../common/optional/samba.nix
@@ -37,7 +38,11 @@
       # isNormalUser = true;
     };
   };
+
+  boot.zfs.extraPools = ["tank-test" "ssdtank-test"];
+
   services.smartd.enable = true;
+
   environment.systemPackages = with pkgs; [
     ipmitool
     lshw

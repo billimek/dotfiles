@@ -28,7 +28,7 @@
       printcap name = /dev/null
       guest account = nobody
       map to guest = bad user
-      hosts allow = 10.0.7. 10.0.2. 10.2.0. 127.0.0.1 localhost
+      hosts allow = 10.0.7. 10.0.2. 10.2.0. 100.64. 127.0.0.1 localhost
       hosts deny = 0.0.0.0/0
       vfs objects = catia fruit streams_xattr
       fruit:nfs_aces = no

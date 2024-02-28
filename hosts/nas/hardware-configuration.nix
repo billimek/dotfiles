@@ -12,8 +12,7 @@
   boot.kernelModules = ["kvm-intel usb_storage"];
   boot.extraModulePackages = [];
 
-  # TODO: not certain we actually need to blacklist i915 here..
-  boot.kernelParams = [ "i915.disable_display=1" "module_blacklist=i915" ];
+  boot.kernelParams = [ "i915.disable_display=1" ];
 
   virtualisation.kvmgt.vgpus = {
     "i915-GVTg_V5_8" = {
