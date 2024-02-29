@@ -66,8 +66,8 @@
     }
   ];
 
-# always install these for all users on nixos systems
-environment.systemPackages = [
+  # always install these for all users on nixos systems
+  environment.systemPackages = [
     pkgs.git
     pkgs.htop
     pkgs.vim

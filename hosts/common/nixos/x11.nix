@@ -6,5 +6,4 @@
   environment.systemPackages = [
     pkgs.xorg.xauth
   ];
-
 }

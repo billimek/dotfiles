@@ -37,7 +37,7 @@
       fruit:encoding = native
       spotlight backend = tracker
       fruit:model = MacPro7,1@ECOLOR=226,226,224
-      fruit:wipe_intentionally_left_blank_rfork = yes 
+      fruit:wipe_intentionally_left_blank_rfork = yes
       fruit:delete_empty_adfiles = yes
     '';
 

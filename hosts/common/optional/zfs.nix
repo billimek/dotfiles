@@ -3,7 +3,7 @@
   pkgs,
   ...
 }: {
-  boot.supportedFilesystems = [ "zfs" ]; # Enable ZFS support
+  boot.supportedFilesystems = ["zfs"]; # Enable ZFS support
   boot.zfs.requestEncryptionCredentials = true; # If you're using ZFS encryption, set this to true to prompt for encryption passwords at boot
 
   services.zfs.autoScrub = {
@@ -13,5 +13,5 @@
 
   services.zfs.trim.enable = true;
 
-  environment.systemPackages = with pkgs; [ zfs ]; # Install the ZFS package
+  environment.systemPackages = with pkgs; [zfs]; # Install the ZFS package
 }

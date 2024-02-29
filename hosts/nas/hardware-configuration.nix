@@ -7,16 +7,16 @@
   pkgs,
   ...
 }: {
-  boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "nvme" "usbhid" "usb_storage" "sd_mod" ];
+  boot.initrd.availableKernelModules = ["xhci_pci" "ahci" "nvme" "usbhid" "usb_storage" "sd_mod"];
   boot.initrd.kernelModules = [];
   boot.kernelModules = ["kvm-intel usb_storage"];
   boot.extraModulePackages = [];
 
-  boot.kernelParams = [ "i915.disable_display=1" ];
+  boot.kernelParams = ["i915.disable_display=1"];
 
   virtualisation.kvmgt.vgpus = {
     "i915-GVTg_V5_8" = {
-      uuid = [ "9f905394-d4d7-11ee-9a00-937582b91b7c" "31cb043a-d4e1-11ee-9357-7b7a0730baf4" ]; # uuid generated with 'nix shell nixpkgs#libossp_uuid -c uuid'
+      uuid = ["9f905394-d4d7-11ee-9a00-937582b91b7c" "31cb043a-d4e1-11ee-9357-7b7a0730baf4"]; # uuid generated with 'nix shell nixpkgs#libossp_uuid -c uuid'
     };
   };
 
@@ -117,7 +117,7 @@
         };
       };
       "50-br0" = {
-        matchConfig.Name ="br0";
+        matchConfig.Name = "br0";
         networkConfig = {
           DHCP = "yes";
         };
@@ -127,7 +127,7 @@
         };
       };
       "50-brk8s20" = {
-        matchConfig.Name ="brk8s20";
+        matchConfig.Name = "brk8s20";
         networkConfig = {
           DHCP = "yes";
         };
