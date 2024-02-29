@@ -64,8 +64,8 @@
         public = "no";
         "read only" = "no";
         writeable = "yes";
-        "create mask" = "0666";
-        "directory mask" = "0777";
+        "create mask" = "0664";
+        "directory mask" = "0775";
         "veto files" = "/._*/.DS_Store/";
         "delete veto files" = "yes";
         "spotlight" = "yes";
@@ -79,8 +79,8 @@
         public = "no";
         "read only" = "no";
         writeable = "yes";
-        "create mask" = "0666";
-        "directory mask" = "0777";
+        "create mask" = "0664";
+        "directory mask" = "0775";
         "veto files" = "/._*/.DS_Store/";
         "delete veto files" = "yes";
         "spotlight" = "yes";
@@ -94,8 +94,8 @@
         public = "no";
         "read only" = "no";
         writeable = "yes";
-        "create mask" = "0666";
-        "directory mask" = "0777";
+        "create mask" = "0664";
+        "directory mask" = "0775";
         "veto files" = "/._*/.DS_Store/";
         "delete veto files" = "yes";
         "spotlight" = "yes";

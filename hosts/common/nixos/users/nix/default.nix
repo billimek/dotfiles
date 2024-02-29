@@ -21,6 +21,7 @@ in {
         "docker"
         "git"
         "libvirtd"
+        "nas"
       ];
 
     openssh.authorizedKeys.keys = [

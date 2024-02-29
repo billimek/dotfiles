@@ -99,8 +99,8 @@
         ];
         linkConfig.RequiredForOnline = "enslaved";
       };
-      "30-enp2s0" = {
-        matchConfig.Name = "enp2s0";
+      "30-enp1s0" = {
+        matchConfig.Name = "enp1s0";
         networkConfig = {
           Bridge = "br0";
           DHCP = "no";
