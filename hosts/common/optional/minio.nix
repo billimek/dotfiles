@@ -14,6 +14,7 @@ in {
     # TODO: rename dataDir to the actualk location when ready
     dataDir = ["/mnt/ssdtank/s3-new"];
     package = pkgs.minio;
+    # TODO: switch these to rootCredentialsFile
     accessKey = secrets.minio.accessKey;
     secretKey = secrets.minio.secretKey;
   };
