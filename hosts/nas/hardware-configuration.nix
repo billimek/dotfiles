@@ -87,18 +87,6 @@
           RequiredForOnline = false;
         };
       };
-      # TODO: remove this when installed to the new case (enp2s0)
-      #"30-eno2" = {
-      #  matchConfig.Name = "eno2";
-      #  networkConfig = {
-      #    Bridge = "br0";
-      #    DHCP = "no";
-      #  };
-      #  vlan = [
-      #    "vlk8s20"
-      #  ];
-      #  linkConfig.RequiredForOnline = "enslaved";
-      #};
       "30-enp2s0" = {
         matchConfig.Name = "enp2s0";
         networkConfig = {
@@ -129,7 +117,7 @@
       "50-brk8s20" = {
         matchConfig.Name = "brk8s20";
         networkConfig = {
-          DHCP = "yes";
+          DHCP = "no";
         };
       };
       "99-network-defaults-wired" = {
