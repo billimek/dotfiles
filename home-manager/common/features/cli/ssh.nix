@@ -23,7 +23,7 @@
       };
     };
     matchBlocks."nas-lan" = {
-      hostname = "100.94.2.42";
+      hostname = "100.119.81.4";
       user = "nix";
       forwardAgent = true;
       setEnv = {
