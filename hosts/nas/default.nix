@@ -40,13 +40,15 @@
     };
   };
 
-  boot.zfs.extraPools = ["tank-test" "ssdtank-test"];
+  boot.zfs.extraPools = ["tank" "ssdtank"];
 
   services.smartd.enable = true;
 
   environment.systemPackages = with pkgs; [
     ipmitool
     lshw
+    lsof
+    pciutils
     rclone
     smartmontools
   ];

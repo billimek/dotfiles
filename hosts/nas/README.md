@@ -1,10 +1,12 @@
-# Bootstrapping NixOS on 'nas'
+# NAS running under NixOS
+
+![](https://i.imgur.com/T5n1Tcw.png)
 
 'nas' is a dedicated server with the following configuration:
 
-* Motherboard: Supermicro X9SCM-F
+* Motherboard: Supermicro X11SCA-F
 * CPU: Intel i5-9500T
-* Memory: 64GB
+* Memory: 128GB
 * Disk:
   * Boot - 500GB nvme SSD 
   * 'ssdtank' 4 SSD (2 1TB and 2 500GB (one of the SSDs is an nvme))
