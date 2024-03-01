@@ -20,19 +20,19 @@
         enable = true;
         enabledCollectors = ["systemd"];
         disabledCollectors = ["textfile"];
-        port = 9001;
+        port = 9100;
       };
       zfs = {
         enable = true;
-        port = 9002;
+        port = 9102;
       };
       smartctl = {
         enable = true;
-        port = 9003;
+        port = 9103;
       };
       ipmi = {
         enable = true;
-        port = 9004;
+        port = 9104;
       };
     };
   };

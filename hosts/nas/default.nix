@@ -12,6 +12,7 @@
     ../common/nixos/users/nix
     ../common/optional/avahi.nix
     ../common/optional/fish.nix
+    ../common/optional/minio.nix
     ../common/optional/monitoring.nix
     ../common/optional/nfs.nix
     ../common/optional/reboot-required.nix
