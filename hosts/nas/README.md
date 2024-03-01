@@ -1,4 +1,6 @@
-# Bootstrapping NixOS on 'nas'
+# NAS running under NixOS
+
+![](https://i.imgur.com/T5n1Tcw.png)
 
 'nas' is a dedicated server with the following configuration:
 
