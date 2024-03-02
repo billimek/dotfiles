@@ -9,30 +9,37 @@
     lm_sensors
   ];
   networking.firewall.allowedTCPPorts = [
-    config.services.prometheus.exporters.node.port
-    config.services.prometheus.exporters.zfs.port
-    config.services.prometheus.exporters.smartctl.port
     config.services.prometheus.exporters.ipmi.port
+    config.services.prometheus.exporters.minio.port
+    config.services.prometheus.exporters.node.port
+    config.services.prometheus.exporters.smartctl.port
+    config.services.prometheus.exporters.zfs.port
   ];
   services.prometheus = {
     exporters = {
+      ipmi = {
+        enable = true;
+        port = 9290;
+        user = "root";
+        group = "root";
+      };
+      minio = {
+        enable = true;
+        port = 9291;
+      };
       node = {
         enable = true;
         enabledCollectors = ["systemd"];
         disabledCollectors = ["textfile"];
         port = 9100;
       };
-      zfs = {
-        enable = true;
-        port = 9102;
-      };
       smartctl = {
         enable = true;
-        port = 9103;
+        port = 9633;
       };
-      ipmi = {
+      zfs = {
         enable = true;
-        port = 9104;
+        port = 9134;
       };
     };
   };
