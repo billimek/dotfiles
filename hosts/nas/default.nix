@@ -7,6 +7,7 @@
 }: {
   imports = [
     ./hardware-configuration.nix
+    ./networking.nix
     ../common/nixos
     ../common/nixos/auto-upgrade.nix
     ../common/nixos/users/nix
@@ -21,12 +22,6 @@
     ../common/optional/vscode-server.nix
     ../common/optional/zfs.nix
   ];
-
-  networking = {
-    hostName = "nas";
-    hostId = "07aca0a7"; # generated from 'head -c 8 /etc/machine-id'
-    networkmanager.enable = true; # Easiest to use and most distros use this by default.
-  };
 
   users.groups = {
     nas.gid = 1001;
