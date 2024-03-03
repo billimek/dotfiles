@@ -18,6 +18,7 @@
     ../common/optional/nfs.nix
     ../common/optional/reboot-required.nix
     ../common/optional/samba.nix
+    ../common/optional/sanoid.nix
     ../common/optional/virtulization.nix
     ../common/optional/vscode-server.nix
     ../common/optional/zfs.nix
@@ -38,6 +39,11 @@
   boot.zfs.extraPools = ["tank" "ssdtank"];
 
   services.smartd.enable = true;
+
+  services.sanoid.datasets = {
+    "tank/backups/timemachine".use_template = ["timemachine"];
+    "ssdtank/vms/home".use_template = ["vms"];
+  };
 
   environment.systemPackages = with pkgs; [
     ipmitool
