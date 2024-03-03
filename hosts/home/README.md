@@ -5,11 +5,10 @@
 * CPU:
   * 1 CPU
   * 2 Cores
-  * 4 Threads
 * Memory:
   * 4GB
 * Disk:
-  * 150GB 
+  * 100GB 
   * VirtIO
 * NIC:
   * VirtIO
@@ -26,13 +25,13 @@ Creates 3 partitions on the virtual drive, one for EFI Boot, one for swap, and o
 
 ```shell
 parted /dev/vda -- mklabel gpt
-parted /dev/vda -- mkpart primary 512MB -8GB
-parted /dev/vda -- mkpart primary linux-swap -8GB 100%
 parted /dev/vda -- mkpart ESP fat32 1MB 512MB
-parted /dev/vda -- set 3 esp on
-mkfs.ext4 -L nixos /dev/vda1
+parted /dev/vda -- mkpart primary linux-swap -8GB 100%
+parted /dev/vda -- mkpart primary 512MB -8GB
+parted /dev/vda -- set 1 esp on
+mkfs.ext4 -L nixos /dev/vda3
 mkswap -L swap /dev/vda2
-mkfs.fat -F 32 -n boot /dev/vda3
+mkfs.fat -F 32 -n boot /dev/vda1
 mount /dev/disk/by-label/nixos /mnt
 mkdir -p /mnt/boot
 mount /dev/disk/by-label/boot /mnt/boot
@@ -65,22 +64,11 @@ Here is where I will normally try and setup all the hardware and import the prof
 ```shell
 nix-shell -p git vim
 cd /etc/nixos
-git clone https://github.com/billimek/dotfiles.git
-```
-
-I will then copy in the new machine basic config into a new machine folder and setup the configuration.nix in root. I will then replace the generated config with the new setup.
-
-```shell
-cd dotfiles
-mkdir -p hosts/home
-mv ../configuration.nix hosts/home/default.nix
-mv ../hardware-configuration.nix hosts/home/hardware-configuration.nix
-vim hosts/home/default.nix
-> add all modules/profiles as required.
-mv ./* ..
-mv ./.* ..
-cd ../
-rm -rf dotfiles
+# these should no longer be needed if we already have the proper configurations already defined in the repo
+mv configuration.nix hardware-configuration.nix /tmp/
+git clone https://github.com/billimek/dotfiles.git .
+nixos-rebuild switch
+chown -R jeff:users .
 reboot
 ```
 
@@ -105,7 +93,7 @@ eval $(op signin --account <redacted>.1password.com)
 ```shell
 atuin login --username $(op item get "atuin" --fields label=username) --password $(op item get "atuin" --fields label=password) --key "$(op item get "atuin" --fields label=key)"
 atuin import auto
-atuin sync
+atuin sync -f
 ```
 
 ### kubeconfig
