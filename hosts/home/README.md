@@ -1,6 +1,6 @@
 # Bootstrapping NixOS on 'home' VM
 
-'home' is a TrueNAS qemu VM with the following configuration:
+'home' is a qemu VM with the following configuration:
 
 * CPU:
   * 1 CPU

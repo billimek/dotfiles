@@ -13,7 +13,7 @@ Leveraging nix, nix-os, nix-darwin, and home-manager to apply machine and home c
       - [nixos](hosts/common/nixos) (global host configuration used across all NixOS hosts)
       - [optional](hosts/common/optional) (optional host configuration used as-needed per host)
     - [nas](hosts/nas/README.md) (NixOS NAS server)
-    - [home](hosts/home/README.md) (NixOS VM running in TrueNAS)
+    - [home](hosts/home/README.md) (NixOS VM running in NAS)
     - [cloud](hosts/cloud/README.md) (NixOS VM running in Oracle Cloud)
     - [k3s-f](hosts/k3s-f/README.md) (NixOS running on an N100 tiny PC as a k3s node)
     - [k3s-g](hosts/k3s-g/README.md) (NixOS running on an N100 tiny PC as a k3s node)
