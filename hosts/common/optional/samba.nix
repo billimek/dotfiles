@@ -22,6 +22,8 @@
       server string = nas
       netbios name = nas
       workgroup = WORKGROUP
+      min protocol = SMB2
+      ea support = yes
       browseable = yes
       smb encrypt = auto
       load printers = no
@@ -33,6 +35,8 @@
       bind interfaces only = yes
       interfaces = lo br0 tailscale0
       vfs objects = catia fruit streams_xattr
+      fruit:aapl = yes
+      fruit:posix_rename = yes
       fruit:nfs_aces = no
       fruit:zero_file_id = yes
       fruit:metadata = stream
@@ -41,20 +45,22 @@
       fruit:model = MacPro7,1@ECOLOR=226,226,224
       fruit:wipe_intentionally_left_blank_rfork = yes
       fruit:delete_empty_adfiles = yes
+      fruit:veto_appledouble = no
     '';
 
     # Don't forget to run `smbpasswd -a <user>` to set the passwords (the user must already exit)
     shares = {
       timemachine = {
         path = "/mnt/tank/backups/timemachine";
+        comment = "Time Machine";
         browseable = "yes";
-        # "valid users" = "root";
         public = "no";
         writeable = "yes";
         "force user" = "root";
         "force group" = "root";
         "fruit:aapl" = "yes";
         "fruit:time machine" = "yes";
+        "fruit:time machine max size" = "3072G";
         "vfs objects" = "catia fruit streams_xattr";
       };
       Tesla = {
