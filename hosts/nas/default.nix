@@ -9,7 +9,8 @@
     ./hardware-configuration.nix
     ./networking.nix
     ../common/nixos
-    ../common/nixos/auto-upgrade.nix
+    # this breaks because of git-secrets
+    #../common/nixos/auto-upgrade.nix
     ../common/nixos/users/nix
     ../common/optional/avahi.nix
     ../common/optional/fish.nix
