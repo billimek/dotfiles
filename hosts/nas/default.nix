@@ -18,6 +18,7 @@
     ../common/optional/monitoring.nix
     ../common/optional/nfs.nix
     ../common/optional/reboot-required.nix
+    ../common/optional/rclone.nix
     ../common/optional/samba.nix
     ../common/optional/sanoid.nix
     ../common/optional/virtulization.nix
