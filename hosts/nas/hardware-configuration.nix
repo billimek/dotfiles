@@ -26,8 +26,7 @@
     timeout = 10;
   };
 
-  # TODO: revisit this; last time I tried this, br0 didn't come up
-  #hardware.ksm.enable = true; # enable kernel same-page merging
+  hardware.ksm.enable = true; # enable kernel same-page merging
 
   fileSystems."/" = {
     device = "/dev/disk/by-label/nixos";
