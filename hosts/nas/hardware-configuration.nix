@@ -26,8 +26,6 @@
     timeout = 10;
   };
 
-  hardware.ksm.enable = true; # enable kernel same-page merging
-
   fileSystems."/" = {
     device = "/dev/disk/by-label/nixos";
     fsType = "ext4";

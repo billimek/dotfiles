@@ -21,7 +21,7 @@
     ../common/optional/rclone.nix
     ../common/optional/samba.nix
     ../common/optional/sanoid.nix
-    ../common/optional/virtulization.nix
+    ../common/optional/virtulization
     ../common/optional/vscode-server.nix
     ../common/optional/zfs.nix
   ];
