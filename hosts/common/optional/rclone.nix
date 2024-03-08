@@ -7,7 +7,7 @@
   imports = [];
 
   # Automated rclone sync to b2
-  
+
   # TODO: handle config/secrets via nix
 
   # volsync
@@ -28,7 +28,7 @@
       OnCalendar = "4:00:00";
       Persistent = true;
     };
-    wantedBy = [ "timers.target" ];
+    wantedBy = ["timers.target"];
   };
 
   # postgres
@@ -49,6 +49,6 @@
       OnCalendar = "6:00:00";
       Persistent = true;
     };
-    wantedBy = [ "timers.target" ];
+    wantedBy = ["timers.target"];
   };
 }

@@ -4,7 +4,6 @@
   pkgs,
   ...
 }: {
-
   networking = {
     hostName = "nas";
     hostId = "07aca0a7"; # generated from 'head -c 8 /etc/machine-id'

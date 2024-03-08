@@ -5,7 +5,7 @@
 }: {
   services.sanoid = {
     enable = true;
-    extraArgs = [ "--verbose" ];
+    extraArgs = ["--verbose"];
     templates = {
       "timemachine" = {
         "daily" = 14;
