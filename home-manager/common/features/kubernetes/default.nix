@@ -10,7 +10,7 @@
     kubectl-example # output example kubernetes types
     kubectl-view-allocations # view kubernetes allocations
     kubectl-view-secret # view kubernetes secrets without piping and decoding
-    kubecolor # colorize kubectl output
+    pkgs.unstable.kubecolor # colorize kubectl output
     kubernetes-helm # helm CLI
     kustomize # kustomize CLI for sadists
     # acorn-next # kubernetes config parser

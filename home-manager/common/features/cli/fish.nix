@@ -39,7 +39,6 @@ in {
         name = "puffer";
         src = pkgs.fishPlugins.puffer.src;
       }
-      #{ name = "z"; src = pkgs.fishPlugins.z.src; }
       {
         name = "fzf";
         src = pkgs.fetchFromGitHub {
@@ -75,12 +74,6 @@ in {
       gpc = "git push -u origin (git rev-parse --abbrev-ref HEAD)";
       gpf = "git push --force-with-lease";
       gbc = "git nb";
-
-      # eza
-      # ls = mkIf hasEza "eza";
-      # ll = mkIf hasEza "eza -laag --git --icons --sort=type";
-      # llrt = mkIf hasEza "eza -laag --git --icons -snew";
-      # l = mkIf hasEza "eza -l --git --icons --sort=type";
 
       # lsd
       ls = mkIf hasLsd "lsd";
@@ -182,6 +175,11 @@ in {
         set fzf_preview_dir_cmd exa --all --color=always
         set -x FZF_DEFAULT_OPTS '--cycle --layout=reverse --border --height=90% --preview-window=wrap --marker="*" --color=fg:white,bg:black,hl:red,fg+:white,hl+:red,info:yellow,prompt:blue,pointer:magenta,marker:magenta,spinner:green,header:blue,border:white'
         set fzf_fd_opts --hidden --exclude=.git --exclude=.github --exclude=.cache
+      ''
+      +
+      # force colors for kubecolor
+      ''
+        set -x KUBECOLOR_FORCE_COLORS true
       '';
   };
 }
