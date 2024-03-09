@@ -47,7 +47,7 @@
     };
   };
 
-  environment.enableAllTerminfo = true;
+  #environment.enableAllTerminfo = true;
   hardware.enableRedistributableFirmware = true;
 
   # Increase open file limit for sudoers
