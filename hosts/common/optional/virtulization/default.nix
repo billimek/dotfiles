@@ -45,8 +45,6 @@
         ];
       };
     };
-
-
   };
 
   hardware.ksm.enable = true; # enable kernel same-page merging
