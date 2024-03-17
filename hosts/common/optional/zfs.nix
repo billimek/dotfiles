@@ -13,5 +13,5 @@
 
   services.zfs.trim.enable = true;
 
-  environment.systemPackages = with pkgs; [zfs]; # Install the ZFS package
+  environment.systemPackages = with pkgs; [zfs pkgs.unstable.httm]; # Install the ZFS package
 }
