@@ -42,6 +42,7 @@
       "visual-studio-code"
       "wowup" # WoW addon manager
       "XQuartz" # X11 for macOS
+      "zed" # text editor WRITTEN IN RUST
       "zoom"
     ];
     masApps = {
