@@ -1,16 +1,9 @@
-{
-  pkgs,
-  lib,
-  config,
-  ...
-}: {
+{ pkgs, lib, config, ... }: {
   programs.atuin = {
     enable = true;
     package = pkgs.unstable.atuin;
 
-    flags = [
-      "--disable-up-arrow"
-    ];
+    flags = [ "--disable-up-arrow" ];
 
     settings = {
       auto_sync = true;

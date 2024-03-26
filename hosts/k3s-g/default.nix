@@ -1,9 +1,4 @@
-{
-  config,
-  pkgs,
-  lib,
-  ...
-}: {
+{ config, pkgs, lib, ... }: {
   imports = [
     ./hardware-configuration.nix
 
@@ -18,9 +13,10 @@
 
   networking = {
     hostName = "k3s-g";
-    timeServers = ["10.0.7.1"];
+    timeServers = [ "10.0.7.1" ];
     firewall.enable = false;
-    networkmanager.enable = false; # Easiest to use and most distros use this by default.
+    networkmanager.enable =
+      false; # Easiest to use and most distros use this by default.
   };
 
   # may fix issues with network service failing during a nixos-rebuild

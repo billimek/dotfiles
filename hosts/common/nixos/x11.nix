@@ -1,9 +1,1 @@
-{
-  config,
-  pkgs,
-  ...
-}: {
-  environment.systemPackages = [
-    pkgs.xorg.xauth
-  ];
-}
+{ config, pkgs, ... }: { environment.systemPackages = [ pkgs.xorg.xauth ]; }

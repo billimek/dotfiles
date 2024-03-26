@@ -1,14 +1,9 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}: {
+{ config, lib, pkgs, ... }: {
   services.avahi = {
     enable = true;
     nssmdns = true;
     openFirewall = true;
-    allowInterfaces = ["br0"];
+    allowInterfaces = [ "br0" ];
     reflector = true;
     publish = {
       enable = true;

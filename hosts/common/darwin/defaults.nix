@@ -1,10 +1,4 @@
-{
-  config,
-  pkgs,
-  lib,
-  pkgs-unstable,
-  ...
-}: {
+{ config, pkgs, lib, pkgs-unstable, ... }: {
   #package config
   nixpkgs = {
     config = {
@@ -17,7 +11,7 @@
     # package = lib.mkDefault pkgs.nix;
     package = pkgs.nix;
     settings = {
-      experimental-features = ["nix-command" "flakes" "repl-flake"];
+      experimental-features = [ "nix-command" "flakes" "repl-flake" ];
       warn-dirty = false;
       sandbox = "relaxed";
     };
@@ -40,16 +34,12 @@
   programs.nix-index.enable = true;
 
   environment = {
-    systemPackages = [
-      pkgs.coreutils
-      pkgs.fish
-      pkgs.git
-      pkgs.vim
-      pkgs.home-manager
-    ];
-    shells = [pkgs.bashInteractive pkgs.fish];
+    systemPackages =
+      [ pkgs.coreutils pkgs.fish pkgs.git pkgs.vim pkgs.home-manager ];
+    shells = [ pkgs.bashInteractive pkgs.fish ];
     variables.EDITOR = "${lib.getBin pkgs.neovim}/bin/nvim";
-    variables.SSH_AUTH_SOCK = "$HOME/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock";
+    variables.SSH_AUTH_SOCK =
+      "$HOME/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock";
   };
 
   programs = {
@@ -60,9 +50,8 @@
 
   # add nerd fonts
   fonts.fontDir.enable = true;
-  fonts.fonts = with pkgs; [
-    (pkgs-unstable.nerdfonts.override {fonts = ["Hack" "Monaspace"];})
-  ];
+  fonts.fonts = with pkgs;
+    [ (pkgs-unstable.nerdfonts.override { fonts = [ "Hack" "Monaspace" ]; }) ];
 
   #system-defaults.nix
   # activationScripts are executed every time you boot the system or run `nixos-rebuild` / `darwin-rebuild`.
@@ -72,9 +61,7 @@
   #   /System/Library/PrivateFrameworks/SystemAdministration.framework/Resources/activateSettings -u
   # '';
 
-  system.keyboard = {
-    enableKeyMapping = true;
-  };
+  system.keyboard = { enableKeyMapping = true; };
   system.defaults = {
     menuExtraClock = {
       ShowDayOfWeek = true;
@@ -89,7 +76,8 @@
 
     finder = {
       AppleShowAllExtensions = true; # show all file extensions
-      FXEnableExtensionChangeWarning = false; # disable warning when changing file extensions
+      FXEnableExtensionChangeWarning =
+        false; # disable warning when changing file extensions
       _FXShowPosixPathInTitle = false; # show full path in title bar
       FXPreferredViewStyle = "Nlsv"; # list view
       FXDefaultSearchScope = "SCcf"; # search current folder by default
@@ -108,7 +96,8 @@
 
     NSGlobalDomain = {
       AppleInterfaceStyle = "Dark"; # set dark mode
-      "com.apple.swipescrolldirection" = false; # set natural scrolling to the _correct_ value
+      "com.apple.swipescrolldirection" =
+        false; # set natural scrolling to the _correct_ value
 
       # show all file extensions
       AppleShowAllExtensions = true;

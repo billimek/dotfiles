@@ -1,12 +1,6 @@
-{
-  config,
-  pkgs,
-  ...
-}: {
-  environment.systemPackages = [
-    pkgs.nfs-utils
-  ];
+{ config, pkgs, ... }: {
+  environment.systemPackages = [ pkgs.nfs-utils ];
 
-  boot.supportedFilesystems = ["nfs"];
+  boot.supportedFilesystems = [ "nfs" ];
   services.rpcbind.enable = true; # needed for NFS
 }

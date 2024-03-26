@@ -1,9 +1,4 @@
-{
-  config,
-  pkgs,
-  lib,
-  ...
-}: {
+{ config, pkgs, lib, ... }: {
   imports = [
     ./hardware-configuration.nix
     ../common/nixos
@@ -19,7 +14,8 @@
 
   networking = {
     hostName = "home";
-    networkmanager.enable = true; # Easiest to use and most distros use this by default.
+    networkmanager.enable =
+      true; # Easiest to use and most distros use this by default.
   };
 
   # may fix issues with network service failing during a nixos-rebuild

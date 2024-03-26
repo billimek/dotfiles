@@ -1,11 +1,7 @@
-{
-  config,
-  pkgs,
-  ...
-}: {
+{ config, pkgs, ... }: {
   services.sanoid = {
     enable = true;
-    extraArgs = ["--verbose"];
+    extraArgs = [ "--verbose" ];
     templates = {
       "timemachine" = {
         "hourly" = 0;

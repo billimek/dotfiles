@@ -1,4 +1,4 @@
-{pkgs, ...}: {
+{ pkgs, ... }: {
   home.packages = with pkgs; [
     cargo # package manager
     gcc # compiler
@@ -7,7 +7,5 @@
     nodejs
     rustc # compiler
   ];
-  home.sessionPath = [
-    "$HOME/.cargo/bin"
-  ];
+  home.sessionPath = [ "$HOME/.cargo/bin" ];
 }

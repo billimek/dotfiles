@@ -1,8 +1,4 @@
-{
-  outputs,
-  lib,
-  ...
-}: {
+{ outputs, lib, ... }: {
   programs.ssh = {
     enable = true;
     # add custom settings to config
@@ -10,25 +6,19 @@
       hostname = "cloud.eviljungle.com";
       user = "jeff";
       forwardAgent = true;
-      setEnv = {
-        is_vscode = 1;
-      };
+      setEnv = { is_vscode = 1; };
     };
     matchBlocks."home" = {
       hostname = "home.home";
       user = "jeff";
       forwardAgent = true;
-      setEnv = {
-        is_vscode = 1;
-      };
+      setEnv = { is_vscode = 1; };
     };
     matchBlocks."nas-lan" = {
       hostname = "100.119.81.4";
       user = "nix";
       forwardAgent = true;
-      setEnv = {
-        is_vscode = 1;
-      };
+      setEnv = { is_vscode = 1; };
     };
   };
 

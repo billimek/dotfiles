@@ -1,25 +1,18 @@
 # This file (and the global directory) holds config used on all hosts
-{
-  inputs,
-  outputs,
-  pkgs,
-  ...
-}: {
-  imports =
-    [
-      inputs.home-manager.nixosModules.home-manager
-      # ./auto-upgrade.nix # doesn't work right now with git-crypt repos - will revisit
-      ./locale.nix
-      ./nix.nix
-      ./nfs.nix
-      ./openssh.nix
-      ./systemd-initrd.nix
-      ./tailscale.nix
-      ./x11.nix
-    ]
-    ++ (builtins.attrValues outputs.nixosModules);
+{ inputs, outputs, pkgs, ... }: {
+  imports = [
+    inputs.home-manager.nixosModules.home-manager
+    # ./auto-upgrade.nix # doesn't work right now with git-crypt repos - will revisit
+    ./locale.nix
+    ./nix.nix
+    ./nfs.nix
+    ./openssh.nix
+    ./systemd-initrd.nix
+    ./tailscale.nix
+    ./x11.nix
+  ] ++ (builtins.attrValues outputs.nixosModules);
 
-  home-manager.extraSpecialArgs = {inherit inputs outputs;};
+  home-manager.extraSpecialArgs = { inherit inputs outputs; };
 
   nixpkgs = {
     # You can add overlays here
@@ -67,9 +60,5 @@
   ];
 
   # always install these for all users on nixos systems
-  environment.systemPackages = [
-    pkgs.git
-    pkgs.htop
-    pkgs.vim
-  ];
+  environment.systemPackages = [ pkgs.git pkgs.htop pkgs.vim ];
 }

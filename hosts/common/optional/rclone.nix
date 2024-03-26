@@ -1,10 +1,5 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}: {
-  imports = [];
+{ config, lib, pkgs, ... }: {
+  imports = [ ];
 
   # Automated rclone sync to b2
 
@@ -28,7 +23,7 @@
       OnCalendar = "4:00:00";
       Persistent = true;
     };
-    wantedBy = ["timers.target"];
+    wantedBy = [ "timers.target" ];
   };
 
   # postgres
@@ -49,6 +44,6 @@
       OnCalendar = "6:00:00";
       Persistent = true;
     };
-    wantedBy = ["timers.target"];
+    wantedBy = [ "timers.target" ];
   };
 }

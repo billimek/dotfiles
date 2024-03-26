@@ -1,18 +1,7 @@
-{
-  inputs,
-  lib,
-  pkgs,
-  config,
-  outputs,
-  ...
-}: let
-  inherit (inputs.nix-colors) colorSchemes;
+{ inputs, lib, pkgs, config, outputs, ... }:
+let inherit (inputs.nix-colors) colorSchemes;
 in {
-  imports =
-    [
-      inputs.nix-colors.homeManagerModules.default
-      ../features/cli
-    ]
+  imports = [ inputs.nix-colors.homeManagerModules.default ../features/cli ]
     ++ (builtins.attrValues outputs.homeManagerModules);
 
   nixpkgs = {
@@ -26,7 +15,7 @@ in {
   nix = {
     package = lib.mkDefault pkgs.nix;
     settings = {
-      experimental-features = ["nix-command" "flakes" "repl-flake"];
+      experimental-features = [ "nix-command" "flakes" "repl-flake" ];
       warn-dirty = false;
     };
   };
@@ -42,5 +31,5 @@ in {
   colorscheme = lib.mkDefault colorSchemes.dracula;
   home.file.".colorscheme".text = config.colorscheme.slug;
 
-  home.sessionPath = ["$HOME/.local/bin" "$HOME/.cargo/bin"];
+  home.sessionPath = [ "$HOME/.local/bin" "$HOME/.cargo/bin" ];
 }

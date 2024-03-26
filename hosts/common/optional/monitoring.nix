@@ -1,13 +1,5 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}: {
-  environment.systemPackages = with pkgs; [
-    ipmitool
-    lm_sensors
-  ];
+{ config, lib, pkgs, ... }: {
+  environment.systemPackages = with pkgs; [ ipmitool lm_sensors ];
   networking.firewall.allowedTCPPorts = [
     config.services.prometheus.exporters.ipmi.port
     config.services.prometheus.exporters.minio.port
@@ -29,8 +21,8 @@
       };
       node = {
         enable = true;
-        enabledCollectors = ["systemd"];
-        disabledCollectors = ["textfile"];
+        enabledCollectors = [ "systemd" ];
+        disabledCollectors = [ "textfile" ];
         port = 9100;
       };
       smartctl = {
