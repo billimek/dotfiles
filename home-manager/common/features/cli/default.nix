@@ -37,6 +37,8 @@
     jwt-cli # JWT tool
     lazygit
     neofetch # show system info
+    nixd # nix daemon
+    nixfmt # nix formatter
     ouch # better unzip "WRITTEN IN RUST"
     procs # better ps "WRITTEN IN RUST"
     ripgrep # Better grep "WRITTEN IN RUST"
