@@ -161,11 +161,11 @@
     },
     "nixpkgs-unstable": {
       "locked": {
-        "lastModified": 1711370797,
-        "narHash": "sha256-2xu0jVSjuKhN97dqc4bVtvEH52Rwh6+uyI1XCnzoUyI=",
+        "lastModified": 1711401922,
+        "narHash": "sha256-QoQqXoj8ClGo0sqD/qWKFWezgEwUL0SUh37/vY2jNhc=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "c726225724e681b3626acc941c6f95d2b0602087",
+        "rev": "07262b18b97000d16a4bdb003418bd2fb067a932",
         "type": "github"
       },
       "original": {
@@ -183,12 +183,12 @@
         "nixpkgs-ovmf": "nixpkgs-ovmf"
       },
       "locked": {
-        "lastModified": 1711311838,
-        "narHash": "sha256-sGHwZzNB/jzD5VnTwqeL5AlFQ8EYHpspWLA/PjNJUgw=",
-        "rev": "cf6ecd6b4625640963528af5b33a8b3eddaeb8de",
-        "revCount": 255,
+        "lastModified": 1711491004,
+        "narHash": "sha256-jEDXUqgXPIz1efb3SbQpHsWI/Vw59uV8A1f6EEEP4DA=",
+        "rev": "3bd0a8100114b56536e7bb65619e3a3e5c726e31",
+        "revCount": 256,
         "type": "tarball",
-        "url": "https://api.flakehub.com/f/pinned/AshleyYakeley/NixVirt/0.4.0/018e7223-1b92-7e5a-912d-09d8a20e40ae/source.tar.gz"
+        "url": "https://api.flakehub.com/f/pinned/AshleyYakeley/NixVirt/0.4.1/018e7cd1-9913-7cc8-ade9-4bd01c7b1245/source.tar.gz"
       },
       "original": {
         "type": "tarball",
