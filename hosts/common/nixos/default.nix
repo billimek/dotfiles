@@ -1,5 +1,5 @@
 # This file (and the global directory) holds config used on all hosts
-{ inputs, outputs, pkgs, ... }: {
+{ inputs, outputs, pkgs, lib, ... }: {
   imports = [
     inputs.home-manager.nixosModules.home-manager
     # ./auto-upgrade.nix # doesn't work right now with git-crypt repos - will revisit
