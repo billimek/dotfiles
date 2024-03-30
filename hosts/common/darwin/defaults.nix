@@ -61,12 +61,6 @@
   #   /System/Library/PrivateFrameworks/SystemAdministration.framework/Resources/activateSettings -u
   # '';
 
-  # Enable printing changes on nix build etc with nvd
-  system.activationScripts.report-changes = ''
-      PATH=$PATH:${lib.makeBinPath [ pkgs.nvd pkgs.nix ]}
-      nvd diff $(ls -dv /nix/var/nix/profiles/system-*-link | tail -2)
-    '';
-
   system.keyboard = { enableKeyMapping = true; };
   system.defaults = {
     menuExtraClock = {
