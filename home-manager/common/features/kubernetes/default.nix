@@ -4,6 +4,7 @@
     go-task # task runner
     k9s # kubernetes viewer tool
     kail # kubernetes tail
+    pkgs.unstable.krr
     ktop # kubernetes top
     kubectl # kubernetes CLI
     kubectl-doctor # kubernetes doctor
