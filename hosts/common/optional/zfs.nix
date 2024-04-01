@@ -13,5 +13,6 @@
   environment.systemPackages = with pkgs; [
     zfs
     pkgs.unstable.httm
-  ]; # Install the ZFS package
+    sanoid
+  ];
 }
