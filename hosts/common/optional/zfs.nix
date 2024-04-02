@@ -10,9 +10,5 @@
 
   services.zfs.trim.enable = true;
 
-  environment.systemPackages = with pkgs; [
-    zfs
-    pkgs.unstable.httm
-    sanoid
-  ];
+  environment.systemPackages = with pkgs; [ zfs pkgs.unstable.httm sanoid ];
 }
