@@ -5,7 +5,6 @@
     # ./auto-upgrade.nix # doesn't work right now with git-crypt repos - will revisit
     ./locale.nix
     ./nix.nix
-    ./nh.nix
     ./nfs.nix
     ./openssh.nix
     ./systemd-initrd.nix
