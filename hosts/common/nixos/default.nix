@@ -65,6 +65,10 @@
     nvd diff $(ls -dv /nix/var/nix/profiles/system-*-link | tail -2)
   '';
 
+  environment.sessionVariables = {
+      FLAKE = "/etc/nixos";
+    };
+
   # always install these for all users on nixos systems
-  environment.systemPackages = [ pkgs.git pkgs.htop pkgs.vim ];
+  environment.systemPackages = [ pkgs.git pkgs.htop pkgs.vim pkgs.unstable.nh ];
 }
