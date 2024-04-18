@@ -5,6 +5,7 @@
     # ./auto-upgrade.nix # doesn't work right now with git-crypt repos - will revisit
     ./locale.nix
     ./nix.nix
+    ./nh.nix
     ./nfs.nix
     ./openssh.nix
     ./systemd-initrd.nix
@@ -64,10 +65,6 @@
     PATH=$PATH:${lib.makeBinPath [ pkgs.nvd pkgs.nix ]}
     nvd diff $(ls -dv /nix/var/nix/profiles/system-*-link | tail -2)
   '';
-
-  environment.sessionVariables = {
-      FLAKE = "/etc/nixos";
-    };
 
   # always install these for all users on nixos systems
   environment.systemPackages = [ pkgs.git pkgs.htop pkgs.vim pkgs.unstable.nh ];
