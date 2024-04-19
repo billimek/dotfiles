@@ -9,6 +9,7 @@
       auto_sync = true;
       sync_frequency = "1h";
       search_mode = "fuzzy";
+      sync.records = true;
     };
   };
 }
