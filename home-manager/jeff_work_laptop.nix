@@ -11,6 +11,7 @@ in {
   };
 
   home.packages = with pkgs; [
+    act
     azure-cli
     cloudfoundry-cli
     unstable.fly
