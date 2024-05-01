@@ -20,7 +20,7 @@ in {
     rancher
     terminal-notifier # send notifications to macOS notification center
     terraform
-    vault
+    unstable.vault
   ];
 
   programs.ssh = {

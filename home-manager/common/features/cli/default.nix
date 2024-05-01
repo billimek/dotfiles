@@ -27,6 +27,7 @@
     duf # better 'df' "WRITTEN IN RUST"
     envsubst # sub env vars
     unstable.eza # replacement for exa "WRITTEN IN RUST"
+    unstable.fastfetch # fetch system info
     fd # better find "WRITTEN IN RUST""
     file # inspect file types
     fzf # fuzzy matcher
@@ -36,7 +37,6 @@
     jq # JSON pretty printer and manipulator
     jwt-cli # JWT tool
     lazygit
-    neofetch # show system info
     nixd # nix daemon
     nixfmt # nix formatter
     nvd
