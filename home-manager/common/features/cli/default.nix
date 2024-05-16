@@ -34,6 +34,8 @@
     git-crypt # encrypt files in git
     htop # system monitor
     hyperfine # benchmarking tool "WRITTEN IN RUST"
+    ipcalc # calculate IP ranges
+    ipinfo # get IP info
     jq # JSON pretty printer and manipulator
     jwt-cli # JWT tool
     lazygit
