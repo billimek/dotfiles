@@ -15,6 +15,7 @@
       "discord"
       "gather"
       "microsoft-remote-desktop"
+      "notunes" # disable iTunes auto-launch
       "obs"
       "obsidian" # note taking app
       "plex"

@@ -143,6 +143,12 @@
         "com.apple.Safari.ContentPageGroupIdentifier.WebKit2DeveloperExtrasEnabled" =
           true;
       };
+      # https://github.com/tombonez/noTunes
+      # hides the menubar icon and replaces the default music app with Spotify
+      "digital.twisted.noTunes" = {
+        "hideIcon" = 1;
+        "replacement" = "/Applications/Spotify.app";
+      };
     };
   };
 
