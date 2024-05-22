@@ -18,6 +18,7 @@
       "rectangle" # window manager
       "spotify"
       "shottr" # screenshot tool
+      "visual-studio-code"
       "vlc" # video player
     ];
     masApps = {
