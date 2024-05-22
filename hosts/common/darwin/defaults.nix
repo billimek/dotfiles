@@ -1,4 +1,7 @@
 { config, pkgs, lib, pkgs-unstable, ... }: {
+  imports = [
+    ./homebrew.nix
+  ];
   #package config
   nixpkgs = {
     config = {
