@@ -15,7 +15,6 @@
       "slack"
       "steam"
       "VIA"
-      "visual-studio-code"
       "wowup" # WoW addon manager
       "XQuartz" # X11 for macOS
       "zoom"

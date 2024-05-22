@@ -7,7 +7,6 @@
       "microsoft-remote-desktop"
       "obs"
       "obsidian" # note taking app
-      "plex"
       "VIA"
     ];
     masApps = {

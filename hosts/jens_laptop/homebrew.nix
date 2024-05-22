@@ -3,9 +3,7 @@
   homebrew = {
     casks = [
       "microsoft-remote-desktop"
-      "obs"
       "slack"
-      "visual-studio-code"
       "webex"
       "zoom"
     ];
