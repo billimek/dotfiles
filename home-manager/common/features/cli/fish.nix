@@ -8,6 +8,7 @@ let
   hasLsd = hasPackage "lsd";
   hasKubecolor = hasPackage "kubecolor";
   hasNeovim = config.programs.neovim.enable;
+  hasAnyNixShell = hasPackage "any-nix-shell";
 in {
   programs.fish = {
     enable = true;
@@ -170,6 +171,13 @@ in {
         set fzf_preview_dir_cmd exa --all --color=always
         set -x FZF_DEFAULT_OPTS '--cycle --layout=reverse --border --height=90% --preview-window=wrap --marker="*" --color=fg:white,bg:black,hl:red,fg+:white,hl+:red,info:yellow,prompt:blue,pointer:magenta,marker:magenta,spinner:green,header:blue,border:white'
         set fzf_fd_opts --hidden --exclude=.git --exclude=.github --exclude=.cache
-      '';
+      '' +
+      (if hasAnyNixShell then
+        ''
+          any-nix-shell fish --info-right | source
+        ''
+      else
+        ""
+      );
   };
 }

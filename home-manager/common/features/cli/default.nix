@@ -18,6 +18,7 @@
   home.packages = with pkgs; [
     # _1password # password manager CLI - installing this break op CLI on macbooks
     # age # encryption tool
+    any-nix-shell # supports any shell in nix-shell (https://github.com/haslersn/any-nix-shell)
     bottom # better top "WRITTEN IN RUST"
     btop
     # curl # get things from URLs
