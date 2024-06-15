@@ -1,6 +1,8 @@
-{ config, pkgs, lib, pkgs-unstable, ... }: {
+{ config, inputs, pkgs, lib, pkgs-unstable, ... }: {
   imports = [
     ./homebrew.nix
+    # can probsbly remove once https://github.com/LnL7/nix-darwin/pull/942 is merged:
+    inputs.nh-darwin.nixDarwinModules.prebuiltin
   ];
   #package config
   nixpkgs = {
@@ -34,12 +36,12 @@
 
   services.activate-system.enable = true;
   services.nix-daemon.enable = true;
-  programs.nix-index.enable = true;
 
   environment = {
     systemPackages =
       [ pkgs.coreutils pkgs.fish pkgs.git pkgs.vim pkgs.home-manager ];
     shells = [ pkgs.bashInteractive pkgs.fish ];
+    shellAliases.nh = "nh-darwin";
     variables.EDITOR = "${lib.getBin pkgs.neovim}/bin/nvim";
     variables.SSH_AUTH_SOCK =
       "$HOME/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock";
@@ -49,6 +51,14 @@
     bash.enable = true;
     fish.enable = true;
     zsh.enable = true;
+    nix-index.enable = true;
+    nh = {
+      enable = true;
+      clean.enable = true;
+      # Installation option once https://github.com/LnL7/nix-darwin/pull/942 is merged:
+      # package = nh-darwin.packages.${pkgs.stdenv.hostPlatform.system}.default;
+    };
+
   };
 
   # add nerd fonts

@@ -3,7 +3,7 @@
 
   inputs = {
     # Nixpkgs
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-23.11";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-24.05";
     # You can access packages and modules from different nixpkgs revs
     # at the same time. Here's an working example:
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
@@ -11,7 +11,7 @@
 
     # Home manager
     home-manager = {
-      url = "github:nix-community/home-manager/release-23.11";
+      url = "github:nix-community/home-manager/release-24.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -19,6 +19,8 @@
       url = "github:LnL7/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    nh-darwin.url = "github:ToyVo/nh-darwin";
 
     # for VSCode remote-ssh
     nix-ld-vscode = {
@@ -36,7 +38,7 @@
   };
 
   outputs =
-    { self, nixpkgs, home-manager, nix-darwin, nixpkgs-unstable, ... }@inputs:
+    { self, nixpkgs, home-manager, nix-darwin, nh-darwin, nixpkgs-unstable, ... }@inputs:
     let
       inherit (self) outputs;
       # Supported systems for your flake packages, shell, etc.
@@ -116,7 +118,10 @@
               config.allowUnfree = true;
             };
           };
-          modules = [ ./hosts/jeffs_laptop ];
+          modules = [
+            ./hosts/jeffs_laptop
+            # nh-darwin.nixDarwinModules.default
+          ];
         };
         Jens-Air-M2 = nix-darwin.lib.darwinSystem {
           specialArgs = {
