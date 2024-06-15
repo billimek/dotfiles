@@ -20,6 +20,7 @@
       "zoom"
     ];
     masApps = {
+      "SteamLink" = 1246969117; 
     };
   };
 }
