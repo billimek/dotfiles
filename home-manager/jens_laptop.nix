@@ -37,16 +37,11 @@
   };
 
   programs.fish = {
-    shellAbbrs = rec {
-      # override with machine-specific values
-      rehome = lib.mkForce
-        "home-manager switch --flake $HOME/src/dotfiles/.#(whoami)@(hostname)";
-      rebuild =
-        lib.mkForce "darwin-rebuild switch --flake $HOME/src/dotfiles/.#";
-    };
+    shellAbbrs = rec { };
     shellAliases = { };
     shellInit = ''
       # set -gx SSH_AUTH_SOCK '$HOME/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock'
+      set -gx FLAKE "$HOME/src/dotfiles"
     '';
 
     loginShellInit = ''

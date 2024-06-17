@@ -91,8 +91,8 @@ in {
       snrs = "sudo nixos-rebuild --flake . switch";
       hm = "home-manager --flake .";
       hms = "home-manager --flake . switch";
-      rebuild = "sudo nixos-rebuild switch";
-      rehome = "home-manager switch --flake .#(whoami)@(hostname)";
+      rebuild = "nh os switch";
+      rehome = "nh home switch";
 
       # other
       df = "df -h";
@@ -171,13 +171,9 @@ in {
         set fzf_preview_dir_cmd exa --all --color=always
         set -x FZF_DEFAULT_OPTS '--cycle --layout=reverse --border --height=90% --preview-window=wrap --marker="*" --color=fg:white,bg:black,hl:red,fg+:white,hl+:red,info:yellow,prompt:blue,pointer:magenta,marker:magenta,spinner:green,header:blue,border:white'
         set fzf_fd_opts --hidden --exclude=.git --exclude=.github --exclude=.cache
-      '' +
-      (if hasAnyNixShell then
-        ''
-          any-nix-shell fish --info-right | source
-        ''
-      else
-        ""
-      );
+      '' + (if hasAnyNixShell then ''
+        any-nix-shell fish --info-right | source
+      '' else
+        "");
   };
 }
