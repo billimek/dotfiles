@@ -75,6 +75,8 @@ in {
     shellAbbrs = rec {
       tf = "terraform";
       sshblock = secrets.work_sshblock;
+      rebuild = lib.mkForce "nh os switch -H work-laptop";
+      rehome = lib.mkForce "nh home switch -c 'jeff@work-laptop'";
     };
     shellAliases = {
       code =
@@ -85,7 +87,7 @@ in {
     shellInit = ''
       # set -gx SSH_AUTH_SOCK '$HOME/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock'
       # set -gx NIX_SSL_CERT_FILE ${secrets.work_certpath}
-      set -gx FLAKE "$HOME/src.github/dotfiles/.#work-laptop"
+      set -gx FLAKE "$HOME/src.github/dotfiles"
     '';
 
     loginShellInit = ''
