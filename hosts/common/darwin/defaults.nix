@@ -1,4 +1,12 @@
-{ config, inputs, pkgs, lib, pkgs-unstable, ... }: {
+{
+  config,
+  inputs,
+  pkgs,
+  lib,
+  pkgs-unstable,
+  ...
+}:
+{
   imports = [
     ./homebrew.nix
     # can probsbly remove once https://github.com/LnL7/nix-darwin/pull/942 is merged:
@@ -16,7 +24,11 @@
     # package = lib.mkDefault pkgs.nix;
     package = pkgs.nix;
     settings = {
-      experimental-features = [ "nix-command" "flakes" "repl-flake" ];
+      experimental-features = [
+        "nix-command"
+        "flakes"
+        "repl-flake"
+      ];
       warn-dirty = false;
       sandbox = "relaxed";
     };
@@ -38,9 +50,17 @@
   services.nix-daemon.enable = true;
 
   environment = {
-    systemPackages =
-      [ pkgs.coreutils pkgs.fish pkgs.git pkgs.vim pkgs.home-manager ];
-    shells = [ pkgs.bashInteractive pkgs.fish ];
+    systemPackages = [
+      pkgs.coreutils
+      pkgs.fish
+      pkgs.git
+      pkgs.vim
+      pkgs.home-manager
+    ];
+    shells = [
+      pkgs.bashInteractive
+      pkgs.fish
+    ];
     shellAliases.nh = "nh-darwin";
     variables = {
       EDITOR = "${lib.getBin pkgs.neovim}/bin/nvim";
@@ -60,12 +80,17 @@
       # Installation option once https://github.com/LnL7/nix-darwin/pull/942 is merged:
       # package = nh-darwin.packages.${pkgs.stdenv.hostPlatform.system}.default;
     };
-
   };
 
   # add nerd fonts
-  fonts.packages = with pkgs;
-    [ (pkgs-unstable.nerdfonts.override { fonts = [ "Hack" "Monaspace" ]; }) ];
+  fonts.packages = with pkgs; [
+    (pkgs-unstable.nerdfonts.override {
+      fonts = [
+        "Hack"
+        "Monaspace"
+      ];
+    })
+  ];
 
   #system-defaults.nix
   # activationScripts are executed every time you boot the system or run `nixos-rebuild` / `darwin-rebuild`.
@@ -75,7 +100,9 @@
   #   /System/Library/PrivateFrameworks/SystemAdministration.framework/Resources/activateSettings -u
   # '';
 
-  system.keyboard = { enableKeyMapping = true; };
+  system.keyboard = {
+    enableKeyMapping = true;
+  };
   system.defaults = {
     menuExtraClock = {
       ShowDayOfWeek = true;
@@ -90,8 +117,7 @@
 
     finder = {
       AppleShowAllExtensions = true; # show all file extensions
-      FXEnableExtensionChangeWarning =
-        false; # disable warning when changing file extensions
+      FXEnableExtensionChangeWarning = false; # disable warning when changing file extensions
       _FXShowPosixPathInTitle = false; # show full path in title bar
       FXPreferredViewStyle = "Nlsv"; # list view
       FXDefaultSearchScope = "SCcf"; # search current folder by default
@@ -110,8 +136,7 @@
 
     NSGlobalDomain = {
       AppleInterfaceStyle = "Dark"; # set dark mode
-      "com.apple.swipescrolldirection" =
-        false; # set natural scrolling to the _correct_ value
+      "com.apple.swipescrolldirection" = false; # set natural scrolling to the _correct_ value
 
       # show all file extensions
       AppleShowAllExtensions = true;
@@ -154,8 +179,7 @@
         "IncludeInternalDebugMenu" = true;
         "IncludeDevelopMenu" = true;
         "WebKitDeveloperExtrasEnabledPreferenceKey" = true;
-        "com.apple.Safari.ContentPageGroupIdentifier.WebKit2DeveloperExtrasEnabled" =
-          true;
+        "com.apple.Safari.ContentPageGroupIdentifier.WebKit2DeveloperExtrasEnabled" = true;
       };
       # https://github.com/tombonez/noTunes
       # hides the menubar icon and replaces the default music app with Spotify

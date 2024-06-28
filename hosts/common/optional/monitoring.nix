@@ -1,5 +1,14 @@
-{ config, lib, pkgs, ... }: {
-  environment.systemPackages = with pkgs; [ ipmitool lm_sensors ];
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+{
+  environment.systemPackages = with pkgs; [
+    ipmitool
+    lm_sensors
+  ];
   networking.firewall.allowedTCPPorts = [
     config.services.prometheus.exporters.ipmi.port
     config.services.prometheus.exporters.minio.port

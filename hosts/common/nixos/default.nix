@@ -1,5 +1,12 @@
 # This file (and the global directory) holds config used on all hosts
-{ inputs, outputs, pkgs, lib, ... }: {
+{
+  inputs,
+  outputs,
+  pkgs,
+  lib,
+  ...
+}:
+{
   imports = [
     inputs.home-manager.nixosModules.home-manager
     # ./auto-upgrade.nix # doesn't work right now with git-crypt repos - will revisit
@@ -12,7 +19,9 @@
     ./x11.nix
   ] ++ (builtins.attrValues outputs.nixosModules);
 
-  home-manager.extraSpecialArgs = { inherit inputs outputs; };
+  home-manager.extraSpecialArgs = {
+    inherit inputs outputs;
+  };
 
   nixpkgs = {
     # You can add overlays here
@@ -61,10 +70,20 @@
 
   # Enable printing changes on nix build etc with nvd
   system.activationScripts.report-changes = ''
-    PATH=$PATH:${lib.makeBinPath [ pkgs.nvd pkgs.nix ]}
+    PATH=$PATH:${
+      lib.makeBinPath [
+        pkgs.nvd
+        pkgs.nix
+      ]
+    }
     nvd diff $(ls -dv /nix/var/nix/profiles/system-*-link | tail -2)
   '';
 
   # always install these for all users on nixos systems
-  environment.systemPackages = [ pkgs.git pkgs.htop pkgs.vim pkgs.unstable.nh ];
+  environment.systemPackages = [
+    pkgs.git
+    pkgs.htop
+    pkgs.vim
+    pkgs.unstable.nh
+  ];
 }

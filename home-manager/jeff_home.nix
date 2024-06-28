@@ -1,4 +1,11 @@
-{ inputs, lib, pkgs, config, ... }: {
+{
+  inputs,
+  lib,
+  pkgs,
+  config,
+  ...
+}:
+{
   imports = [
     ./common/global
     #./common/features/dev
@@ -10,7 +17,11 @@
     username = lib.mkDefault "jeff";
     homeDirectory = lib.mkDefault "/home/${config.home.username}";
     stateVersion = lib.mkDefault "23.11";
-    packages = with pkgs; [ _1password nfs-utils calibre ];
+    packages = with pkgs; [
+      _1password
+      nfs-utils
+      calibre
+    ];
   };
 
   programs.git = {
@@ -18,8 +29,7 @@
     userEmail = "jeff@billimek.com";
     extraConfig = {
       user = {
-        signingKey =
-          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIhZTlonLeCLJpBtuSQcqofKoUbr2ajG3JXxZ7Gjdgkh";
+        signingKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIhZTlonLeCLJpBtuSQcqofKoUbr2ajG3JXxZ7Gjdgkh";
       };
     };
   };

@@ -1,4 +1,10 @@
-{ config, lib, pkgs, ... }: {
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+{
   services.samba-wsdd.enable = true;
   services.samba-wsdd.workgroup = "WORKGROUP";
   networking.firewall.allowedTCPPorts = [

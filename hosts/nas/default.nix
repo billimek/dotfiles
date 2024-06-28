@@ -1,4 +1,11 @@
-{ config, pkgs, lib, modulesPath, ... }: {
+{
+  config,
+  pkgs,
+  lib,
+  modulesPath,
+  ...
+}:
+{
   imports = [
     ./hardware-configuration.nix
     ./networking.nix
@@ -20,7 +27,9 @@
     ../common/optional/zfs.nix
   ];
 
-  users.groups = { nas.gid = 1001; };
+  users.groups = {
+    nas.gid = 1001;
+  };
   users.users = {
     nas = {
       group = "nas";
@@ -30,7 +39,10 @@
     };
   };
 
-  boot.zfs.extraPools = [ "tank" "ssdtank" ];
+  boot.zfs.extraPools = [
+    "tank"
+    "ssdtank"
+  ];
 
   services.smartd.enable = true;
 

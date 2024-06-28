@@ -1,4 +1,5 @@
-{ lib, pkgs, ... }: {
+{ lib, pkgs, ... }:
+{
   services.tailscale = {
     enable = true;
     package = pkgs.unstable.tailscale;

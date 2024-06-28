@@ -1,4 +1,10 @@
-{ config, pkgs, lib, ... }: {
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
+{
   imports = [
     ./hardware-configuration.nix
     ../common/nixos
@@ -16,8 +22,7 @@
   networking = {
     hostName = "cloud";
     firewall.enable = false;
-    networkmanager.enable =
-      true; # Easiest to use and most distros use this by default.
+    networkmanager.enable = true; # Easiest to use and most distros use this by default.
   };
 
   # need to disable this for aarch64 due to https://github.com/NixOS/nixpkgs/issues/258515

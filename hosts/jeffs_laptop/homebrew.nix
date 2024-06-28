@@ -1,4 +1,5 @@
-{ config, pkgs, ... }: {
+{ config, pkgs, ... }:
+{
   #homebrew packages
   homebrew = {
     casks = [
@@ -20,7 +21,7 @@
       "zoom"
     ];
     masApps = {
-      "SteamLink" = 1246969117; 
+      "SteamLink" = 1246969117;
     };
   };
 }

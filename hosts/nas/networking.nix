@@ -1,9 +1,14 @@
-{ config, lib, pkgs, ... }: {
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+{
   networking = {
     hostName = "nas";
     hostId = "07aca0a7"; # generated from 'head -c 8 /etc/machine-id'
-    networkmanager.enable =
-      false; # Not sure if needed given that we're using systemd-networkd - diusabling this doesn't seem to break anything
+    networkmanager.enable = false; # Not sure if needed given that we're using systemd-networkd - diusabling this doesn't seem to break anything
     useDHCP = lib.mkDefault true; # Disable global DHCP
     useNetworkd = true;
     usePredictableInterfaceNames = true;
@@ -29,7 +34,9 @@
           Kind = "vlan";
           Description = "VLAN 20 (k8s nodes)";
         };
-        vlanConfig = { Id = 20; };
+        vlanConfig = {
+          Id = 20;
+        };
       };
       "40-k8s20" = {
         netdevConfig = {
@@ -60,17 +67,22 @@
       "30-eno2" = {
         matchConfig.Name = "eno2";
         networkConfig = {
-          DHCP =
-            "no"; # disabling DHCP for this interface because I observed egress traversing this instead of the 10GB enp2s0 which is no bueno
+          DHCP = "no"; # disabling DHCP for this interface because I observed egress traversing this instead of the 10GB enp2s0 which is no bueno
         };
       };
       "40-vlk8s20" = {
-        matchConfig = { Name = "vlk8s20"; };
-        networkConfig = { Bridge = "brk8s20"; };
+        matchConfig = {
+          Name = "vlk8s20";
+        };
+        networkConfig = {
+          Bridge = "brk8s20";
+        };
       };
       "50-br0" = {
         matchConfig.Name = "br0";
-        networkConfig = { DHCP = "yes"; };
+        networkConfig = {
+          DHCP = "yes";
+        };
         linkConfig = {
           # or "routable" with IP addresses configured
           RequiredForOnline = "carrier";
@@ -78,7 +90,9 @@
       };
       "50-brk8s20" = {
         matchConfig.Name = "brk8s20";
-        networkConfig = { DHCP = "no"; };
+        networkConfig = {
+          DHCP = "no";
+        };
       };
       "99-network-defaults-wired" = {
         matchConfig.Name = "en* | eth* | usb*";

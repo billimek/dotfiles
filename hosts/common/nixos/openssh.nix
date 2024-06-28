@@ -1,9 +1,15 @@
-{ outputs, lib, config, ... }:
+{
+  outputs,
+  lib,
+  config,
+  ...
+}:
 let
   inherit (config.networking) hostName;
   hosts = outputs.nixosConfigurations;
-  #   pubKey = host: ../../${host}/ssh_host_ed25519_key.pub;
-in {
+in
+#   pubKey = host: ../../${host}/ssh_host_ed25519_key.pub;
+{
   services.openssh = {
     enable = true;
     settings = {

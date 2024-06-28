@@ -1,4 +1,10 @@
-{ config, pkgs, inputs, ... }: {
+{
+  config,
+  pkgs,
+  inputs,
+  ...
+}:
+{
   imports = [ inputs.nixvirt.nixosModules.default ];
 
   # configure for using virt-manager

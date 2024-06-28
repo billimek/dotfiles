@@ -1,4 +1,5 @@
-{ config, pkgs, ... }: {
+{ config, pkgs, ... }:
+{
   #homebrew packages
   homebrew = {
     casks = [
@@ -7,7 +8,6 @@
       "webex"
       "zoom"
     ];
-    masApps = {
-    };
+    masApps = { };
   };
 }

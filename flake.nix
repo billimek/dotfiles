@@ -38,7 +38,15 @@
   };
 
   outputs =
-    { self, nixpkgs, home-manager, nix-darwin, nh-darwin, nixpkgs-unstable, ... }@inputs:
+    {
+      self,
+      nixpkgs,
+      home-manager,
+      nix-darwin,
+      nh-darwin,
+      nixpkgs-unstable,
+      ...
+    }@inputs:
     let
       inherit (self) outputs;
       # Supported systems for your flake packages, shell, etc.
@@ -53,25 +61,30 @@
       # pass to it, with each system as an argument
       forAllSystems = nixpkgs.lib.genAttrs systems;
 
-      mkNixos = modules:
+      mkNixos =
+        modules:
         nixpkgs.lib.nixosSystem {
           inherit modules;
-          specialArgs = { inherit inputs outputs; };
+          specialArgs = {
+            inherit inputs outputs;
+          };
         };
-      mkHome = modules: pkgs:
+      mkHome =
+        modules: pkgs:
         home-manager.lib.homeManagerConfiguration {
           inherit modules pkgs;
-          extraSpecialArgs = { inherit inputs outputs; };
+          extraSpecialArgs = {
+            inherit inputs outputs;
+          };
         };
-    in {
+    in
+    {
       # Your custom packages
       # Acessible through 'nix build', 'nix shell', etc
-      packages =
-        forAllSystems (system: import ./pkgs nixpkgs.legacyPackages.${system});
+      packages = forAllSystems (system: import ./pkgs nixpkgs.legacyPackages.${system});
       # Formatter for your nix files, available through 'nix fmt'
       # Other options beside 'alejandra' include 'nixpkgs-fmt'
-      formatter =
-        forAllSystems (system: nixpkgs.legacyPackages.${system}.nixfmt);
+      formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.nixfmt-rfc-style);
 
       # Your custom packages and modifications, exported as overlays
       overlays = import ./overlays { inherit inputs; };
@@ -139,30 +152,26 @@
       # Standalone home-manager configuration entrypoint
       # Available through 'home-manager --flake .#your-username@your-hostname'
       homeConfigurations = {
-        "nix@nas" = mkHome [ ./home-manager/nix_nas.nix ]
-          nixpkgs.legacyPackages."x86_64-linux";
+        "nix@nas" = mkHome [ ./home-manager/nix_nas.nix ] nixpkgs.legacyPackages."x86_64-linux";
         # VMs
-        "jeff@home" = mkHome [ ./home-manager/jeff_home.nix ]
-          nixpkgs.legacyPackages."x86_64-linux";
-        "jeff@cloud" = mkHome [ ./home-manager/jeff_cloud.nix ]
-          nixpkgs.legacyPackages."aarch64-linux";
+        "jeff@home" = mkHome [ ./home-manager/jeff_home.nix ] nixpkgs.legacyPackages."x86_64-linux";
+        "jeff@cloud" = mkHome [ ./home-manager/jeff_cloud.nix ] nixpkgs.legacyPackages."aarch64-linux";
         # k8s nodes
-        "nix@k3s-f" = mkHome [ ./home-manager/nix_k3s-f.nix ]
-          nixpkgs.legacyPackages."x86_64-linux";
-        "nix@k3s-g" = mkHome [ ./home-manager/nix_k3s-g.nix ]
-          nixpkgs.legacyPackages."x86_64-linux";
-        "nix@k3s-h" = mkHome [ ./home-manager/nix_k3s-h.nix ]
-          nixpkgs.legacyPackages."x86_64-linux";
+        "nix@k3s-f" = mkHome [ ./home-manager/nix_k3s-f.nix ] nixpkgs.legacyPackages."x86_64-linux";
+        "nix@k3s-g" = mkHome [ ./home-manager/nix_k3s-g.nix ] nixpkgs.legacyPackages."x86_64-linux";
+        "nix@k3s-h" = mkHome [ ./home-manager/nix_k3s-h.nix ] nixpkgs.legacyPackages."x86_64-linux";
         # Laptops
-        "jeff@work-laptop" = mkHome [ ./home-manager/jeff_work_laptop.nix ]
-          nixpkgs.legacyPackages."aarch64-darwin";
-        "jeff@Jeffs-M3Pro" = mkHome [ ./home-manager/jeffs_laptop.nix ]
-          nixpkgs.legacyPackages."aarch64-darwin";
-        "jeff@Jens-Air-M2" = mkHome [ ./home-manager/jens_laptop.nix ]
-          nixpkgs.legacyPackages."aarch64-darwin";
+        "jeff@work-laptop" = mkHome [
+          ./home-manager/jeff_work_laptop.nix
+        ] nixpkgs.legacyPackages."aarch64-darwin";
+        "jeff@Jeffs-M3Pro" = mkHome [
+          ./home-manager/jeffs_laptop.nix
+        ] nixpkgs.legacyPackages."aarch64-darwin";
+        "jeff@Jens-Air-M2" = mkHome [
+          ./home-manager/jens_laptop.nix
+        ] nixpkgs.legacyPackages."aarch64-darwin";
         # Other
-        "root@truenas" = mkHome [ ./home-manager/root_truenas.nix ]
-          nixpkgs.legacyPackages."x86_64-linux";
+        "root@truenas" = mkHome [ ./home-manager/root_truenas.nix ] nixpkgs.legacyPackages."x86_64-linux";
       };
     };
 }

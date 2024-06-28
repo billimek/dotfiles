@@ -1,4 +1,5 @@
-{ config, pkgs, ... }: {
+{ config, pkgs, ... }:
+{
   systemd.timers."reboot-required-check" = {
     wantedBy = [ "timers.target" ];
     timerConfig = {

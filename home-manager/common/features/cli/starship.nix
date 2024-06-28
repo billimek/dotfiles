@@ -1,4 +1,5 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
   programs.starship = {
     enable = true;
     settings = {
@@ -15,14 +16,18 @@
       kubernetes.disabled = false;
       ocaml.disabled = true;
       perl.disabled = true;
-      cmd_duration = { format = "took [$duration]($style) "; };
+      cmd_duration = {
+        format = "took [$duration]($style) ";
+      };
 
       directory = {
         format = "[$path]($style)( [$read_only]($read_only_style)) ";
       };
 
       # Cloud
-      gcloud = { format = "on [$symbol($project)]($style) "; };
+      gcloud = {
+        format = "on [$symbol($project)]($style) ";
+      };
 
       # Icon changes only \/
       aws.symbol = "  ";

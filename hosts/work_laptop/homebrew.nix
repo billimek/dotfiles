@@ -1,4 +1,5 @@
-{ config, pkgs, ... }: {
+{ config, pkgs, ... }:
+{
   #homebrew packages
   homebrew = {
     casks = [
@@ -9,7 +10,6 @@
       "obsidian" # note taking app
       "VIA"
     ];
-    masApps = {
-    };
+    masApps = { };
   };
 }

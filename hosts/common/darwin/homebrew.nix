@@ -1,4 +1,5 @@
-{ config, pkgs, ... }: {
+{ config, pkgs, ... }:
+{
   #homebrew packages
   homebrew = {
     enable = true;
@@ -6,19 +7,25 @@
     onActivation.upgrade = true;
     onActivation.cleanup = "zap";
     brews = [ "cask" ];
-    taps = [ "homebrew/bundle" "homebrew/cask-fonts" "homebrew/services" ];
+    taps = [
+      "homebrew/bundle"
+      "homebrew/cask-fonts"
+      "homebrew/services"
+    ];
     casks = [
       "1password"
       "1password-cli" # need to install CLI via brew too to make biometric unlock work with GUI app
       "betterzip" # zip/unzip for quicklook
-      "discord"
-      "iterm2"
+      "discord" # chat
+      "iterm2" # terminal
+      "karabiner-elements" # keyboard remapping
       "notunes" # disable iTunes auto-launch
       "qlmarkdown" # markdown preview in quicklook
       "rectangle" # window manager
-      "spotify"
+      "sanesidebuttons" # enable side buttons on mouse
+      "spotify" # music
       "shottr" # screenshot tool
-      "visual-studio-code"
+      "visual-studio-code" # code editor
       "vlc" # video player
     ];
     masApps = {

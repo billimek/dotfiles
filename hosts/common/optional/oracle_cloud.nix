@@ -1,6 +1,10 @@
-{ config, pkgs, ... }: {
+{ config, pkgs, ... }:
+{
   # adopting automation from https://github.com/hitrov/oci-arm-host-capacity
-  environment.systemPackages = [ pkgs.php pkgs.php82Packages.composer ];
+  environment.systemPackages = [
+    pkgs.php
+    pkgs.php82Packages.composer
+  ];
 
   systemd.timers."oci-arm-host-capacity" = {
     wantedBy = [ "timers.target" ];

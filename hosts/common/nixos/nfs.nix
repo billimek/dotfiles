@@ -1,4 +1,5 @@
-{ config, pkgs, ... }: {
+{ config, pkgs, ... }:
+{
   environment.systemPackages = [ pkgs.nfs-utils ];
 
   boot.supportedFilesystems = [ "nfs" ];
