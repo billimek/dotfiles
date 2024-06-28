@@ -1,9 +1,9 @@
 { pkgs, ... }:
 {
+  imports = [ ./k9s.nix ];
   home.packages = with pkgs; [
     fluxcd # flux CLI
     go-task # task runner
-    k9s # kubernetes viewer tool
     kail # kubernetes tail
     ktop # kubernetes top
     kubectl # kubernetes CLI
