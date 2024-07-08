@@ -19,16 +19,16 @@
     "cachix": {
       "inputs": {
         "devenv": [
-          "nh-darwin",
+          "nh_darwin",
           "crate2nix"
         ],
         "flake-compat": [
-          "nh-darwin",
+          "nh_darwin",
           "crate2nix"
         ],
         "nixpkgs": "nixpkgs",
         "pre-commit-hooks": [
-          "nh-darwin",
+          "nh_darwin",
           "crate2nix"
         ]
       },
@@ -94,7 +94,7 @@
     "devshell": {
       "inputs": {
         "nixpkgs": [
-          "nh-darwin",
+          "nh_darwin",
           "crate2nix",
           "nixpkgs"
         ],
@@ -117,7 +117,7 @@
     "devshell_2": {
       "inputs": {
         "nixpkgs": [
-          "nh-darwin",
+          "nh_darwin",
           "nixpkgs"
         ],
         "systems": "systems_4"
@@ -153,7 +153,7 @@
     "flake-parts": {
       "inputs": {
         "nixpkgs-lib": [
-          "nh-darwin",
+          "nh_darwin",
           "crate2nix",
           "nixpkgs"
         ]
@@ -175,7 +175,7 @@
     "flake-parts_2": {
       "inputs": {
         "nixpkgs-lib": [
-          "nh-darwin",
+          "nh_darwin",
           "nixpkgs"
         ]
       },
@@ -250,7 +250,7 @@
     "gitignore": {
       "inputs": {
         "nixpkgs": [
-          "nh-darwin",
+          "nh_darwin",
           "crate2nix",
           "pre-commit-hooks",
           "nixpkgs"
@@ -272,11 +272,11 @@
     },
     "hardware": {
       "locked": {
-        "lastModified": 1719895800,
-        "narHash": "sha256-xNbjISJTFailxass4LmdWeV4jNhAlmJPwj46a/GxE6M=",
+        "lastModified": 1720372297,
+        "narHash": "sha256-bwy1rPQSQSCj/TNf1yswHW88nBQYvJQkeScGvOA8pd4=",
         "owner": "nixos",
         "repo": "nixos-hardware",
-        "rev": "6e253f12b1009053eff5344be5e835f604bb64cd",
+        "rev": "da0aa7b533d49e6319c603e07b46a5690082f65f",
         "type": "github"
       },
       "original": {
@@ -306,7 +306,7 @@
         "type": "github"
       }
     },
-    "nh-darwin": {
+    "nh_darwin": {
       "inputs": {
         "crate2nix": "crate2nix",
         "devshell": "devshell_2",
@@ -318,13 +318,13 @@
         "lastModified": 1719935332,
         "narHash": "sha256-yX0NOCmiRq3iMAwsKoSMxhfBMkLlZirHdmAyZIL95FM=",
         "owner": "ToyVo",
-        "repo": "nh-darwin",
+        "repo": "nh_darwin",
         "rev": "aa4bc963cbbdc44d0ed35d18345c911d465a5c7e",
         "type": "github"
       },
       "original": {
         "owner": "ToyVo",
-        "repo": "nh-darwin",
+        "repo": "nh_darwin",
         "type": "github"
       }
     },
@@ -354,11 +354,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1719845423,
-        "narHash": "sha256-ZLHDmWAsHQQKnmfyhYSHJDlt8Wfjv6SQhl2qek42O7A=",
+        "lastModified": 1720337362,
+        "narHash": "sha256-9TNQtlwu97NPaJYsKkdObOsy0MLN4NAOBz0pqwH3KnA=",
         "owner": "LnL7",
         "repo": "nix-darwin",
-        "rev": "ec12b88104d6c117871fad55e931addac4626756",
+        "rev": "0f89b73f41eaa1dde67b291452c181d9a75f10dd",
         "type": "github"
       },
       "original": {
@@ -453,11 +453,11 @@
     },
     "nixpkgs-unstable": {
       "locked": {
-        "lastModified": 1720181791,
-        "narHash": "sha256-i4vJL12/AdyuQuviMMd1Hk2tsGt02hDNhA0Zj1m16N8=",
+        "lastModified": 1720338227,
+        "narHash": "sha256-PlL/yXNX/C87S2N8lF/HfOJhHForf/l7E6lVWZ4jMrw=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "4284c2b73c8bce4b46a6adf23e16d9e2ec8da4bb",
+        "rev": "b60793b86201040d9dee019a05089a9150d08b5b",
         "type": "github"
       },
       "original": {
@@ -515,11 +515,11 @@
     },
     "nixpkgs_5": {
       "locked": {
-        "lastModified": 1720110830,
-        "narHash": "sha256-E5dN9GDV4LwMEduhBLSkyEz51zM17XkWZ3/9luvNOPs=",
+        "lastModified": 1720244366,
+        "narHash": "sha256-WrDV0FPMVd2Sq9hkR5LNHudS3OSMmUrs90JUTN+MXpA=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "c0d0be00d4ecc4b51d2d6948e37466194c1e6c51",
+        "rev": "49ee0e94463abada1de470c9c07bfc12b36dcf40",
         "type": "github"
       },
       "original": {
@@ -552,19 +552,19 @@
     "pre-commit-hooks": {
       "inputs": {
         "flake-compat": [
-          "nh-darwin",
+          "nh_darwin",
           "crate2nix",
           "flake-compat"
         ],
         "flake-utils": "flake-utils_2",
         "gitignore": "gitignore",
         "nixpkgs": [
-          "nh-darwin",
+          "nh_darwin",
           "crate2nix",
           "nixpkgs"
         ],
         "nixpkgs-stable": [
-          "nh-darwin",
+          "nh_darwin",
           "crate2nix",
           "nixpkgs"
         ]
@@ -587,7 +587,7 @@
       "inputs": {
         "hardware": "hardware",
         "home-manager": "home-manager",
-        "nh-darwin": "nh-darwin",
+        "nh_darwin": "nh_darwin",
         "nix-colors": "nix-colors",
         "nix-darwin": "nix-darwin",
         "nix-ld-vscode": "nix-ld-vscode",
