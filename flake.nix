@@ -20,7 +20,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nh-darwin.url = "github:ToyVo/nh-darwin";
+    nh_darwin.url = "github:ToyVo/nh_darwin";
 
     # for VSCode remote-ssh
     nix-ld-vscode = {
@@ -43,7 +43,7 @@
       nixpkgs,
       home-manager,
       nix-darwin,
-      nh-darwin,
+      nh_darwin,
       nixpkgs-unstable,
       ...
     }@inputs:
@@ -133,7 +133,7 @@
           };
           modules = [
             ./hosts/jeffs_laptop
-            # nh-darwin.nixDarwinModules.default
+            # nh_darwin.nixDarwinModules.default
           ];
         };
         Jens-Air-M2 = nix-darwin.lib.darwinSystem {

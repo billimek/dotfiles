@@ -10,7 +10,7 @@
   imports = [
     ./homebrew.nix
     # can probsbly remove once https://github.com/LnL7/nix-darwin/pull/942 is merged:
-    inputs.nh-darwin.nixDarwinModules.prebuiltin
+    inputs.nh_darwin.nixDarwinModules.prebuiltin
   ];
   #package config
   nixpkgs = {
@@ -30,7 +30,8 @@
         "repl-flake"
       ];
       warn-dirty = false;
-      sandbox = "relaxed";
+      # false until https://github.com/NixOS/nix/issues/11002 is truly resolved
+      sandbox = false;
     };
 
     configureBuildUsers = true;
@@ -61,7 +62,7 @@
       pkgs.bashInteractive
       pkgs.fish
     ];
-    shellAliases.nh = "nh-darwin";
+    shellAliases.nh = "nh_darwin";
     variables = {
       EDITOR = "${lib.getBin pkgs.neovim}/bin/nvim";
       SSH_AUTH_SOCK = "$HOME/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock";
@@ -78,7 +79,7 @@
       enable = true;
       clean.enable = true;
       # Installation option once https://github.com/LnL7/nix-darwin/pull/942 is merged:
-      # package = nh-darwin.packages.${pkgs.stdenv.hostPlatform.system}.default;
+      # package = nh_darwin.packages.${pkgs.stdenv.hostPlatform.system}.default;
     };
   };
 
