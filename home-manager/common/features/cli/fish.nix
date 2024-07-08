@@ -96,8 +96,8 @@ in
       snrs = "sudo nixos-rebuild --flake . switch";
       hm = "home-manager --flake .";
       hms = "home-manager --flake . switch";
-      rebuild = "nh os switch";
-      rehome = "nh home switch";
+      rebuild = "nh os switch --pull";
+      rehome = "nh home switch --pull";
 
       # other
       df = "df -h";
