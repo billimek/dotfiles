@@ -96,8 +96,16 @@ in
       snrs = "sudo nixos-rebuild --flake . switch";
       hm = "home-manager --flake .";
       hms = "home-manager --flake . switch";
-      rebuild = "nh os switch --pull";
-      rehome = "nh home switch --pull";
+
+      # Conditional rebuild command based on the host system
+      rebuild = if pkgs.stdenv.isDarwin then
+        "nh os switch --pull"
+      else
+        "nh os switch";
+      rehome = if pkgs.stdenv.isDarwin then
+        "nh home switch --pull"
+      else
+        "nh home switch";
 
       # other
       df = "df -h";
