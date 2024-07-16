@@ -87,8 +87,8 @@ in
     shellAbbrs = rec {
       tf = "terraform";
       sshblock = secrets.work_sshblock;
-      rebuild = lib.mkForce "nh os switch -H work-laptop";
-      rehome = lib.mkForce "nh home switch -c 'jeff@work-laptop'";
+      rebuild = lib.mkForce "nh os switch --pull -H work-laptop";
+      rehome = lib.mkForce "nh home switch --pull -c 'jeff@work-laptop'";
     };
     shellAliases = {
       code = "/Applications/Visual\\ Studio\\ Code.app/Contents/Resources/app/bin/code";
