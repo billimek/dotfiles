@@ -2,6 +2,12 @@
 {
   #homebrew packages
   homebrew = {
+    taps = [
+      "chainguard-dev/tap"
+    ];
+    brews = [
+      "chainguard-dev/tap/chainctl"
+    ];
     casks = [
       "arc"
       "gather"
