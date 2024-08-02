@@ -136,17 +136,6 @@
             # nh_darwin.nixDarwinModules.default
           ];
         };
-        Jens-Air-M2 = nix-darwin.lib.darwinSystem {
-          specialArgs = {
-            inherit inputs outputs;
-            pkgs-unstable = import nixpkgs-unstable {
-              system = "aarch64-darwin";
-              config.allowUnfree = true;
-            };
-          };
-          system = "aarch64-darwin";
-          modules = [ ./hosts/jens_laptop ];
-        };
       };
 
       # Standalone home-manager configuration entrypoint
@@ -166,9 +155,6 @@
         ] nixpkgs.legacyPackages."aarch64-darwin";
         "jeff@Jeffs-M3Pro" = mkHome [
           ./home-manager/jeffs_laptop.nix
-        ] nixpkgs.legacyPackages."aarch64-darwin";
-        "jeff@Jens-Air-M2" = mkHome [
-          ./home-manager/jens_laptop.nix
         ] nixpkgs.legacyPackages."aarch64-darwin";
         # Other
         "root@truenas" = mkHome [ ./home-manager/root_truenas.nix ] nixpkgs.legacyPackages."x86_64-linux";

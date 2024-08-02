@@ -19,7 +19,6 @@ Leveraging nix, nix-os, nix-darwin, and home-manager to apply machine and home c
     - [k3s-g](hosts/k3s-g/README.md) (NixOS running on an N100 tiny PC as a k3s node)
     - [k3s-h](hosts/k3s-h/README.md) (NixOS running on an N100 tiny PC as a k3s node)
     - [jeffs_laptop](hosts/jeffs_laptop/README.md) (nix-darwin running on a MacBook Pro)
-    - [jens_laptop](hosts/jens_laptop/README.md) (nix-darwin running on a MacBook Air)
     - [work_laptop](hosts/work_laptop/README.md) (nix-darwin running on a MacBook Pro)
   - [modules](modules) (Custom NixOS and home-manager modules)
   - [overlays](overlays) (Custom overlays, primarily used for packages currently)
