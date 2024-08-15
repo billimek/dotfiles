@@ -27,6 +27,7 @@
       "shottr" # screenshot tool
       "visual-studio-code" # code editor
       "vlc" # video player
+      "wezterm" # terminal
     ];
     masApps = {
       "1Password for Safari" = 1569813296;
