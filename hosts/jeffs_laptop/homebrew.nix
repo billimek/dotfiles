@@ -3,7 +3,6 @@
   #homebrew packages
   homebrew = {
     casks = [
-      "battle-net" # Blizzard launcher
       "google-chrome"
       "discord"
       "microsoft-office"
