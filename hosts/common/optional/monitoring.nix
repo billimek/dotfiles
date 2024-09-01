@@ -25,7 +25,7 @@
         group = "root";
       };
       minio = {
-        enable = true;
+        enable = false;
         port = 9291;
       };
       node = {
