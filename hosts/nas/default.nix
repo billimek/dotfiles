@@ -1,8 +1,6 @@
 {
-  config,
   pkgs,
   lib,
-  modulesPath,
   ...
 }:
 {
@@ -18,6 +16,7 @@
     ../common/optional/minio.nix
     ../common/optional/monitoring.nix
     ../common/optional/nfs.nix
+    ../common/optional/proxmox.nix
     ../common/optional/reboot-required.nix
     ../common/optional/rclone.nix
     ../common/optional/samba.nix

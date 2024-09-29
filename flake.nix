@@ -33,6 +33,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    proxmox-nixos.url = "github:SaumonNet/proxmox-nixos";
+
     hardware.url = "github:nixos/nixos-hardware";
     nix-colors.url = "github:misterio77/nix-colors";
   };
@@ -43,7 +45,6 @@
       nixpkgs,
       home-manager,
       nix-darwin,
-      nh_darwin,
       nixpkgs-unstable,
       ...
     }@inputs:
