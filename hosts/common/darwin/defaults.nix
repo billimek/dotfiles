@@ -1,5 +1,4 @@
 {
-  config,
   inputs,
   pkgs,
   lib,
@@ -21,7 +20,6 @@
   };
 
   nix = {
-    # package = lib.mkDefault pkgs.nix;
     package = pkgs.nix;
     settings = {
       experimental-features = [
@@ -31,7 +29,7 @@
       ];
       warn-dirty = false;
       # false until https://github.com/NixOS/nix/issues/11002 is truly resolved
-      sandbox = false;
+      # sandbox = false;
     };
 
     configureBuildUsers = true;
@@ -52,7 +50,6 @@
       pkgs.bashInteractive
       pkgs.fish
     ];
-    shellAliases.nh = "nh_darwin";
     variables = {
       EDITOR = "${lib.getBin pkgs.neovim}/bin/nvim";
       SSH_AUTH_SOCK = "$HOME/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock";
@@ -74,7 +71,7 @@
   };
 
   # add nerd fonts
-  fonts.packages = with pkgs; [
+  fonts.packages = [
     (pkgs-unstable.nerdfonts.override {
       fonts = [
         "Hack"
@@ -82,14 +79,6 @@
       ];
     })
   ];
-
-  #system-defaults.nix
-  # activationScripts are executed every time you boot the system or run `nixos-rebuild` / `darwin-rebuild`.
-  # system.activationScripts.postUserActivation.text = ''
-  #   # activateSettings -u will reload the settings from the database and apply them to the current session,
-  #   # so we do not need to logout and login again to make the changes take effect.
-  #   /System/Library/PrivateFrameworks/SystemAdministration.framework/Resources/activateSettings -u
-  # '';
 
   system.keyboard = {
     enableKeyMapping = true;
@@ -184,9 +173,14 @@
   # Add flake support and apple silicon stuff
   nix.extraOptions = ''
     experimental-features = nix-command flakes
-    extra-platforms = aarch64-darwin x86_64-darwi
+    extra-platforms = aarch64-darwin x86_64-darwin
   '';
 
   # Use touch ID for sudo auth
   security.pam.enableSudoTouchIdAuth = true;
+
+  # Set sudo timestamp timeout
+  security.sudo.extraConfig = ''
+    Defaults timestamp_timeout=30
+  '';
 }
