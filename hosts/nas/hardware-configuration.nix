@@ -17,19 +17,25 @@
     "sd_mod"
   ];
   boot.initrd.kernelModules = [ ];
-  boot.kernelModules = [ "kvm-intel usb_storage" ];
+  boot.kernelModules = [ "kvm-intel" "usb_storage" "kvmgt" "vfio-iommu-type1" "mdev" ];
   boot.extraModulePackages = [ ];
 
-  boot.kernelParams = [ "i915.disable_display=1" ];
+  boot.kernelParams = [
+    "i915.disable_display=1"
+    "i915.enable_gvt=1"
+    "intel_iommu=on"
+    "iommu=pt"
+  ];
 
-  virtualisation.kvmgt.vgpus = {
-    "i915-GVTg_V5_8" = {
-      uuid = [
-        "9f905394-d4d7-11ee-9a00-937582b91b7c"
-        "31cb043a-d4e1-11ee-9357-7b7a0730baf4"
-      ]; # uuid generated with 'nix shell nixpkgs#libossp_uuid -c uuid'
-    };
-  };
+  # disabling as it conflicts with proxmox using mediated gpu passthrough
+  # virtualisation.kvmgt.vgpus = {
+  #   "i915-GVTg_V5_8" = {
+  #     uuid = [
+  #       "9f905394-d4d7-11ee-9a00-937582b91b7c"
+  #       "31cb043a-d4e1-11ee-9357-7b7a0730baf4"
+  #     ]; # uuid generated with 'nix shell nixpkgs#libossp_uuid -c uuid'
+  #   };
+  # };
 
   boot.loader = {
     systemd-boot.enable = true;
