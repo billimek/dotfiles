@@ -8,7 +8,7 @@
 * Memory:
   * 4GB
 * Disk:
-  * 100GB 
+  * 100GB
   * VirtIO
 * NIC:
   * VirtIO
@@ -24,18 +24,18 @@ sudo -i
 Creates 3 partitions on the virtual drive, one for EFI Boot, one for swap, and one for the primary partition.
 
 ```shell
-parted /dev/vda -- mklabel gpt
-parted /dev/vda -- mkpart ESP fat32 1MB 512MB
-parted /dev/vda -- mkpart primary linux-swap -8GB 100%
-parted /dev/vda -- mkpart primary 512MB -8GB
-parted /dev/vda -- set 1 esp on
-mkfs.ext4 -L nixos /dev/vda3
-mkswap -L swap /dev/vda2
-mkfs.fat -F 32 -n boot /dev/vda1
+parted /dev/sda -- mklabel gpt
+parted /dev/sda -- mkpart ESP fat32 1MB 512MB
+parted /dev/sda -- mkpart primary linux-swap -8GB 100%
+parted /dev/sda -- mkpart primary 512MB -8GB
+parted /dev/sda -- set 1 esp on
+mkfs.ext4 -L nixos /dev/sda3
+mkswap -L swap /dev/sda2
+mkfs.fat -F 32 -n boot /dev/sda1
 mount /dev/disk/by-label/nixos /mnt
 mkdir -p /mnt/boot
 mount /dev/disk/by-label/boot /mnt/boot
-swapon /dev/vda2
+swapon /dev/sda2
 ```
 
 ## NixOS Install
