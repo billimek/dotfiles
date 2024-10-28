@@ -13,6 +13,29 @@
 * NIC:
   * VirtIO
 
+## Proxmox VM config
+
+```ini
+agent: 1
+bios: ovmf
+boot: order=scsi0;ide2;net0
+cores: 4
+cpu: host
+efidisk0: ssdtank-proxmox:vm-200-disk-0,efitype=4m,size=1M
+ide2: tank-proxmox:iso/latest-nixos-minimal-x86_64-linux.iso,media=cdrom,size=1094512K
+machine: q35
+memory: 8192
+meta: creation-qemu=8.1.5,ctime=1730119622
+name: home
+net0: virtio=52:54:00:b5:87:3a,bridge=br0,firewall=1
+numa: 0
+onboot: 1
+ostype: l26
+scsi0: ssdtank-proxmox:vm-200-disk-1,discard=on,iothread=1,size=100G,ssd=1
+scsihw: virtio-scsi-single
+sockets: 1
+```
+
 It is installed with the NixOS iso installation media.  These are the steps initially taken to install NixOS, though once the config is setup it can just be re-used for future re-installs if needed. This assumes you have booted into a NixOS install image from a USB stick and that we will be using systemd-boot.  Following the [manual installation steps](https://nixos.org/manual/nixos/stable/index.html#sec-installation-manual):
 
 ```shell
