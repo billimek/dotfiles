@@ -7,13 +7,10 @@
 {
   programs.neovim = {
     enable = true;
+    # need newer version of neovim for conform to work
+    package = pkgs.unstable.neovim-unwrapped;
     defaultEditor = true;
     vimAlias = true;
-    plugins = with pkgs.vimPlugins; [
-      conform-nvim
-      lazy-nvim
-      nvim-treesitter.withAllGrammars
-    ];
 
     extraPackages = with pkgs; [
       # NodeJS
