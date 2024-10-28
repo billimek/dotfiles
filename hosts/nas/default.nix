@@ -47,7 +47,7 @@
 
   services.sanoid.datasets = {
     "tank/backups/timemachine".use_template = [ "timemachine" ];
-    "ssdtank/vms/home".use_template = [ "vms" ];
+    "ssdtank/proxmox".use_template = [ "vms" ];
     "ssdtank/vms/k3s-0".use_template = [ "vms" ];
     #"tank/backups".use_template = [ "backups" ];
     #"tank/media/photos".use_template = [ "backups" ];
