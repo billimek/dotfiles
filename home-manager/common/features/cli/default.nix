@@ -14,6 +14,7 @@
     ./starship.nix
     ./tealdeer.nix
     ./tmux.nix
+    ./wezterm.nix
     ./zoxide.nix
   ];
   home.packages = with pkgs; [
