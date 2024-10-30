@@ -7,6 +7,7 @@
 {
   programs.tmux = {
     enable = true;
+    package = pkgs.unstable.tmux;
     terminal = "tmux-256color";
     aggressiveResize = true;
     baseIndex = 1;
