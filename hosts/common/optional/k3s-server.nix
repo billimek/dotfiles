@@ -12,7 +12,7 @@ in
   networking.firewall.allowedTCPPorts = [ 6443 ];
   services.k3s = {
     enable = true;
-    package = pkgs.unstable.k3s_1_30;
+    package = pkgs.unstable.k3s_1_31;
     role = "server";
     token = lib.mkDefault secrets.k3s_node_token;
     extraFlags = "--tls-san k3s-0 --disable servicelb --disable traefik --disable local-storage --flannel-backend=host-gw --node-taint \"node-role.kubernetes.io/master=true:NoSchedule\" --node-label \"k3s-upgrade=false\"";
@@ -22,7 +22,7 @@ in
   };
 
   environment.systemPackages = [
-    pkgs.unstable.k3s_1_30
+    pkgs.unstable.k3s_1_31
     pkgs.kubectl
   ];
 
