@@ -7,17 +7,39 @@
 {
   programs.neovim = {
     enable = true;
+    # need newer version of neovim for conform to work
+    package = pkgs.unstable.neovim-unwrapped;
     defaultEditor = true;
     vimAlias = true;
+
+    extraPackages = with pkgs; [
+      # NodeJS
+      nodejs
+
+      # Treesitter
+      cmake
+      gcc
+      tree-sitter
+
+      # Formatters and Linters
+      selene
+      shfmt
+      stylua
+
+      # LSPs
+      helm-ls
+      prettierd
+      nodePackages.vscode-langservers-extracted
+      nodePackages.yaml-language-server
+      nodePackages.dockerfile-language-server-nodejs
+      nodePackages.bash-language-server
+      sumneko-lua-language-server
+      nixd
+      terraform-ls
+    ];
   };
 
-  home.packages = with pkgs; [
-    gcc # neovim needs this to work properly with some of the plugins it uses
-    nodejs # needed for some plugins
-  ];
-
   # hacky lazyvim configuration - replicating what https://github.com/LazyVim/starter does
-
   home.file.".config/nvim/init.lua".text = ''
     -- bootstrap lazy.nvim, LazyVim and your plugins
     require("config.lazy")
