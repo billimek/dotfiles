@@ -21,6 +21,7 @@
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [
     "kvm-intel"
+    "rbd"
   ];
   boot.extraModulePackages = [ ];
   boot.loader = {
