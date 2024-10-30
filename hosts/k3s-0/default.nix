@@ -12,6 +12,7 @@
     ../common/nixos/users/nix
     ../common/optional/fish.nix
     ../common/optional/k3s-server.nix
+    ../common/optional/qemu.nix
     ../common/optional/reboot-required.nix
   ];
 
