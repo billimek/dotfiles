@@ -7,11 +7,15 @@
 {
   imports = [ inputs.nixvirt.nixosModules.default ];
 
+  hardware.ksm.enable = true; # enable kernel same-page merging
+
   # configure for using virt-manager
   virtualisation = {
-    libvirt.enable = true;
+    kvmgt.enable = true;
+
+    libvirt.enable = false;
     libvirtd = {
-      enable = true;
+      enable = false;
       qemu = {
         package = pkgs.qemu_kvm;
         swtpm.enable = true;
@@ -19,7 +23,6 @@
         ovmf.packages = [ pkgs.OVMFFull.fd ];
       };
     };
-    kvmgt.enable = true;
 
     # WARNING: defining this will wipe-out any existing libvirt connections (i.e. virt-manager VMs you manually created)
     libvirt.connections = {
@@ -27,11 +30,11 @@
         domains = [
           {
             definition = ./domains/home.xml;
-            active = true;
+            active = false;
           }
           {
             definition = ./domains/k3s-0.xml;
-            active = true;
+            active = false;
           }
         ];
         pools = [
@@ -47,8 +50,5 @@
       };
     };
   };
-
-  hardware.ksm.enable = true; # enable kernel same-page merging
-
-  programs.virt-manager.enable = true;
+  programs.virt-manager.enable = false;
 }

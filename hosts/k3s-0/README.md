@@ -2,11 +2,11 @@
 
 * CPU:
   * 1 CPU
-  * 2 Cores
+  * 4 Cores
 * Memory:
-  * 4GB
+  * 8GB
 * Disk:
-  * 100GB
+  * 200GB
   * VirtIO
 * NIC:
   * VirtIO
@@ -17,15 +17,15 @@
 agent: 1
 bios: ovmf
 boot: order=scsi0;ide2;net0
-cores: 2
+cores: 4
 cpu: host
 efidisk0: ssdtank-proxmox:vm-300-disk-0,efitype=4m,size=1M
 ide2: tank-proxmox:iso/latest-nixos-minimal-x86_64-linux.iso,media=cdrom,size=1094512K
 machine: q35
-memory: 4096
+memory: 8192
 meta: creation-qemu=8.1.5,ctime=1730250507
 name: k3s-0
-net0: virtio=BC:24:11:C9:F7:88,bridge=brk8s20,firewall=1
+net0: virtio=da:42:e5:28:86:7c,bridge=brk8s20,firewall=1
 numa: 0
 ostype: l26
 scsi0: ssdtank-proxmox:vm-300-disk-1,discard=on,iothread=1,size=200G,ssd=1

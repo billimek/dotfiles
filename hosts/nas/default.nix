@@ -48,10 +48,8 @@
   services.sanoid.datasets = {
     "tank/backups/timemachine".use_template = [ "timemachine" ];
     "ssdtank/proxmox".use_template = [ "vms" ];
-    "ssdtank/vms/k3s-0".use_template = [ "vms" ];
     #"tank/backups".use_template = [ "backups" ];
     #"tank/media/photos".use_template = [ "backups" ];
-    #"ssdtank/s3".use_template = [ "backups" ];
   };
 
   environment.systemPackages = with pkgs; [
