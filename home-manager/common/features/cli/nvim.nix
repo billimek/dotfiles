@@ -43,8 +43,8 @@
   home.file.".config/nvim/init.lua".text = ''
     -- bootstrap lazy.nvim, LazyVim and your plugins
     require("config.lazy")
-
-    vim.opt.mouse = nil -- Disable mouse mode
+    
+    vim.opt.mouse = "" -- Disable mouse mode
   '';
   home.file.".config/nvim/stylua.toml".text = ''
     indent_type = "Spaces"
