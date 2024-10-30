@@ -17,9 +17,9 @@ in
     serverAddr = lib.mkDefault "https://k3s-0:6443";
     token = lib.mkDefault secrets.k3s_node_token;
     extraFlags = "--tls-san k3s-0 --disable servicelb --disable traefik --disable local-storage --flannel-backend=host-gw --node-taint \"node-role.kubernetes.io/master=true:NoSchedule\" --node-label \"k3s-upgrade=false\"";
-    extraKubeletConfig = {
-      imageMaximumGCAge = "168h";
-    };
+    #extraKubeletConfig = {
+    #  imageMaximumGCAge = "168h";
+    #};
   };
 
   environment.systemPackages = [
