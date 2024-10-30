@@ -19,7 +19,14 @@ in
     extraFlags = ''--node-label "k3s-upgrade=false"''; # Optionally add additional args to k3s
   };
 
-  environment.systemPackages = [ pkgs.unstable.k3s_1_28 ];
+  environment.systemPackages = [ pkgs.unstable.k3s_1_30 ];
+
+  # https://rook.io/docs/rook/latest-release/Getting-Started/Prerequisites/prerequisites/#nixos
+  systemd.services.containerd.serviceConfig = {
+    LimitNOFILE = lib.mkForce null;
+  };
+
+  programs.nbd.enable = true;
 
   # create symlink from /run/current-system/sw/bin/test to /usr/bin/test for kured to work
   system.activationScripts.test = ''
