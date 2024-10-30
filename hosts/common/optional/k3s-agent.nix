@@ -12,14 +12,14 @@ in
   networking.firewall.allowedTCPPorts = [ 6443 ];
   services.k3s = {
     enable = true;
-    package = pkgs.unstable.k3s_1_30;
+    package = pkgs.unstable.k3s_1_31;
     role = "agent";
     serverAddr = lib.mkDefault "https://k3s-0:6443";
     token = lib.mkDefault secrets.k3s_node_token;
     extraFlags = ''--node-label "k3s-upgrade=false"''; # Optionally add additional args to k3s
   };
 
-  environment.systemPackages = [ pkgs.unstable.k3s_1_30 ];
+  environment.systemPackages = [ pkgs.unstable.k3s_1_31 ];
 
   # https://rook.io/docs/rook/latest-release/Getting-Started/Prerequisites/prerequisites/#nixos
   systemd.services.containerd.serviceConfig = {
