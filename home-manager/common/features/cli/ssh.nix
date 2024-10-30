@@ -19,6 +19,14 @@
         is_vscode = 1;
       };
     };
+    matchBlocks."home-ts" = {
+      hostname = "100.85.196.21";
+      user = "jeff";
+      forwardAgent = true;
+      setEnv = {
+        is_vscode = 1;
+      };
+    };
     matchBlocks."nas-lan" = {
       hostname = "100.119.81.4";
       user = "nix";
