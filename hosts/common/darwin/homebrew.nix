@@ -34,7 +34,7 @@
       "Tailscale" = 1475387142;
       "consent-o-matic" = 1606897889;
       "Kagi Search for Safari" = 1622835804;
-      "Wipr for Safari" = 1320666476;
+      "Wipr2 for Safari" = 1662217862;
     };
   };
 }
