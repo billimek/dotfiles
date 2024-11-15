@@ -15,8 +15,7 @@
       "slack"
       "steam"
       "VIA"
-      "wowup" # WoW addon manager
-      "XQuartz" # X11 for macOS
+      "vmware-fusion"
       "zoom"
     ];
     masApps = {
