@@ -35,7 +35,6 @@
     configureBuildUsers = true;
   };
 
-  services.activate-system.enable = true;
   services.nix-daemon.enable = true;
 
   environment = {
