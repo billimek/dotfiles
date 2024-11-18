@@ -8,7 +8,6 @@
 {
   imports = [
     ./common/global
-    ./common/features/virtulization
     inputs.nix-ld-vscode.nixosModules.default
   ];
 

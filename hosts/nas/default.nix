@@ -21,7 +21,6 @@
     ../common/optional/rclone.nix
     ../common/optional/samba.nix
     ../common/optional/sanoid.nix
-    ../common/optional/virtulization
     ../common/optional/vscode-server.nix
     ../common/optional/zfs.nix
   ];
@@ -47,7 +46,10 @@
 
   services.sanoid.datasets = {
     "tank/backups/timemachine".use_template = [ "timemachine" ];
-    "ssdtank/proxmox".use_template = [ "vms" ];
+    "ssdtank/proxmox" = {
+        use_template = [ "vms" ];
+        recursive = true;
+    };
     #"tank/backups".use_template = [ "backups" ];
     #"tank/media/photos".use_template = [ "backups" ];
   };
