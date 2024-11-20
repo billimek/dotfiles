@@ -24,15 +24,15 @@ in
 
   home.packages = with pkgs; [
     act
-    azure-cli
     cloudfoundry-cli
+    crane
     unstable.fly
     jwt-cli
     python3
     rancher
     terminal-notifier # send notifications to macOS notification center
     terraform
-    # unstable.vault
+    yq
   ];
 
   programs.ssh = {
