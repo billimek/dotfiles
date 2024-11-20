@@ -174,11 +174,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1731885500,
-        "narHash": "sha256-ZrztYfSOS33J+ewq5alBOSdnIyZ0/sr1iy7FyBe9zIg=",
+        "lastModified": 1732016537,
+        "narHash": "sha256-XwXUK+meYnlhdQz2TVE4Wv+tsx1CkdGbDPt1tRzCNH4=",
         "owner": "LnL7",
         "repo": "nix-darwin",
-        "rev": "c60b5c924c6188a0b3ca2e139ead3d0f92ae5db5",
+        "rev": "61cee20168a3ebb71a9efd70a55adebaadfbe4d4",
         "type": "github"
       },
       "original": {
@@ -362,11 +362,11 @@
         "utils": "utils"
       },
       "locked": {
-        "lastModified": 1731956439,
-        "narHash": "sha256-52mOMFSYjfGRmK82DxxqScHnJpPSTs1BxVgkhIjoy8k=",
+        "lastModified": 1732060714,
+        "narHash": "sha256-NWJx0l8++uPvGcdkyCnh8NQZUoIWiIoFJL7FuP5BsvM=",
         "owner": "SaumonNet",
         "repo": "proxmox-nixos",
-        "rev": "803e86e10e02f92769e08e4802b7b1cb1423d1d6",
+        "rev": "d5de3026c4e5522a6729426cf1192b65cba49dfc",
         "type": "github"
       },
       "original": {
