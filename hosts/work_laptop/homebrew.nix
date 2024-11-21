@@ -12,7 +12,6 @@
       "arc"
       "gather"
       "microsoft-remote-desktop"
-      "obs"
       "obsidian" # note taking app
       "VIA"
     ];
