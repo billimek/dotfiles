@@ -25,7 +25,6 @@
       experimental-features = [
         "nix-command"
         "flakes"
-        "repl-flake"
       ];
       warn-dirty = false;
       # false until https://github.com/NixOS/nix/issues/11002 is truly resolved
@@ -71,12 +70,8 @@
 
   # add nerd fonts
   fonts.packages = [
-    (pkgs-unstable.nerdfonts.override {
-      fonts = [
-        "Hack"
-        "Monaspace"
-      ];
-    })
+    pkgs-unstable.nerd-fonts.hack
+    pkgs-unstable.nerd-fonts.monaspace
   ];
 
   system.keyboard = {
