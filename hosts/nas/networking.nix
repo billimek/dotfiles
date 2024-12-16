@@ -99,7 +99,6 @@
         networkConfig = {
           Description = "Fallback Wired DHCP";
           DHCP = "yes";
-          IPForward = "yes";
         };
       };
     };
