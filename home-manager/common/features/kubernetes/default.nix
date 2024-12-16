@@ -14,6 +14,6 @@
     pkgs.unstable.kubecolor # colorize kubectl output
     kubernetes-helm # helm CLI
     kustomize # kustomize CLI for sadists
-    # acorn-next # kubernetes config parser
+    talosctl # talos CLI
   ];
 }
