@@ -24,10 +24,6 @@
         user = "root";
         group = "root";
       };
-      minio = {
-        enable = false;
-        port = 9291;
-      };
       node = {
         enable = true;
         enabledCollectors = [ "systemd" ];
