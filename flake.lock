@@ -135,11 +135,11 @@
         "nixpkgs": "nixpkgs"
       },
       "locked": {
-        "lastModified": 1734116841,
-        "narHash": "sha256-/oeuhLjH9XYt4HWQ4NfIQBEwrpK7JK5gEgPX7BQ3uo0=",
+        "lastModified": 1734649198,
+        "narHash": "sha256-ZgHTep4WPfIeCQYP6y7ls3YFYmLxBZckZ6aPiZ1mqVA=",
         "owner": "ToyVo",
         "repo": "nh_plus",
-        "rev": "efd625b90d6ede8987d7f59bd0a3b8f424e2d5f3",
+        "rev": "5549630d2a9556209f287c6982865875a87f3e77",
         "type": "github"
       },
       "original": {
