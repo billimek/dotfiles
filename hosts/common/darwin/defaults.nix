@@ -70,8 +70,9 @@
 
   # add nerd fonts
   fonts.packages = [
-    pkgs-unstable.nerd-fonts.hack
+    pkgs-unstable.monaspace
     pkgs-unstable.nerd-fonts.monaspace
+    pkgs-unstable.nerd-fonts.symbols-only
   ];
 
   system.keyboard = {

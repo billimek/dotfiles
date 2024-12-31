@@ -4,8 +4,11 @@
     clipboard-trim-trailing-spaces = true
     copy-on-select = true
 
-    # use default fonts for now because the custom fonts render symbols too small
+    # use 'fallback' nerdfont symbols font to make default fonts for now because the custom fonts render symbols too small
     # see https://github.com/ghostty-org/ghostty/discussions/3501
+    font-family = "Monaspace Neon"
+    font-family = "Symbols Nerd Font Mono"
+
     # font-family = "MonaspiceNe NFM"
     # font-family-bold = "MonaspiceNe NFM Bold"
     # font-family-bold-italic = "MonaspiceRn NFM Bold Italic"
