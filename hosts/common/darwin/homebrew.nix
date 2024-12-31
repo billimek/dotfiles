@@ -17,6 +17,7 @@
       "1password-cli" # need to install CLI via brew too to make biometric unlock work with GUI app
       "betterzip" # zip/unzip for quicklook
       "discord" # chat
+      "ghostty"
       "iterm2" # terminal
       "karabiner-elements" # keyboard remapping
       "notunes" # disable iTunes auto-launch

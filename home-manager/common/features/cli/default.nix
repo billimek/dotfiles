@@ -6,6 +6,7 @@
     ./bat.nix
     ./direnv.nix
     ./fish.nix
+    ./ghostty.nix
     ./nvim.nix
     ./gh.nix
     ./git.nix
