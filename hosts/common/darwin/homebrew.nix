@@ -17,7 +17,7 @@
       "1password-cli" # need to install CLI via brew too to make biometric unlock work with GUI app
       "betterzip" # zip/unzip for quicklook
       "discord" # chat
-      "ghostty"
+      "ghostty" # so hot right now
       "iterm2" # terminal
       "karabiner-elements" # keyboard remapping
       "notunes" # disable iTunes auto-launch
@@ -28,7 +28,6 @@
       "shottr" # screenshot tool
       "visual-studio-code" # code editor
       "vlc" # video player
-      "wezterm" # terminal
     ];
     masApps = {
       "1Password for Safari" = 1569813296;

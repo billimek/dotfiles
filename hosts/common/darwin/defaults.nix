@@ -150,12 +150,12 @@
       # Disable Creation of Metadata Files on USB Volumes
       "com.apple.desktopservices".DSDontWriteUSBStores = true;
       # safari should enable dev mode
-      "com.apple.Safari" = {
-        "IncludeInternalDebugMenu" = true;
-        "IncludeDevelopMenu" = true;
-        "WebKitDeveloperExtrasEnabledPreferenceKey" = true;
-        "com.apple.Safari.ContentPageGroupIdentifier.WebKit2DeveloperExtrasEnabled" = true;
-      };
+      # "com.apple.Safari" = {
+      #   "IncludeInternalDebugMenu" = true;
+      #   "IncludeDevelopMenu" = true;
+      #   "WebKitDeveloperExtrasEnabledPreferenceKey" = true;
+      #   "com.apple.Safari.ContentPageGroupIdentifier.WebKit2DeveloperExtrasEnabled" = true;
+      # };
       # https://github.com/tombonez/noTunes
       # hides the menubar icon and replaces the default music app with Spotify
       "digital.twisted.noTunes" = {
