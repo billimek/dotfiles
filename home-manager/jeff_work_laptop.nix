@@ -27,6 +27,7 @@ in
     cloudfoundry-cli
     crane
     unstable.fly
+    (google-cloud-sdk.withExtraComponents [google-cloud-sdk.components.gke-gcloud-auth-plugin])
     jwt-cli
     python3
     rancher
@@ -109,15 +110,9 @@ in
         eval (/opt/homebrew/bin/brew shellenv)
       ''
       +
-        # handle gcloud CLI
-        ''
-          bass source ~/google-cloud-sdk/path.bash.inc
-          bass source ~/google-cloud-sdk/completion.bash.inc
-        ''
-      +
-        # add custom localized paths
-        ''
-          fish_add_path $HOME/.rd/bin
-        '';
+      # add custom localized paths
+      ''
+        fish_add_path $HOME/.rd/bin
+      '';
   };
 }
