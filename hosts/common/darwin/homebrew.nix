@@ -21,6 +21,7 @@
       "iterm2" # terminal
       "karabiner-elements" # keyboard remapping
       "notunes" # disable iTunes auto-launch
+      "orion" # browser
       "qlmarkdown" # markdown preview in quicklook
       "rectangle" # window manager
       "sanesidebuttons" # enable side buttons on mouse
