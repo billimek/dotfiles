@@ -23,7 +23,6 @@
       "notunes" # disable iTunes auto-launch
       "orion" # browser
       "qlmarkdown" # markdown preview in quicklook
-      "rectangle" # window manager
       "sanesidebuttons" # enable side buttons on mouse
       "spotify" # music
       "shottr" # screenshot tool
