@@ -15,7 +15,6 @@
     casks = [
       "1password"
       "1password-cli" # need to install CLI via brew too to make biometric unlock work with GUI app
-      "betterzip" # zip/unzip for quicklook
       "discord" # chat
       "ghostty" # so hot right now
       "iterm2" # terminal
@@ -27,6 +26,7 @@
       "spotify" # music
       "shottr" # screenshot tool
       "visual-studio-code" # code editor
+      "visual-studio-code@insiders"
       "vlc" # video player
     ];
     masApps = {
