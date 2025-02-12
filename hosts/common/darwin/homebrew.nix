@@ -27,6 +27,7 @@
       "spotify" # music
       "shottr" # screenshot tool
       "visual-studio-code" # code editor
+      "visual-studio-code@insiders" # code editor
       "vlc" # video player
     ];
     masApps = {
@@ -35,6 +36,7 @@
       "consent-o-matic" = 1606897889;
       "Kagi Search for Safari" = 1622835804;
       "Wipr2 for Safari" = 1662217862;
+      "MuteKey" = 1509590766;
     };
   };
 }
