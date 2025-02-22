@@ -12,6 +12,7 @@
       "obs"
       "OrbStack"
       "plex"
+      "prismlauncher" # app launcher
       "slack"
       "steam"
       "VIA"
