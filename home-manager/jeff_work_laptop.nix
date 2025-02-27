@@ -30,6 +30,7 @@ in
     (google-cloud-sdk.withExtraComponents [google-cloud-sdk.components.gke-gcloud-auth-plugin])
     jwt-cli
     python3
+    python311Packages.pyyaml # needed for yaml parsing
     rancher
     terminal-notifier # send notifications to macOS notification center
     terraform
