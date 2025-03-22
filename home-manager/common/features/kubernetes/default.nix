@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, nixpkgs, inputs, ... }:
 {
   imports = [ ./k9s.nix ];
   home.packages = with pkgs; [
@@ -14,6 +14,7 @@
     pkgs.unstable.kubecolor # colorize kubectl output
     kubernetes-helm # helm CLI
     kustomize # kustomize CLI for sadists
+    talhelper # talos helper
     talosctl # talos CLI
   ];
 }
