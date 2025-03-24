@@ -54,5 +54,6 @@
     unixtools.watch # watch files and run commands
     unzip # unzip files
     wget # get things from URLs
+    yq # YAML pretty printer and manipulator
   ];
 }
