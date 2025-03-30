@@ -12,7 +12,7 @@ in
   networking.firewall.allowedTCPPorts = [ 6443 ];
   services.k3s = {
     enable = true;
-    package = pkgs.unstable.k3s_1_31;
+    package = pkgs.k3s;
     role = "agent";
     serverAddr = lib.mkDefault "https://k3s-0:6443";
     token = lib.mkDefault secrets.k3s_node_token;
