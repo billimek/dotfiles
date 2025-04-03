@@ -16,6 +16,7 @@
     pkgs.unstable.kubecolor # colorize kubectl output
     kubernetes-helm # helm CLI
     kustomize # kustomize CLI for sadists
+    stern
     talhelper # talos helper
     talosctl # talos CLI
     (wrapHelm kubernetes-helm {
