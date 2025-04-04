@@ -18,7 +18,7 @@
     kustomize # kustomize CLI for sadists
     stern
     talhelper # talos helper
-    talosctl # talos CLI
+    pkgs.unstable.talosctl # talos CLI
     (wrapHelm kubernetes-helm {
       plugins = with pkgs.kubernetes-helmPlugins; [
         helm-diff
