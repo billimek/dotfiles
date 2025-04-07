@@ -8,6 +8,7 @@
     kail # kubernetes tail
     ktop # kubernetes top
     kubectl # kubernetes CLI
+    kubectl-browse-pvc
     kubectl-doctor # kubernetes doctor
     kubectl-example # output example kubernetes types
     kubectl-view-allocations # view kubernetes allocations
