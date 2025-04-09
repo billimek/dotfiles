@@ -29,9 +29,9 @@
               10.0.7.0/24(sec=sys,rw,anonuid=0,anongid=0,all_squash,insecure,no_subtree_check)\
               10.2.0.0/24(sec=sys,rw,anonuid=0,anongid=0,all_squash,insecure,no_subtree_check)
       "/mnt/ssdtank/s3"\
-              10.0.7.1(sec=sys,rw,anonuid=0,anongid=0,all_squash,insecure,no_subtree_check)\
               100.116.152.46(sec=sys,rw,anonuid=0,anongid=0,all_squash,insecure,no_subtree_check)\
-              10.2.0.0/24(sec=sys,rw,anonuid=0,anongid=0,all_squash,insecure,no_subtree_check)
+              10.2.0.0/24(sec=sys,rw,anonuid=0,anongid=0,all_squash,insecure,no_subtree_check)\
+              10.0.7.0/24(sec=sys,rw,anonuid=0,anongid=0,all_squash,insecure,no_subtree_check)
     '';
   };
 
