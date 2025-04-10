@@ -105,11 +105,6 @@
         # VMs
         home = mkNixos [ ./hosts/home ];
         cloud = mkNixos [ ./hosts/cloud ];
-        # k8s nodes
-        k3s-0 = mkNixos [ ./hosts/k3s-0 ];
-        k3s-f = mkNixos [ ./hosts/k3s-f ];
-        k3s-g = mkNixos [ ./hosts/k3s-g ];
-        k3s-h = mkNixos [ ./hosts/k3s-h ];
       };
 
       # Build darwin flake using:
@@ -149,11 +144,6 @@
         # VMs
         "jeff@home" = mkHome [ ./home-manager/jeff_home.nix ] nixpkgs.legacyPackages."x86_64-linux";
         "jeff@cloud" = mkHome [ ./home-manager/jeff_cloud.nix ] nixpkgs.legacyPackages."aarch64-linux";
-        # k8s nodes
-        "nix@k3s-0" = mkHome [ ./home-manager/nix_k3s-0.nix ] nixpkgs.legacyPackages."x86_64-linux";
-        "nix@k3s-f" = mkHome [ ./home-manager/nix_k3s-f.nix ] nixpkgs.legacyPackages."x86_64-linux";
-        "nix@k3s-g" = mkHome [ ./home-manager/nix_k3s-g.nix ] nixpkgs.legacyPackages."x86_64-linux";
-        "nix@k3s-h" = mkHome [ ./home-manager/nix_k3s-h.nix ] nixpkgs.legacyPackages."x86_64-linux";
         # Laptops
         "jeff@work-laptop" = mkHome [
           ./home-manager/jeff_work_laptop.nix
