@@ -13,7 +13,7 @@
     kubectl-example # output example kubernetes types
     kubectl-view-allocations # view kubernetes allocations
     kubectl-view-secret # view kubernetes secrets without piping and decoding
-    kubefetch
+    pkgs.unstable.kubefetch
     minijinja # templating engine for kubernetes
     pkgs.unstable.kubecolor # colorize kubectl output
     kubernetes-helm # helm CLI
