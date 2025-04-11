@@ -17,6 +17,7 @@
     "sd_mod"
   ];
   boot.initrd.kernelModules = [ ];
+  boot.kernel.sysctl = { "vm.swappiness" = 1; };
   boot.kernelModules = [ "kvm-intel" "usb_storage" "kvmgt" "vfio-iommu-type1" "mdev" ];
   boot.extraModulePackages = [ ];
 
@@ -52,6 +53,8 @@
     device = "/dev/disk/by-label/boot";
     fsType = "vfat";
   };
+
+  hardware.ksm.enable = true;
 
   swapDevices = [ { device = "/dev/disk/by-label/swap"; } ];
 
