@@ -3,6 +3,7 @@
   pkgs,
   lib,
   home-manager,
+  inputs,
   ...
 }:
 let
@@ -18,6 +19,11 @@ in
   # Use a custom configuration.nix location.
   # $ darwin-rebuild switch -I darwin-config=$HOME/.config/nixpkgs/darwin/configuration.nix
   environment.darwinConfig = "$HOME/src.github/dotfiles/hosts/work_laptop/default.nix";
+
+  # Add system-wide packages
+  environment.systemPackages = [
+    inputs.opnix.packages.${pkgs.system}.default
+  ];
 
   # Create a system-wide alias for git so that keychain certs are properly used for https operations
   environment.shellAliases = {

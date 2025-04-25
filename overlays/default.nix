@@ -27,5 +27,10 @@
   talhelper-overlay = final: _prev: {
     inherit (inputs.talhelper.packages.${final.system}) talhelper;
   };
+  
+  # Add opnix overlay
+  opnix-overlay = final: _prev: {
+    opnix = inputs.opnix.packages.${final.system};
+  };
 
 }

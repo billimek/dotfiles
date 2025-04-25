@@ -38,6 +38,7 @@
     hardware.url = "github:nixos/nixos-hardware";
     nix-colors.url = "github:misterio77/nix-colors";
     talhelper.url = "github:budimanjojo/talhelper";
+    opnix.url = "github:brizzbuzz/opnix";
   };
 
   outputs =
