@@ -11,6 +11,7 @@
     ./gh.nix
     ./git.nix
     ./lsd.nix
+    ./opnix.nix
     ./ssh.nix
     ./starship.nix
     ./tealdeer.nix

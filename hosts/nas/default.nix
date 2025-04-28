@@ -61,7 +61,6 @@
     pciutils
     rclone
     smartmontools
-    opnix.default
   ];
 
   # may fix issues with network service failing during a nixos-rebuild

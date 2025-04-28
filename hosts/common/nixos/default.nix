@@ -81,6 +81,7 @@
 
   # always install these for all users on nixos systems
   environment.systemPackages = [
+    # pkgs.opnix.default
     pkgs.git
     pkgs.htop
     pkgs.vim
