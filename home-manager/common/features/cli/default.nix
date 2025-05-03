@@ -7,7 +7,8 @@
     ./direnv.nix
     ./fish.nix
     ./ghostty.nix
-    ./nvim.nix
+    ./nvf.nix
+    # ./nvim.nix
     ./gh.nix
     ./git.nix
     ./lsd.nix

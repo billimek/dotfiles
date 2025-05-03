@@ -13,6 +13,7 @@ in
   imports = [
     inputs.nix-colors.homeManagerModules.default
     inputs.opnix.homeManagerModules.default
+    inputs.nvf.homeManagerModules.default
     ../features/cli
   ] ++ (builtins.attrValues outputs.homeManagerModules);
 
