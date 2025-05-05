@@ -5,6 +5,7 @@
 {
   programs.nvf = {
     enable = true;
+    defaultEditor = true;
 
     settings.vim = {
       package = pkgs.unstable.neovim-unwrapped;
@@ -28,7 +29,6 @@
       };
 
       languages = {
-        enableLSP = true;
         enableFormat = true;
         enableTreesitter = true;
         enableExtraDiagnostics = true;
