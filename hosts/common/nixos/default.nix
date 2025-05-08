@@ -5,19 +5,20 @@
   pkgs,
   lib,
   ...
-}:
-{
-  imports = [
-    inputs.home-manager.nixosModules.home-manager
-    # ./auto-upgrade.nix # doesn't work right now with git-crypt repos - will revisit
-    ./locale.nix
-    ./nix.nix
-    ./nfs.nix
-    ./openssh.nix
-    ./systemd-initrd.nix
-    ./tailscale.nix
-    ./x11.nix
-  ] ++ (builtins.attrValues outputs.nixosModules);
+}: {
+  imports =
+    [
+      inputs.home-manager.nixosModules.home-manager
+      # ./auto-upgrade.nix # doesn't work right now with git-crypt repos - will revisit
+      ./locale.nix
+      ./nix.nix
+      ./nfs.nix
+      ./openssh.nix
+      ./systemd-initrd.nix
+      ./tailscale.nix
+      ./x11.nix
+    ]
+    ++ (builtins.attrValues outputs.nixosModules);
 
   home-manager.extraSpecialArgs = {
     inherit inputs outputs;
@@ -87,4 +88,8 @@
     pkgs.vim
     pkgs.unstable.nh
   ];
+
+  environment.variables = {
+    NH_FLAKE = "/etc/nixos";
+  };
 }
