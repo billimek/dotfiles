@@ -5,6 +5,7 @@
     casks = [
       "google-chrome"
       "discord"
+      "freelens"
       "microsoft-office"
       "microsoft-remote-desktop"
       "moonlight"
