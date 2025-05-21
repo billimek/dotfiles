@@ -42,10 +42,7 @@
       ];
     };
 
-    configureBuildUsers = true;
   };
-
-  services.nix-daemon.enable = true;
 
   environment = {
     systemPackages = [
@@ -181,7 +178,7 @@
   '';
 
   # Use touch ID for sudo auth
-  security.pam.enableSudoTouchIdAuth = true;
+  security.pam.services.sudo_local.touchIdAuth = true;
 
   # Set sudo timestamp timeout
   security.sudo.extraConfig = ''

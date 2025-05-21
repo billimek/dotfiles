@@ -27,6 +27,8 @@ in
 
   security.pki.certificateFiles = [ secrets.work_certpath ];
 
+  system.primaryUser = secrets.work_username;
+
   # Used for backwards compatibility, please read the changelog before changing.
   # $ darwin-rebuild changelog
   system.stateVersion = 4;

@@ -21,6 +21,8 @@
   # TODO: already set during installation of OS?
   # time.timeZone = lib.mkDefault "America/New_York";
 
+  system.primaryUser = "jeff";
+
   users.users.jeff = {
     description = "Jeff Billimek";
     # The shell setting currently does not work, see https://github.com/LnL7/nix-darwin/issues/811
