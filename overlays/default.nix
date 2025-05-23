@@ -11,12 +11,6 @@
     # example = prev.example.overrideAttrs (oldAttrs: rec {
     # ...
     # });
-    # nota-bene: this doesn't actually build, it fails with "/build/source/go.mod:3: invalid go version '1.21.0': must match format 1.23""
-
-    # Override default nodejs with nodejs_22
-    # https://github.com/NixOS/nixpkgs/issues/402079
-    nodejs = prev.nodejs_22;
-    nodejs-slim = prev.nodejs-slim_22;
   };
 
   # When applied, the unstable nixpkgs set (declared in the flake inputs) will
