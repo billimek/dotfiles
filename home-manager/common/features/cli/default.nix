@@ -8,7 +8,6 @@
     ./fish.nix
     ./ghostty.nix
     ./nvf.nix
-    # ./nvim.nix
     ./gh.nix
     ./git.nix
     ./lsd.nix
