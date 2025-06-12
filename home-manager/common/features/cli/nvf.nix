@@ -150,7 +150,7 @@
                 border = 'single',
                 row = nil,
                 col = nil,
-                title = 'OhChat',
+                title = 'Copilot Chat',
                 footer = nil,
                 zindex = 1,
               },
