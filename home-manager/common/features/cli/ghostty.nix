@@ -2,7 +2,7 @@
   # place ~/$HOME/Library/Application\ Support/com.mitchellh.ghostty/config file
   home.file."Library/Application Support/com.mitchellh.ghostty/config".text = ''
     clipboard-trim-trailing-spaces = true
-    copy-on-select = true
+    copy-on-select = clipboard
 
     # use 'fallback' nerdfont symbols font to make default fonts for now because the custom fonts render symbols too small
     # see https://github.com/ghostty-org/ghostty/discussions/3501
