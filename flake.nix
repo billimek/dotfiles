@@ -20,7 +20,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nh_darwin.url = "github:ToyVo/nh_plus";
+    nh_darwin.url = "github:nix-community/nh";
 
     # for VSCode remote-ssh
     nix-ld-vscode = {
@@ -120,7 +120,9 @@
             };
           };
           system = "aarch64-darwin";
-          modules = [ ./hosts/work_laptop ];
+          modules = [ 
+            ./hosts/work_laptop 
+          ];
         };
         Jeffs-M3Pro = nix-darwin.lib.darwinSystem {
           system = "aarch64-darwin";
@@ -133,7 +135,6 @@
           };
           modules = [
             ./hosts/jeffs_laptop
-            # nh_darwin.nixDarwinModules.default
           ];
         };
       };

@@ -8,8 +8,6 @@
 {
   imports = [
     ./homebrew.nix
-    # can probsbly remove once https://github.com/LnL7/nix-darwin/pull/942 is merged:
-    inputs.nh_darwin.nixDarwinModules.prebuiltin
   ];
   #package config
   nixpkgs = {
@@ -51,6 +49,8 @@
       pkgs.git
       pkgs.vim
       pkgs.home-manager
+      # Use the dev version of nh
+      inputs.nh_darwin.packages.${pkgs.stdenv.hostPlatform.system}.default
     ];
     shells = [
       pkgs.bashInteractive
@@ -66,12 +66,12 @@
     fish.enable = true;
     zsh.enable = true;
     nix-index.enable = true;
-    nh = {
-      enable = true;
-      clean.enable = true;
-      # Installation option once https://github.com/LnL7/nix-darwin/pull/942 is merged:
-      # package = nh_darwin.packages.${pkgs.stdenv.hostPlatform.system}.default;
-    };
+    # TODO: Uncomment when programs.nh becomes available in nix-darwin
+    # See: https://github.com/LnL7/nix-darwin/issues or check for nh module support
+    # nh = {
+    #   enable = true;
+    #   clean.enable = true;
+    # };
   };
 
   # add nerd fonts
