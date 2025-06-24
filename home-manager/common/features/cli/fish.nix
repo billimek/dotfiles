@@ -99,11 +99,11 @@ in
 
       # Conditional rebuild command based on the host system
       rebuild = if pkgs.stdenv.isDarwin then
-        "nh darwin switch --pull"
+        "nh darwin switch"
       else
         "nh os switch";
       rehome = if pkgs.stdenv.isDarwin then
-        "nh home switch --pull"
+        "nh home switch"
       else
         "nh home switch";
 
