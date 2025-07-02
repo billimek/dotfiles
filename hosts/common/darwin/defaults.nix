@@ -8,6 +8,7 @@
 {
   imports = [
     ./homebrew.nix
+    inputs.opnix.darwinModules.default
   ];
   #package config
   nixpkgs = {
@@ -51,6 +52,7 @@
       pkgs.home-manager
       # Use the dev version of nh
       inputs.nh_darwin.packages.${pkgs.stdenv.hostPlatform.system}.default
+      inputs.opnix.packages.${pkgs.stdenv.hostPlatform.system}.default
     ];
     shells = [
       pkgs.bashInteractive
@@ -115,7 +117,7 @@
 
     SoftwareUpdate.AutomaticallyInstallMacOSUpdates = true;
 
-    NSGlobalDomain = {
+    CustomUserPreferences.NSGlobalDomain = {
       AppleInterfaceStyle = "Dark"; # set dark mode
       "com.apple.swipescrolldirection" = false; # set natural scrolling to the _correct_ value
 
