@@ -7,6 +7,7 @@
     # go
     # pkgs.unstable.nodejs
     # rustc # compiler
+    uv # nodejs runtime
   ];
   home.sessionPath = [ "$HOME/.cargo/bin" ];
 }
