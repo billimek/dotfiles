@@ -494,11 +494,11 @@
         "utils": "utils"
       },
       "locked": {
-        "lastModified": 1751193633,
-        "narHash": "sha256-xz9em+OuHTzbMDgFD92y+rvgmrDKSeT5GrIDmHk/b/c=",
+        "lastModified": 1751538533,
+        "narHash": "sha256-aNB6A0+azhP/Wt9fFQslHMeQHlTYoz8Y/1cI4XqzrP0=",
         "owner": "SaumonNet",
         "repo": "proxmox-nixos",
-        "rev": "65040d4aa01f1411ca209ddb1ae9a5cb0c37ae68",
+        "rev": "bfe830d4d3fc055b8d157313a3ec2fa69ded5d4e",
         "type": "github"
       },
       "original": {
@@ -590,11 +590,11 @@
         "nixpkgs": "nixpkgs_5"
       },
       "locked": {
-        "lastModified": 1751514814,
-        "narHash": "sha256-Mnoq8mbH5Po10NyA4ccODYMZHq9hhCMjCfprIaY0NEw=",
+        "lastModified": 1751593056,
+        "narHash": "sha256-xzX2zzio4UJsxq/g0pzCrbOojVkRsukTpbYryGVczYI=",
         "owner": "budimanjojo",
         "repo": "talhelper",
-        "rev": "6c8debf156e3b7f89647add923b387c7908a2c68",
+        "rev": "55ac21e1e5e732524a1f3129a580bd4382b1d1e5",
         "type": "github"
       },
       "original": {
