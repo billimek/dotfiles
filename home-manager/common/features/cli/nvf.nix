@@ -42,7 +42,16 @@
         terraform.enable = true;
         yaml.enable = true;
       };
-      
+
+      options = {
+        tabstop = 2;
+        shiftwidth = 2;
+        softtabstop = 2;
+        expandtab = true;
+        autoindent = true;
+        smartindent = true;
+      };
+
       visuals = {
         nvim-scrollbar.enable = true;
         nvim-web-devicons.enable = true;
