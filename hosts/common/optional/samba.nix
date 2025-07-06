@@ -47,6 +47,8 @@
       "fruit:wipe_intentionally_left_blank_rfork" = "yes";
       "fruit:delete_empty_adfiles" = "yes";
       "fruit:veto_appledouble" = "no";
+      "use sendfile" = "yes";
+      "store dos attributes" = "yes";
     };
 
     # Don't forget to run `smbpasswd -a <user>` to set the passwords (the user must already exit)
@@ -60,8 +62,29 @@
       "force group" = "root";
       "fruit:aapl" = "yes";
       "fruit:time machine" = "yes";
-      "fruit:time machine max size" = "3072G";
+      "fruit:time machine max size" = "6144G";
       "vfs objects" = "catia fruit streams_xattr";
+      # Time Machine specific optimizations
+      "strict allocate" = "yes";
+      "allocation roundup size" = "1048576";
+      # Improve performance for large files
+      "read raw" = "yes";
+      "write raw" = "yes";
+      "strict locking" = "no";
+      "oplocks" = "no";
+      "level2 oplocks" = "no";
+      # Prevent fragmentation
+      "min receivefile size" = "16384";
+      # Time Machine specific performance tuning
+      "socket options" = "TCP_NODELAY IPTOS_LOWDELAY SO_RCVBUF=65536 SO_SNDBUF=65536";
+      "aio read size" = "16384";
+      "aio write size" = "16384";
+      "aio write behind" = "true";
+      # Reduce metadata overhead for Time Machine
+      "map archive" = "no";
+      "map hidden" = "no";
+      "map readonly" = "no";
+      "map system" = "no";
     };
     settings.Tesla = {
       path = "/mnt/tank/media/Videos/Tesla";

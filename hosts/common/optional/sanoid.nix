@@ -11,6 +11,9 @@
         "yearly" = 0;
         "autosnap" = true;
         "autoprune" = true;
+        # Optimize for Time Machine's behavior
+        "skip_children" = true;
+        "process_children_only" = false;
       };
       "vms" = {
         "hourly" = 6;
