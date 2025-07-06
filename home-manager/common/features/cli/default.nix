@@ -1,5 +1,4 @@
-{ pkgs, ... }:
-{
+{pkgs, ...}: {
   imports = [
     ./atuin.nix
     ./bash.nix
@@ -11,7 +10,7 @@
     ./gh.nix
     ./git.nix
     ./lsd.nix
-    ./opnix.nix
+    #./opnix.nix
     ./ssh.nix
     ./starship.nix
     ./tealdeer.nix
