@@ -1,5 +1,8 @@
-{ lib, pkgs, ... }:
 {
+  lib,
+  pkgs,
+  ...
+}: {
   services.tailscale = {
     enable = true;
     package = pkgs.unstable.tailscale;
@@ -7,6 +10,6 @@
   };
   networking.firewall = {
     checkReversePath = "loose";
-    allowedUDPPorts = [ 41641 ]; # Facilitate firewall punching
+    allowedUDPPorts = [41641]; # Facilitate firewall punching
   };
 }
