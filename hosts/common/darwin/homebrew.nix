@@ -16,6 +16,7 @@
       "1password"
       "1password-cli" # need to install CLI via brew too to make biometric unlock work with GUI app
       "discord" # chat
+      "element" # matrix chat
       "ghostty" # so hot right now
       "iterm2" # terminal
       "karabiner-elements" # keyboard remapping
