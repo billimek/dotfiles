@@ -19,6 +19,7 @@
       "element" # matrix chat
       "ghostty" # so hot right now
       "iterm2" # terminal
+      "itermbrowserplugin" # iterm2 browser integration
       "karabiner-elements" # keyboard remapping
       "notunes" # disable iTunes auto-launch
       "orion" # browser
