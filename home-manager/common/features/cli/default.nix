@@ -6,6 +6,7 @@
     ./direnv.nix
     ./fish.nix
     ./ghostty.nix
+    ./copilot-cli.nix
     ./nvf.nix
     ./gh.nix
     ./git.nix
