@@ -16,6 +16,22 @@
         "type": "github"
       }
     },
+    "dotfiles-secrets": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1759236675,
+        "narHash": "sha256-qYn1jGptqyo9tyAgnUJGem+/N+Qp6mU8uovrTkfv/Ac=",
+        "ref": "refs/heads/main",
+        "rev": "08989ace3d901138306ef36988d5b0b30c643dcf",
+        "revCount": 2,
+        "type": "git",
+        "url": "https://github.com/billimek/dotfiles-secrets.git"
+      },
+      "original": {
+        "type": "git",
+        "url": "https://github.com/billimek/dotfiles-secrets.git"
+      }
+    },
     "flake-compat": {
       "flake": false,
       "locked": {
@@ -473,6 +489,7 @@
     },
     "root": {
       "inputs": {
+        "dotfiles-secrets": "dotfiles-secrets",
         "hardware": "hardware",
         "home-manager": "home-manager",
         "nh_darwin": "nh_darwin",

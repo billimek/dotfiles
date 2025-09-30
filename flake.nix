@@ -40,6 +40,11 @@
     talhelper.url = "github:budimanjojo/talhelper";
     opnix.url = "github:brizzbuzz/opnix";
     nvf.url = "github:notashelf/nvf";
+    
+    dotfiles-secrets = {
+      url = "git+https://github.com/billimek/dotfiles-secrets.git";
+      flake = false;
+    };
   };
   outputs =
     {
