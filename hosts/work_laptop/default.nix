@@ -7,7 +7,7 @@
   ...
 }:
 let
-  secrets = import "${inputs.dotfiles-secrets}/secrets.nix";
+  secrets = import ../../secrets.nix;
 in
 {
   imports = [
@@ -26,7 +26,7 @@ in
   };
 
   security.pki.certificateFiles = [ secrets.work_certpath ];
-  
+
   system.primaryUser = secrets.work_username;
 
   # Used for backwards compatibility, please read the changelog before changing.

@@ -7,7 +7,7 @@
   ...
 }:
 let
-  secrets = import "${inputs.dotfiles-secrets}/secrets.nix";
+  secrets = import ../secrets.nix;
 in
 {
   imports = [
