@@ -18,7 +18,7 @@
       "vms" = {
         "hourly" = 6;
         "daily" = 14;
-        "monthly" = 3;
+        "monthly" = 6;
         "yearly" = 0;
         "autosnap" = true;
         "autoprune" = true;
