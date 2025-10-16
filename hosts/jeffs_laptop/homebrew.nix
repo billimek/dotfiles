@@ -1,5 +1,8 @@
-{ config, pkgs, ... }:
 {
+  config,
+  pkgs,
+  ...
+}: {
   #homebrew packages
   homebrew = {
     casks = [
@@ -22,6 +25,7 @@
     ];
     masApps = {
       "SteamLink" = 1246969117;
+      "paprika-recipe-manager-3" = 1303222628;
     };
   };
 }
