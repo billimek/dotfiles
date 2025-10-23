@@ -26,7 +26,6 @@ in
     act
     cloudfoundry-cli
     crane
-    unstable.fly
     (google-cloud-sdk.withExtraComponents [google-cloud-sdk.components.gke-gcloud-auth-plugin])
     jwt-cli
     nodejs
