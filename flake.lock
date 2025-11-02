@@ -555,11 +555,11 @@
         "nixpkgs": "nixpkgs_5"
       },
       "locked": {
-        "lastModified": 1761873857,
-        "narHash": "sha256-v+wNOrB6lxgvNgFlFA2tSOhv6l1XDya3xhnt8OcQeXs=",
+        "lastModified": 1762055740,
+        "narHash": "sha256-DWZSNZ/ULX1WbnDKw4ivrN9cN7x0JTuqpBl2OfauLuE=",
         "owner": "budimanjojo",
         "repo": "talhelper",
-        "rev": "a428dd34491384e59e5c9e8c648f20e0ec8b29f0",
+        "rev": "2b26862815e2eef9ffc6bb9319c5c273bbdb465d",
         "type": "github"
       },
       "original": {
