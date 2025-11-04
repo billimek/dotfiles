@@ -50,8 +50,7 @@
       pkgs.git
       pkgs.vim
       pkgs.home-manager
-      # Use the dev version of nh
-      inputs.nh_darwin.packages.${pkgs.stdenv.hostPlatform.system}.default
+      pkgs-unstable.nh
       inputs.opnix.packages.${pkgs.stdenv.hostPlatform.system}.default
     ];
     shells = [
@@ -69,7 +68,7 @@
     zsh.enable = true;
     nix-index.enable = true;
     # TODO: Uncomment when programs.nh becomes available in nix-darwin
-    # See: https://github.com/LnL7/nix-darwin/issues or check for nh module support
+    # See: https://github.com/nix-darwin/nix-darwin/pull/942 or check for nh module support
     # nh = {
     #   enable = true;
     #   clean.enable = true;

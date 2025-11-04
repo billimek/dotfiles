@@ -20,8 +20,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nh_darwin.url = "github:nix-community/nh";
-
     # for VSCode remote-ssh
     nix-ld-vscode = {
       url = "github:scottstephens/nix-ld-vscode/main";
