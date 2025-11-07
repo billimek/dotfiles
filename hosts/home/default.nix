@@ -21,6 +21,7 @@
   networking = {
     hostName = "home";
     networkmanager.enable = true; # Easiest to use and most distros use this by default.
+    dhcpcd.enable = false; # NetworkManager handles DHCP
   };
 
   # may fix issues with network service failing during a nixos-rebuild
