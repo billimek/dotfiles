@@ -34,6 +34,23 @@ in
   # # Migrate data
   # mc mirror minio/bucket-name garage/bucket-name
 
+  # Set an expiration policy (using the aws CLI):
+
+  # aws s3api put-bucket-lifecycle-configuration \
+  #         --endpoint-url http://127.0.0.1:3900 \
+  #         --bucket talos-backup \
+  #         --lifecycle-configuration '{
+  #       "Rules": [
+  #         {
+  #           "ID": "30-day-expiration",
+  #           "Status": "Enabled",
+  #           "Expiration": {
+  #             "Days": 30
+  #           }
+  #         }
+  #       ]
+  #     }'
+
   services.garage = {
     enable = true;
     package = pkgs.garage_2;
