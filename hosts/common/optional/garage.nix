@@ -83,50 +83,22 @@ in
     groups.garage = { };
   };
 
-  # Override systemd service to use explicit user and manage directories
+  # Use systemd.tmpfiles for directory management
+  systemd.tmpfiles.rules = [
+    # Create garage subdirectories with proper ownership and permissions
+    "d /mnt/ssdtank/garage/data 0755 garage garage -"
+    "d /mnt/ssdtank/garage/meta 0755 garage garage -"
+  ];
+
+  # Ensure garage service waits for ZFS dataset mount
   systemd.services.garage = {
+    requires = [ "mnt-ssdtank-garage.mount" ];
+    after = [ "mnt-ssdtank-garage.mount" ];
     serviceConfig = {
       DynamicUser = lib.mkForce false;
       User = "garage";
       Group = "garage";
     };
-  };
-
-  # Preconfigure service to create directories with proper ownership
-  # Note: ZFS dataset auto-mounts at /mnt/ssdtank/garage, we just need subdirectories and ownership
-  systemd.services.garage-preconfigure = {
-    requires = [ "mnt-ssdtank-garage.mount" ];
-    after = [ "mnt-ssdtank-garage.mount" ];
-    requiredBy = [ "garage.service" ];
-    before = [ "garage.service" ];
-    partOf = [ "garage.service" ];
-    bindsTo = [ "garage.service" ];
-    serviceConfig = {
-      Type = "oneshot";
-      RemainAfterExit = true;
-    };
-    path = with pkgs; [
-      coreutils
-      util-linux
-    ];
-    script = ''
-      set -euo pipefail
-
-      # ZFS dataset is already mounted at /mnt/ssdtank/garage
-      # Create garage subdirectories if they don't exist
-      mkdir -p /mnt/ssdtank/garage/data
-      mkdir -p /mnt/ssdtank/garage/meta
-
-      # Set ownership (ZFS dataset root and subdirectories)
-      chown garage:garage /mnt/ssdtank/garage
-      chown garage:garage /mnt/ssdtank/garage/data
-      chown garage:garage /mnt/ssdtank/garage/meta
-
-      # Set permissions
-      chmod 755 /mnt/ssdtank/garage
-      chmod 755 /mnt/ssdtank/garage/data
-      chmod 755 /mnt/ssdtank/garage/meta
-    '';
   };
 
   # Optional Garage Web UI
