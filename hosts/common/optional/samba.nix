@@ -15,8 +15,8 @@
   ];
   services.samba = {
     enable = true;
-    enableNmbd = true; # namespace and browsing suport
-    enableWinbindd = true; # integrations linux user auth
+    nmbd.enable = true; # namespace and browsing suport
+    winbindd.enable = true;
     openFirewall = true;
     settings.global = {
       workgroup = "WORKGROUP";
