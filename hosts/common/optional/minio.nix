@@ -10,7 +10,7 @@ in
 {
   environment.systemPackages = with pkgs; [ minio-client ];
   services.minio = {
-    enable = true;
+    enable = false;
     dataDir = [ "/mnt/ssdtank/s3" ];
     package = pkgs.minio;
     # TODO: switch these to rootCredentialsFile
