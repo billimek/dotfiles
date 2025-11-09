@@ -93,9 +93,10 @@ in
   };
 
   # Preconfigure service to create directories with proper ownership
+  # Note: ZFS dataset auto-mounts at /mnt/ssdtank/garage, we just need subdirectories and ownership
   systemd.services.garage-preconfigure = {
-    requires = [ "mnt-ssdtank.mount" ];
-    after = [ "mnt-ssdtank.mount" ];
+    requires = [ "mnt-ssdtank-garage.mount" ];
+    after = [ "mnt-ssdtank-garage.mount" ];
     requiredBy = [ "garage.service" ];
     before = [ "garage.service" ];
     partOf = [ "garage.service" ];
@@ -111,12 +112,12 @@ in
     script = ''
       set -euo pipefail
 
-      # Create garage directories if they don't exist
-      mkdir -p /mnt/ssdtank/garage
+      # ZFS dataset is already mounted at /mnt/ssdtank/garage
+      # Create garage subdirectories if they don't exist
       mkdir -p /mnt/ssdtank/garage/data
       mkdir -p /mnt/ssdtank/garage/meta
 
-      # Set ownership
+      # Set ownership (ZFS dataset root and subdirectories)
       chown garage:garage /mnt/ssdtank/garage
       chown garage:garage /mnt/ssdtank/garage/data
       chown garage:garage /mnt/ssdtank/garage/meta
