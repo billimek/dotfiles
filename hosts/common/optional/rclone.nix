@@ -1,13 +1,56 @@
 {
   config,
-  lib,
   pkgs,
   ...
 }:
 {
   imports = [ ];
 
-  # TODO: handle config/secrets via opnix
+  # Generate rclone.conf dynamically using secrets
+  systemd.services.generate-rclone-config = {
+    description = "Generate rclone configuration with secrets";
+    wantedBy = [ "multi-user.target" ];
+    after = [ "opnix-secrets.service" ];
+    requires = [ "opnix-secrets.service" ];
+    
+    serviceConfig = {
+      Type = "oneshot";
+      User = "root";
+      RemainAfterExit = true;
+    };
+
+    script = ''
+      # Create rclone config directory
+      mkdir -p /home/nix/.config/rclone
+      
+      # Generate rclone.conf with secrets
+      cat > /home/nix/.config/rclone/rclone.conf << EOF
+[garage]
+type = s3
+provider = Other
+access_key_id = $(cat ${config.services.onepassword-secrets.secretPaths.garageS3AccessKey})
+secret_access_key = $(cat ${config.services.onepassword-secrets.secretPaths.garageS3SecretKey})
+endpoint = http://10.0.7.7:3900
+region = garage
+force_path_style = true
+
+[b2]
+type = b2
+account = $(cat ${config.services.onepassword-secrets.secretPaths.b2AccountId})
+key = $(cat ${config.services.onepassword-secrets.secretPaths.b2ApplicationKey})
+EOF
+      
+      # Set proper ownership and permissions
+      chown nix:users /home/nix/.config/rclone/rclone.conf
+      chmod 0600 /home/nix/.config/rclone/rclone.conf
+    '';
+  };
+
+  # Ensure rclone config is regenerated when secrets change
+  systemd.services.generate-rclone-config.serviceConfig.ExecStartPost = [
+    "${pkgs.systemd}/bin/systemctl try-restart rclone-backup-volsync.service"
+    "${pkgs.systemd}/bin/systemctl try-restart rclone-backup-postgres.service"
+  ];
 
   # Automated rclone sync to b2
   # Uses existing /home/nix/.config/rclone/rclone.conf with garage S3 remote configured

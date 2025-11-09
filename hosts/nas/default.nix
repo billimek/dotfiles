@@ -17,6 +17,7 @@
     ../common/optional/garage.nix
     ../common/optional/monitoring.nix
     ../common/optional/nfs.nix
+    ../common/optional/opnix.nix
     ../common/optional/proxmox.nix
     ../common/optional/reboot-required.nix
     ../common/optional/rclone.nix

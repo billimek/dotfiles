@@ -4,9 +4,6 @@
   pkgs,
   ...
 }:
-let
-  secrets = import ../../../secrets.nix;
-in
 {
   # Garage S3-compatible object storage
   # Documentation: https://garagehq.deuxfleurs.fr/
@@ -64,7 +61,8 @@ in
 
       # RPC configuration (internal cluster communication)
       rpc_bind_addr = "[::]:3901";
-      rpc_secret = secrets.garage.rpc_secret;
+      # Use opnix-managed secret file
+      rpc_secret_file = config.services.onepassword-secrets.secretPaths.garageRpcSecret;
 
       # S3 API configuration
       s3_api = {
@@ -75,11 +73,13 @@ in
   };
 
   # Create explicit garage user and group (not DynamicUser)
+  # Add nix user to garage group for CLI access to secrets
   users = {
     users.garage = {
       isSystemUser = true;
       group = "garage";
     };
+    users.nix.extraGroups = [ "garage" ];
     groups.garage = { };
   };
 
@@ -90,14 +90,17 @@ in
     "d /mnt/ssdtank/garage/meta 0755 garage garage -"
   ];
 
-  # Ensure garage service waits for ZFS dataset mount
+  # Ensure garage service waits for ZFS dataset mount and OpNix secrets
+  # OpNix will handle service dependencies automatically via the services = ["garage"] config
   systemd.services.garage = {
-    requires = [ "mnt-ssdtank-garage.mount" ];
-    after = [ "mnt-ssdtank-garage.mount" ];
+    requires = [ "mnt-ssdtank-garage.mount" "opnix-secrets.service" ];
+    after = [ "mnt-ssdtank-garage.mount" "opnix-secrets.service" ];
     serviceConfig = {
       DynamicUser = lib.mkForce false;
       User = "garage";
       Group = "garage";
+      # Allow group-readable secrets so nix user can access them for CLI
+      Environment = [ "GARAGE_ALLOW_WORLD_READABLE_SECRETS=true" ];
     };
   };
 

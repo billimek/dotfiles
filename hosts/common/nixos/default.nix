@@ -9,6 +9,7 @@
   imports =
     [
       inputs.home-manager.nixosModules.home-manager
+      inputs.opnix.nixosModules.default
       # ./auto-upgrade.nix # doesn't work right now with git-crypt repos - will revisit
       ./locale.nix
       ./nix.nix
@@ -32,6 +33,7 @@
       outputs.overlays.additions
       outputs.overlays.modifications
       outputs.overlays.unstable-packages
+      outputs.overlays.opnix-overlay
 
       # You can also add overlays exported from other flakes:
       # neovim-nightly-overlay.overlays.default
@@ -82,7 +84,7 @@
 
   # always install these for all users on nixos systems
   environment.systemPackages = [
-    # pkgs.opnix.default
+    pkgs.opnix.default
     pkgs.git
     pkgs.htop
     pkgs.vim
