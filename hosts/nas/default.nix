@@ -8,12 +8,10 @@
     ./hardware-configuration.nix
     ./networking.nix
     ../common/nixos
-    # this breaks because of git-secrets
-    #../common/nixos/auto-upgrade.nix
+    ../common/nixos/auto-upgrade.nix
     ../common/nixos/users/nix
     ../common/optional/avahi.nix
     ../common/optional/fish.nix
-    ../common/optional/minio.nix
     ../common/optional/garage.nix
     ../common/optional/monitoring.nix
     ../common/optional/nfs.nix
@@ -49,8 +47,8 @@
   services.sanoid.datasets = {
     "tank/backups/timemachine".use_template = [ "timemachine" ];
     "ssdtank/proxmox" = {
-        use_template = [ "vms" ];
-        recursive = true;
+      use_template = [ "vms" ];
+      recursive = true;
     };
     #"tank/backups".use_template = [ "backups" ];
     #"tank/media/photos".use_template = [ "backups" ];
