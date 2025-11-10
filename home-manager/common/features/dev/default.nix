@@ -7,6 +7,7 @@
     # go
     # pkgs.unstable.nodejs
     # rustc # compiler
+    pkgs.unstable.claude-code
     python311Packages.pyyaml
     uv # nodejs runtime
   ];
