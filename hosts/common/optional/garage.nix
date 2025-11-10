@@ -10,7 +10,7 @@
   #
   # To enable this service:
   # 1. Generate RPC secret: openssl rand -hex 32
-  # 2. Add to secrets.nix under garage.rpc_secret
+  # 2. Add to 1password for use via opnix
   # 3. Enable this module in hosts/nas/default.nix
   # 4. Run: sudo nixos-rebuild switch --flake .#nas
   # 5. Initialize cluster:
@@ -93,8 +93,14 @@
   # Ensure garage service waits for ZFS dataset mount and OpNix secrets
   # OpNix will handle service dependencies automatically via the services = ["garage"] config
   systemd.services.garage = {
-    requires = [ "mnt-ssdtank-garage.mount" "opnix-secrets.service" ];
-    after = [ "mnt-ssdtank-garage.mount" "opnix-secrets.service" ];
+    requires = [
+      "mnt-ssdtank-garage.mount"
+      "opnix-secrets.service"
+    ];
+    after = [
+      "mnt-ssdtank-garage.mount"
+      "opnix-secrets.service"
+    ];
     serviceConfig = {
       DynamicUser = lib.mkForce false;
       User = "garage";
