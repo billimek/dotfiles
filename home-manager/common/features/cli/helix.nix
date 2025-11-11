@@ -26,13 +26,6 @@
         file-picker.hidden = false;
       };
 
-      keys.normal = {
-        space = {
-          f = ":pick_file";
-          w = ":write";
-          q = ":quit";
-        };
-      };
     };
 
     languages = {
