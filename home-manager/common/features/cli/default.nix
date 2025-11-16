@@ -7,7 +7,6 @@
     ./fish.nix
     ./ghostty.nix
     ./copilot-cli.nix
-    ./helix.nix
     ./nvf.nix
     ./gh.nix
     ./git.nix
