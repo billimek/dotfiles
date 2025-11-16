@@ -11,7 +11,6 @@
   ];
   networking.firewall.allowedTCPPorts = [
     config.services.prometheus.exporters.ipmi.port
-    config.services.prometheus.exporters.minio.port
     config.services.prometheus.exporters.node.port
     config.services.prometheus.exporters.smartctl.port
     config.services.prometheus.exporters.zfs.port

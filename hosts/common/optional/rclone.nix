@@ -55,11 +55,11 @@ EOF
   # Automated rclone sync to b2
   # Uses existing /home/nix/.config/rclone/rclone.conf with garage S3 remote configured
 
-  # volsync - sync from garage S3 API instead of deprecated minio filesystem paths
+  # volsync - sync from garage S3 API
   systemd.services."rclone-backup-volsync" = {
     description = "Rclone backup volsync";
     script = ''
-      # Sync from garage S3 API (bucket-to-bucket) instead of filesystem paths
+      # Sync from garage S3 API (bucket-to-bucket)
       ${pkgs.rclone}/bin/rclone --config /home/nix/.config/rclone/rclone.conf --transfers 50 --fast-list sync garage:volsync b2:billimek-volsync
     '';
     serviceConfig = {
@@ -76,11 +76,11 @@ EOF
     wantedBy = [ "timers.target" ];
   };
 
-  # postgres - sync from garage S3 API instead of deprecated minio filesystem paths
+  # postgres - sync from garage S3 API
   systemd.services."rclone-backup-postgres" = {
     description = "Rclone backup postgres";
     script = ''
-      # Sync from garage S3 API (bucket-to-bucket) instead of filesystem paths
+      # Sync from garage S3 API (bucket-to-bucket)
       ${pkgs.rclone}/bin/rclone --config /home/nix/.config/rclone/rclone.conf --transfers 50 --fast-list sync garage:postgresql b2:billimek-postgres
     '';
     serviceConfig = {
@@ -97,11 +97,11 @@ EOF
     wantedBy = [ "timers.target" ];
   };
 
-  # talos-backup - sync from garage S3 API instead of deprecated minio filesystem paths
+  # talos-backup - sync from garage S3 API
   # systemd.services."rclone-backup-talos" = {
   #   description = "Rclone backup talos";
   #   script = ''
-  #     # Sync from garage S3 API (bucket-to-bucket) instead of filesystem paths
+  #     # Sync from garage S3 API (bucket-to-bucket)
   #     ${pkgs.rclone}/bin/rclone --config /home/nix/.config/rclone/rclone.conf --transfers 50 --fast-list sync garage:talos-backup b2:billimek-talos-backup
   #   '';
   #   serviceConfig = {
