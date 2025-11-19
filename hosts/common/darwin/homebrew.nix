@@ -7,11 +7,6 @@
     onActivation.upgrade = true;
     onActivation.cleanup = "zap";
     brews = [ "cask" ];
-    taps = [
-      "homebrew/bundle"
-      "homebrew/cask-fonts"
-      "homebrew/services"
-    ];
     casks = [
       "1password"
       "1password-cli" # need to install CLI via brew too to make biometric unlock work with GUI app
@@ -23,8 +18,6 @@
       "karabiner-elements" # keyboard remapping
       "notunes" # disable iTunes auto-launch
       "orion" # browser
-      "qlmarkdown" # markdown preview in quicklook
-      "sanesidebuttons" # enable side buttons on mouse
       "spotify" # music
       "shottr" # screenshot tool
       "visual-studio-code" # code editor
