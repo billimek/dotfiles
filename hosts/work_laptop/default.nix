@@ -25,7 +25,7 @@ in
     git = "/usr/bin/git";
   };
 
-  security.pki.certificateFiles = [ secrets.work_certpath ];
+  security.pki.certificateFiles = [ "/usr/local/munki/thd_certs.pem" ];
 
   system.primaryUser = secrets.work_username;
 

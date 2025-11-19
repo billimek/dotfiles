@@ -33,6 +33,7 @@ in
     python311Packages.pyyaml # needed for yaml parsing
     rancher
     terminal-notifier # send notifications to macOS notification center
+    temurin-bin
     terraform
     yq
   ];
@@ -88,7 +89,6 @@ in
   programs.fish = {
     shellAbbrs = rec {
       tf = "terraform";
-      sshblock = secrets.work_sshblock;
       rebuild = lib.mkForce "nh darwin switch -H work-laptop";
       rehome = lib.mkForce "nh home switch -c 'jeff@work-laptop'";
     };
@@ -99,7 +99,9 @@ in
     };
     shellInit = ''
       # set -gx SSH_AUTH_SOCK '$HOME/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock'
-      set -gx NIX_SSL_CERT_FILE ${secrets.work_certpath}
+      set -gx NIX_SSL_CERT_FILE /usr/local/munki/thd_certs.pem
+      set -gx NODE_EXTRA_CA_CERTS /usr/local/munki/thd_certs.pem
+      set -gx REQUESTS_CA_BUNDLE /usr/local/munki/thd_certs.pem
       set -gx NH_FLAKE "$HOME/src.github/dotfiles"
     '';
 
