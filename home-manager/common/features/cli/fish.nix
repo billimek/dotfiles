@@ -31,10 +31,6 @@ in
         src = pkgs.fishPlugins.colored-man-pages.src;
       }
       {
-        name = "done";
-        src = pkgs.fishPlugins.done.src;
-      }
-      {
         name = "humantime-fish";
         src = pkgs.fishPlugins.humantime-fish.src;
       }
@@ -180,6 +176,12 @@ in
           set fish_cursor_insert      line       blink
           set fish_cursor_replace_one underscore blink
           set fish_cursor_visual      block
+        ''
+      +
+        # humantime-fish configuration
+        ''
+          # Show execution time for commands longer than 3 seconds (3000ms)
+          set -gx humantime_threshold 3000
         ''
       +
         # fzf
