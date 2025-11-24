@@ -15,6 +15,9 @@
     # font-family-italic = "MonaspiceRn NFM Italic"
     font-size = 15
 
+    # Claude Code Shift+Enter support - sends ESC + CR
+    # See: https://github.com/anthropics/claude-code/issues/1282
+    keybind = shift+enter=text:\x1b\r
     keybind = shift+page_down=scroll_page_down
     keybind = shift+page_up=scroll_page_up
     keybind = super+`=toggle_quick_terminal
