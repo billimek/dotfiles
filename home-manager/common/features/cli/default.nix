@@ -51,7 +51,7 @@
     ripgrep # Better grep "WRITTEN IN RUST"
     sd # better sed "WRITTEN IN RUST"
     shellcheck # shell linter
-    unstable.tailscale
+    # unstable.tailscale
     tokei # better cloc "WRITTEN IN RUST"
     unixtools.watch # watch files and run commands
     unzip # unzip files
