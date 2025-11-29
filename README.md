@@ -1,6 +1,6 @@
 Leveraging nix, nix-os, nix-darwin, and home-manager to apply machine and home configurations
 
-![](https://imgur.com/ISNnzgN.png)
+![](https://i.imgur.com/eQyXtWk.png)
 
 ## Structure
 
