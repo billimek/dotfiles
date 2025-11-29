@@ -58,6 +58,7 @@ in
     # Discover Home Manager configurations
     homeConfigurations = autowire.discoverHomeConfigurations {
       dir = root + /users;
+      darwinDir = root + /configurations/darwin;
       inherit inputs;
       outputs = self;
       homeModules = self.homeManagerModules;

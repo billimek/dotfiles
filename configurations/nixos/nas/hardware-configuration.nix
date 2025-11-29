@@ -17,8 +17,16 @@
     "sd_mod"
   ];
   boot.initrd.kernelModules = [ ];
-  boot.kernel.sysctl = { "vm.swappiness" = 1; };
-  boot.kernelModules = [ "kvm-intel" "usb_storage" "kvmgt" "vfio-iommu-type1" "mdev" ];
+  boot.kernel.sysctl = {
+    "vm.swappiness" = 1;
+  };
+  boot.kernelModules = [
+    "kvm-intel"
+    "usb_storage"
+    "kvmgt"
+    "vfio-iommu-type1"
+    "mdev"
+  ];
   boot.extraModulePackages = [ ];
 
   boot.kernelParams = [
