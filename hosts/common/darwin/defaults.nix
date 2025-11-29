@@ -66,7 +66,6 @@
     bash.enable = true;
     fish.enable = true;
     zsh.enable = true;
-    nix-index.enable = true;
     # TODO: Uncomment when programs.nh becomes available in nix-darwin
     # See: https://github.com/nix-darwin/nix-darwin/pull/942 or check for nh module support
     # nh = {

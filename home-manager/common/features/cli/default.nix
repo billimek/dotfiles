@@ -18,6 +18,10 @@
     ./tmux.nix
     ./zoxide.nix
   ];
+
+  # Enable comma and nix-index with automatic database updates
+  programs.nix-index-database.comma.enable = true;
+
   home.packages = with pkgs; [
     # _1password # password manager CLI - installing this break op CLI on macbooks
     # age # encryption tool

@@ -38,6 +38,10 @@
     talhelper.url = "github:budimanjojo/talhelper";
     opnix.url = "github:brizzbuzz/opnix";
     nvf.url = "github:notashelf/nvf";
+    nix-index-database = {
+      url = "github:nix-community/nix-index-database";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
   outputs =
     {

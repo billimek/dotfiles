@@ -14,6 +14,7 @@ in
     inputs.nix-colors.homeManagerModules.default
     inputs.opnix.homeManagerModules.default
     inputs.nvf.homeManagerModules.default
+    inputs.nix-index-database.homeModules.nix-index
     ../features/cli
   ] ++ (builtins.attrValues outputs.homeManagerModules);
 
