@@ -18,10 +18,9 @@
   programs.git = {
     userName = lib.mkDefault "billimek";
     userEmail = lib.mkDefault "jeff@billimek.com";
-    extraConfig = {
-      user = {
-        signingKey = lib.mkDefault "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIhZTlonLeCLJpBtuSQcqofKoUbr2ajG3JXxZ7Gjdgkh";
-      };
+    signing = {
+      key = lib.mkDefault "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIhZTlonLeCLJpBtuSQcqofKoUbr2ajG3JXxZ7Gjdgkh";
+      signer = lib.mkDefault "/Applications/1Password.app/Contents/MacOS/op-ssh-sign";
     };
   };
 }

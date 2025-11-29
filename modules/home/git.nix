@@ -37,13 +37,14 @@ in
         s = "status";
         t = "tag -n";
       };
+      signing = {
+        format = "ssh";
+        signByDefault = true;
+      };
       extraConfig = {
         apply.whitespace = "nowarm";
         branch.autosetupmerge = true;
         color.ui = true;
-        commit = {
-          gpgSign = true;
-        };
         core = {
           autocrlf = false;
           editor = "nvim";
@@ -51,9 +52,6 @@ in
         };
         fetch.prune = true;
         format.pretty = "format:%C(blue)%ad%Creset %C(yellow)%h%C(green)%d%Creset %C(blue)%s %C(magenta) [%an]%Creset";
-        gpg = {
-          format = "ssh";
-        };
         merge = {
           summary = true;
           verbosity = "1";

@@ -60,14 +60,8 @@ in
   programs.git = {
     userName = lib.mkForce "Jeff Billimek";
     userEmail = lib.mkForce secrets.work_email;
+    signing.key = lib.mkForce secrets.work_git_pubkey;
     extraConfig = {
-      user = {
-        signingKey = secrets.work_git_pubkey;
-      };
-      gpg = {
-        program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign";
-        format = "ssh";
-      };
       core.sshCommand = "ssh -i ~/.ssh/id_ghec.pub -o IdentitiesOnly=yes -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no";
     };
     includes = [
