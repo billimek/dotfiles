@@ -121,6 +121,14 @@ in
       # Disable greeting
       fish_greeting = "";
 
+      # Fix for nix-index-database comma command using wrong syntax
+      # Override the broken function that uses $@ instead of $argv
+      comma-command-not-found = {
+        body = ''
+          command comma --ask $argv
+        '';
+      };
+
       # https://github.com/fish-shell/fish-shell/issues/1279#issuecomment-1203233446
       _report_time = {
         description = "Reports runtime of long commands";
