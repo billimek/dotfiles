@@ -39,99 +39,17 @@
   };
 
   outputs =
-    inputs@{
-      self,
-      flake-parts,
-      nixpkgs,
-      nixpkgs-unstable,
-      home-manager,
-      nix-darwin,
-      ...
-    }:
-    let
-      inherit (self) outputs;
-
-      mkNixos =
-        modules:
-        nixpkgs.lib.nixosSystem {
-          inherit modules;
-          specialArgs = {
-            inherit inputs outputs;
-          };
-        };
-
-      mkHome =
-        modules: pkgs:
-        home-manager.lib.homeManagerConfiguration {
-          inherit modules pkgs;
-          extraSpecialArgs = {
-            inherit inputs outputs;
-          };
-        };
-
-      mkDarwin =
-        system: modules:
-        nix-darwin.lib.darwinSystem {
-          inherit system modules;
-          specialArgs = {
-            inherit inputs outputs;
-            pkgs-unstable = import nixpkgs-unstable {
-              inherit system;
-              config.allowUnfree = true;
-            };
-          };
-        };
-    in
+    inputs@{ flake-parts, ... }:
     flake-parts.lib.mkFlake { inherit inputs; } {
+      imports = [
+        ./flake-module.nix
+      ];
+
       systems = [
         "aarch64-linux"
         "x86_64-linux"
         "aarch64-darwin"
         "x86_64-darwin"
       ];
-
-      # Per-system outputs
-      perSystem =
-        { pkgs, system, ... }:
-        {
-          # Custom packages accessible via 'nix build', 'nix shell', etc
-          packages = import ./pkgs { inherit pkgs; };
-
-          # Formatter for nix files, available via 'nix fmt'
-          formatter = pkgs.nixfmt-rfc-style;
-        };
-
-      # Flake-wide outputs
-      flake = {
-        # Custom overlays
-        overlays = import ./overlays { inherit inputs; };
-
-        # Reusable modules
-        nixosModules = import ./modules/nixos;
-        homeManagerModules = import ./modules/home-manager;
-
-        # NixOS configurations
-        nixosConfigurations = {
-          nas = mkNixos [ ./hosts/nas ];
-          home = mkNixos [ ./hosts/home ];
-          cloud = mkNixos [ ./hosts/cloud ];
-        };
-
-        # Darwin (macOS) configurations
-        darwinConfigurations = {
-          work-laptop = mkDarwin "aarch64-darwin" [ ./hosts/work_laptop ];
-          Jeffs-M3Pro = mkDarwin "aarch64-darwin" [ ./hosts/jeffs_laptop ];
-        };
-
-        # Standalone Home Manager configurations
-        homeConfigurations = {
-          "nix@nas" = mkHome [ ./home-manager/nix_nas.nix ] nixpkgs.legacyPackages."x86_64-linux";
-          "jeff@home" = mkHome [ ./home-manager/jeff_home.nix ] nixpkgs.legacyPackages."x86_64-linux";
-          "jeff@cloud" = mkHome [ ./home-manager/jeff_cloud.nix ] nixpkgs.legacyPackages."aarch64-linux";
-          "jeff@work-laptop" = mkHome [ ./home-manager/jeff_work_laptop.nix ] nixpkgs.legacyPackages."aarch64-darwin";
-          "jeff@Jeffs-M3Pro" = mkHome [ ./home-manager/jeffs_laptop.nix ] nixpkgs.legacyPackages."aarch64-darwin";
-          "root@truenas" = mkHome [ ./home-manager/root_truenas.nix ] nixpkgs.legacyPackages."x86_64-linux";
-        };
-      };
     };
 }

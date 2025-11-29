@@ -1,8 +1,10 @@
 # This file defines overlays
 { inputs, ... }:
 {
-  # Custom packages from the 'pkgs' directory
-  additions = final: _prev: import ../pkgs { pkgs = final; };
+  # Custom packages from the 'packages' directory
+  additions = final: _prev: {
+    kubectl-browse-pvc = final.callPackage ../packages/kubectl-browse-pvc.nix { };
+  };
 
   # Unstable nixpkgs accessible via 'pkgs.unstable'
   unstable-packages = final: _prev: {

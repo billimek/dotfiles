@@ -1,27 +1,52 @@
 Leveraging nix, nix-os, nix-darwin, and home-manager to apply machine and home configurations
 
-![](https://imgur.com/ISNnzgN.png)
+![](https://i.imgur.com/eQyXtWk.png)
 
 ## Structure
 
-- [flake.nix](flake.nix) (Entrypoint for rebuilding via nixos-rebuild or home-manager)
-- [flake.lock](flake.lock) (lockfile for current nix flake state, updated daily via [github action](.github/workflows/main.yml))
-  - [home-manager](home-manager) (User level configuration per machine via home-manager)
-  - [hosts](hosts/README.md) - (Definition of physical/virutal hosts)
-    - [common](hosts/common) (Role definitions [Desktop, Laptop, Server])
-      - [darwin](hosts/common/darwin) (global host configuration used across all darwin hosts)
-      - [nixos](hosts/common/nixos) (global host configuration used across all NixOS hosts)
-      - [optional](hosts/common/optional) (optional host configuration used as-needed per host)
-    - [nas](hosts/nas/README.md) (NixOS NAS server)
-    - [home](hosts/home/README.md) (NixOS VM running in NAS)
-    - [cloud](hosts/cloud/README.md) (NixOS VM running in Oracle Cloud)
-    - [jeffs_laptop](hosts/jeffs_laptop/README.md) (nix-darwin running on a MacBook Pro)
-    - [work_laptop](hosts/work_laptop/README.md) (nix-darwin running on a MacBook Pro)
-  - [modules](modules) (Custom NixOS and home-manager modules)
-  - [overlays](overlays) (Custom overlays, primarily used for packages currently)
-  - [pkgs](pkgs) (Custom Packages, mainly items not yet in official nixpkgs) 
-- [shell.nix](shell.nix) (Shell for bootstrapping flake-enabled nix and home-manager)
-- [nixpkgs.nix](nixpkgs.nix) (Used by shell.nix - useful to avoid using channels when using legacy nix commands)
+```
+.
+├── flake.nix                  # Simplified entry point using flake-parts
+├── flake-module.nix           # Flake-parts module with autowiring logic
+├── flake.lock                 # Lockfile (updated daily via GitHub Actions)
+├── lib/
+│   └── autowire.nix           # Helper functions for auto-discovering configs/modules
+├── configurations/            # Host-specific configurations
+│   ├── nixos/                 # NixOS hosts
+│   │   ├── nas/               # NixOS NAS server (Proxmox, ZFS, Samba, etc.)
+│   │   ├── home/              # NixOS VM running in NAS
+│   │   └── cloud/             # NixOS VM running in Oracle Cloud
+│   └── darwin/                # macOS hosts
+│       ├── Jeffs-M3Pro.nix    # Personal MacBook Pro
+│       └── work-laptop.nix    # Work MacBook Pro
+├── users/                     # Home Manager configurations by user
+│   ├── jeff/
+│   │   ├── default.nix        # Shared jeff user settings
+│   │   └── hosts/             # Per-host configurations
+│   │       ├── Jeffs-M3Pro.nix
+│   │       ├── work-laptop.nix
+│   │       ├── home.nix
+│   │       └── cloud.nix
+│   └── nix/
+│       ├── default.nix        # Shared nix user settings
+│       └── hosts/
+│           └── nas.nix
+├── modules/                   # Reusable modules with enable options
+│   ├── nixos/                 # NixOS modules (base, zfs, docker, etc.)
+│   ├── darwin/                # Darwin modules (base, homebrew)
+│   └── home/                  # Home Manager modules (cli, fish, dev, etc.)
+├── overlays/                  # Custom package overlays
+├── packages/                  # Custom packages not in nixpkgs
+├── secrets/                   # Encrypted secrets directory (git-crypt)
+└── secrets.nix                # Encrypted secrets file (git-crypt)
+```
+
+### Key Concepts
+
+- **Autowiring**: Configurations and modules are auto-discovered based on directory structure
+- **Modular Architecture**: All features are opt-in modules with `enable` options
+- **Separation of Concerns**: Configurations (what to enable) vs Modules (how it works)
+- **User-first Home Manager**: Organized as `users/<user>/hosts/<host>.nix`
 
 ## Background
 
