@@ -6,7 +6,7 @@
   programs.nvf = {
     enable = true;
     defaultEditor = true;
-    enableManpages = true; #for man 5 nvf
+    enableManpages = true; # for man 5 nvf
 
     settings.vim = {
       package = pkgs.unstable.neovim-unwrapped;
@@ -21,7 +21,7 @@
       ];
       viAlias = false;
       vimAlias = true;
-      
+
       lsp = {
         enable = true;
         formatOnSave = true;
@@ -87,14 +87,14 @@
       filetree.neo-tree.enable = true;
       tabline.nvimBufferline.enable = true;
       treesitter.context.enable = true;
-      
+
       binds = {
         whichKey.enable = true;
         cheatsheet.enable = true;
       };
 
       telescope.enable = true;
-      
+
       git = {
         enable = true;
         gitsigns = {

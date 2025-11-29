@@ -11,7 +11,10 @@ let
   '';
 in
 {
-  home.packages = [ node copilot ];
+  home.packages = [
+    node
+    copilot
+  ];
 
   # Optional: ensure ~/.npm and cache directories exist to avoid first-run warnings
   home.activation.ensureNpmDirs = lib.hm.dag.entryAfter [ "writeBoundary" ] ''

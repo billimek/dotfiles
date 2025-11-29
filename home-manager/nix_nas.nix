@@ -8,7 +8,6 @@
 {
   imports = [
     ./common/global
-    inputs.nix-ld-vscode.nixosModules.default
   ];
 
   home = {

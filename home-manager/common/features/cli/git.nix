@@ -10,7 +10,7 @@ in
 {
   programs.git = {
     enable = true;
-    package = pkgs.gitAndTools.gitFull;
+    package = pkgs.git;
     aliases = {
       a = "add";
       snapshot = ''!git stash save "snapshot: $(date)" && git stash apply "stash@{0}"'';
