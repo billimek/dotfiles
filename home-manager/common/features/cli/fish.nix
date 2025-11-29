@@ -94,14 +94,8 @@ in
       hms = "home-manager --flake . switch";
 
       # Conditional rebuild command based on the host system
-      rebuild = if pkgs.stdenv.isDarwin then
-        "nh darwin switch"
-      else
-        "nh os switch";
-      rehome = if pkgs.stdenv.isDarwin then
-        "nh home switch"
-      else
-        "nh home switch";
+      rebuild = if pkgs.stdenv.isDarwin then "nh darwin switch" else "nh os switch";
+      rehome = if pkgs.stdenv.isDarwin then "nh home switch" else "nh home switch";
 
       # other
       df = "df -h";

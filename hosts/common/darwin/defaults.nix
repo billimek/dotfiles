@@ -10,6 +10,9 @@
     ./homebrew.nix
     inputs.opnix.darwinModules.default
   ];
+
+  # Preserve existing nixbld GID (changed from 30000 to 350 in newer nix-darwin)
+  ids.gids.nixbld = 30000;
   #package config
   nixpkgs = {
     config = {

@@ -26,7 +26,7 @@ in
     act
     cloudfoundry-cli
     crane
-    (google-cloud-sdk.withExtraComponents [google-cloud-sdk.components.gke-gcloud-auth-plugin])
+    (google-cloud-sdk.withExtraComponents [ google-cloud-sdk.components.gke-gcloud-auth-plugin ])
     jwt-cli
     nodejs
     python3

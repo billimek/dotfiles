@@ -16,7 +16,8 @@ in
     inputs.nvf.homeManagerModules.default
     inputs.nix-index-database.homeModules.nix-index
     ../features/cli
-  ] ++ (builtins.attrValues outputs.homeManagerModules);
+  ]
+  ++ (builtins.attrValues outputs.homeManagerModules);
 
   nixpkgs = {
     overlays = builtins.attrValues outputs.overlays;
