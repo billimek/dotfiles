@@ -28,8 +28,8 @@ in
       dust
       duf
       envsubst
-      unstable.eza
-      unstable.fastfetch
+      eza
+      fastfetch
       fd
       file
       fzf

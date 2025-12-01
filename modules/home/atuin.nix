@@ -18,7 +18,7 @@ in
   config = lib.mkIf cfg.enable {
     programs.atuin = {
       enable = true;
-      package = pkgs.unstable.atuin;
+      package = pkgs.atuin;
       flags = [ "--disable-up-arrow" ];
       settings = {
         auto_sync = true;

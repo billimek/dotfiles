@@ -63,7 +63,7 @@ in
         pkgs.git
         pkgs.vim
         pkgs.home-manager
-        pkgs-unstable.nh
+        pkgs.nh
         inputs.opnix.packages.${pkgs.stdenv.hostPlatform.system}.default
       ];
       shells = [
@@ -82,9 +82,9 @@ in
     };
 
     fonts.packages = [
-      pkgs-unstable.monaspace
-      pkgs-unstable.nerd-fonts.monaspace
-      pkgs-unstable.nerd-fonts.symbols-only
+      pkgs.monaspace
+      pkgs.nerd-fonts.monaspace
+      pkgs.nerd-fonts.symbols-only
     ];
 
     system.keyboard = {

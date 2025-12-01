@@ -63,7 +63,7 @@ in
       pkgs.git
       pkgs.htop
       pkgs.vim
-      pkgs.unstable.nh
+      pkgs.nh
     ];
 
     environment.variables = {

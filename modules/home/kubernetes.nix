@@ -26,14 +26,14 @@ in
       kubectl-example
       kubectl-view-allocations
       kubectl-view-secret
-      pkgs.unstable.kubefetch
+      kubefetch
       minijinja
-      pkgs.unstable.kubecolor
+      kubecolor
       kubernetes-helm
       kustomize
       stern
       talhelper
-      pkgs.unstable.talosctl
+      talosctl
       (wrapHelm kubernetes-helm {
         plugins = with pkgs.kubernetes-helmPlugins; [
           helm-diff

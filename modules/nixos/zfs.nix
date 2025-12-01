@@ -26,7 +26,7 @@ in
 
     environment.systemPackages = with pkgs; [
       zfs
-      pkgs.unstable.httm
+      httm
       sanoid
     ];
   };

@@ -22,7 +22,7 @@ in
       enableManpages = true; # for man 5 nvf
 
       settings.vim = {
-        package = pkgs.unstable.neovim-unwrapped;
+        package = pkgs.neovim-unwrapped;
 
         keymaps = [
           {
