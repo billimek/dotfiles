@@ -9,17 +9,17 @@
   # Unstable nixpkgs accessible via 'pkgs.unstable'
   unstable-packages = final: _prev: {
     unstable = import inputs.nixpkgs-unstable {
-      system = final.system;
+      system = final.stdenv.hostPlatform.system;
       config.allowUnfree = true;
     };
   };
 
   # External input overlays
   talhelper-overlay = final: _prev: {
-    inherit (inputs.talhelper.packages.${final.system}) talhelper;
+    inherit (inputs.talhelper.packages.${final.stdenv.hostPlatform.system}) talhelper;
   };
 
   opnix-overlay = final: _prev: {
-    opnix = inputs.opnix.packages.${final.system};
+    opnix = inputs.opnix.packages.${final.stdenv.hostPlatform.system};
   };
 }
