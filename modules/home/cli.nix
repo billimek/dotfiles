@@ -25,7 +25,7 @@ in
       btop
       dig
       dogdns
-      du-dust
+      dust
       duf
       envsubst
       unstable.eza

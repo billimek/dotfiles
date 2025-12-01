@@ -16,8 +16,10 @@
 
   # Common git configuration for jeff
   programs.git = {
-    userName = lib.mkDefault "billimek";
-    userEmail = lib.mkDefault "jeff@billimek.com";
+    settings.user = {
+      name = lib.mkDefault "billimek";
+      email = lib.mkDefault "jeff@billimek.com";
+    };
     signing = {
       key = lib.mkDefault "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIhZTlonLeCLJpBtuSQcqofKoUbr2ajG3JXxZ7Gjdgkh";
       signer = lib.mkDefault "/Applications/1Password.app/Contents/MacOS/op-ssh-sign";

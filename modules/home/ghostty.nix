@@ -18,10 +18,12 @@ in
     programs.ghostty = {
       enable = true;
 
-      # Set to null on Darwin since ghostty package is marked as broken
-      # You can install Ghostty separately (e.g., from the app or building manually)
+      # Set to null since we install Ghostty separately (e.g., from the app or Homebrew)
       # This module will still manage your config at $XDG_CONFIG_HOME/ghostty/config
       package = null;
+
+      # Disable systemd integration (requires package to be set)
+      systemd.enable = false;
 
       # Enable shell integrations for better terminal experience
       enableBashIntegration = true;
