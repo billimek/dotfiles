@@ -16,12 +16,10 @@
 
   # Common git configuration for nix user
   programs.git = {
-    userName = lib.mkDefault "billimek";
-    userEmail = lib.mkDefault "jeff@billimek.com";
-    extraConfig = {
-      user = {
-        signingKey = lib.mkDefault "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIhZTlonLeCLJpBtuSQcqofKoUbr2ajG3JXxZ7Gjdgkh";
-      };
+    settings.user = {
+      name = lib.mkDefault "billimek";
+      email = lib.mkDefault "jeff@billimek.com";
+      signingKey = lib.mkDefault "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIhZTlonLeCLJpBtuSQcqofKoUbr2ajG3JXxZ7Gjdgkh";
     };
   };
 }

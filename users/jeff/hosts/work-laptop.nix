@@ -58,12 +58,14 @@ in
   home.file.".ssh/id_ghec.pub".text = secrets.work_git_pubkey;
 
   programs.git = {
-    userName = lib.mkForce "Jeff Billimek";
-    userEmail = lib.mkForce secrets.work_email;
-    signing.key = lib.mkForce secrets.work_git_pubkey;
-    extraConfig = {
+    settings = {
+      user = {
+        name = lib.mkForce "Jeff Billimek";
+        email = lib.mkForce secrets.work_email;
+      };
       core.sshCommand = "ssh -i ~/.ssh/id_ghec.pub -o IdentitiesOnly=yes -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no";
     };
+    signing.key = lib.mkForce secrets.work_git_pubkey;
     includes = [
       {
         condition = "gitdir:~/src.github/";

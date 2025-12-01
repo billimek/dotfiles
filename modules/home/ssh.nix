@@ -17,7 +17,12 @@ in
   config = lib.mkIf cfg.enable {
     programs.ssh = {
       enable = true;
+      # Disable deprecated default config - we set our own defaults in matchBlocks."*"
+      enableDefaultConfig = false;
       # add custom settings to config
+      matchBlocks."*" = {
+        addKeysToAgent = "yes";
+      };
       matchBlocks."cloud" = {
         hostname = "cloud.eviljungle.com";
         user = "jeff";
