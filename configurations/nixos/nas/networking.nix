@@ -67,7 +67,13 @@
       "30-eno2" = {
         matchConfig.Name = "eno2";
         networkConfig = {
-          DHCP = "no"; # disabling DHCP for this interface because I observed egress traversing this instead of the 10GB enp2s0 which is no bueno
+          DHCP = "no";
+          IPv6AcceptRA = false; # Disable IPv6 router advertisements (SLAAC)
+          LinkLocalAddressing = "no"; # Disable link-local addresses
+        };
+        linkConfig = {
+          RequiredForOnline = "no";
+          ActivationPolicy = "down"; # Keep the interface administratively down
         };
       };
       "40-vlk8s20" = {
