@@ -38,6 +38,7 @@ in
       "microsoft-remote-desktop"
       "obsidian"
       "VIA"
+      "zed"
     ];
     masApps = { };
   };
