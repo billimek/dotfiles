@@ -124,8 +124,8 @@ in
         AppleInterfaceStyle = "Dark";
         "com.apple.swipescrolldirection" = false;
         AppleShowAllExtensions = true;
-        InitialKeyRepeat = 18;
-        KeyRepeat = 1;
+        # InitialKeyRepeat = 18;
+        # KeyRepeat = 1;
         NSAutomaticCapitalizationEnabled = false;
         NSAutomaticDashSubstitutionEnabled = false;
         "com.apple.sound.beep.feedback" = 1;
