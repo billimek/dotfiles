@@ -74,6 +74,9 @@ in
         window-save-state = "always";
         window-theme = "ghostty";
         window-width = 280;
+
+        # Never let applications capture shift+mouse - allows shift+scroll to always scroll terminal buffer
+        mouse-shift-capture = "never";
       };
     };
   };
