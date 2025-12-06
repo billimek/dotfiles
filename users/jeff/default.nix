@@ -14,6 +14,27 @@
     stateVersion = lib.mkDefault "23.11";
   };
 
+  modules.copilot-cli.instructions = ''
+    You are an intelligent CLI assistant running on a ${if pkgs.stdenv.isDarwin then "Darwin (macOS)" else "Linux"} host managed by Nix.
+
+    # Environment & Shell
+    - **Shell**: The user uses `fish`. ALWAYS generate fish-compatible commands.
+      - Use `(cmd)` for substitution, not `$(cmd)`.
+      - Use `set -gx VAR val` for exports.
+      - Use `and`/`or` for logic.
+    - **Packages**:
+      - If a tool is missing, suggest using `nix-shell -p <pkg>` or the comma wrapper `, <cmd>`.
+
+    # Preferred Tools
+    The following modern tools are available and preferred over their traditional counterparts:
+    - **Search**: `rg` (ripgrep) instead of `grep`.
+    - **Find**: `fd` instead of `find`.
+    - **List**: `eza` instead of `ls`.
+    - **Processes**: `procs` instead of `ps`.
+    - **Text Replace**: `sd` instead of `sed`.
+    - **Data**: `jq` for JSON, `yq` for YAML.
+  '';
+
   # Common git configuration for jeff
   programs.git = {
     settings.user = {
