@@ -53,7 +53,7 @@ in
       unixtools.watch
       unzip
       wget
-      yq
+      yq-go
     ];
   };
 }

@@ -35,7 +35,6 @@ in
       terminal-notifier # send notifications to macOS notification center
       temurin-bin
       terraform
-      yq
     ];
   };
 
