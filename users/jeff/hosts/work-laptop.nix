@@ -95,6 +95,7 @@ in
     };
     shellInit = ''
       # set -gx SSH_AUTH_SOCK '$HOME/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock'
+      set -gx SSL_CERT_FILE /usr/local/munki/thd_certs.pem
       set -gx NIX_SSL_CERT_FILE /usr/local/munki/thd_certs.pem
       set -gx NODE_EXTRA_CA_CERTS /usr/local/munki/thd_certs.pem
       set -gx REQUESTS_CA_BUNDLE /usr/local/munki/thd_certs.pem
