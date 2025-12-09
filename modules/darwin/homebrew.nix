@@ -19,7 +19,8 @@ in
       enable = true;
       onActivation.autoUpdate = true;
       onActivation.upgrade = true;
-      onActivation.cleanup = "zap";
+      onActivation.cleanup = "uninstall";
+      global.brewfile = true;
       brews = [ "cask" ];
       casks = [
         "1password"
