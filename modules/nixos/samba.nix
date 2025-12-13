@@ -3,11 +3,9 @@
   config,
   lib,
   ...
-}:
-let
+}: let
   cfg = config.modules.samba;
-in
-{
+in {
   options.modules.samba = {
     enable = lib.mkEnableOption "samba file sharing";
   };
@@ -16,8 +14,8 @@ in
     services.samba-wsdd.enable = true;
     services.samba-wsdd.workgroup = "WORKGROUP";
 
-    networking.firewall.allowedTCPPorts = [ 5357 ];
-    networking.firewall.allowedUDPPorts = [ 3702 ];
+    networking.firewall.allowedTCPPorts = [5357];
+    networking.firewall.allowedUDPPorts = [3702];
 
     services.samba = {
       enable = true;
@@ -28,12 +26,13 @@ in
         workgroup = "WORKGROUP";
         "server string" = "nas";
         "netbios name" = "nas";
-        "security type" = "user";
         "hosts allow" = "10.0.7. 10.0.2. 10.2.0. 100.64.0.0/10 127.0.0.1 localhost";
         "hosts deny" = "0.0.0.0/0";
         "guest account" = "nobody";
         "map to guest" = "bad user";
-        "min protocol" = "SMB2";
+        "min protocol" = "SMB3";
+        "server min protocol" = "SMB3";
+        "server max protocol" = "SMB3";
         "ea support" = "yes";
         "browseable" = "yes";
         "smb encrypt" = "auto";
@@ -43,18 +42,24 @@ in
         "interfaces" = "lo br0 tailscale0";
         "vfs objects" = "catia fruit streams_xattr";
         "fruit:aapl" = "yes";
+        "fruit:posix" = "yes";
         "fruit:posix_rename" = "yes";
         "fruit:nfs_aces" = "no";
         "fruit:zero_file_id" = "yes";
         "fruit:metadata" = "stream";
+        "fruit:resource" = "stream";
         "fruit:encoding" = "native";
         "spotlight backend" = "tracker";
         "fruit:model" = "MacPro7,1@ECOLOR=226,226,224";
         "fruit:wipe_intentionally_left_blank_rfork" = "yes";
         "fruit:delete_empty_adfiles" = "yes";
+        "fruit:delete_empty_xattr" = "yes";
         "fruit:veto_appledouble" = "no";
         "use sendfile" = "yes";
         "store dos attributes" = "yes";
+        "read raw" = "yes";
+        "write raw" = "yes";
+        "socket options" = "TCP_NODELAY IPTOS_LOWDELAY SO_RCVBUF=65536 SO_SNDBUF=65536";
       };
 
       settings.timemachine = {
@@ -68,23 +73,6 @@ in
         "fruit:aapl" = "yes";
         "fruit:time machine" = "yes";
         "fruit:time machine max size" = "6144G";
-        "vfs objects" = "catia fruit streams_xattr";
-        "strict allocate" = "yes";
-        "allocation roundup size" = "1048576";
-        "read raw" = "yes";
-        "write raw" = "yes";
-        "strict locking" = "no";
-        "oplocks" = "no";
-        "level2 oplocks" = "no";
-        "min receivefile size" = "16384";
-        "socket options" = "TCP_NODELAY IPTOS_LOWDELAY SO_RCVBUF=65536 SO_SNDBUF=65536";
-        "aio read size" = "16384";
-        "aio write size" = "16384";
-        "aio write behind" = "true";
-        "map archive" = "no";
-        "map hidden" = "no";
-        "map readonly" = "no";
-        "map system" = "no";
       };
 
       settings.Tesla = {
