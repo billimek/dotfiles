@@ -14,6 +14,7 @@ in {
   config = lib.mkIf cfg.enable {
     home.packages = with pkgs; [
       python311Packages.pyyaml
+      pkgs.unstable.opencode
       uv
     ];
     home.sessionPath = ["$HOME/.cargo/bin"];
