@@ -10,6 +10,7 @@ in
 {
   options.modules.nfs-mounts = {
     media.enable = lib.mkEnableOption "mount media NFS share";
+    backups.enable = lib.mkEnableOption "mount backups NFS share";
     ssdtank.enable = lib.mkEnableOption "mount ssdtank NFS share";
   };
 
