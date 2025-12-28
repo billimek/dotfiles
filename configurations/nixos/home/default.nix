@@ -18,6 +18,7 @@
     docker.enable = true;
     fish.enable = true;
     nfs-mounts.media.enable = true;
+    nfs-mounts.backups.enable = true;
     qemu.enable = true;
     reboot-required.enable = true;
     vscode-server.enable = true;

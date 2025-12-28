@@ -37,6 +37,29 @@ in
       ];
     })
 
+    (lib.mkIf cfg.backups.enable {
+      systemd.mounts = [
+        {
+          type = "nfs";
+          what = "10.0.7.7:/mnt/tank/backups";
+          where = "/mnt/backups";
+          mountConfig = {
+            Options = "noatime";
+          };
+        }
+      ];
+
+      systemd.automounts = [
+        {
+          where = "/mnt/backups";
+          wantedBy = [ "multi-user.target" ];
+          automountConfig = {
+            TimeoutIdleSec = "600";
+          };
+        }
+      ];
+    })
+
     (lib.mkIf cfg.ssdtank.enable {
       systemd.mounts = [
         {
