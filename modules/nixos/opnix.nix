@@ -3,11 +3,9 @@
   config,
   lib,
   ...
-}:
-let
+}: let
   cfg = config.modules.opnix;
-in
-{
+in {
   options.modules.opnix = {
     enable = lib.mkEnableOption "opnix secret management";
   };
@@ -17,6 +15,12 @@ in
       enable = true;
       tokenFile = "/etc/opnix-token";
       secrets = {
+        garageAdminToken = {
+          reference = "op://nix/garage/admin_token";
+          owner = "garage";
+          group = "garage";
+          mode = "0640";
+        };
         garageRpcSecret = {
           reference = "op://nix/garage/rpc_secret";
           owner = "garage";
