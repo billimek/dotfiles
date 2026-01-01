@@ -32,6 +32,10 @@
     garage.enable = true;
     monitoring.enable = true;
     nfs-server.enable = true;
+    nut = {
+      enable = true;
+      upsName = "ups-nas";
+    };
     opnix.enable = true;
     proxmox.enable = true;
     reboot-required.enable = true;

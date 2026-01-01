@@ -3,9 +3,11 @@
   config,
   lib,
   ...
-}: let
+}:
+let
   cfg = config.modules.opnix;
-in {
+in
+{
   options.modules.opnix = {
     enable = lib.mkEnableOption "opnix secret management";
   };
@@ -50,6 +52,18 @@ in {
           owner = "nix";
           group = "users";
           mode = "0600";
+        };
+        nutUpsmonPassword = {
+          reference = "op://nix/nut-passwords/upsmon";
+          owner = "nutmon";
+          group = "nutmon";
+          mode = "0640";
+        };
+        nutMonitorPassword = {
+          reference = "op://nix/nut-passwords/monitor";
+          owner = "root";
+          group = "root";
+          mode = "0640";
         };
       };
     };
