@@ -7,6 +7,20 @@
 }:
 let
   cfg = config.modules.nut;
+
+  # UPS notification script that posts to Discord
+  upsNotifyScript = pkgs.writeShellScript "ups-notify.sh" ''
+    #!/bin/sh
+    HOST=$(${pkgs.nettools}/bin/hostname)
+    WEBHOOK_URL=$(cat ${config.services.onepassword-secrets.secretPaths.discordWebhookUrl})
+
+    # UPS event is passed as first argument
+    EVENT="$1"
+
+    ${pkgs.curl}/bin/curl -X POST \
+      --data-urlencode "payload={\"username\": \"UPS\", \"text\": \":exclamation: UPS Alert on $HOST: $EVENT\", \"icon_emoji\": \":electric_plug:\"}" \
+      "$WEBHOOK_URL"
+  '';
 in
 {
   options.modules.nut = {
@@ -57,6 +71,23 @@ in
         };
       };
 
+      # Configure upssched for event notifications
+      schedulerRules = ''
+        CMDSCRIPT ${upsNotifyScript}
+        PIPEFN /run/nut/upssched.pipe
+        LOCKFN /run/nut/upssched.lock
+
+        # Notify immediately on these events
+        AT ONBATT * EXECUTE onbatt
+        AT ONLINE * EXECUTE online
+        AT LOWBATT * EXECUTE lowbatt
+        AT COMMOK * EXECUTE commok
+        AT COMMBAD * EXECUTE commbad
+        AT SHUTDOWN * EXECUTE shutdown
+        AT REPLBATT * EXECUTE replbatt
+        AT NOCOMM * EXECUTE nocomm
+      '';
+
       # Configure local upsmon to monitor this UPS
       upsmon = {
         enable = true;
@@ -64,6 +95,47 @@ in
           system = "${cfg.upsName}@localhost";
           user = "upsmon";
           type = "primary";
+        };
+        # Override default settings to ensure upssched is called for all events
+        settings = {
+          NOTIFYFLAG = [
+            [
+              "ONLINE"
+              "SYSLOG+EXEC"
+            ]
+            [
+              "ONBATT"
+              "SYSLOG+EXEC"
+            ]
+            [
+              "LOWBATT"
+              "SYSLOG+EXEC"
+            ]
+            [
+              "FSD"
+              "SYSLOG+EXEC"
+            ]
+            [
+              "COMMOK"
+              "SYSLOG+EXEC"
+            ]
+            [
+              "COMMBAD"
+              "SYSLOG+EXEC"
+            ]
+            [
+              "SHUTDOWN"
+              "SYSLOG+EXEC"
+            ]
+            [
+              "REPLBATT"
+              "SYSLOG+EXEC"
+            ]
+            [
+              "NOCOMM"
+              "SYSLOG+EXEC"
+            ]
+          ];
         };
       };
     };

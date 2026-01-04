@@ -65,6 +65,12 @@ in
           group = "root";
           mode = "0640";
         };
+        discordWebhookUrl = {
+          reference = "op://nix/discord/ups-webhook-url";
+          owner = "root";
+          group = "root";
+          mode = "0640";
+        };
       };
     };
   };
