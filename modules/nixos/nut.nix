@@ -72,21 +72,23 @@ in
       };
 
       # Configure upssched for event notifications
-      schedulerRules = ''
-        CMDSCRIPT ${upsNotifyScript}
-        PIPEFN /run/nut/upssched.pipe
-        LOCKFN /run/nut/upssched.lock
+      schedulerRules = toString (
+        pkgs.writeText "upssched.conf" ''
+          CMDSCRIPT ${upsNotifyScript}
+          PIPEFN /run/nut/upssched.pipe
+          LOCKFN /run/nut/upssched.lock
 
-        # Notify immediately on these events
-        AT ONBATT * EXECUTE onbatt
-        AT ONLINE * EXECUTE online
-        AT LOWBATT * EXECUTE lowbatt
-        AT COMMOK * EXECUTE commok
-        AT COMMBAD * EXECUTE commbad
-        AT SHUTDOWN * EXECUTE shutdown
-        AT REPLBATT * EXECUTE replbatt
-        AT NOCOMM * EXECUTE nocomm
-      '';
+          # Notify immediately on these events
+          AT ONBATT * EXECUTE onbatt
+          AT ONLINE * EXECUTE online
+          AT LOWBATT * EXECUTE lowbatt
+          AT COMMOK * EXECUTE commok
+          AT COMMBAD * EXECUTE commbad
+          AT SHUTDOWN * EXECUTE shutdown
+          AT REPLBATT * EXECUTE replbatt
+          AT NOCOMM * EXECUTE nocomm
+        ''
+      );
 
       # Configure local upsmon to monitor this UPS
       upsmon = {
