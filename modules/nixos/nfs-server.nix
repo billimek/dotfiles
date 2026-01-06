@@ -15,6 +15,7 @@ in
   config = lib.mkIf cfg.enable {
     services.nfs.server = {
       enable = true;
+      nproc = 32; # Number of NFS server threads (increased from default 8)
       statdPort = 4000;
       lockdPort = 4001;
       mountdPort = 4002;
