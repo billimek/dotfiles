@@ -45,7 +45,7 @@ in
 
         languages = {
           enableFormat = true;
-          enableTreesitter = true;
+          enableTreesitter = false; # Disable treesitter due to nvf parsers incompatibility
           enableExtraDiagnostics = true;
 
           nix.enable = true;
@@ -99,7 +99,6 @@ in
         snippets.luasnip.enable = true;
         filetree.neo-tree.enable = true;
         tabline.nvimBufferline.enable = true;
-        treesitter.context.enable = true;
 
         binds = {
           whichKey.enable = true;
