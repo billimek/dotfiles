@@ -33,6 +33,9 @@
     networkmanager.enable = true;
   };
 
+  # Allow wheel group to use sudo without password
+  security.sudo.wheelNeedsPassword = false;
+
   # need to disable this for aarch64 due to https://github.com/NixOS/nixpkgs/issues/258515
   environment.enableAllTerminfo = lib.mkForce false;
 
