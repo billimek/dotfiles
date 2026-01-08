@@ -25,12 +25,12 @@
   boot.binfmt.emulatedSystems = [ "x86_64-linux" ];
 
   fileSystems."/" = {
-    device = "/dev/disk/by-uuid/d20157c6-faac-48a0-a47f-b2471da6053d";
+    device = "/dev/disk/by-uuid/17744c51-06a6-4f81-bf9b-b947e24bcb27";
     fsType = "ext4";
   };
 
   fileSystems."/boot" = {
-    device = "/dev/disk/by-uuid/4034-7CCE";
+    device = "/dev/disk/by-uuid/649F-0143";
     fsType = "vfat";
   };
 
