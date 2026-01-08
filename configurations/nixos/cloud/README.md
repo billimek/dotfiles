@@ -1,6 +1,6 @@
 # Bootstrapping NixOS on 'cloud' VM
 
-![](https://i.imgur.com/9RaCuKF.png)
+![](https://i.imgur.com/2Yl5fC4.png)
 
 'cloud' is an Oracle Cloud free-tier VM:
 
@@ -12,7 +12,7 @@
 * Disk:
   * 200GB
 
-It is installed with the NixOS following [this guide](https://blog.korfuri.fr/posts/2022/08/nixos-on-an-oracle-free-tier-ampere-machine/) to takeover an Ubuntu VM OS
+It is installed with the NixOS following [this guide](https://mtlynch.io/notes/nix-oracle-cloud/) to replace an Ubuntu VM OS
 
 ## First Run (Bootstrap)
 Here is where I will normally try and setup all the hardware and import the profiles/modules I want from this repo. Since I use the minimal install, I will kick things off like so:
@@ -64,7 +64,7 @@ eval $(op signin --account <redacted>.1password.com)
 ### atuin login
 
 ```shell
-atuin login --username $(op item get "atuin" --fields label=username) --password $(op item get "atuin" --fields label=password) --key "$(op item get "atuin" --fields label=key)"
+atuin login --username $(op item get "atuin" --fields label=username) --password $(op item get "atuin" --fields label=password --reveal) --key "$(op item get "atuin" --fields label=key --reveal)"
 atuin import auto
 atuin sync
 ```
@@ -72,6 +72,6 @@ atuin sync
 ### kubeconfig
 
 ```shell
-mkdir -p ~/.kube
-op document get --vault kubernetes 'k3s.yaml' --out-file ~/.kube/config
+sudo tailscale set --operator=jeff
+tailscale configure kubeconfig tailscale-operator
 ```
