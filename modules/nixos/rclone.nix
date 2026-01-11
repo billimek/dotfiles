@@ -87,7 +87,9 @@ in
           exit 1
         fi
 
-        SNAPSHOT_PATH="/mnt/$LATEST_SNAPSHOT"
+        # Extract snapshot name (everything after @)
+        SNAPSHOT_NAME=$(echo "$LATEST_SNAPSHOT" | cut -d@ -f2)
+        SNAPSHOT_PATH="/mnt/ssdtank/kopia/.zfs/snapshot/$SNAPSHOT_NAME"
         echo "Syncing from snapshot: $SNAPSHOT_PATH"
 
         ${pkgs.rclone}/bin/rclone --config /home/nix/.config/rclone/rclone.conf \
