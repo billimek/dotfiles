@@ -3,11 +3,9 @@
   config,
   lib,
   ...
-}:
-let
+}: let
   cfg = config.modules.nfs-server;
-in
-{
+in {
   options.modules.nfs-server = {
     enable = lib.mkEnableOption "NFS server";
   };
@@ -37,7 +35,7 @@ in
         "/mnt/tank/data/k8s-nfs"\
                 10.0.7.0/24(sec=sys,rw,anonuid=0,anongid=0,all_squash,insecure,no_subtree_check)\
                 10.2.0.0/24(sec=sys,rw,anonuid=0,anongid=0,all_squash,insecure,no_subtree_check)
-        "/mnt/ssdtank/s3"\
+        "/mnt/ssdtank/kopia"\
                 100.116.152.46(sec=sys,rw,anonuid=0,anongid=0,all_squash,insecure,no_subtree_check)\
                 10.2.0.0/24(sec=sys,rw,anonuid=0,anongid=0,all_squash,insecure,no_subtree_check)\
                 10.0.7.0/24(sec=sys,rw,anonuid=0,anongid=0,all_squash,insecure,no_subtree_check)
