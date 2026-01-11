@@ -52,29 +52,9 @@ in
     };
 
     systemd.services.generate-rclone-config.serviceConfig.ExecStartPost = [
-      "${pkgs.systemd}/bin/systemctl try-restart rclone-backup-volsync.service"
       "${pkgs.systemd}/bin/systemctl try-restart rclone-backup-postgres.service"
+      "${pkgs.systemd}/bin/systemctl try-restart rclone-backup-kopia.service"
     ];
-
-    systemd.services."rclone-backup-volsync" = {
-      description = "Rclone backup volsync";
-      script = ''
-        ${pkgs.rclone}/bin/rclone --config /home/nix/.config/rclone/rclone.conf --transfers 50 --fast-list sync garage:volsync b2:billimek-volsync
-      '';
-      serviceConfig = {
-        Type = "oneshot";
-        User = "root";
-      };
-    };
-
-    systemd.timers."rclone-backup-volsync" = {
-      description = "Rclone backup timer volsync";
-      timerConfig = {
-        OnCalendar = "4:00:00";
-        Persistent = true;
-      };
-      wantedBy = [ "timers.target" ];
-    };
 
     systemd.services."rclone-backup-postgres" = {
       description = "Rclone backup postgres";
@@ -91,6 +71,42 @@ in
       description = "Rclone backup timer postgres";
       timerConfig = {
         OnCalendar = "6:00:00";
+        Persistent = true;
+      };
+      wantedBy = [ "timers.target" ];
+    };
+
+    systemd.services."rclone-backup-kopia" = {
+      description = "Rclone backup kopia to B2";
+      script = ''
+        # Find the most recent daily snapshot
+        LATEST_SNAPSHOT=$(${pkgs.zfs}/bin/zfs list -H -t snapshot -o name -s creation ssdtank/kopia | ${pkgs.gnugrep}/bin/grep '@autosnap_.*_daily' | tail -1)
+
+        if [ -z "$LATEST_SNAPSHOT" ]; then
+          echo "ERROR: No daily snapshot found for ssdtank/kopia"
+          exit 1
+        fi
+
+        SNAPSHOT_PATH="/mnt/$LATEST_SNAPSHOT"
+        echo "Syncing from snapshot: $SNAPSHOT_PATH"
+
+        ${pkgs.rclone}/bin/rclone --config /home/nix/.config/rclone/rclone.conf \
+          --transfers 50 \
+          --fast-list \
+          sync "$SNAPSHOT_PATH" b2:billimek-kopia
+      '';
+      serviceConfig = {
+        Type = "oneshot";
+        User = "root";
+      };
+      after = [ "generate-rclone-config.service" ];
+      requires = [ "generate-rclone-config.service" ];
+    };
+
+    systemd.timers."rclone-backup-kopia" = {
+      description = "Rclone backup timer for kopia";
+      timerConfig = {
+        OnCalendar = "5:00:00";
         Persistent = true;
       };
       wantedBy = [ "timers.target" ];

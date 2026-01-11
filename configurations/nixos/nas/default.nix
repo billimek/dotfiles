@@ -83,6 +83,10 @@
       use_template = [ "vms" ];
       recursive = true;
     };
+
+    "ssdtank/kopia" = {
+      use_template = [ "backups" ]; # 0 hourly, 0 daily, 6 monthly, 2 yearly
+    };
   };
 
   environment.systemPackages = with pkgs; [
