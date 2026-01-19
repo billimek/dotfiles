@@ -36,6 +36,13 @@ in
 
     nix = {
       package = pkgs.nix;
+      
+      gc = {
+        automatic = true;
+        interval = { Weekday = 0; Hour = 2; Minute = 0; }; # Weekly on Sunday at 2 AM
+        options = "--delete-older-than 2d";
+      };
+      
       settings = {
         experimental-features = [
           "nix-command"
