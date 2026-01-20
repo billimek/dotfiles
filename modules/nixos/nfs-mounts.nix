@@ -3,9 +3,11 @@
   config,
   lib,
   ...
-}: let
+}:
+let
   cfg = config.modules.nfs-mounts;
-in {
+in
+{
   options.modules.nfs-mounts = {
     media.enable = lib.mkEnableOption "mount media NFS share";
     backups.enable = lib.mkEnableOption "mount backups NFS share";
@@ -28,7 +30,7 @@ in {
       systemd.automounts = [
         {
           where = "/mnt/media";
-          wantedBy = ["multi-user.target"];
+          wantedBy = [ "multi-user.target" ];
           automountConfig = {
             TimeoutIdleSec = "600";
           };
@@ -51,7 +53,7 @@ in {
       systemd.automounts = [
         {
           where = "/mnt/backups";
-          wantedBy = ["multi-user.target"];
+          wantedBy = [ "multi-user.target" ];
           automountConfig = {
             TimeoutIdleSec = "600";
           };
@@ -74,7 +76,7 @@ in {
       systemd.automounts = [
         {
           where = "/mnt/ssdtank";
-          wantedBy = ["multi-user.target"];
+          wantedBy = [ "multi-user.target" ];
           automountConfig = {
             TimeoutIdleSec = "600";
           };

@@ -4,9 +4,11 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.modules.garage;
-in {
+in
+{
   options.modules.garage = {
     enable = lib.mkEnableOption "garage object storage";
   };
@@ -80,8 +82,8 @@ in {
         isSystemUser = true;
         group = "garage";
       };
-      users.nix.extraGroups = ["garage"];
-      groups.garage = {};
+      users.nix.extraGroups = [ "garage" ];
+      groups.garage = { };
     };
 
     systemd.tmpfiles.rules = [
@@ -102,7 +104,7 @@ in {
         DynamicUser = lib.mkForce false;
         User = "garage";
         Group = "garage";
-        Environment = ["GARAGE_ALLOW_WORLD_READABLE_SECRETS=true"];
+        Environment = [ "GARAGE_ALLOW_WORLD_READABLE_SECRETS=true" ];
       };
     };
 
@@ -113,7 +115,7 @@ in {
         "network.target"
         "garage.service"
       ];
-      wantedBy = ["multi-user.target"];
+      wantedBy = [ "multi-user.target" ];
       serviceConfig = {
         User = "garage";
         Group = "garage";
@@ -130,7 +132,7 @@ in {
         ''}";
         Restart = "on-failure";
       };
-      path = with pkgs; [coreutils];
+      path = with pkgs; [ coreutils ];
     };
 
     networking.firewall.allowedTCPPorts = [

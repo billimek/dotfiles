@@ -20,15 +20,16 @@ in
       isNormalUser = true;
       shell = pkgs.fish;
       initialPassword = "nix";
-      extraGroups =
-        [ "wheel" ]
-        ++ ifTheyExist [
-          "network"
-          "docker"
-          "git"
-          "libvirtd"
-          "nas"
-        ];
+      extraGroups = [
+        "wheel"
+      ]
+      ++ ifTheyExist [
+        "network"
+        "docker"
+        "git"
+        "libvirtd"
+        "nas"
+      ];
 
       openssh.authorizedKeys.keys = [
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBmSHyH/Zxn9G+HPwWPkPfjlrqCYulCfO2JyS3pXUrYu"

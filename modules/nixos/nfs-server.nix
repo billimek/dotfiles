@@ -3,9 +3,11 @@
   config,
   lib,
   ...
-}: let
+}:
+let
   cfg = config.modules.nfs-server;
-in {
+in
+{
   options.modules.nfs-server = {
     enable = lib.mkEnableOption "NFS server";
   };

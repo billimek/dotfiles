@@ -3,9 +3,11 @@
   config,
   lib,
   ...
-}: let
+}:
+let
   cfg = config.modules.samba;
-in {
+in
+{
   options.modules.samba = {
     enable = lib.mkEnableOption "samba file sharing";
   };
@@ -14,8 +16,8 @@ in {
     services.samba-wsdd.enable = true;
     services.samba-wsdd.workgroup = "WORKGROUP";
 
-    networking.firewall.allowedTCPPorts = [5357];
-    networking.firewall.allowedUDPPorts = [3702];
+    networking.firewall.allowedTCPPorts = [ 5357 ];
+    networking.firewall.allowedUDPPorts = [ 3702 ];
 
     services.samba = {
       enable = true;

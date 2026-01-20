@@ -8,7 +8,7 @@
 buildGoModule rec {
   pname = "kubectl-browse-pvc";
   version = "1.3.0";
-  
+
   src = pkgs.fetchFromGitHub {
     owner = "clbx";
     repo = "kubectl-browse-pvc";
@@ -19,7 +19,7 @@ buildGoModule rec {
   vendorHash = "sha256-WwEFtiWP9rQnOjMNnY8nFBKvw0Gp29wcKrLrUqOr7DQ=";
 
   doCheck = false;
-  
+
   # Point to the correct source directory containing go.mod
   sourceRoot = "source/src";
 

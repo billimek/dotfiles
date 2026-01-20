@@ -15,7 +15,9 @@
   };
 
   modules.copilot-cli.instructions = ''
-    You are an intelligent CLI assistant running on a ${if pkgs.stdenv.isDarwin then "Darwin (macOS)" else "Linux"} host managed by Nix.
+    You are an intelligent CLI assistant running on a ${
+      if pkgs.stdenv.isDarwin then "Darwin (macOS)" else "Linux"
+    } host managed by Nix.
 
     # Environment & Shell
     - **Shell**: The user uses `fish`. ALWAYS generate fish-compatible commands if a command is intended to be run by the user. Shell scripts can use bash/sh syntax.
