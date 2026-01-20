@@ -35,15 +35,14 @@
     };
   };
 
-   programs.fish = {
-     shellAbbrs = rec { };
-     shellAliases = { };
-     shellInit = ''
-       # set -gx SSH_AUTH_SOCK '$HOME/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock'
-       # set -gx FLAKE "$HOME/src/dotfiles"
-       set -gx NH_FLAKE "$HOME/src/dotfiles"
-       fish_add_path /Users/jeff/.opencode/bin
-     '';
+  programs.fish = {
+    shellAbbrs = rec { };
+    shellAliases = { };
+    shellInit = ''
+      # set -gx SSH_AUTH_SOCK '$HOME/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock'
+      # set -gx FLAKE "$HOME/src/dotfiles"
+      set -gx NH_FLAKE "$HOME/src/dotfiles"
+    '';
 
     loginShellInit = ''for p in (string split " " $NIX_PROFILES); fish_add_path --prepend --move $p/bin; end'';
 

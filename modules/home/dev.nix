@@ -4,11 +4,25 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.modules.dev;
-in {
+in
+{
   options.modules.dev = {
     enable = lib.mkEnableOption "development tools";
+
+    opencode = {
+      settings = lib.mkOption {
+        type = lib.types.attrs;
+        default = {
+          share = "manual";
+          theme = "one-dark";
+          default_agent = "plan";
+        };
+        description = "OpenCode configuration settings";
+      };
+    };
   };
 
   config = lib.mkIf cfg.enable {
@@ -18,6 +32,21 @@ in {
       # pkgs.unstable.opencode
       uv
     ];
-    home.sessionPath = ["$HOME/.cargo/bin"];
+    home.sessionPath = [
+      "$HOME/.cargo/bin"
+      "$HOME/.opencode/bin"
+    ];
+
+    # OpenCode configuration
+    home.file.".config/opencode/opencode.json".text = builtins.toJSON (
+      {
+        "$schema" = "https://opencode.ai/config.json";
+        instructions = [
+          "~/.copilot/copilot-instructions.md"
+          ".github/copilot-instructions.md"
+        ];
+      }
+      // cfg.opencode.settings
+    );
   };
 }
