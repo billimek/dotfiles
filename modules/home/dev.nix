@@ -16,7 +16,7 @@ in
       settings = lib.mkOption {
         type = lib.types.attrs;
         default = {
-          share = "manual";
+          share = "disabled";
           theme = "one-dark";
           default_agent = "plan";
         };
