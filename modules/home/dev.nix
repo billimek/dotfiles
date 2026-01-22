@@ -45,6 +45,9 @@ in
           "~/.copilot/copilot-instructions.md"
           ".github/copilot-instructions.md"
         ];
+        plugin = [
+          "oh-my-opencode"
+        ];
       }
       // cfg.opencode.settings
     );
