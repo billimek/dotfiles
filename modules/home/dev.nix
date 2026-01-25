@@ -4,9 +4,11 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.modules.dev;
-in {
+in
+{
   options.modules.dev = {
     enable = lib.mkEnableOption "development tools";
 
@@ -44,9 +46,9 @@ in {
           ".github/copilot-instructions.md"
         ];
         plugin = [
-          "oh-my-opencode"
+          "oh-my-opencode-slim"
         ];
-        model = "anthropic/claude-sonnet-4-5";
+        model = "github-copilot/claude-sonnet-4.5";
       }
       // cfg.opencode.settings
     );
