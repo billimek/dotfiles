@@ -4,11 +4,9 @@
   lib,
   pkgs,
   ...
-}:
-let
+}: let
   cfg = config.modules.dev;
-in
-{
+in {
   options.modules.dev = {
     enable = lib.mkEnableOption "development tools";
 
@@ -48,6 +46,7 @@ in
         plugin = [
           "oh-my-opencode"
         ];
+        model = "anthropic/claude-sonnet-4-5";
       }
       // cfg.opencode.settings
     );
