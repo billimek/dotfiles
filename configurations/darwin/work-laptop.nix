@@ -33,7 +33,7 @@ in
       "chainguard-dev/tap/chainctl"
     ];
     casks = [
-      "arc"
+      "codex"
       "gather"
       "microsoft-remote-desktop"
       "obsidian"
