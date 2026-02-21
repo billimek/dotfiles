@@ -45,10 +45,8 @@ in
           "~/.copilot/copilot-instructions.md"
           ".github/copilot-instructions.md"
         ];
-        plugin = [
-          "oh-my-opencode-slim"
-        ];
-        model = "github-copilot/claude-sonnet-4.5";
+        # plugin = [ "oh-my-opencode-slim" ];
+        model = "github-copilot/claude-sonnet-4.6";
       }
       // cfg.opencode.settings
     );
