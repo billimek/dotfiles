@@ -25,6 +25,7 @@ in
       casks = [
         "1password"
         "1password-cli"
+        "cmux"
         "discord"
         "element"
         "ghostty"
