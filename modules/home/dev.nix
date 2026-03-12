@@ -27,7 +27,8 @@ in
 
   config = lib.mkIf cfg.enable {
     home.packages = with pkgs; [
-      python311Packages.pyyaml
+      python3Packages.pyyaml
+      python3Packages.requests
       # manage outside of nix until it updates less frequently
       # pkgs.unstable.opencode
       uv
