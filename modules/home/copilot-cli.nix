@@ -22,12 +22,6 @@ in
     enable = lib.mkEnableOption "GitHub Copilot CLI" // {
       default = true;
     };
-
-    instructions = lib.mkOption {
-      type = lib.types.lines;
-      default = "";
-      description = "Global instructions for GitHub Copilot CLI (~/.copilot/copilot-instructions.md)";
-    };
   };
 
   config = lib.mkIf cfg.enable {
@@ -35,10 +29,6 @@ in
       node
       copilot
     ];
-
-    home.file.".copilot/copilot-instructions.md" = lib.mkIf (cfg.instructions != "") {
-      text = cfg.instructions;
-    };
 
     # Optional: ensure ~/.npm and cache directories exist to avoid first-run warnings
     home.activation.ensureNpmDirs = lib.hm.dag.entryAfter [ "writeBoundary" ] ''

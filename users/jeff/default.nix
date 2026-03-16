@@ -14,7 +14,7 @@
     stateVersion = lib.mkDefault "23.11";
   };
 
-  modules.copilot-cli.instructions = ''
+  modules.agent-instructions.globalText = ''
     You are an intelligent CLI assistant running on a ${
       if pkgs.stdenv.isDarwin then "Darwin (macOS)" else "Linux"
     } host managed by Nix.

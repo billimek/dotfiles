@@ -7,6 +7,7 @@
 }:
 let
   cfg = config.modules.dev;
+  instructionCfg = config.modules.agent-instructions;
 in
 {
   options.modules.dev = {
@@ -43,8 +44,8 @@ in
       {
         "$schema" = "https://opencode.ai/config.json";
         instructions = [
-          "~/.copilot/copilot-instructions.md"
-          ".github/copilot-instructions.md"
+          "~/${instructionCfg.globalFilePath}"
+          instructionCfg.repoFileName
         ];
         # plugin = [ "oh-my-opencode-slim" ];
         model = "github-copilot/claude-sonnet-4.6";
