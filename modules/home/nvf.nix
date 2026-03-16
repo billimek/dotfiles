@@ -89,11 +89,6 @@ in
           transparent = false;
         };
 
-        assistant.copilot = {
-          enable = true;
-          cmp.enable = true;
-        };
-
         autopairs.nvim-autopairs.enable = true;
         autocomplete.nvim-cmp.enable = true;
         snippets.luasnip.enable = true;
@@ -158,28 +153,6 @@ in
           comment-nvim.enable = true;
         };
 
-        extraPlugins = with pkgs.vimPlugins; {
-          CopilotChat-nvim = {
-            package = CopilotChat-nvim;
-            setup = ''
-              require("CopilotChat").setup({
-                window = {
-                  layout = 'float',
-                  width = 0.5,
-                  height = 0.5,
-                  relative = 'editor',
-                  border = 'single',
-                  row = nil,
-                  col = nil,
-                  title = 'Copilot Chat',
-                  footer = nil,
-                  zindex = 1,
-                },
-              })
-              vim.keymap.set({"n", "i", "v"}, "<C-c>", ":CopilotChatToggle<CR>", { desc = "copilot" })
-            '';
-          };
-        };
       };
     };
   };
