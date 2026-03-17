@@ -41,7 +41,6 @@ in
         "vlc"
       ];
       masApps = {
-        "1Password for Safari" = 1569813296;
         "Tailscale" = 1475387142;
         "consent-o-matic" = 1606897889;
         "Kagi Search for Safari" = 1622835804;
