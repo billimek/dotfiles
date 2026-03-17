@@ -21,7 +21,10 @@ in
       onActivation.upgrade = true;
       onActivation.cleanup = "uninstall";
       global.brewfile = true;
-      brews = [ "cask" ];
+      brews = [
+        "cask"
+        "mas"
+      ];
       casks = [
         "1password"
         "1password-cli"
@@ -41,6 +44,7 @@ in
         "vlc"
       ];
       masApps = {
+        "1Password for Safari" = 1569813296;
         "Tailscale" = 1475387142;
         "consent-o-matic" = 1606897889;
         "Kagi Search for Safari" = 1622835804;
