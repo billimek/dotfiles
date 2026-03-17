@@ -126,7 +126,7 @@ eval $(op signin --account <redacted>.1password.com)
 ### atuin login
 
 ```shell
-atuin login --username $(op item get "atuin" --fields label=username) --password $(op item get "atuin" --fields label=password) --key "$(op item get "atuin" --fields label=key)"
+atuin login --username $(op item get "atuin" --fields label=username --reveal) --password $(op item get "atuin" --fields label=password --reveal) --key "$(op item get "atuin" --fields label=key --reveal)"
 atuin import auto
 atuin sync -f
 ```
