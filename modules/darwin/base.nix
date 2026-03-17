@@ -34,38 +34,9 @@ in
       };
     };
 
-    nix = {
-      package = pkgs.nix;
-
-      gc = {
-        automatic = true;
-        interval = {
-          Weekday = 0;
-          Hour = 2;
-          Minute = 0;
-        }; # Weekly on Sunday at 2 AM
-        options = "--delete-older-than 2d";
-      };
-
-      settings = {
-        experimental-features = [
-          "nix-command"
-          "flakes"
-        ];
-        warn-dirty = false;
-
-        substituters = [
-          "https://cache.nixos.org/"
-          "https://nix-community.cachix.org"
-          "https://nixpkgs-unfree.cachix.org"
-        ];
-        trusted-public-keys = [
-          "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
-          "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
-          "nixpkgs-unfree.cachix.org-1:hqvoInulhbV4nJ9yJOEr+4wxhDV4xq2d1DK7S6Nj6rs="
-        ];
-      };
-    };
+    # Determinate Nix manages its own daemon and nix.conf; disable nix-darwin's
+    # nix management to avoid conflicts.
+    nix.enable = false;
 
     environment = {
       systemPackages = [
@@ -159,11 +130,6 @@ in
         };
       };
     };
-
-    nix.extraOptions = ''
-      experimental-features = nix-command flakes
-      extra-platforms = aarch64-darwin x86_64-darwin
-    '';
 
     security.pam.services.sudo_local.touchIdAuth = true;
     security.sudo.extraConfig = ''
