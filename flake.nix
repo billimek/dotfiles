@@ -8,6 +8,7 @@
 
     # Flake framework
     flake-parts.url = "github:hercules-ci/flake-parts";
+    determinate.url = "https://flakehub.com/f/DeterminateSystems/determinate/3";
 
     # Home manager
     home-manager = {
