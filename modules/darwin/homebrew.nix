@@ -35,6 +35,7 @@ in
         "iterm2"
         # "itermbrowserplugin"
         # "karabiner-elements"
+        "logi-options+"
         "notunes"
         "orion"
         "spotify"
