@@ -10,6 +10,7 @@
 }:
 let
   cfg = config.modules.base;
+  finderDownloadsPath = "file://localhost/Users/${config.system.primaryUser}/Downloads/";
 in
 {
   # Imports must be at top level (not inside mkIf)
@@ -75,9 +76,14 @@ in
 
     system.defaults = {
       menuExtraClock = {
+        FlashDateSeparators = true;
         ShowDayOfWeek = true;
         ShowDayOfMonth = true;
         ShowAMPM = false;
+      };
+
+      WindowManager = {
+        EnableStandardClickToShowDesktop = false;
       };
 
       dock = {
@@ -106,8 +112,10 @@ in
         AppleInterfaceStyle = "Dark";
         "com.apple.swipescrolldirection" = false;
         AppleShowAllExtensions = true;
-        # InitialKeyRepeat = 18;
-        # KeyRepeat = 1;
+        NSGlassDiffusionSetting = 1;
+        ApplePressAndHoldEnabled = false;
+        InitialKeyRepeat = 15;
+        KeyRepeat = 2;
         NSAutomaticCapitalizationEnabled = false;
         NSAutomaticDashSubstitutionEnabled = false;
         "com.apple.sound.beep.feedback" = 1;
@@ -118,6 +126,10 @@ in
       };
 
       CustomUserPreferences = {
+        "com.apple.finder" = {
+          NewWindowTarget = "PfLo";
+          NewWindowTargetPath = finderDownloadsPath;
+        };
         "com.googlecode.iterm2" = {
           "PrefsCustomFolder" = "~/.config/iterm2";
           "LoadPrefsFromCustomFolder" = 1;
