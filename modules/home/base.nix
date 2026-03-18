@@ -35,7 +35,10 @@ in
       };
     };
 
-    nix = {
+    # On Darwin, Determinate Nix owns /etc/nix/nix.conf; let it manage settings
+    # there to avoid "unknown setting" warnings from stock nix reading Determinate
+    # specific keys. On Linux/NixOS, manage settings here as normal.
+    nix = lib.mkIf (!pkgs.stdenv.isDarwin) {
       package = lib.mkDefault pkgs.nix;
       settings = {
         experimental-features = [
