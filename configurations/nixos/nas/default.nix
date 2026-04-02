@@ -76,11 +76,6 @@
       recursive = false; # Don't auto-snapshot child datasets
     };
 
-    # Child dataset: Time Machine backups with more frequent snapshots
-    "tank/backups/timemachine" = {
-      use_template = [ "timemachine" ]; # 0 hourly, 14 daily, 6 monthly, 0 yearly
-    };
-
     "ssdtank/proxmox" = {
       use_template = [ "vms" ];
       recursive = true;
