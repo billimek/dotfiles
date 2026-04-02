@@ -49,6 +49,8 @@
     users.nix.enable = true;
   };
 
+  security.sudo.wheelNeedsPassword = false;
+
   users.groups = {
     nas.gid = 1001;
   };
