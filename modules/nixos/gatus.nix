@@ -232,6 +232,26 @@ in
       mode = "0640";
     };
 
+    # Expose Gatus via Tailscale Funnel so external services (e.g. k8s cluster
+    # pods that are not on the tailnet) can reach the API.
+    # `tailscale funnel --bg` persists the funnel config in tailscaled state,
+    # so this only needs to run once after tailscaled starts.
+    systemd.services.gatus-funnel = {
+      description = "Configure Tailscale Funnel for Gatus";
+      wantedBy = [ "multi-user.target" ];
+      after = [
+        "tailscaled.service"
+        "network-online.target"
+      ];
+      requires = [ "tailscaled.service" ];
+      wants = [ "network-online.target" ];
+      serviceConfig = {
+        Type = "oneshot";
+        RemainAfterExit = true;
+        ExecStart = "${pkgs.tailscale}/bin/tailscale funnel --bg ${toString cfg.port}";
+      };
+    };
+
     systemd.services.gatus = {
       description = "Gatus uptime monitoring";
       wantedBy = [ "multi-user.target" ];
