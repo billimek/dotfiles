@@ -149,7 +149,7 @@ let
 
       - name: OPNsense
         group: external
-        url: icmp://direct.eviljungle.com
+        url: icmp://192.0.2.1
         interval: 1m
         conditions:
           - "[CONNECTED] == true"
