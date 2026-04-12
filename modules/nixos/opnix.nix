@@ -16,62 +16,71 @@ in
     services.onepassword-secrets = {
       enable = true;
       tokenFile = "/etc/opnix-token";
-      secrets = {
-        garageAdminToken = {
-          reference = "op://nix/garage/admin_token";
-          owner = "garage";
-          group = "garage";
-          mode = "0640";
-        };
-        garageRpcSecret = {
-          reference = "op://nix/garage/rpc_secret";
-          owner = "garage";
-          group = "garage";
-          mode = "0640";
-        };
-        garageS3AccessKey = {
-          reference = "op://nix/garage/access-key";
-          owner = "nix";
-          group = "users";
-          mode = "0600";
-        };
-        garageS3SecretKey = {
-          reference = "op://nix/garage/secret-key";
-          owner = "nix";
-          group = "users";
-          mode = "0600";
-        };
-        b2AccountId = {
-          reference = "op://nix/backblaze-b2/account-id";
-          owner = "nix";
-          group = "users";
-          mode = "0600";
-        };
-        b2ApplicationKey = {
-          reference = "op://nix/backblaze-b2/application-key";
-          owner = "nix";
-          group = "users";
-          mode = "0600";
-        };
-        nutUpsmonPassword = {
-          reference = "op://nix/nut-passwords/upsmon";
-          owner = "nutmon";
-          group = "nutmon";
-          mode = "0640";
-        };
-        nutMonitorPassword = {
-          reference = "op://nix/nut-passwords/monitor";
-          owner = "root";
-          group = "root";
-          mode = "0640";
-        };
-        discordWebhookUrl = {
-          reference = "op://nix/discord/ups-webhook-url";
-          owner = "root";
-          group = "root";
-          mode = "0640";
-        };
-      };
+      secrets = lib.mkMerge [
+        # Garage secrets - only when garage module is enabled
+        (lib.mkIf config.modules.garage.enable {
+          garageAdminToken = {
+            reference = "op://nix/garage/admin_token";
+            owner = "garage";
+            group = "garage";
+            mode = "0640";
+          };
+          garageRpcSecret = {
+            reference = "op://nix/garage/rpc_secret";
+            owner = "garage";
+            group = "garage";
+            mode = "0640";
+          };
+          garageS3AccessKey = {
+            reference = "op://nix/garage/access-key";
+            owner = "nix";
+            group = "users";
+            mode = "0600";
+          };
+          garageS3SecretKey = {
+            reference = "op://nix/garage/secret-key";
+            owner = "nix";
+            group = "users";
+            mode = "0600";
+          };
+        })
+        # Rclone/B2 secrets - only when rclone module is enabled
+        (lib.mkIf config.modules.rclone.enable {
+          b2AccountId = {
+            reference = "op://nix/backblaze-b2/account-id";
+            owner = "nix";
+            group = "users";
+            mode = "0600";
+          };
+          b2ApplicationKey = {
+            reference = "op://nix/backblaze-b2/application-key";
+            owner = "nix";
+            group = "users";
+            mode = "0600";
+          };
+        })
+        # NUT secrets - only when NUT module is enabled
+        (lib.mkIf config.modules.nut.enable {
+          nutUpsmonPassword = {
+            reference = "op://nix/nut-passwords/upsmon";
+            owner = "nutmon";
+            group = "nutmon";
+            mode = "0640";
+          };
+          nutMonitorPassword = {
+            reference = "op://nix/nut-passwords/monitor";
+            owner = "root";
+            group = "root";
+            mode = "0640";
+          };
+          discordWebhookUrl = {
+            reference = "op://nix/discord/ups-webhook-url";
+            owner = "root";
+            group = "root";
+            mode = "0640";
+          };
+        })
+      ];
     };
   };
 }

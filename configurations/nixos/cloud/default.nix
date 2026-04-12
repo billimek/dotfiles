@@ -17,8 +17,10 @@
     auto-upgrade.enable = true;
     docker.enable = true;
     fish.enable = true;
+    gatus.enable = true;
     nfs-mounts.media.enable = true;
     nfs-mounts.ssdtank.enable = true;
+    opnix.enable = true;
     qemu.enable = true;
     reboot-required.enable = true;
     vscode-server.enable = true;
