@@ -47,22 +47,8 @@ let
     metrics: true
 
     endpoints:
-      - name: Cloudflare
-        group: connectivity
-        url: icmp://1.1.1.1
-        interval: 1m
-        conditions:
-          - "[CONNECTED] == true"
-
-      - name: Google
-        group: connectivity
-        url: icmp://8.8.8.8
-        interval: 1m
-        conditions:
-          - "[CONNECTED] == true"
-
       - name: DNS eviljungle.com
-        group: dns
+        group: external
         url: 1.1.1.1
         interval: 5m
         dns:
@@ -72,7 +58,7 @@ let
           - "[DNS_RCODE] == NOERROR"
 
       - name: eviljungle.com
-        group: services
+        group: external
         url: https://eviljungle.com
         interval: 2m
         client:
@@ -85,7 +71,7 @@ let
           - type: discord
 
       - name: www
-        group: services
+        group: external
         url: https://www.eviljungle.com
         interval: 2m
         client:
@@ -98,7 +84,7 @@ let
           - type: discord
 
       - name: Audiobookshelf
-        group: services
+        group: external
         url: https://abs.eviljungle.com
         interval: 2m
         client:
@@ -111,7 +97,7 @@ let
           - type: discord
 
       - name: Home Assistant
-        group: services
+        group: external
         url: https://hass.eviljungle.com
         interval: 2m
         client:
@@ -124,7 +110,7 @@ let
           - type: discord
 
       - name: Matrix
-        group: services
+        group: external
         url: https://matrix.eviljungle.com
         interval: 2m
         client:
@@ -137,7 +123,7 @@ let
           - type: discord
 
       - name: Plex
-        group: services
+        group: external
         url: https://plex.eviljungle.com
         interval: 2m
         client:
@@ -150,7 +136,7 @@ let
           - type: discord
 
       - name: Seerr
-        group: services
+        group: external
         url: https://request.eviljungle.com
         interval: 2m
         client:
@@ -163,7 +149,7 @@ let
           - type: discord
 
       - name: Internal Gatus
-        group: services
+        group: external
         url: https://status.eviljungle.com
         interval: 2m
         client:
@@ -176,7 +162,7 @@ let
           - type: discord
 
       - name: OPNsense
-        group: network
+        group: external
         url: icmp://direct.eviljungle.com
         interval: 1m
         conditions:
@@ -185,7 +171,7 @@ let
           - type: discord
 
       - name: qBittorrent
-        group: network
+        group: external
         url: tcp://direct.eviljungle.com:50413
         interval: 2m
         conditions:
