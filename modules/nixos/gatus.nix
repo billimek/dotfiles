@@ -30,15 +30,26 @@ let
           failure-threshold: 3
           success-threshold: 2
           send-on-resolved: true
+      ntfy:
+        topic: "eviljungle-gatus"
+        url: "https://ntfy.sh"
+        token: "''${NTFY_ACCESS_TOKEN}"
+        priority: 4
+        click: "https://cloud.drake-eel.ts.net"
+        default-alert:
+          enabled: true
+          failure-threshold: 3
+          success-threshold: 2
+          send-on-resolved: true
 
     ui:
       title: "External Status | eviljungle.com"
-      header: "External Status"
+      header: "eviljungle.com External Monitoring"
+      dashboard-heading: ""
+      dashboard-subheading: ""
       logo: https://avatars.githubusercontent.com/u/6393612
       link: https://github.com/billimek
       buttons:
-        - name: Github
-          link: https://github.com/billimek
         - name: Homelab
           link: https://github.com/billimek/k8s-gitops
         - name: Internal Status
@@ -56,32 +67,6 @@ let
           query-type: A
         conditions:
           - "[DNS_RCODE] == NOERROR"
-
-      - name: eviljungle.com
-        group: external
-        url: https://eviljungle.com
-        interval: 2m
-        client:
-          dns-resolver: "udp://1.1.1.1:53"
-        conditions:
-          - "[STATUS] == 200"
-          - "[RESPONSE_TIME] < 5000"
-          - "[CERTIFICATE_EXPIRATION] > 48h"
-        alerts:
-          - type: discord
-
-      - name: www
-        group: external
-        url: https://www.eviljungle.com
-        interval: 2m
-        client:
-          dns-resolver: "udp://1.1.1.1:53"
-        conditions:
-          - "[STATUS] == 200"
-          - "[RESPONSE_TIME] < 5000"
-          - "[CERTIFICATE_EXPIRATION] > 48h"
-        alerts:
-          - type: discord
 
       - name: Audiobookshelf
         group: external
@@ -160,6 +145,7 @@ let
           - "[CERTIFICATE_EXPIRATION] > 48h"
         alerts:
           - type: discord
+          - type: ntfy
 
       - name: OPNsense
         group: external
@@ -169,6 +155,7 @@ let
           - "[CONNECTED] == true"
         alerts:
           - type: discord
+          - type: ntfy
 
       - name: qBittorrent
         group: external
@@ -182,11 +169,12 @@ let
 
   gatusConfig = pkgs.writeText "gatus-config.yaml" configYaml;
 
-  # Wrapper that loads the Discord webhook URL from opnix secret into the
-  # environment, then exec's gatus. Gatus natively substitutes ${ENV_VAR}
-  # in its config file, so the secret value never touches the Nix store.
+  # Wrapper that loads secrets from opnix into the environment, then exec's
+  # gatus. Gatus natively substitutes ${ENV_VAR} in its config file, so
+  # secret values never touch the Nix store.
   gatusWrapper = pkgs.writeShellScript "gatus-wrapper.sh" ''
     export DISCORD_WEBHOOK_URL=$(cat ${config.services.onepassword-secrets.secretPaths.gatusDiscordWebhookUrl})
+    export NTFY_ACCESS_TOKEN=$(cat ${config.services.onepassword-secrets.secretPaths.gatusNtfyAccessToken})
     exec ${pkgs.gatus}/bin/gatus
   '';
 in
@@ -210,9 +198,15 @@ in
     };
     users.groups.gatus = { };
 
-    # Gatus owns its own opnix secret definition
+    # Gatus owns its own opnix secret definitions
     services.onepassword-secrets.secrets.gatusDiscordWebhookUrl = {
       reference = "op://nix/discord/gatus-webhook-url";
+      owner = "gatus";
+      group = "gatus";
+      mode = "0640";
+    };
+    services.onepassword-secrets.secrets.gatusNtfyAccessToken = {
+      reference = "op://nix/ntfy/access-token";
       owner = "gatus";
       group = "gatus";
       mode = "0640";
