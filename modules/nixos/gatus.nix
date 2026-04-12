@@ -186,7 +186,7 @@ let
 
       - name: qBittorrent
         group: network
-        url: tcp://direct.eviljungle.com:59999
+        url: tcp://direct.eviljungle.com:50413
         interval: 15s
         conditions:
           - "[CONNECTED] == true"
