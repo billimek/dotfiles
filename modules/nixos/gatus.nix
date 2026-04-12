@@ -187,14 +187,11 @@ let
       - name: qBittorrent
         group: network
         url: tcp://direct.eviljungle.com:50413
-        interval: 15s
+        interval: 2m
         conditions:
           - "[CONNECTED] == true"
         alerts:
           - type: discord
-            failure-threshold: 1
-            success-threshold: 1
-            send-on-resolved: true
   '';
 
   gatusConfig = pkgs.writeText "gatus-config.yaml" configYaml;
