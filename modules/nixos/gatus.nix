@@ -75,6 +75,8 @@ let
         group: services
         url: https://eviljungle.com
         interval: 2m
+        client:
+          dns-resolver: "udp://1.1.1.1:53"
         conditions:
           - "[STATUS] == 200"
           - "[RESPONSE_TIME] < 5000"
@@ -86,6 +88,8 @@ let
         group: services
         url: https://www.eviljungle.com
         interval: 2m
+        client:
+          dns-resolver: "udp://1.1.1.1:53"
         conditions:
           - "[STATUS] == 200"
           - "[RESPONSE_TIME] < 5000"
@@ -97,6 +101,8 @@ let
         group: services
         url: https://abs.eviljungle.com
         interval: 2m
+        client:
+          dns-resolver: "udp://1.1.1.1:53"
         conditions:
           - "[STATUS] == 200"
           - "[RESPONSE_TIME] < 5000"
@@ -108,6 +114,8 @@ let
         group: services
         url: https://hass.eviljungle.com
         interval: 2m
+        client:
+          dns-resolver: "udp://1.1.1.1:53"
         conditions:
           - "[STATUS] == any(200, 401)"
           - "[RESPONSE_TIME] < 5000"
@@ -119,6 +127,8 @@ let
         group: services
         url: https://matrix.eviljungle.com
         interval: 2m
+        client:
+          dns-resolver: "udp://1.1.1.1:53"
         conditions:
           - "[STATUS] == any(200, 404)"
           - "[RESPONSE_TIME] < 5000"
@@ -130,6 +140,8 @@ let
         group: services
         url: https://plex.eviljungle.com
         interval: 2m
+        client:
+          dns-resolver: "udp://1.1.1.1:53"
         conditions:
           - "[STATUS] == any(200, 401)"
           - "[RESPONSE_TIME] < 5000"
@@ -141,6 +153,8 @@ let
         group: services
         url: https://request.eviljungle.com
         interval: 2m
+        client:
+          dns-resolver: "udp://1.1.1.1:53"
         conditions:
           - "[STATUS] == 200"
           - "[RESPONSE_TIME] < 5000"
@@ -152,6 +166,8 @@ let
         group: services
         url: https://status.eviljungle.com
         interval: 2m
+        client:
+          dns-resolver: "udp://1.1.1.1:53"
         conditions:
           - "[STATUS] == 200"
           - "[RESPONSE_TIME] < 5000"
