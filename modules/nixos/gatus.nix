@@ -174,6 +174,24 @@ let
           - "[CERTIFICATE_EXPIRATION] > 48h"
         alerts:
           - type: discord
+
+      - name: OPNsense
+        group: network
+        url: icmp://direct.eviljungle.com
+        interval: 1m
+        conditions:
+          - "[CONNECTED] == true"
+        alerts:
+          - type: discord
+
+      - name: qBittorrent
+        group: network
+        url: tcp://direct.eviljungle.com:50413
+        interval: 2m
+        conditions:
+          - "[CONNECTED] == true"
+        alerts:
+          - type: discord
   '';
 
   gatusConfig = pkgs.writeText "gatus-config.yaml" configYaml;
