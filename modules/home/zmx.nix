@@ -36,10 +36,14 @@ in
         if type -q zmx
           zmx completions fish | source
         end
-        # cd to session working directory on session creation
+        # cd / launch app on session creation
         switch "$ZMX_SESSION"
           case home.gitops
-            cd ~/k8s-gitops
+            cd ~/src/k8s-gitops
+          case home.nixos
+            cd /etc/nixos
+          case home.k9s
+            k9s
         end
       '';
     })
