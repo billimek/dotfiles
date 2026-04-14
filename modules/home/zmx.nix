@@ -16,7 +16,7 @@ let
     sessions:
     let
       tabArgs = lib.concatMapStrings (
-        s: ''-e 'new tab in w with configuration {initial input:"ash ${s}" & return}' \'' + "\n"
+        s: ''-e 'new tab in w with configuration {initial input:"autossh -M 0 ${s}" & return}' \'' + "\n"
       ) sessions;
     in
     ''
@@ -78,7 +78,7 @@ in
           set -l sessions ${lib.concatStringsSep " " (map (s: lib.escapeShellArg s) cfg.sessions)}
           set -l choice (printf '%s\n' $sessions | fzf --header="Select zmx session" --layout=reverse --height=40%)
           if test -n "$choice"
-            ash $choice
+            autossh -M 0 $choice
           end
         '';
       };
