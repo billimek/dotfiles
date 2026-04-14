@@ -36,6 +36,10 @@ in
         if type -q zmx
           zmx completions fish | source
         end
+        # Use stable symlink for SSH agent so forwarding survives session re-attach
+        if set -q ZMX_SESSION
+          set -gx SSH_AUTH_SOCK ~/.ssh/ssh_auth_sock
+        end
         # cd / launch app on session creation
         switch "$ZMX_SESSION"
           case home.gitops
