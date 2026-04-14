@@ -55,6 +55,8 @@ in
         controlMaster = "auto";
         controlPath = "~/.ssh/cm-%r@%h:%p";
         controlPersist = "10m";
+        serverAliveInterval = 60;
+        serverAliveCountMax = 3;
         extraOptions = {
           RequestTTY = "yes";
           RemoteCommand = "zmx attach %n";
@@ -67,6 +69,8 @@ in
         controlMaster = "auto";
         controlPath = "~/.ssh/cm-%r@%h:%p";
         controlPersist = "10m";
+        serverAliveInterval = 60;
+        serverAliveCountMax = 3;
         extraOptions = {
           RequestTTY = "yes";
           RemoteCommand = "zmx attach %n";
@@ -79,6 +83,8 @@ in
         controlMaster = "auto";
         controlPath = "~/.ssh/cm-%r@%h:%p";
         controlPersist = "10m";
+        serverAliveInterval = 60;
+        serverAliveCountMax = 3;
         extraOptions = {
           RequestTTY = "yes";
           RemoteCommand = "zmx attach %n";

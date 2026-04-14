@@ -104,7 +104,7 @@ in
         jqless = "jq -C | less -r";
         k = "kubectl";
         # sc is a function (see functions block) -- handles zmx, zellij, and tmux
-        ash = "autossh -M 0 -q";
+        ash = "autossh -M 0";
       };
       shellAliases = {
         kubectl = mkIf hasKubecolor "kubecolor";
