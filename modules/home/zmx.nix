@@ -9,22 +9,24 @@
 let
   cfg = config.modules.zmx;
 
-  # Build an osascript command that opens one Ghostty tab per session,
-  # using `initial input` so the command fires at terminal creation time
-  # (no shell-readiness race condition).
+  # Build a fish function body that opens one Ghostty tab per session.
+  # Uses `new tab` → `delay 0.3` → `input text ... to (focused terminal of t)`
+  # to reliably target each tab's own terminal surface.
   mkWorkspaceScript =
     sessions:
     let
-      tabArgs = lib.concatMapStrings (
-        s: ''-e 'new tab in w with configuration {initial input:"autossh -M 0 ${s}" & return}' \'' + "\n"
-      ) sessions;
+      tabCmds = lib.concatMapStrings (s: ''
+        set t to (new tab in w)
+        delay 0.3
+        input text "autossh -M 0 ${s}" & return to (focused terminal of t)
+      '') sessions;
     in
+    # Use printf to pipe AppleScript to osascript, avoiding fish heredoc quoting issues
     ''
-      osascript \
-          -e 'tell application "Ghostty"' \
-          -e 'activate' \
-          -e 'set w to front window' \
-      ${tabArgs}    -e 'end tell'
+      printf '%s' 'tell application "Ghostty"
+          activate
+          set w to front window
+      ${tabCmds}end tell' | osascript
     '';
 in
 {
