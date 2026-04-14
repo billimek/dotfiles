@@ -103,7 +103,8 @@ in
         du = "du -h";
         jqless = "jq -C | less -r";
         k = "kubectl";
-        # sc is a function (see functions block) -- handles both tmux and zellij
+        # sc is a function (see functions block) -- handles zmx, zellij, and tmux
+        ash = "autossh -M 0 -q";
       };
       shellAliases = {
         kubectl = mkIf hasKubecolor "kubecolor";
@@ -114,9 +115,11 @@ in
         fish_greeting = "";
 
         sc = {
-          description = "Reattach to current multiplexer session (tmux or zellij)";
+          description = "Reattach to current multiplexer session (zmx, zellij, or tmux)";
           body = ''
-            if set -q ZELLIJ
+            if set -q ZMX_SESSION
+              echo "Already in zmx session: $ZMX_SESSION"
+            else if set -q ZELLIJ
               zellij attach
             else if set -q TMUX
               tmux detach; and tmux attach

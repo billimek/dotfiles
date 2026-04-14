@@ -19,12 +19,11 @@ in
       enable = true;
       # Disable deprecated default config - we set our own defaults in matchBlocks."*"
       enableDefaultConfig = false;
-      # add custom settings to config
       matchBlocks."*" = {
         addKeysToAgent = "yes";
       };
       matchBlocks."cloud" = {
-        hostname = "cloud.eviljungle.com";
+        hostname = "cloud";
         user = "jeff";
         forwardAgent = true;
         setEnv = {
@@ -32,27 +31,57 @@ in
         };
       };
       matchBlocks."home" = {
-        hostname = "home.home";
+        hostname = "home";
         user = "jeff";
         forwardAgent = true;
         setEnv = {
           is_vscode = 1;
         };
       };
-      matchBlocks."home-ts" = {
-        hostname = "100.85.196.21";
-        user = "jeff";
-        forwardAgent = true;
-        setEnv = {
-          is_vscode = 1;
-        };
-      };
-      matchBlocks."nas-lan" = {
-        hostname = "100.119.81.4";
+      matchBlocks."nas" = {
+        hostname = "nas";
         user = "nix";
         forwardAgent = true;
         setEnv = {
           is_vscode = 1;
+        };
+      };
+
+      # zmx session hosts -- e.g. "ssh home.shell" attaches to zmx session "home.shell"
+      matchBlocks."home.*" = {
+        hostname = "home";
+        user = "jeff";
+        forwardAgent = true;
+        requestTTY = "yes";
+        remoteCommand = "zmx attach %n";
+        extraOptions = {
+          ControlMaster = "auto";
+          ControlPath = "~/.ssh/cm-%r@%h:%p";
+          ControlPersist = "10m";
+        };
+      };
+      matchBlocks."nas.*" = {
+        hostname = "nas";
+        user = "nix";
+        forwardAgent = true;
+        requestTTY = "yes";
+        remoteCommand = "zmx attach %n";
+        extraOptions = {
+          ControlMaster = "auto";
+          ControlPath = "~/.ssh/cm-%r@%h:%p";
+          ControlPersist = "10m";
+        };
+      };
+      matchBlocks."cloud.*" = {
+        hostname = "cloud";
+        user = "jeff";
+        forwardAgent = true;
+        requestTTY = "yes";
+        remoteCommand = "zmx attach %n";
+        extraOptions = {
+          ControlMaster = "auto";
+          ControlPath = "~/.ssh/cm-%r@%h:%p";
+          ControlPersist = "10m";
         };
       };
     };

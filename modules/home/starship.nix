@@ -18,6 +18,16 @@ in
     programs.starship = {
       enable = true;
       settings = {
+        # Prepend zmx session name when inside a zmx session
+        format = "\${env_var.ZMX_SESSION}$all";
+
+        env_var.ZMX_SESSION = {
+          symbol = " ";
+          format = "[$symbol$env_value]($style) ";
+          description = "zmx session name";
+          style = "bold magenta";
+        };
+
         status.disabled = false;
         username = { };
         hostname = {

@@ -14,6 +14,7 @@
   modules = {
     # dev.enable = true;  # commented out in original
     kubernetes.enable = true;
+    zmx.enable = true;
 
     zellij = {
       defaultLayout = "home";

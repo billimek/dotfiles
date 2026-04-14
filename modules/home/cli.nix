@@ -21,6 +21,7 @@ in
 
     home.packages = with pkgs; [
       any-nix-shell
+      autossh
       bottom
       btop
       dig
