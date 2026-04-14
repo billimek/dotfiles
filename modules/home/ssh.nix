@@ -48,21 +48,6 @@ in
       };
 
       # zmx session hosts -- e.g. "ssh home.shell" attaches to zmx session "home.shell"
-      # home.gitops is first (before home.*) and sets working dir on session creation
-      matchBlocks."home.gitops" = lib.hm.dag.entryBefore [ "home.*" ] {
-        hostname = "home";
-        user = "jeff";
-        forwardAgent = true;
-        controlMaster = "auto";
-        controlPath = "~/.ssh/cm-%r@%h:%p";
-        controlPersist = "10m";
-        serverAliveInterval = 60;
-        serverAliveCountMax = 3;
-        extraOptions = {
-          RequestTTY = "yes";
-          RemoteCommand = "zmx attach %n fish -C 'cd ~/k8s-gitops'";
-        };
-      };
       matchBlocks."home.*" = {
         hostname = "home";
         user = "jeff";
