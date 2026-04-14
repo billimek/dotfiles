@@ -54,15 +54,8 @@ in
           "super+`=toggle_quick_terminal"
           "super+left=previous_tab"
           "super+right=next_tab"
-          # Workspace: open 4 zmx session tabs (home.gitops, home.nixos, home.shell, nas.files)
-          "super+shift+i=new_tab"
-          "chain=text:ash home.gitops\\n"
-          "chain=new_tab"
-          "chain=text:ash home.nixos\\n"
-          "chain=new_tab"
-          "chain=text:ash home.shell\\n"
-          "chain=new_tab"
-          "chain=text:ash nas.files\\n"
+          # Workspace: open zmx session tabs via fish function (uses AppleScript)
+          "super+shift+i=text:zmx-workspace\\n"
         ];
 
         macos-auto-secure-input = true;

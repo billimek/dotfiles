@@ -8,10 +8,29 @@
 }:
 let
   cfg = config.modules.zmx;
+
+  # Build an osascript command that opens one Ghostty tab per session,
+  # using `initial input` so the command fires at terminal creation time
+  # (no shell-readiness race condition).
+  mkWorkspaceScript =
+    sessions:
+    let
+      tabArgs = lib.concatMapStrings (
+        s: ''-e 'new tab in w with configuration {initial input:"ash ${s}" & return}' \'' + "\n"
+      ) sessions;
+    in
+    ''
+      osascript \
+          -e 'tell application "Ghostty"' \
+          -e 'activate' \
+          -e 'set w to front window' \
+      ${tabArgs}    -e 'end tell'
+    '';
 in
 {
   options.modules.zmx = {
     enable = lib.mkEnableOption "zmx session persistence";
+
     sessions = lib.mkOption {
       type = lib.types.listOf lib.types.str;
       default = [
@@ -25,6 +44,17 @@ in
         "cloud.deploy"
       ];
       description = "Predefined zmx session names for the zmx-connect picker";
+    };
+
+    workspaceSessions = lib.mkOption {
+      type = lib.types.listOf lib.types.str;
+      default = [
+        "home.gitops"
+        "home.nixos"
+        "home.shell"
+        "nas.files"
+      ];
+      description = "Sessions opened as tabs by the zmx-workspace command (macOS/Ghostty only)";
     };
   };
 
@@ -51,6 +81,14 @@ in
             ash $choice
           end
         '';
+      };
+    })
+
+    # macOS-only: zmx-workspace opens Ghostty tabs via AppleScript
+    (lib.mkIf (pkgs.stdenv.isDarwin && cfg.workspaceSessions != [ ]) {
+      programs.fish.functions.zmx-workspace = {
+        description = "Open Ghostty tabs for each workspace zmx session";
+        body = mkWorkspaceScript cfg.workspaceSessions;
       };
     })
   ];
