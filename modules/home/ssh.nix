@@ -52,36 +52,36 @@ in
         hostname = "home";
         user = "jeff";
         forwardAgent = true;
-        requestTTY = "yes";
-        remoteCommand = "zmx attach %n";
+        controlMaster = "auto";
+        controlPath = "~/.ssh/cm-%r@%h:%p";
+        controlPersist = "10m";
         extraOptions = {
-          ControlMaster = "auto";
-          ControlPath = "~/.ssh/cm-%r@%h:%p";
-          ControlPersist = "10m";
+          RequestTTY = "yes";
+          RemoteCommand = "zmx attach %n";
         };
       };
       matchBlocks."nas.*" = {
         hostname = "nas";
         user = "nix";
         forwardAgent = true;
-        requestTTY = "yes";
-        remoteCommand = "zmx attach %n";
+        controlMaster = "auto";
+        controlPath = "~/.ssh/cm-%r@%h:%p";
+        controlPersist = "10m";
         extraOptions = {
-          ControlMaster = "auto";
-          ControlPath = "~/.ssh/cm-%r@%h:%p";
-          ControlPersist = "10m";
+          RequestTTY = "yes";
+          RemoteCommand = "zmx attach %n";
         };
       };
       matchBlocks."cloud.*" = {
         hostname = "cloud";
         user = "jeff";
         forwardAgent = true;
-        requestTTY = "yes";
-        remoteCommand = "zmx attach %n";
+        controlMaster = "auto";
+        controlPath = "~/.ssh/cm-%r@%h:%p";
+        controlPersist = "10m";
         extraOptions = {
-          ControlMaster = "auto";
-          ControlPath = "~/.ssh/cm-%r@%h:%p";
-          ControlPersist = "10m";
+          RequestTTY = "yes";
+          RemoteCommand = "zmx attach %n";
         };
       };
     };
