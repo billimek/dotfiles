@@ -103,7 +103,7 @@ in
         du = "du -h";
         jqless = "jq -C | less -r";
         k = "kubectl";
-        sc = "tmux detach;tmux attach";
+        # sc is a function (see functions block) -- handles both tmux and zellij
       };
       shellAliases = {
         kubectl = mkIf hasKubecolor "kubecolor";
@@ -112,6 +112,19 @@ in
       };
       functions = {
         fish_greeting = "";
+
+        sc = {
+          description = "Reattach to current multiplexer session (tmux or zellij)";
+          body = ''
+            if set -q ZELLIJ
+              zellij attach
+            else if set -q TMUX
+              tmux detach; and tmux attach
+            else
+              zellij attach
+            end
+          '';
+        };
 
         comma-command-not-found = {
           body = ''
