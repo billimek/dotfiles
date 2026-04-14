@@ -20,12 +20,10 @@ in
         "home.nixos"
         "home.shell"
         "home.k9s"
-        "nas.files"
         "nas.shell"
         "cloud.shell"
-        "cloud.deploy"
       ];
-      description = "Predefined zmx session names for the zmx-connect picker";
+      description = "Predefined zmx session names for the zc picker";
     };
   };
 
@@ -41,9 +39,9 @@ in
       '';
     })
 
-    # Everywhere: zmx-connect fzf session picker
+    # Everywhere: zc fzf session picker
     (lib.mkIf (cfg.sessions != [ ]) {
-      programs.fish.functions.zmx-connect = {
+      programs.fish.functions.zc = {
         description = "Connect to a remote zmx session via autossh (fzf picker)";
         body = ''
           set -l sessions ${lib.concatStringsSep " " (map (s: lib.escapeShellArg s) cfg.sessions)}
