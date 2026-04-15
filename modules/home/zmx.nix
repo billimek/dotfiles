@@ -52,6 +52,19 @@ in
       '';
     })
 
+    # Darwin-only: zmx installed via homebrew (neurosnap/tap/zmx); wire up fish completions
+    (lib.mkIf (cfg.enable && pkgs.stdenv.isDarwin) {
+      programs.fish.interactiveShellInit = lib.mkAfter ''
+        if type -q zmx
+          zmx completions fish | source
+        end
+        # Use stable symlink for SSH agent so forwarding survives session re-attach
+        if set -q ZMX_SESSION
+          set -gx SSH_AUTH_SOCK ~/.ssh/ssh_auth_sock
+        end
+      '';
+    })
+
     # Everywhere: zc fzf session picker
     (lib.mkIf (cfg.sessions != [ ]) {
       programs.fish.functions.zc = {

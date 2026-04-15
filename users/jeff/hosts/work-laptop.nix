@@ -17,6 +17,7 @@ in
   modules = {
     dev.enable = true;
     kubernetes.enable = true;
+    zmx.enable = true;
   };
 
   home = {
