@@ -31,6 +31,7 @@ in
       ];
       casks = [
         "1password"
+        "claude"
         "1password-cli"
         "cmux"
         "discord"

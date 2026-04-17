@@ -21,6 +21,7 @@ in
 
     home.packages = with pkgs; [
       any-nix-shell
+      claude-code
       autossh
       bottom
       btop
