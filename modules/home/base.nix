@@ -63,5 +63,9 @@ in
       "$HOME/.local/bin"
       "$HOME/.cargo/bin"
     ];
+
+    home.sessionVariables.NIXPKGS_ALLOW_UNFREE = "1";
+
+    xdg.configFile."nixpkgs/config.nix".text = "{ allowUnfree = true; }";
   };
 }

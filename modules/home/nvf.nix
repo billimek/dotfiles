@@ -49,7 +49,7 @@ in
           enableExtraDiagnostics = true;
 
           nix.enable = true;
-          markdown.enable = true;
+          markdown.enable = false; # marksman LSP requires dotnet to build
           bash.enable = true;
           helm.enable = true;
           terraform.enable = true;
