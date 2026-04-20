@@ -1,39 +1,14 @@
 # Claude Code CLI configuration
+#
+# Nix manages the package and CLAUDE.md (via agent-instructions.nix).
+# ~/.claude/settings.json is left to the CLI and org managed settings.
 { ... }:
 {
   programs.claude-code = {
     enable = true;
 
-    settings = {
-      permissions = {
-        allow = [
-          "Read"
-          "Edit"
-          "MultiEdit"
-          "Write"
-          "Glob"
-          "Grep"
-          "Bash(git diff:*)"
-          "Bash(git log:*)"
-          "Bash(git status:*)"
-          "Bash(git add:*)"
-          "Bash(git commit:*)"
-          "Bash(rg:*)"
-          "Bash(fd:*)"
-          "Bash(eza:*)"
-          "Bash(jq:*)"
-          "Bash(nix fmt:*)"
-          "Bash(nix flake:*)"
-          "Bash(nix build:*)"
-          "Bash(nix eval:*)"
-        ];
-        deny = [
-          "Read(./.env)"
-          "Read(./secrets/**)"
-        ];
-      };
-      includeCoAuthoredBy = false;
-    };
+    # settings intentionally left empty — the CLI owns settings.json so it
+    # remains writable for interactive config changes and org policy merges.
 
     # memory — skipped; agent-instructions.nix owns ~/.claude/CLAUDE.md
     # mcpServers = { };   # add MCP servers here as needed
