@@ -185,6 +185,7 @@ in
     }:
     let
       nixpkgs = inputs.nixpkgs;
+      nixpkgs-unstable = inputs.nixpkgs-unstable;
       getSystem = hostToSystem { inherit darwinDir; };
 
       # Get all user directories
@@ -216,6 +217,10 @@ in
                 ];
                 extraSpecialArgs = extraSpecialArgs // {
                   inherit inputs outputs;
+                  pkgs-unstable = import nixpkgs-unstable {
+                    inherit system;
+                    config.allowUnfree = true;
+                  };
                 };
               }
             )

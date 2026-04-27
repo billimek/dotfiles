@@ -3,6 +3,7 @@
   config,
   lib,
   pkgs,
+  pkgs-unstable,
   ...
 }:
 let
@@ -33,7 +34,7 @@ in
       kustomize
       stern
       talhelper
-      talosctl
+      pkgs-unstable.talosctl
       (wrapHelm kubernetes-helm {
         plugins = with pkgs.kubernetes-helmPlugins; [
           helm-diff
