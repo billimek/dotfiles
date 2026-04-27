@@ -569,11 +569,11 @@
     },
     "nixpkgs_3": {
       "locked": {
-        "lastModified": 1776734388,
-        "narHash": "sha256-vl3dkhlE5gzsItuHoEMVe+DlonsK+0836LIRDnm6MXQ=",
+        "lastModified": 1777077449,
+        "narHash": "sha256-AIiMJiqvGrN4HyLEbKAoCSRRYn0rnlW5VbKNIMIYqm4=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "10e7ad5bbcb421fe07e3a4ad53a634b0cd57ffac",
+        "rev": "a4bf06618f0b5ee50f14ed8f0da77d34ecc19160",
         "type": "github"
       },
       "original": {
@@ -813,11 +813,11 @@
         "nixpkgs": "nixpkgs_6"
       },
       "locked": {
-        "lastModified": 1777166854,
-        "narHash": "sha256-iUCs2xDo8QFW7v/Hl+ZTCQmwAQNLYBJd+R+mfzAuenc=",
+        "lastModified": 1777253371,
+        "narHash": "sha256-uOBgBhhSI5C5DYRL+hCsKA1tcDWu9K28TKH3/VZlM70=",
         "owner": "budimanjojo",
         "repo": "talhelper",
-        "rev": "698e0ee4435f3b2c7f952666d1daf65987789d2c",
+        "rev": "8b8efc16c9ba9cf2388e89f309a29f7e40568af6",
         "type": "github"
       },
       "original": {
@@ -868,11 +868,11 @@
         "zig2nix": "zig2nix"
       },
       "locked": {
-        "lastModified": 1777168666,
-        "narHash": "sha256-mgEK+lqcO4tKThmp5LdmUKX3fhN4VLkgfa9MsDyKzl4=",
+        "lastModified": 1777260123,
+        "narHash": "sha256-NmLRu7SZqOQSOEfivWncii3N5AhO1U9W2A99bFpoTJ4=",
         "owner": "neurosnap",
         "repo": "zmx",
-        "rev": "cd82c84e42057d78dd5d438a69af1eb59c142c16",
+        "rev": "5389d30bad1e6500fb8ef9960f3d9d794d814eb5",
         "type": "github"
       },
       "original": {
