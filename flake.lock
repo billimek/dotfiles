@@ -813,11 +813,11 @@
         "nixpkgs": "nixpkgs_6"
       },
       "locked": {
-        "lastModified": 1777253371,
-        "narHash": "sha256-uOBgBhhSI5C5DYRL+hCsKA1tcDWu9K28TKH3/VZlM70=",
+        "lastModified": 1777348464,
+        "narHash": "sha256-Gcw0zw/Cd2UiEYBDQDgexzrL7Iec8ajiFkeM0bFdBWU=",
         "owner": "budimanjojo",
         "repo": "talhelper",
-        "rev": "8b8efc16c9ba9cf2388e89f309a29f7e40568af6",
+        "rev": "9546244981401698514e39e877e7d29d8506d0a4",
         "type": "github"
       },
       "original": {
