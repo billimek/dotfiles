@@ -21,6 +21,7 @@
     homeDirectory = "/Users/${config.home.username}";
     packages = with pkgs; [
       terminal-notifier # send notifications to macOS notification center
+      _1password-cli
     ];
   };
 
