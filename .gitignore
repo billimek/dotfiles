@@ -1,3 +1,7 @@
 result
-.claude/
+.claude/*
+!.claude/settings.json
+!.claude/commands/
+!.claude/commands/**
+.claude/settings.local.json
 CLAUDE.md
