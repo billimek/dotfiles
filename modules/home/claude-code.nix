@@ -15,10 +15,10 @@ let
   defaultSettings = {
     model = "opus[1m]";
     effortLevel = "medium";
-    defaultMode = "plan";
     remoteControlAtStartup = true;
     includeCoAuthoredBy = false;
 
+    permissions.defaultMode = "plan";
     permissions.allow = [
       # Modern CLI (per AGENTS.md preferences)
       "Bash(rg:*)"
