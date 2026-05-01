@@ -136,7 +136,7 @@ let
       export CLAUDE_CTX_BAR="$bar"
 
       cd "$cwd" 2>/dev/null || true
-      exec starship prompt --config "${config.home.homeDirectory}/.claude/starship.toml"
+      STARSHIP_CONFIG="${config.home.homeDirectory}/.claude/starship.toml" exec starship prompt
     '';
   };
 
