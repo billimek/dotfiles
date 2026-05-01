@@ -13,7 +13,7 @@ let
   cfg = config.modules.claude-code;
 
   defaultSettings = {
-    model = "opus[1m]";
+    model = "opusplan";
     effortLevel = "medium";
     remoteControlAtStartup = true;
     includeCoAuthoredBy = false;
@@ -247,6 +247,8 @@ in
   };
 
   config = lib.mkIf cfg.enable {
+    home.sessionVariables.CLAUDE_CODE_SUBAGENT_MODEL = "sonnet";
+
     programs.claude-code = {
       enable = true;
       # manage outside of nix for faster updates (curl -fsSL https://claude.ai/install.sh | bash)
