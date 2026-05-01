@@ -6,6 +6,8 @@
 {
   programs.claude-code = {
     enable = true;
+    # manage outside of nix for faster updates (curl -fsSL https://claude.ai/install.sh | bash)
+    package = null;
 
     # settings intentionally left empty — the CLI owns settings.json so it
     # remains writable for interactive config changes and org policy merges.

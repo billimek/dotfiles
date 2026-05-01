@@ -37,6 +37,7 @@ in
     home.sessionPath = [
       "$HOME/.cargo/bin"
       "$HOME/.opencode/bin"
+      "$HOME/.claude/local/bin"
     ];
 
     # OpenCode configuration
