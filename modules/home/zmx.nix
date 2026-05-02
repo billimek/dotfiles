@@ -28,8 +28,8 @@ in
   };
 
   config = lib.mkMerge [
-    # Linux-only: install zmx binary + fish completions
-    (lib.mkIf (cfg.enable && pkgs.stdenv.isLinux) {
+    # Install zmx binary + fish completions (both Linux and Darwin)
+    (lib.mkIf cfg.enable {
       home.packages = [ inputs.zmx.packages.${pkgs.system}.default ];
 
       programs.fish.interactiveShellInit = lib.mkAfter ''
@@ -40,7 +40,12 @@ in
         if set -q ZMX_SESSION
           set -gx SSH_AUTH_SOCK ~/.ssh/ssh_auth_sock
         end
-        # cd / launch app on session creation
+      '';
+    })
+
+    # Linux-only: cd / launch app on session creation
+    (lib.mkIf (cfg.enable && pkgs.stdenv.isLinux) {
+      programs.fish.interactiveShellInit = lib.mkAfter ''
         switch "$ZMX_SESSION"
           case home.gitops
             cd ~/src/k8s-gitops
@@ -48,19 +53,6 @@ in
             cd /etc/nixos
           case home.k9s
             k9s
-        end
-      '';
-    })
-
-    # Darwin-only: zmx installed via homebrew (neurosnap/tap/zmx); wire up fish completions
-    (lib.mkIf (cfg.enable && pkgs.stdenv.isDarwin) {
-      programs.fish.interactiveShellInit = lib.mkAfter ''
-        if type -q zmx
-          zmx completions fish | source
-        end
-        # Use stable symlink for SSH agent so forwarding survives session re-attach
-        if set -q ZMX_SESSION
-          set -gx SSH_AUTH_SOCK ~/.ssh/ssh_auth_sock
         end
       '';
     })

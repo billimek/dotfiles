@@ -870,15 +870,16 @@
         "zmx-src-main": "zmx-src-main"
       },
       "locked": {
-        "lastModified": 1777557794,
-        "narHash": "sha256-rooGnIUbL9zp8EKXBP835+lmwMGo3wnWKDq2AEUJz58=",
-        "owner": "thrawny",
+        "lastModified": 1777738492,
+        "narHash": "sha256-PLAyH6zuZJMMtxSG7iaoyI9WPNzVhLQcKIvHYsN/qHo=",
+        "owner": "billimek",
         "repo": "zmx-flake",
-        "rev": "4bcb620b2aef887bddfc631491484a0b7f366ba5",
+        "rev": "f785d89a9e54da5fb172bf8fc364d498526826a3",
         "type": "github"
       },
       "original": {
-        "owner": "thrawny",
+        "owner": "billimek",
+        "ref": "darwin-support",
         "repo": "zmx-flake",
         "type": "github"
       }

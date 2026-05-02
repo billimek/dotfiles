@@ -21,13 +21,9 @@ in
       onActivation.upgrade = true;
       onActivation.cleanup = "uninstall";
       global.brewfile = true;
-      taps = [
-        "neurosnap/tap"
-      ];
       brews = [
         "cask"
         "mas"
-        "neurosnap/tap/zmx"
       ];
       casks = [
         "1password"
