@@ -33,7 +33,9 @@
     talhelper.url = "github:budimanjojo/talhelper";
     opnix.url = "github:brizzbuzz/opnix";
     nvf.url = "github:notashelf/nvf";
-    zmx.url = "github:neurosnap/zmx";
+    # Community Linux flake; upstream neurosnap/zmx fetches ghostty at build time
+    # which fails in the nix sandbox (neurosnap/zmx#16, #43). Revisit when nixpkgs#468608 lands.
+    zmx.url = "github:thrawny/zmx-flake";
     nix-index-database = {
       url = "github:nix-community/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";

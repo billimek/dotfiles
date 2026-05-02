@@ -65,6 +65,11 @@ let
       "Bash(git stash list)"
       "Bash(git stash show:*)"
 
+      # Write git (requires explicit user instruction to commit/push)
+      "Bash(git add:*)"
+      "Bash(git commit:*)"
+      "Bash(git push:*)"
+
       # Read-only nix
       "Bash(nix eval:*)"
       "Bash(nix flake show:*)"
