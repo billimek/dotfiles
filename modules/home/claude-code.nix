@@ -119,6 +119,7 @@ let
       starship
       coreutils
       gawk
+      findutils
     ];
     text = ''
       payload=$(cat)
@@ -140,8 +141,59 @@ let
       i=0; while [ "$i" -lt "$empty"  ]; do bar="''${bar}░"; i=$((i+1)); done
       export CLAUDE_CTX_BAR="$bar"
 
+      cost_usd=$(printf '%s' "$payload" | jq -r '.cost.total_cost_usd // 0' | awk '{printf "%.2f", $1+0}')
+      export CLAUDE_COST_USD="$cost_usd"
+
+      session_id=$(printf '%s' "$payload" | jq -r '.session_id // ""')
+      agent_count=0
+      count_file="/tmp/claude-subagents-$session_id.count"
+      if [ -n "$session_id" ] && [ -f "$count_file" ] \
+         && [ -n "$(find "$count_file" -mmin -1 2>/dev/null)" ]; then
+        agent_count=$(cat "$count_file" 2>/dev/null || echo 0)
+      fi
+      export CLAUDE_AGENT_COUNT="$agent_count"
+
       cd "$cwd" 2>/dev/null || true
       STARSHIP_CONFIG="${config.home.homeDirectory}/.claude/starship.toml" exec starship prompt
+    '';
+  };
+
+  subagentStatuslinePackage = pkgs.writeShellApplication {
+    name = "claude-subagent-statusline";
+    runtimeInputs = with pkgs; [
+      jq
+      coreutils
+      gawk
+      findutils
+    ];
+    text = ''
+      payload=$(cat)
+      session_id=$(printf '%s' "$payload" | jq -r '.session_id // ""')
+      [ -z "$session_id" ] && exit 0
+
+      # Try array mode first (documented: tasks[] with full list per render).
+      count=$(printf '%s' "$payload" \
+        | jq -r 'if (.tasks|type) == "array"
+                 then [.tasks[] | select(.status != "completed"
+                                      and .status != "done"
+                                      and .status != "error"
+                                      and .status != "cancelled")] | length
+                 else empty end' 2>/dev/null || true)
+
+      if [ -z "$count" ]; then
+        # Per-row fallback: touch a marker file per task id, count fresh ones.
+        task_id=$(printf '%s' "$payload" | jq -r '.id // .task.id // ""')
+        dir="/tmp/claude-subagents-$session_id"
+        mkdir -p "$dir"
+        [ -n "$task_id" ] && : > "$dir/$task_id"
+        count=$(find "$dir" -type f -mmin -0.1 2>/dev/null | wc -l | awk '{print $1}')
+      fi
+
+      out="/tmp/claude-subagents-$session_id.count"
+      printf '%s' "$count" > "$out.tmp" && mv "$out.tmp" "$out"
+
+      # Output label for the agent panel row.
+      printf '%s' "$payload" | jq -r '.label // .name // ""'
     '';
   };
 
@@ -150,7 +202,7 @@ let
     command_timeout = 500;
     format =
       "$directory$git_branch$git_status$nix_shell$kubernetes"
-      + "\${custom.model}\${custom.output_style}"
+      + "\${custom.model}\${custom.output_style}\${custom.agents}\${custom.cost}"
       + "\${custom.ctx_low}\${custom.ctx_med}\${custom.ctx_high}";
 
     directory = {
@@ -188,6 +240,28 @@ let
         command = ''printf '%s' "$CLAUDE_OUTPUT_STYLE"'';
         format = "[$output]($style) ";
         style = "italic yellow";
+        shell = [
+          "bash"
+          "--noprofile"
+          "--norc"
+        ];
+      };
+      agents = {
+        when = ''[ "$CLAUDE_AGENT_COUNT" -gt 0 ]'';
+        command = ''printf '⚙ %s' "$CLAUDE_AGENT_COUNT"'';
+        format = "[$output]($style) ";
+        style = "bold magenta";
+        shell = [
+          "bash"
+          "--noprofile"
+          "--norc"
+        ];
+      };
+      cost = {
+        when = ''awk "BEGIN{exit !($CLAUDE_COST_USD > 0)}"'';
+        command = ''printf '$%s' "$CLAUDE_COST_USD"'';
+        format = "[$output]($style) ";
+        style = "bold green";
         shell = [
           "bash"
           "--noprofile"
@@ -267,11 +341,21 @@ in
             command = "${config.home.homeDirectory}/.claude/statusline-command.sh";
             padding = 0;
           };
+          subagentStatusLine = {
+            type = "command";
+            command = "${config.home.homeDirectory}/.claude/subagent-statusline.sh";
+            padding = 0;
+          };
         };
     };
 
     home.file.".claude/statusline-command.sh" = lib.mkIf cfg.statusline.enable {
       source = "${statuslinePackage}/bin/claude-statusline";
+      executable = true;
+    };
+
+    home.file.".claude/subagent-statusline.sh" = lib.mkIf cfg.statusline.enable {
+      source = "${subagentStatuslinePackage}/bin/claude-subagent-statusline";
       executable = true;
     };
 
