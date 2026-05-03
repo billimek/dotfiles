@@ -42,7 +42,7 @@ in
           s = "status";
           t = "tag -n";
         };
-        apply.whitespace = "nowarm";
+        apply.whitespace = "nowarn";
         branch.autosetupmerge = true;
         color.ui = true;
         core = {
