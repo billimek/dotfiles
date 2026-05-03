@@ -33,11 +33,10 @@
     talhelper.url = "github:budimanjojo/talhelper";
     opnix.url = "github:brizzbuzz/opnix";
     nvf.url = "github:notashelf/nvf";
-    # Community flake with darwin support; upstream neurosnap/zmx fetches ghostty at build time
-    # which fails in the nix sandbox (neurosnap/zmx#16, #43). Revisit when nixpkgs#468608 lands.
-    # Using billimek fork (darwin-support branch) until thrawny/zmx-flake#2 merges, then revert to
-    # github:thrawny/zmx-flake.
-    zmx.url = "github:billimek/zmx-flake/darwin-support";
+    # Community fork of zmx with darwin support; upstream neurosnap/zmx fetches ghostty
+    # at build time which fails in the nix sandbox (neurosnap/zmx#16, #43).
+    # Revisit when nixpkgs#468608 lands.
+    zmx.url = "github:thrawny/zmx-flake";
     nix-index-database = {
       url = "github:nix-community/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";
