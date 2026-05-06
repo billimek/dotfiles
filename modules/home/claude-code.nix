@@ -110,6 +110,11 @@ let
       "WebSearch"
       "WebFetch"
     ];
+
+    autoMode.allow = [
+      "$defaults"
+      "Run git push when the user explicitly asks to push"
+    ];
   };
 
   statuslinePackage = pkgs.writeShellApplication {
