@@ -3,11 +3,9 @@
   inputs,
   pkgs,
   ...
-}:
-let
+}: let
   secrets = import ../../secrets.nix;
-in
-{
+in {
   # Enable modules (base and homebrew are auto-enabled)
   modules = {
     # All base darwin modules are auto-enabled
@@ -20,7 +18,7 @@ in
     git = "/usr/bin/git";
   };
 
-  security.pki.certificateFiles = [ "/usr/local/munki/thd_certs.pem" ];
+  security.pki.certificateFiles = ["/usr/local/munki/thd_certs.pem"];
 
   system.primaryUser = secrets.work_username;
 
@@ -34,13 +32,14 @@ in
     ];
     casks = [
       "codex"
+      "codex-app"
       "gather"
       "microsoft-remote-desktop"
       "obsidian"
       "VIA"
       "zed"
     ];
-    masApps = { };
+    masApps = {};
   };
 
   system.stateVersion = 5;
