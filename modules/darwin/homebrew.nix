@@ -3,15 +3,15 @@
   config,
   lib,
   ...
-}:
-let
+}: let
   cfg = config.modules.homebrew;
-in
-{
+in {
   options.modules.homebrew = {
-    enable = lib.mkEnableOption "homebrew package management" // {
-      default = true;
-    };
+    enable =
+      lib.mkEnableOption "homebrew package management"
+      // {
+        default = true;
+      };
   };
 
   config = lib.mkIf cfg.enable {
@@ -50,7 +50,6 @@ in
         "consent-o-matic" = 1606897889;
         "Kagi Search for Safari" = 1622835804;
         "Wipr2 for Safari" = 1662217862;
-        "MuteKey" = 1509590766;
       };
     };
   };
