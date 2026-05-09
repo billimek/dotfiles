@@ -21,6 +21,9 @@ in
     services.syslog-ng = {
       enable = true;
       extraConfig = ''
+        rewrite r_strip_ansi {
+          subst("\x1b\[[0-9;]*[a-zA-Z]", "", value("MESSAGE"), flags(global));
+        };
         source s_journal { systemd-journal(); };
         destination d_remote {
           syslog(
@@ -29,7 +32,7 @@ in
             port(${toString cfg.port})
           );
         };
-        log { source(s_journal); destination(d_remote); };
+        log { source(s_journal); rewrite(r_strip_ansi); destination(d_remote); };
       '';
     };
   };
