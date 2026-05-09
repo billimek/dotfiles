@@ -41,6 +41,7 @@
     reboot-required.enable = true;
     rclone.enable = true;
     samba.enable = true;
+    syslog-forward.enable = true;
     sanoid.enable = true;
     vscode-server.enable = true;
     zfs.enable = true;
