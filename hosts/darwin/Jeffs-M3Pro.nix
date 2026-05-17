@@ -9,7 +9,7 @@
     # All base darwin modules are auto-enabled
   };
 
-  environment.darwinConfig = "$HOME/src/dotfiles/configurations/darwin/Jeffs-M3Pro.nix";
+  environment.darwinConfig = "$HOME/src/dotfiles/hosts/darwin/Jeffs-M3Pro.nix";
 
   networking.hostName = "Jeffs-M3Pro";
 

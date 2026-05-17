@@ -45,8 +45,9 @@ mkdir -p ~/src && git clone https://github.com/billimek/dotfiles.git ~/src/dotfi
 
 `darwin-rebuild` is not yet on `PATH` on a fresh machine, so use `nix run` for the first switch.
 
-The flake configuration names (`work-laptop`, `Jeffs-M3Pro`) are fixed identifiers from
-`configurations/darwin/` — they do **not** need to match the machine's actual hostname.
+The flake configuration names (`work-laptop`, `Jeffs-M3Pro`) are the
+identifiers registered in `modules/wiring/hosts.nix` — they do **not**
+need to match the machine's actual hostname.
 
 The `nix-darwin-25.11` ref must match the `nix-darwin` input pin in `flake.nix`. Update it
 if the flake is ever bumped to a new nixpkgs release.

@@ -13,7 +13,7 @@ in
     # All base darwin modules are auto-enabled
   };
 
-  environment.darwinConfig = "$HOME/src.github/dotfiles/configurations/darwin/work-laptop.nix";
+  environment.darwinConfig = "$HOME/src.github/dotfiles/hosts/darwin/work-laptop.nix";
 
   # Create a system-wide alias for git so that keychain certs are properly used for https operations
   environment.shellAliases = {
