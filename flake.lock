@@ -296,6 +296,21 @@
         "type": "github"
       }
     },
+    "import-tree": {
+      "locked": {
+        "lastModified": 1743590248,
+        "narHash": "sha256-b6WtsoI+AzBCaonXVrkA+se1zbXoyKME8o647iPwooE=",
+        "owner": "mightyiam",
+        "repo": "import-tree",
+        "rev": "599004dadb236b6ad020ca54b41f26b43693205d",
+        "type": "github"
+      },
+      "original": {
+        "owner": "mightyiam",
+        "repo": "import-tree",
+        "type": "github"
+      }
+    },
     "mnw": {
       "locked": {
         "lastModified": 1777828893,
@@ -734,6 +749,7 @@
         "flake-parts": "flake-parts_2",
         "hardware": "hardware",
         "home-manager": "home-manager",
+        "import-tree": "import-tree",
         "nix-colors": "nix-colors",
         "nix-darwin": "nix-darwin",
         "nix-index-database": "nix-index-database",
