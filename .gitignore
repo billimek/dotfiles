@@ -4,4 +4,3 @@ result
 !.claude/commands/
 !.claude/commands/**
 .claude/settings.local.json
-CLAUDE.md

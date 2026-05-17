@@ -4,49 +4,46 @@ Leveraging nix, nix-os, nix-darwin, and home-manager to apply machine and home c
 
 ## Structure
 
+Built on the **dendritic** flake-parts pattern via
+[`mightyiam/import-tree`](https://github.com/mightyiam/import-tree):
+`flake.nix` is just `mkFlake` + `(import-tree ./modules)`. Every `.nix`
+file under `./modules/` is a flake-parts module that contributes to the
+flake's outputs by option-merging.
+
 ```
 .
-├── flake.nix                  # Simplified entry point using flake-parts
-├── flake-module.nix           # Flake-parts module with autowiring logic
+├── flake.nix                  # mkFlake + (import-tree ./modules)
 ├── flake.lock                 # Lockfile (updated daily via GitHub Actions)
-├── lib/
-│   └── autowire.nix           # Helper functions for auto-discovering configs/modules
-├── configurations/            # Host-specific configurations
-│   ├── nixos/                 # NixOS hosts
+├── modules/                   # Everything here is a flake-parts module
+│   ├── wiring/
+│   │   ├── hosts.nix          # Central host registry (mkNixos / mkDarwin / mkHome)
+│   │   ├── options.nix        # Option declarations for non-standard flake outputs
+│   │   └── formatter.nix      # perSystem.formatter = nixfmt-rfc-style
+│   ├── nixos-modules/         # NixOS feature modules (base, zfs, docker, ...)
+│   ├── darwin-modules/        # Darwin feature modules (base, homebrew, determinate)
+│   ├── home-modules/          # Home Manager feature modules (cli, fish, dev, ...)
+│   ├── overlays/              # One flake-parts module per overlay
+│   └── packages/              # perSystem.packages registrations
+├── hosts/                     # NOT loaded by import-tree; referenced from modules/wiring/hosts.nix
+│   ├── nixos/
 │   │   ├── nas/               # NixOS NAS server (Proxmox, ZFS, Samba, etc.)
 │   │   ├── home/              # NixOS VM running in NAS
 │   │   └── cloud/             # NixOS VM running in Oracle Cloud
-│   └── darwin/                # macOS hosts
-│       ├── Jeffs-M3Pro.nix    # Personal MacBook Pro
-│       └── work-laptop.nix    # Work MacBook Pro
-├── users/                     # Home Manager configurations by user
-│   ├── jeff/
-│   │   ├── default.nix        # Shared jeff user settings
-│   │   └── hosts/             # Per-host configurations
-│   │       ├── Jeffs-M3Pro.nix
-│   │       ├── work-laptop.nix
-│   │       ├── home.nix
-│   │       └── cloud.nix
-│   └── nix/
-│       ├── default.nix        # Shared nix user settings
-│       └── hosts/
-│           └── nas.nix
-├── modules/                   # Reusable modules with enable options
-│   ├── nixos/                 # NixOS modules (base, zfs, docker, etc.)
-│   ├── darwin/                # Darwin modules (base, homebrew)
-│   └── home/                  # Home Manager modules (cli, fish, dev, etc.)
-├── overlays/                  # Custom package overlays
-├── packages/                  # Custom packages not in nixpkgs
-├── secrets/                   # Encrypted secrets directory (git-crypt)
+│   ├── darwin/
+│   │   ├── Jeffs-M3Pro.nix    # Personal MacBook Pro
+│   │   └── work-laptop.nix    # Work MacBook Pro
+│   └── home/
+│       ├── jeff/{default,Jeffs-M3Pro,work-laptop,home,cloud}.nix
+│       └── nix/{default,nas}.nix
+├── packages/                  # Custom callPackage-style derivations
 └── secrets.nix                # Encrypted secrets file (git-crypt)
 ```
 
 ### Key Concepts
 
-- **Autowiring**: Configurations and modules are auto-discovered based on directory structure
-- **Modular Architecture**: All features are opt-in modules with `enable` options
-- **Separation of Concerns**: Configurations (what to enable) vs Modules (how it works)
-- **User-first Home Manager**: Organized as `users/<user>/hosts/<host>.nix`
+- **Dendritic pattern**: every `.nix` under `modules/` is a flake-parts module loaded recursively by `import-tree`
+- **Modular architecture**: all features are opt-in modules with `enable` options
+- **Explicit host registry**: `modules/wiring/hosts.nix` lists every nixos / darwin / home configuration (adding a host = one line)
 
 ## Background
 

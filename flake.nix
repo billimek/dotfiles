@@ -8,6 +8,7 @@
 
     # Flake framework
     flake-parts.url = "github:hercules-ci/flake-parts";
+    import-tree.url = "github:mightyiam/import-tree";
     determinate.url = "https://flakehub.com/f/DeterminateSystems/determinate/3";
 
     # Home manager
@@ -44,11 +45,9 @@
   };
 
   outputs =
-    inputs@{ flake-parts, ... }:
+    inputs@{ flake-parts, import-tree, ... }:
     flake-parts.lib.mkFlake { inherit inputs; } {
-      imports = [
-        ./flake-module.nix
-      ];
+      imports = [ (import-tree ./modules) ];
 
       systems = [
         "aarch64-linux"
