@@ -86,6 +86,9 @@ To **default a module on** (always active unless explicitly disabled), merge `//
 - Keep edits minimal and consistent with nearby patterns.
 - Commit messages use `scope: description` format. Common scopes: `flake`, `home`, `darwin`, `nixos`, `nas`, `cloud`, `docs`. Multi-scope example: `flake,home,darwin: ...`.
 
+## Git staging for flake evaluation
+Before running `nh`, `nix flake check`, or any flake build, `git add` any new files. Nix flakes only evaluate git-tracked files; untracked new modules will silently be missing from the evaluation.
+
 ## Verify before committing
 ```
 nix fmt          # format all .nix files

@@ -41,6 +41,10 @@
       - Running any command that deletes, overwrites, or mutates data (e.g. `rm`, `dd`, `>` redirection, `git push --force`, `git reset --hard`, `kubectl apply`, etc.).
       - Pushing commits to any remote branch.
     - Preview destructive commands with `echo` first when feasible.
+
+    # Commit & PR Conventions
+    - Never use emojis or em-dashes in commit messages, PR descriptions, or any git-related content.
+    - Use plain ASCII punctuation only.
   '';
 
   # Common git configuration for jeff
