@@ -34,6 +34,8 @@
         github = {
           type = "http";
           url = "https://api.githubcopilot.com/mcp";
+          # gh auth token evaluated at activation time so it stays current
+          headers = [ "Authorization: Bearer $(/Users/jeff/.nix-profile/bin/gh auth token 2>/dev/null)" ];
         };
       };
 
@@ -404,9 +406,13 @@
                   let
                     n = lib.escapeShellArg name;
                     envFlags = lib.concatMapStringsSep " " (e: "-e ${lib.escapeShellArg e}") (server.env or [ ]);
+                    # Double-quote headers so bash evaluates any $(...) at activation time
+                    headerFlags = lib.concatMapStringsSep " " (h: ''-H "${h}"'') (server.headers or [ ]);
                     addCmd =
                       if (server.type or "") == "http" then
-                        "${claudeBin} mcp add -s user --transport http ${n} ${lib.escapeShellArg server.url}"
+                        "${claudeBin} mcp add -s user --transport http ${n} ${lib.escapeShellArg server.url}${
+                          lib.optionalString (headerFlags != "") " ${headerFlags}"
+                        }"
                       else
                         "${claudeBin} mcp add -s user ${n} ${lib.escapeShellArg server.command} ${
                           lib.optionalString (envFlags != "") "${envFlags} "
