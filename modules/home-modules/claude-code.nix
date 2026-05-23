@@ -29,6 +29,7 @@
             "serve"
             "--read-only"
           ];
+          env = [ "KUBECONFIG=${config.home.homeDirectory}/.kube/config" ];
         };
         github = {
           type = "http";
@@ -402,11 +403,14 @@
                   name: server:
                   let
                     n = lib.escapeShellArg name;
+                    envFlags = lib.concatMapStringsSep " " (e: "-e ${lib.escapeShellArg e}") (server.env or [ ]);
                     addCmd =
                       if (server.type or "") == "http" then
                         "${claudeBin} mcp add -s user --transport http ${n} ${lib.escapeShellArg server.url}"
                       else
-                        "${claudeBin} mcp add -s user ${n} ${lib.escapeShellArg server.command} -- ${lib.escapeShellArgs server.args}";
+                        "${claudeBin} mcp add -s user ${n} ${lib.escapeShellArg server.command} ${
+                          lib.optionalString (envFlags != "") "${envFlags} "
+                        }-- ${lib.escapeShellArgs server.args}";
                   in
                   "  $DRY_RUN_CMD ${claudeBin} mcp remove -s user ${n} >/dev/null 2>&1 || true\n  $DRY_RUN_CMD ${addCmd}"
                 ) cfg.mcpServers
