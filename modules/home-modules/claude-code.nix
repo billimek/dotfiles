@@ -19,6 +19,10 @@
       flux-operator-mcp = pkgs.callPackage ../../packages/flux-operator-mcp.nix { };
 
       defaultMcpServers = {
+        mcp-nixos = {
+          command = "${pkgs.mcp-nixos}/bin/mcp-nixos";
+          args = [ ];
+        };
         kubernetes = {
           command = "${kubernetes-mcp-server}/bin/kubernetes-mcp-server";
           args = [ ];
