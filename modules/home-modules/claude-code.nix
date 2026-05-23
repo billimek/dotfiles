@@ -18,6 +18,24 @@
       kubernetes-mcp-server = pkgs.callPackage ../../packages/kubernetes-mcp-server.nix { };
       flux-operator-mcp = pkgs.callPackage ../../packages/flux-operator-mcp.nix { };
 
+      defaultMcpServers = {
+        kubernetes = {
+          command = "${kubernetes-mcp-server}/bin/kubernetes-mcp-server";
+          args = [ ];
+        };
+        flux = {
+          command = "${flux-operator-mcp}/bin/flux-operator-mcp";
+          args = [
+            "serve"
+            "--read-only"
+          ];
+        };
+        github = {
+          type = "http";
+          url = "https://api.githubcopilot.com/mcp";
+        };
+      };
+
       defaultSettings = {
         model = "opusplan";
         effortLevel = "medium";
@@ -121,24 +139,6 @@
           "$defaults"
           "Run git push when the user explicitly asks to push"
         ];
-
-        mcpServers = {
-          kubernetes = {
-            command = "${kubernetes-mcp-server}/bin/kubernetes-mcp-server";
-            args = [ ];
-          };
-          flux = {
-            command = "${flux-operator-mcp}/bin/flux-operator-mcp";
-            args = [
-              "serve"
-              "--read-only"
-            ];
-          };
-          github = {
-            type = "http";
-            url = "https://api.githubcopilot.com/mcp";
-          };
-        };
       };
 
       statuslinePackage = pkgs.writeShellApplication {
@@ -349,6 +349,17 @@
           '';
         };
 
+        mcpServers = lib.mkOption {
+          type = lib.types.attrsOf lib.types.attrs;
+          default = defaultMcpServers;
+          description = ''
+            MCP servers to register via `claude mcp add --scope user` during
+            home-manager activation. Claude Code reads these from ~/.claude.json,
+            not settings.json, so they must be registered imperatively.
+            Stdio servers need {command, args}; HTTP servers need {type="http", url}.
+          '';
+        };
+
         statusline.enable = lib.mkEnableOption "starship-driven Claude statusline" // {
           default = true;
         };
@@ -377,6 +388,32 @@
               };
             };
         };
+
+        home.activation.claudeMcpServers =
+          let
+            # Claude Code binary installs outside Nix; activation PATH won't find it
+            claudeBin = lib.escapeShellArg "${config.home.homeDirectory}/.local/bin/claude";
+          in
+          lib.hm.dag.entryAfter [ "writeBoundary" ] (
+            lib.optionalString (cfg.mcpServers != { }) (
+              "if [ -x ${claudeBin} ]; then\n"
+              + lib.concatStringsSep "\n" (
+                lib.mapAttrsToList (
+                  name: server:
+                  let
+                    n = lib.escapeShellArg name;
+                    addCmd =
+                      if (server.type or "") == "http" then
+                        "${claudeBin} mcp add -s user --transport http ${n} ${lib.escapeShellArg server.url}"
+                      else
+                        "${claudeBin} mcp add -s user ${n} ${lib.escapeShellArg server.command} -- ${lib.escapeShellArgs server.args}";
+                  in
+                  "  $DRY_RUN_CMD ${claudeBin} mcp remove -s user ${n} >/dev/null 2>&1 || true\n  $DRY_RUN_CMD ${addCmd}"
+                ) cfg.mcpServers
+              )
+              + "\nfi\n"
+            )
+          );
 
         home.file.".claude/statusline-command.sh" = lib.mkIf cfg.statusline.enable {
           source = "${statuslinePackage}/bin/claude-statusline";
