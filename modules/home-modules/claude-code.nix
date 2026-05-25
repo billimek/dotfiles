@@ -39,7 +39,7 @@
           type = "http";
           url = "https://api.githubcopilot.com/mcp";
           # gh auth token evaluated at activation time so it stays current
-          headers = [ "Authorization: Bearer $(/Users/jeff/.nix-profile/bin/gh auth token 2>/dev/null)" ];
+          headers = [ "Authorization: Bearer $(${pkgs.gh}/bin/gh auth token 2>/dev/null)" ];
         };
       };
 
