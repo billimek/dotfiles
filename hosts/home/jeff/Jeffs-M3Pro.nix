@@ -12,6 +12,14 @@
     kubernetes.enable = true;
     zmx.enable = true;
 
+    claude-code.extraMcpServers.victorialogs = {
+      command = lib.getExe (pkgs.callPackage ../../../packages/mcp-victorialogs.nix { });
+      args = [ ];
+      env = [
+        "VL_INSTANCE_ENTRYPOINT=https://vlogs.eviljungle.com"
+      ];
+    };
+
     claude-code.extraMcpServers.grafana = {
       command = lib.getExe pkgs.mcp-grafana;
       args = [ "--disable-write" ];
