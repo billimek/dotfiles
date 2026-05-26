@@ -40,6 +40,7 @@
     - You must ask for explicit confirmation before:
       - Running any command that deletes, overwrites, or mutates data (e.g. `rm`, `dd`, `>` redirection, `git push --force`, `git reset --hard`, `kubectl apply`, etc.).
       - Pushing commits to any remote branch.
+      - This confirmation rule applies equally to MCP server tools that mutate state (create, update, delete, scale, exec, merge, push), not just shell commands. Read-only MCP queries do not need confirmation.
     - Preview destructive commands with `echo` first when feasible.
 
     # Commit & PR Conventions

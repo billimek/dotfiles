@@ -140,6 +140,28 @@
           # Web
           "WebSearch"
           "WebFetch"
+
+          # MCP — whole-server approve for servers that cannot write
+          "mcp__mcp-nixos"
+          "mcp__flux"
+          "mcp__grafana"
+          "mcp__victorialogs"
+
+          # MCP — kubernetes read-only tools only (write tools stay gated)
+          "mcp__kubernetes__configuration_contexts_list"
+          "mcp__kubernetes__configuration_view"
+          "mcp__kubernetes__events_list"
+          "mcp__kubernetes__namespaces_list"
+          "mcp__kubernetes__nodes_log"
+          "mcp__kubernetes__nodes_stats_summary"
+          "mcp__kubernetes__nodes_top"
+          "mcp__kubernetes__pods_get"
+          "mcp__kubernetes__pods_list"
+          "mcp__kubernetes__pods_list_in_namespace"
+          "mcp__kubernetes__pods_log"
+          "mcp__kubernetes__pods_top"
+          "mcp__kubernetes__resources_get"
+          "mcp__kubernetes__resources_list"
         ];
 
         autoMode.allow = [

@@ -81,6 +81,12 @@ To **default a module on** (always active unless explicitly disabled), merge `//
 - **opnix** (1Password) — runtime secrets on NixOS hosts via `services.onepassword-secrets`. Configured in `modules/nixos-modules/opnix.nix`.
 - Never commit plaintext secrets.
 
+## Verifying option names with mcp-nixos
+When adding or changing Nix options, verify the exact option path and accepted values using the
+`mcp-nixos` tools (`nixos_search`, `nixos_info`, `home_manager_options_by_prefix`,
+`darwin_options_by_prefix`, etc.) rather than guessing. There is no CI build check — eval errors
+are caught only at local build time.
+
 ## Conventions
 - Drop new module files into the appropriate `modules/.../*.nix` location; `import-tree` picks them up automatically.
 - Keep edits minimal and consistent with nearby patterns.
