@@ -367,6 +367,15 @@
           '';
         };
 
+        extraMcpServers = lib.mkOption {
+          type = lib.types.attrsOf lib.types.attrs;
+          default = { };
+          description = ''
+            Per-host MCP servers merged on top of mcpServers. Lets a single host
+            register an extra server without redefining the shared defaults.
+          '';
+        };
+
         statusline.enable = lib.mkEnableOption "starship-driven Claude statusline" // {
           default = true;
         };
@@ -400,16 +409,19 @@
           let
             # Claude Code binary installs outside Nix; activation PATH won't find it
             claudeBin = lib.escapeShellArg "${config.home.homeDirectory}/.local/bin/claude";
+            allServers = cfg.mcpServers // cfg.extraMcpServers;
           in
           lib.hm.dag.entryAfter [ "writeBoundary" ] (
-            lib.optionalString (cfg.mcpServers != { }) (
+            lib.optionalString (allServers != { }) (
               "if [ -x ${claudeBin} ]; then\n"
               + lib.concatStringsSep "\n" (
                 lib.mapAttrsToList (
                   name: server:
                   let
                     n = lib.escapeShellArg name;
-                    envFlags = lib.concatMapStringsSep " " (e: "-e ${lib.escapeShellArg e}") (server.env or [ ]);
+                    # Double-quote env so bash evaluates any $(...) (e.g. `op read`) at
+                    # activation time, mirroring the headers treatment below.
+                    envFlags = lib.concatMapStringsSep " " (e: ''-e "${e}"'') (server.env or [ ]);
                     # Double-quote headers so bash evaluates any $(...) at activation time
                     headerFlags = lib.concatMapStringsSep " " (h: ''-H "${h}"'') (server.headers or [ ]);
                     addCmd =
@@ -423,7 +435,7 @@
                         }-- ${lib.escapeShellArgs server.args}";
                   in
                   "  $DRY_RUN_CMD ${claudeBin} mcp remove -s user ${n} >/dev/null 2>&1 || true\n  $DRY_RUN_CMD ${addCmd}"
-                ) cfg.mcpServers
+                ) allServers
               )
               + "\nfi\n"
             )

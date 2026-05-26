@@ -11,6 +11,15 @@
     dev.enable = true;
     kubernetes.enable = true;
     zmx.enable = true;
+
+    claude-code.extraMcpServers.grafana = {
+      command = lib.getExe pkgs.mcp-grafana;
+      args = [ "--disable-write" ];
+      env = [
+        "GRAFANA_URL=https://grafana.eviljungle.com"
+        "GRAFANA_SERVICE_ACCOUNT_TOKEN=$(${pkgs._1password-cli}/bin/op read op://nix/grafana-mcp/token 2>/dev/null)"
+      ];
+    };
   };
 
   home = {
