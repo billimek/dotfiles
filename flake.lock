@@ -554,11 +554,11 @@
     },
     "nixpkgs-unstable": {
       "locked": {
-        "lastModified": 1779536132,
-        "narHash": "sha256-q+fF42iv/geEbHfgSzy3tS0FF/EyD6XTZ98E6yxiBO8=",
+        "lastModified": 1779694939,
+        "narHash": "sha256-Ly4j75O8ICaSQx3uxPnwk2x7PMF0XQvn5r0c3yBA7FI=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "3d8f0f3f72a6cd4d93d0ad13203f2ea1cb7e1456",
+        "rev": "f9d8b65950353691ab56561e7c73d2e1063d810b",
         "type": "github"
       },
       "original": {
@@ -730,11 +730,11 @@
         "utils": "utils"
       },
       "locked": {
-        "lastModified": 1779289456,
-        "narHash": "sha256-TpqlnOIA9z/HsMLYjUpuFGBiduoy5dVOWOUvaPbBCfA=",
+        "lastModified": 1779702760,
+        "narHash": "sha256-ajdQMy+MoA0QWqEF3eYK2f2zThV0rb+1OxL2Gnk6orw=",
         "owner": "SaumonNet",
         "repo": "proxmox-nixos",
-        "rev": "32832700fd38f4c33678c17bbbbf829e78cbf630",
+        "rev": "f41ec4d7218c6c6c1cab27c378016b4c343d7bcc",
         "type": "github"
       },
       "original": {
