@@ -10,6 +10,7 @@
       config,
       lib,
       pkgs,
+      pkgs-unstable,
       ...
     }:
     let
@@ -127,6 +128,11 @@
           "Bash(, hexyl:*)"
           "Bash(, xxd:*)"
           "Bash(, glow:*)"
+
+          # rtk meta-commands (read-only; hook auto-allows rewritten commands itself)
+          "Bash(rtk gain:*)"
+          "Bash(rtk discover:*)"
+          "Bash(rtk --version)"
 
           # Python via nix-shell. Running python is arbitrary code execution by
           # definition, so this expands trust by roughly the same amount as
@@ -401,10 +407,15 @@
         statusline.enable = lib.mkEnableOption "starship-driven Claude statusline" // {
           default = true;
         };
+
+        rtk.enable = lib.mkEnableOption "rtk token-reducing CLI proxy hook for Claude Code";
       };
 
       config = lib.mkIf cfg.enable {
         home.sessionVariables.CLAUDE_CODE_SUBAGENT_MODEL = "sonnet";
+        home.sessionVariables.RTK_TELEMETRY_DISABLED = lib.mkIf cfg.rtk.enable "1";
+
+        home.packages = lib.mkIf cfg.rtk.enable [ pkgs-unstable.rtk ];
 
         programs.claude-code = {
           enable = true;
@@ -424,6 +435,21 @@
                 command = "${config.home.homeDirectory}/.claude/subagent-statusline.sh";
                 padding = 0;
               };
+            }
+            // lib.optionalAttrs cfg.rtk.enable {
+              hooks.PreToolUse = [
+                {
+                  matcher = "Bash";
+                  hooks = [
+                    {
+                      type = "command";
+                      # Must be exactly "rtk hook claude" (no store path) so rtk's
+                      # binary_hook_registered() exact-match check considers it installed.
+                      command = "rtk hook claude";
+                    }
+                  ];
+                }
+              ];
             };
         };
 
