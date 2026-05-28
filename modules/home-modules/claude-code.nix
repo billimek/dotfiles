@@ -412,8 +412,12 @@
       };
 
       config = lib.mkIf cfg.enable {
-        home.sessionVariables.CLAUDE_CODE_SUBAGENT_MODEL = "sonnet";
-        home.sessionVariables.RTK_TELEMETRY_DISABLED = lib.mkIf cfg.rtk.enable "1";
+        home.sessionVariables = {
+          CLAUDE_CODE_SUBAGENT_MODEL = "sonnet";
+        }
+        // lib.optionalAttrs cfg.rtk.enable {
+          RTK_TELEMETRY_DISABLED = "1";
+        };
 
         home.packages = lib.mkIf cfg.rtk.enable [ pkgs-unstable.rtk ];
 
