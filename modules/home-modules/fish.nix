@@ -149,7 +149,7 @@
                     set hours        (math -s0 "($CMD_DURATION / (1000*60*60)) % 24")
                     set days         (math -s0 "($CMD_DURATION / (1000*60*60*24))")
 
-                    echo -n (set_color -io -b black black)"Took "
+                    echo -n (set_color -i -o -b black black)"Took "
                     test $days -gt 0 && echo -n "$days days, "
                     test $hours -gt 0 && echo -n "$hours hours, "
                     test $minutes -gt 0 && echo -n "$minutes minutes, "
