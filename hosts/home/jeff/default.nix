@@ -56,7 +56,12 @@
     };
     signing = {
       key = lib.mkDefault "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIhZTlonLeCLJpBtuSQcqofKoUbr2ajG3JXxZ7Gjdgkh";
-      signer = lib.mkDefault "/Applications/1Password.app/Contents/MacOS/op-ssh-sign";
+      signer = lib.mkDefault (
+        if pkgs.stdenv.isDarwin then
+          "/Applications/1Password.app/Contents/MacOS/op-ssh-sign"
+        else
+          "ssh-keygen"
+      );
     };
   };
 }

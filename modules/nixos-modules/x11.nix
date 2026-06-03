@@ -1,25 +1,25 @@
-{ ... }: {
-  flake.nixosModules.x11 = 
-# X11 utilities (for X forwarding)
+{ ... }:
 {
-  config,
-  lib,
-  pkgs,
-  ...
-}:
-let
-  cfg = config.modules.x11;
-in
-{
-  options.modules.x11 = {
-    enable = lib.mkEnableOption "X11 utilities" // {
-      default = true;
-    };
-  };
+  flake.nixosModules.x11 =
+    # X11 utilities (for X forwarding)
+    {
+      config,
+      lib,
+      pkgs,
+      ...
+    }:
+    let
+      cfg = config.modules.x11;
+    in
+    {
+      options.modules.x11 = {
+        enable = lib.mkEnableOption "X11 utilities" // {
+          default = true;
+        };
+      };
 
-  config = lib.mkIf cfg.enable {
-    environment.systemPackages = [ pkgs.xorg.xauth ];
-  };
-}
-  ;
+      config = lib.mkIf cfg.enable {
+        environment.systemPackages = [ pkgs.xauth ];
+      };
+    };
 }
