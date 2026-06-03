@@ -46,7 +46,7 @@
           jwt-cli
           lazygit
           nixd
-          nixfmt-rfc-style
+          nixfmt
           nvd
           ouch
           procs
