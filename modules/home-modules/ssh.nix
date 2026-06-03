@@ -29,19 +29,25 @@
               Hostname = "cloud";
               User = "jeff";
               ForwardAgent = "yes";
-              SetEnv = "is_vscode=1";
+              SetEnv = {
+                is_vscode = "1";
+              };
             };
             "home" = {
               Hostname = "home";
               User = "jeff";
               ForwardAgent = "yes";
-              SetEnv = "is_vscode=1";
+              SetEnv = {
+                is_vscode = "1";
+              };
             };
             "nas" = {
               Hostname = "nas";
               User = "nix";
               ForwardAgent = "yes";
-              SetEnv = "is_vscode=1";
+              SetEnv = {
+                is_vscode = "1";
+              };
             };
             # zmx session hosts -- e.g. "ssh home.shell" attaches to zmx session "home.shell"
             "home.*" = {
