@@ -20,78 +20,63 @@
       config = lib.mkIf cfg.enable {
         programs.ssh = {
           enable = true;
-          # Disable deprecated default config - we set our own defaults in matchBlocks."*"
           enableDefaultConfig = false;
-          matchBlocks."*" = {
-            addKeysToAgent = "yes";
-          };
-          matchBlocks."cloud" = {
-            hostname = "cloud";
-            user = "jeff";
-            forwardAgent = true;
-            setEnv = {
-              is_vscode = 1;
-            };
-          };
-          matchBlocks."home" = {
-            hostname = "home";
-            user = "jeff";
-            forwardAgent = true;
-            setEnv = {
-              is_vscode = 1;
-            };
-          };
-          matchBlocks."nas" = {
-            hostname = "nas";
-            user = "nix";
-            forwardAgent = true;
-            setEnv = {
-              is_vscode = 1;
-            };
-          };
-
-          # zmx session hosts -- e.g. "ssh home.shell" attaches to zmx session "home.shell"
-          matchBlocks."home.*" = {
-            hostname = "home";
-            user = "jeff";
-            forwardAgent = true;
-            controlMaster = "auto";
-            controlPath = "~/.ssh/cm-%r@%h:%p";
-            controlPersist = "10m";
-            serverAliveInterval = 60;
-            serverAliveCountMax = 3;
-          };
-          matchBlocks."nas.*" = {
-            hostname = "nas";
-            user = "nix";
-            forwardAgent = true;
-            controlMaster = "auto";
-            controlPath = "~/.ssh/cm-%r@%h:%p";
-            controlPersist = "10m";
-            serverAliveInterval = 60;
-            serverAliveCountMax = 3;
-          };
-          matchBlocks."cloud.*" = {
-            hostname = "cloud";
-            user = "jeff";
-            forwardAgent = true;
-            controlMaster = "auto";
-            controlPath = "~/.ssh/cm-%r@%h:%p";
-            controlPersist = "10m";
-            serverAliveInterval = 60;
-            serverAliveCountMax = 3;
-          };
-          # RequestTTY/RemoteCommand use upstream directive names (extraOptions deprecated in HM 26.05)
           settings = {
+            "*" = {
+              AddKeysToAgent = "yes";
+            };
+            "cloud" = {
+              Hostname = "cloud";
+              User = "jeff";
+              ForwardAgent = "yes";
+              SetEnv = "is_vscode=1";
+            };
+            "home" = {
+              Hostname = "home";
+              User = "jeff";
+              ForwardAgent = "yes";
+              SetEnv = "is_vscode=1";
+            };
+            "nas" = {
+              Hostname = "nas";
+              User = "nix";
+              ForwardAgent = "yes";
+              SetEnv = "is_vscode=1";
+            };
+            # zmx session hosts -- e.g. "ssh home.shell" attaches to zmx session "home.shell"
             "home.*" = {
+              Hostname = "home";
+              User = "jeff";
+              ForwardAgent = "yes";
+              ControlMaster = "auto";
+              ControlPath = "~/.ssh/cm-%r@%h:%p";
+              ControlPersist = "10m";
+              ServerAliveInterval = 60;
+              ServerAliveCountMax = 3;
               RequestTTY = "yes";
               RemoteCommand = "zmx attach %n";
             };
             "nas.*" = {
+              Hostname = "nas";
+              User = "nix";
+              ForwardAgent = "yes";
+              ControlMaster = "auto";
+              ControlPath = "~/.ssh/cm-%r@%h:%p";
+              ControlPersist = "10m";
+              ServerAliveInterval = 60;
+              ServerAliveCountMax = 3;
               RequestTTY = "yes";
               RemoteCommand = "zmx attach %n";
             };
             "cloud.*" = {
+              Hostname = "cloud";
+              User = "jeff";
+              ForwardAgent = "yes";
+              ControlMaster = "auto";
+              ControlPath = "~/.ssh/cm-%r@%h:%p";
+              ControlPersist = "10m";
+              ServerAliveInterval = 60;
+              ServerAliveCountMax = 3;
               RequestTTY = "yes";
               RemoteCommand = "zmx attach %n";
             };
