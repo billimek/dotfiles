@@ -7,7 +7,7 @@ Nix flake managing NixOS hosts, nix-darwin (macOS) hosts, and Home Manager user 
 ## Architecture
 - **Pattern**: dendritic flake-parts via [`mightyiam/import-tree`](https://github.com/mightyiam/import-tree). `flake.nix` is `mkFlake` + `(import-tree ./modules)` — every `.nix` file under `./modules/` is a flake-parts module loaded recursively, and outputs are produced by option-merging.
 - **Formatter**: `nixfmt-rfc-style` (run `nix fmt`).
-- **Key inputs**: `nixpkgs` (25.11), `nixpkgs-unstable`, `home-manager`, `nix-darwin`, `flake-parts`, `import-tree`, `determinate`, `opnix`, `nvf`.
+- **Key inputs**: `nixpkgs` (26.05), `nixpkgs-unstable`, `home-manager`, `nix-darwin`, `flake-parts`, `import-tree`, `determinate`, `opnix`, `nvf`.
 
 ## Directory layout
 | Path | Purpose |
