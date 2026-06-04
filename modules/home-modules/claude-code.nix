@@ -208,6 +208,11 @@
           cost_usd=$(printf '%s' "$payload" | jq -r '.cost.total_cost_usd // 0' | awk '{printf "%.2f", $1+0}')
           export CLAUDE_COST_USD="$cost_usd"
 
+          lim5h=$(printf '%s' "$payload" | jq -r '.rate_limits.five_hour.used_percentage // empty' | awk 'NF{printf "%d", $1+0}')
+          lim7d=$(printf '%s' "$payload" | jq -r '.rate_limits.seven_day.used_percentage // empty' | awk 'NF{printf "%d", $1+0}')
+          export CLAUDE_LIMIT_5H_PCT="$lim5h"
+          export CLAUDE_LIMIT_7D_PCT="$lim7d"
+
           session_id=$(printf '%s' "$payload" | jq -r '.session_id // ""')
           agent_count=0
           count_file="/tmp/claude-subagents-$session_id.count"
@@ -267,7 +272,9 @@
         format =
           "$directory$git_branch$git_status$nix_shell$kubernetes"
           + "\${custom.model}\${custom.output_style}\${custom.agents}\${custom.cost}"
-          + "\${custom.ctx_low}\${custom.ctx_med}\${custom.ctx_high}";
+          + "\${custom.ctx_low}\${custom.ctx_med}\${custom.ctx_high}"
+          + "\${custom.limit_5h_low}\${custom.limit_5h_med}\${custom.limit_5h_high}"
+          + "\${custom.limit_7d_low}\${custom.limit_7d_med}\${custom.limit_7d_high}";
 
         directory = {
           format = "[$path]($style) ";
@@ -358,6 +365,72 @@
             when = ''[ "$CLAUDE_CTX_PCT" -ge 80 ]'';
             command = ''printf 'ctx %s %s%%' "$CLAUDE_CTX_BAR" "$CLAUDE_CTX_PCT"'';
             format = "[$output]($style)";
+            style = "bold red";
+            shell = [
+              "bash"
+              "--noprofile"
+              "--norc"
+            ];
+          };
+          limit_5h_low = {
+            when = ''[ -n "$CLAUDE_LIMIT_5H_PCT" ] && [ "$CLAUDE_LIMIT_5H_PCT" -lt 50 ]'';
+            command = ''printf '5h %s%%' "$CLAUDE_LIMIT_5H_PCT"'';
+            format = "[ $output]($style)";
+            style = "green";
+            shell = [
+              "bash"
+              "--noprofile"
+              "--norc"
+            ];
+          };
+          limit_5h_med = {
+            when = ''[ -n "$CLAUDE_LIMIT_5H_PCT" ] && [ "$CLAUDE_LIMIT_5H_PCT" -ge 50 ] && [ "$CLAUDE_LIMIT_5H_PCT" -lt 80 ]'';
+            command = ''printf '5h %s%%' "$CLAUDE_LIMIT_5H_PCT"'';
+            format = "[ $output]($style)";
+            style = "yellow";
+            shell = [
+              "bash"
+              "--noprofile"
+              "--norc"
+            ];
+          };
+          limit_5h_high = {
+            when = ''[ -n "$CLAUDE_LIMIT_5H_PCT" ] && [ "$CLAUDE_LIMIT_5H_PCT" -ge 80 ]'';
+            command = ''printf '5h %s%%' "$CLAUDE_LIMIT_5H_PCT"'';
+            format = "[ $output]($style)";
+            style = "bold red";
+            shell = [
+              "bash"
+              "--noprofile"
+              "--norc"
+            ];
+          };
+          limit_7d_low = {
+            when = ''[ -n "$CLAUDE_LIMIT_7D_PCT" ] && [ "$CLAUDE_LIMIT_7D_PCT" -lt 50 ]'';
+            command = ''printf '7d %s%%' "$CLAUDE_LIMIT_7D_PCT"'';
+            format = "[ $output]($style)";
+            style = "green";
+            shell = [
+              "bash"
+              "--noprofile"
+              "--norc"
+            ];
+          };
+          limit_7d_med = {
+            when = ''[ -n "$CLAUDE_LIMIT_7D_PCT" ] && [ "$CLAUDE_LIMIT_7D_PCT" -ge 50 ] && [ "$CLAUDE_LIMIT_7D_PCT" -lt 80 ]'';
+            command = ''printf '7d %s%%' "$CLAUDE_LIMIT_7D_PCT"'';
+            format = "[ $output]($style)";
+            style = "yellow";
+            shell = [
+              "bash"
+              "--noprofile"
+              "--norc"
+            ];
+          };
+          limit_7d_high = {
+            when = ''[ -n "$CLAUDE_LIMIT_7D_PCT" ] && [ "$CLAUDE_LIMIT_7D_PCT" -ge 80 ]'';
+            command = ''printf '7d %s%%' "$CLAUDE_LIMIT_7D_PCT"'';
+            format = "[ $output]($style)";
             style = "bold red";
             shell = [
               "bash"
