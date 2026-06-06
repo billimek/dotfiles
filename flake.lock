@@ -845,11 +845,11 @@
         "nixpkgs": "nixpkgs_7"
       },
       "locked": {
-        "lastModified": 1780624881,
-        "narHash": "sha256-MIl7BZkjmAF8gQq5Dzi20rSJevVBgOUWni2CFv9kFiA=",
+        "lastModified": 1780709800,
+        "narHash": "sha256-tUWuaIC8+T4HgkEfhkpJfNsVlsRnhDfaxIzOLNmD3kM=",
         "owner": "budimanjojo",
         "repo": "talhelper",
-        "rev": "5a856eab22aa860983c10dd6f96b242eaeda9e71",
+        "rev": "82d9e82fffa5e5989554fbfbbd0d676e35d7e14a",
         "type": "github"
       },
       "original": {
