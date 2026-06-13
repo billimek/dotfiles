@@ -36,6 +36,7 @@
     packages = with pkgs; [
       terminal-notifier # send notifications to macOS notification center
       _1password-cli
+      (pkgs.callPackage ../../../packages/apple-mail-mcp.nix { })
     ];
   };
 
