@@ -38,7 +38,6 @@
       "slack"
       "steam"
       "VIA"
-      "vmware-fusion"
       "zoom"
     ];
     masApps = {
