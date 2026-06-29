@@ -49,6 +49,7 @@
         effortLevel = "medium";
         remoteControlAtStartup = true;
         includeCoAuthoredBy = false;
+        tui = "fullscreen";
 
         permissions.defaultMode = "plan";
         permissions.allow = [
