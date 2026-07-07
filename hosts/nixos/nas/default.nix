@@ -78,7 +78,8 @@
     };
 
     "ssdtank/kopia" = {
-      use_template = [ "backups" ]; # 0 hourly, 0 daily, 6 monthly, 2 yearly
+      use_template = [ "backups" ]; # base: 0 hourly, 6 monthly, 2 yearly
+      daily = 3; # override template daily=0 so rclone-backup-kopia has a fresh source
     };
   };
 
