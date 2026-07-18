@@ -28,7 +28,7 @@
       "discord"
       "freelens"
       "microsoft-office"
-      "microsoft-remote-desktop"
+      "windows-app"
       "moonlight"
       "mudlet"
       "obs"

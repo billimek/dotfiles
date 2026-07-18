@@ -36,7 +36,7 @@ in
       "codex"
       "codex-app"
       "gather"
-      "microsoft-remote-desktop"
+      "windows-app"
       "obsidian"
       "VIA"
       "zed"
