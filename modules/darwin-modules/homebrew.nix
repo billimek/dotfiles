@@ -21,7 +21,7 @@
         homebrew = {
           enable = true;
           onActivation.autoUpdate = true;
-          onActivation.upgrade = true;
+          onActivation.upgrade = false;
           onActivation.cleanup = "uninstall";
           onActivation.extraFlags = [ "--force" ];
           global.brewfile = true;
