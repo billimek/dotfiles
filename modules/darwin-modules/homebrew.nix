@@ -18,6 +18,8 @@
       };
 
       config = lib.mkIf cfg.enable {
+        environment.variables.HOMEBREW_NO_UPGRADE_AUTO_UPDATES_CASKS = "1";
+
         homebrew = {
           enable = true;
           onActivation.autoUpdate = true;
@@ -26,7 +28,6 @@
           onActivation.extraFlags = [ "--force" ];
           global.brewfile = true;
           brews = [
-            "cask"
             "mas"
           ];
           casks = [
