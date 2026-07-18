@@ -26,12 +26,10 @@
     casks = [
       "google-chrome"
       "discord"
-      "freelens"
       "microsoft-office"
       "windows-app"
       "moonlight"
       "mudlet"
-      "obs"
       "OrbStack"
       "plex"
       "prismlauncher"

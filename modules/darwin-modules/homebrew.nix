@@ -33,11 +33,9 @@
           casks = [
             "1password"
             "claude"
-            "cmux"
             "discord"
             "element"
             "ghostty"
-            "iterm2"
             # "itermbrowserplugin"
             # "karabiner-elements"
             "logi-options+"
@@ -46,7 +44,6 @@
             "spotify"
             "shottr"
             "visual-studio-code"
-            "visual-studio-code@insiders"
             "vlc"
           ];
           masApps = {
