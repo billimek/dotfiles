@@ -15,12 +15,21 @@ in
     dev.enable = true;
     kubernetes.enable = true;
     zmx.enable = true;
+
+    claude-code.extraMcpServers.leanix = {
+      type = "http";
+      url = "https://homedepot.leanix.net/services/mcp-server/v1/mcp";
+      headers = [
+        "Authorization: Token $(${pkgs._1password-cli}/bin/op read op://nix/leanix-mcp/token 2>/dev/null)"
+      ];
+    };
   };
 
   home = {
     username = lib.mkForce secrets.work_username;
     homeDirectory = "/Users/${config.home.username}";
     packages = with pkgs; [
+      _1password-cli
       act
       cloudfoundry-cli
       crane
