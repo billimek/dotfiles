@@ -11,7 +11,6 @@
     dev.enable = true;
     kubernetes.enable = true;
     zmx.enable = true;
-    claude-code.rtk.enable = true;
 
     claude-code.extraMcpServers.victorialogs = {
       command = lib.getExe (pkgs.callPackage ../../../packages/mcp-victorialogs.nix { });
