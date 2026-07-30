@@ -90,6 +90,21 @@ are caught only at local build time.
 ## Conventions
 - Drop new module files into the appropriate `modules/.../*.nix` location; `import-tree` picks them up automatically.
 - Keep edits minimal and consistent with nearby patterns.
+- **`~/.claude/settings.json` is copied, never symlinked.** Claude Code's settings writer opens the
+  file with `O_NOFOLLOW` and refuses to write through a symlink, so a store symlink there makes
+  every runtime settings write fail silently — including its one-time org-default reconciliation,
+  which then retried forever and reset `model = "opusplan"` to the org default on every startup.
+  Both upstream reports (`anthropics/claude-code#15786`, `#55485`) were closed as not planned, so
+  this is settled behavior. `modules/home-modules/claude-code.nix` therefore leaves
+  `programs.claude-code.settings` empty (home-manager only creates the symlink when it is
+  non-empty) and installs the generated JSON via `home.activation.claudeSettings` with
+  `install -m 644`. Consequence: nix is the source of truth and the file is overwritten on every
+  switch, so runtime `/config` and `/effort` changes do not survive a rebuild — put anything
+  durable in `defaultSettings`. Before overwriting, activation stashes a timestamped copy in
+  `~/.claude/settings-drift/` whenever the live file differs semantically from what nix installs;
+  run `/reconcile-claude-settings` to triage those and fold the keepers into `defaultSettings`.
+  Do not "fix" this by switching to `home.file`, including `mkOutOfStoreSymlink`: both still
+  produce a symlink.
 - Commit messages use `scope: description` format. Common scopes: `flake`, `home`, `darwin`, `nixos`, `nas`, `cloud`, `docs`. Multi-scope example: `flake,home,darwin: ...`.
 
 ## Git staging for flake evaluation

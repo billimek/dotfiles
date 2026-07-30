@@ -6,6 +6,21 @@
     # The binary is installed outside Nix (`curl -fsSL https://claude.ai/install.sh | bash`)
     # so it can auto-update. Nix manages settings.json, the starship-driven
     # statusline, and (via agent-instructions.nix) ~/.claude/CLAUDE.md.
+    #
+    # settings.json is COPIED during activation rather than symlinked from the
+    # store. Claude Code's settings writer opens the file with O_NOFOLLOW and
+    # refuses to write through a symlink at all ("Refusing to write through
+    # symlink"), so a store symlink there makes every runtime settings write
+    # fail silently. That is not a bug awaiting a fix: both upstream reports
+    # (anthropics/claude-code#15786, #55485) were closed as not planned, and it
+    # is why the wider nix community copies this file too. Copying keeps nix as
+    # the source of truth while leaving the file writable, which also lets
+    # Claude Code complete its one-time org-default reconciliation instead of
+    # retrying it (and resetting `model`) on every single startup.
+    #
+    # Trade-off: runtime changes made via /config, /effort, or "add to user
+    # settings" are reverted on the next home-manager switch. Anything meant to
+    # be durable belongs in `defaultSettings` below.
     {
       config,
       lib,
@@ -49,6 +64,7 @@
         effortLevel = "medium";
         remoteControlAtStartup = true;
         includeCoAuthoredBy = false;
+        agentPushNotifEnabled = true;
         tui = "fullscreen";
 
         permissions.defaultMode = "plan";
@@ -223,6 +239,18 @@
           fi
           export CLAUDE_AGENT_COUNT="$agent_count"
 
+          # Count unreconciled settings.json stashes left by the activation
+          # script (see home.activation.claudeSettings). -maxdepth 1 is load
+          # bearing: /reconcile-claude-settings moves processed stashes into
+          # reconciled/ to clear this indicator, and without it they would keep
+          # being counted and the warning would never go away.
+          drift_count=0
+          drift_dir="$HOME/.claude/settings-drift"
+          if [ -d "$drift_dir" ]; then
+            drift_count=$(find "$drift_dir" -maxdepth 1 -type f -name '*.json' 2>/dev/null | wc -l | awk '{print $1}')
+          fi
+          export CLAUDE_SETTINGS_DRIFT="$drift_count"
+
           cd "$cwd" 2>/dev/null || true
           STARSHIP_CONFIG="${config.home.homeDirectory}/.claude/starship.toml" exec starship prompt
         '';
@@ -272,7 +300,7 @@
         command_timeout = 500;
         format =
           "$directory$git_branch$git_status$nix_shell$kubernetes"
-          + "\${custom.model}\${custom.output_style}\${custom.agents}\${custom.cost}"
+          + "\${custom.model}\${custom.output_style}\${custom.settings_drift}\${custom.agents}\${custom.cost}"
           + "\${custom.ctx_low}\${custom.ctx_med}\${custom.ctx_high}"
           + "\${custom.limit_5h_low}\${custom.limit_5h_med}\${custom.limit_5h_high}"
           + "\${custom.limit_7d_low}\${custom.limit_7d_med}\${custom.limit_7d_high}";
@@ -312,6 +340,21 @@
             command = ''printf '%s' "$CLAUDE_OUTPUT_STYLE"'';
             format = "[$output]($style) ";
             style = "italic yellow";
+            shell = [
+              "bash"
+              "--noprofile"
+              "--norc"
+            ];
+          };
+          # Unreconciled settings.json drift. `nh` hides activation output unless
+          # run with -v, so the stash warning printed during the switch is never
+          # actually seen; surface it here instead, where /reconcile-claude-settings
+          # is also the obvious next action.
+          settings_drift = {
+            when = ''[ "$CLAUDE_SETTINGS_DRIFT" -gt 0 ]'';
+            command = ''printf 'cfg-drift %s' "$CLAUDE_SETTINGS_DRIFT"'';
+            format = "[$output]($style) ";
+            style = "bold yellow";
             shell = [
               "bash"
               "--noprofile"
@@ -455,6 +498,10 @@
             Contents of ~/.claude/settings.json. Defaults cover model, plan-mode
             startup, and a read-only command allowlist; per-host modules can
             override individual fields with lib.mkForce.
+
+            Written by copy during activation, not symlinked, so Claude Code can
+            write to the file. This means the file is overwritten on every
+            switch and any runtime changes to it are lost.
           '';
         };
 
@@ -500,36 +547,84 @@
           # manage outside of nix for faster updates (curl -fsSL https://claude.ai/install.sh | bash)
           package = null;
 
-          settings =
-            cfg.settings
-            // lib.optionalAttrs cfg.statusline.enable {
-              statusLine = {
-                type = "command";
-                command = "${config.home.homeDirectory}/.claude/statusline-command.sh";
-                padding = 0;
-              };
-              subagentStatusLine = {
-                type = "command";
-                command = "${config.home.homeDirectory}/.claude/subagent-statusline.sh";
-                padding = 0;
-              };
-            }
-            // lib.optionalAttrs cfg.rtk.enable {
-              hooks.PreToolUse = [
-                {
-                  matcher = "Bash";
-                  hooks = [
-                    {
-                      type = "command";
-                      # Must be exactly "rtk hook claude" (no store path) so rtk's
-                      # binary_hook_registered() exact-match check considers it installed.
-                      command = "rtk hook claude";
-                    }
-                  ];
-                }
-              ];
-            };
+          # Deliberately left unset: home-manager only creates the
+          # ~/.claude/settings.json symlink when this is non-empty, and Claude
+          # Code cannot write through a symlink. home.activation.claudeSettings
+          # below copies the same JSON into place instead.
+          settings = { };
         };
+
+        home.activation.claudeSettings =
+          let
+            settingsJson = (pkgs.formats.json { }).generate "claude-code-settings.json" (
+              {
+                "$schema" = "https://json.schemastore.org/claude-code-settings.json";
+              }
+              // cfg.settings
+              // lib.optionalAttrs cfg.statusline.enable {
+                # `padding` is deliberately omitted. It is optional in Claude
+                # Code's schema and it strips the key when it rewrites the file,
+                # so emitting `padding = 0` would make the live file differ from
+                # nix after every rewrite and trip the drift check below forever.
+                statusLine = {
+                  type = "command";
+                  command = "${config.home.homeDirectory}/.claude/statusline-command.sh";
+                };
+                subagentStatusLine = {
+                  type = "command";
+                  command = "${config.home.homeDirectory}/.claude/subagent-statusline.sh";
+                };
+              }
+              // lib.optionalAttrs cfg.rtk.enable {
+                hooks.PreToolUse = [
+                  {
+                    matcher = "Bash";
+                    hooks = [
+                      {
+                        type = "command";
+                        # Must be exactly "rtk hook claude" (no store path) so rtk's
+                        # binary_hook_registered() exact-match check considers it installed.
+                        command = "rtk hook claude";
+                      }
+                    ];
+                  }
+                ];
+              }
+            );
+            claudeDir = lib.escapeShellArg "${config.home.homeDirectory}/.claude";
+            target = lib.escapeShellArg "${config.home.homeDirectory}/.claude/settings.json";
+            driftDir = lib.escapeShellArg "${config.home.homeDirectory}/.claude/settings-drift";
+          in
+          lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+            $DRY_RUN_CMD mkdir -p ${claudeDir}
+
+            # This file is overwritten on every switch, so any setting Claude
+            # Code wrote at runtime (/config, /effort, "add to user settings")
+            # would vanish here. Stash a copy first whenever the live file
+            # differs semantically from what we are about to install, so the
+            # change can be reconciled into defaultSettings rather than lost.
+            # `jq -S` normalises key order and whitespace so Claude Code merely
+            # rewriting the file is not mistaken for a real change. It does not
+            # hide added or removed keys, so avoid emitting keys Claude Code
+            # strips as defaults (see the `padding` note above) or this fires
+            # on every switch.
+            if [ -f ${target} ] && [ \
+                 "$(${pkgs.jq}/bin/jq -S . ${target} 2>/dev/null)" \
+                 != "$(${pkgs.jq}/bin/jq -S . ${settingsJson})" ]; then
+              stamp="$(date +%Y%m%dT%H%M%S)"
+              $DRY_RUN_CMD mkdir -p ${driftDir}
+              $DRY_RUN_CMD cp ${target} ${driftDir}/"$stamp".json
+              echo "claude-code: settings.json had runtime changes; saved ${driftDir}/$stamp.json" >&2
+              echo "claude-code: run /reconcile-claude-settings in the dotfiles repo to fold them in" >&2
+            fi
+
+            # `rm -f` first: the target may still be a store symlink from an
+            # older generation, and `install` would follow it into the
+            # read-only store instead of replacing it. Mode 644 (not the
+            # store's 444) is what keeps the file writable by Claude Code.
+            $DRY_RUN_CMD rm -f ${target}
+            $DRY_RUN_CMD install -m 644 ${settingsJson} ${target}
+          '';
 
         home.activation.claudeMcpServers =
           let
