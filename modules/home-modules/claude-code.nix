@@ -64,6 +64,7 @@
         remoteControlAtStartup = true;
         includeCoAuthoredBy = false;
         agentPushNotifEnabled = true;
+        inputNeededNotifEnabled = true;
         tui = "fullscreen";
 
         permissions.defaultMode = "plan";
