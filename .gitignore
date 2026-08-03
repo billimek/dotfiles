@@ -3,4 +3,6 @@ result
 !.claude/settings.json
 !.claude/commands/
 !.claude/commands/**
+!.claude/skills/
+!.claude/skills/**
 .claude/settings.local.json
