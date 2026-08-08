@@ -56,6 +56,10 @@
       #     }'
 
       config = lib.mkIf cfg.enable {
+        # garage-webui builds its frontend with pnpm, which is currently flagged
+        # insecure in nixpkgs. Scope the permit to hosts that actually run garage-webui.
+        nixpkgs.config.permittedInsecurePackages = [ "pnpm-9.15.9" ];
+
         services.garage = {
           enable = true;
           package = pkgs.garage_2;
