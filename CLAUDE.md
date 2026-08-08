@@ -43,8 +43,11 @@ To **default a module on** (always active unless explicitly disabled), merge `//
 - **Fish codesigning workaround on aarch64-darwin** is duplicated across `modules/darwin-modules/base.nix` and `modules/overlays/fish-codesign-fix.nix`. Removing one without the other will break fish on Apple Silicon.
 
 ## Secrets
-- **`secrets.nix`** at repo root — encrypted via **git-crypt**. Imported at a relative path only by Darwin/work configs (`hosts/darwin/work-laptop.nix` → `../../secrets.nix`, `hosts/home/jeff/work-laptop.nix` → `../../../secrets.nix`). Flake evaluation of these configs requires git-crypt unlocked.
-- **opnix** (1Password) — runtime secrets on NixOS hosts via `services.onepassword-secrets`. Configured in `modules/nixos-modules/opnix.nix`.
+Four mechanisms, each scoped to a different point in the config lifecycle — reach for the one that matches, don't blend them:
+- **`secrets.nix`** at repo root — encrypted via **git-crypt**, for **eval-time** values (Nix evaluation is pure and can't call out to a provider). Imported at a relative path only by Darwin/work configs (`hosts/darwin/work-laptop.nix` → `../../secrets.nix`, `hosts/home/jeff/work-laptop.nix` → `../../../secrets.nix`). Flake evaluation of these configs requires git-crypt unlocked.
+- **opnix** (1Password) — **runtime** secrets on NixOS hosts, delivered as owned files (not env vars) via `services.onepassword-secrets`. Configured in `modules/nixos-modules/opnix.nix`; consumed by garage, rclone, nut, gatus.
+- **secretspec** (`modules/home-modules/secretspec.nix`) — secrets a **stdio MCP server needs injected into its own process env at launch**, e.g. `modules.claude-code.extraMcpServers.grafana` on Jeffs-M3Pro. Resolves from 1Password via `secretspec run` at process start, using a cached provider alias that serves repeat reads from the login keychain for `modules.secretspec.cacheMaxAge` (default 12h) so `op` isn't hit — and a 1Password biometric prompt isn't raised — on every MCP server launch. Never written into `~/.claude.json`, unlike the old `$(op read ...)` pattern it replaces there.
+- **`op read` at home-manager activation** — the older pattern, still used where secretspec's model doesn't fit: HTTP-transport MCP servers whose token rides in an `Authorization` header string, e.g. `leanix` on work-laptop (`hosts/home/jeff/work-laptop.nix`), since there's no child process for `secretspec run` to wrap. Resolved once per `nh home switch` and baked into `~/.claude.json`; a locked vault at switch time fails the switch rather than silently registering an empty token.
 - Never commit plaintext secrets.
 
 ## Verifying option names with mcp-nixos

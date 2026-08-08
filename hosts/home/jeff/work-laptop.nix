@@ -16,11 +16,16 @@ in
     kubernetes.enable = true;
     zmx.enable = true;
 
+    # HTTP-transport MCP server: the token rides in an Authorization header
+    # string with no child process, so secretspec (which only wraps process
+    # launches) can't apply here. Stays on `op read` at activation time.
+    # Deliberately no `2>/dev/null`: a locked vault should fail loudly at
+    # `nh home switch` rather than silently register an empty token.
     claude-code.extraMcpServers.leanix = {
       type = "http";
       url = "https://homedepot.leanix.net/services/mcp-server/v1/mcp";
       headers = [
-        "Authorization: Token $(${pkgs._1password-cli}/bin/op read op://nix/leanix-mcp/token 2>/dev/null)"
+        "Authorization: Token $(${pkgs._1password-cli}/bin/op read op://nix/leanix-mcp/token)"
       ];
     };
   };
