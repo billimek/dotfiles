@@ -68,6 +68,12 @@
     "ssdtank"
   ];
 
+  # 125 GB RAM box: cap ARC at 64 GiB so it stops evicting anonymous pages into swap.
+  # Host-local rather than in modules/nixos-modules/zfs.nix — other hosts have far less RAM.
+  boot.extraModprobeConfig = ''
+    options zfs zfs_arc_max=68719476736
+  '';
+
   services.smartd.enable = true;
 
   services.sanoid.datasets = {
