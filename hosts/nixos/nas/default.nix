@@ -87,6 +87,15 @@
       use_template = [ "backups" ]; # base: 0 hourly, 6 monthly, 2 yearly
       daily = 3; # override template daily=0 so rclone-backup-kopia has a fresh source
     };
+
+    # garage's LMDB metadata store has a known tendency to corrupt after an unclean
+    # shutdown; snapshots are garage's own recommended recovery path.
+    "ssdtank/garage/meta" = {
+      use_template = [ "backups" ]; # 0 hourly, 0 daily, 6 monthly, 2 yearly
+    };
+    "ssdtank/garage/data" = {
+      use_template = [ "backups" ];
+    };
   };
 
   environment.systemPackages = with pkgs; [
