@@ -16,19 +16,41 @@ jobs:
       contents: write
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      - uses: cachix/install-nix-action@v20
+      - uses: cachix/install-nix-action@v27
 
       - run: nix flake update
 
-      - uses: stefanzweifel/git-auto-commit-action@v4
+      # Evaluate every config the updated lockfile would build before committing it,
+      # so a breaking upstream change is caught here instead of at `nh switch` time.
+      # work-laptop configs are excluded: they import ../../secrets.nix, which is
+      # git-crypt encrypted and unreadable to this runner, so evaluating them would
+      # fail for reasons unrelated to the lockfile bump.
+      - name: Evaluate updated configs
+        run: |
+          set -euo pipefail
+          for attr in \
+            nixosConfigurations.nas.config.system.build.toplevel \
+            nixosConfigurations.cloud.config.system.build.toplevel \
+            nixosConfigurations.home.config.system.build.toplevel \
+            darwinConfigurations.Jeffs-M3Pro.config.system.build.toplevel \
+            homeConfigurations."jeff@cloud".activationPackage \
+            homeConfigurations."jeff@home".activationPackage \
+            homeConfigurations."jeff@Jeffs-M3Pro".activationPackage \
+            homeConfigurations."nix@nas".activationPackage \
+          ; do
+            echo "== .#$attr =="
+            nix eval --no-write-lock-file ".#$attr.drvPath"
+          done
+
+      - uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: Bump flake.lock
           branch: master
           commit_options: '--no-verify --signoff'
           file_pattern: flake.lock
-          skip_dirty_check: false    
+          skip_dirty_check: false
           skip_fetch: true

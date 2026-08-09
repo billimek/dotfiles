@@ -1,5 +1,15 @@
 { inputs, self, ... }:
 let
+  # Shared by mkDarwin/mkHome, the only two builders that receive `pkgs-unstable`
+  # via specialArgs (NixOS modules use `pkgs.unstable.*` from the
+  # `unstable-packages` overlay instead -- see modules/overlays/unstable-packages.nix).
+  mkPkgsUnstable =
+    system:
+    import inputs.nixpkgs-unstable {
+      inherit system;
+      config.allowUnfree = true;
+    };
+
   mkNixos =
     { system, hostPath }:
     inputs.nixpkgs.lib.nixosSystem {
@@ -21,10 +31,7 @@ let
       specialArgs = {
         inherit inputs;
         outputs = self;
-        pkgs-unstable = import inputs.nixpkgs-unstable {
-          system = "aarch64-darwin";
-          config.allowUnfree = true;
-        };
+        pkgs-unstable = mkPkgsUnstable "aarch64-darwin";
       };
       modules = [
         hostPath
@@ -48,10 +55,7 @@ let
       extraSpecialArgs = {
         inherit inputs;
         outputs = self;
-        pkgs-unstable = import inputs.nixpkgs-unstable {
-          inherit system;
-          config.allowUnfree = true;
-        };
+        pkgs-unstable = mkPkgsUnstable system;
       };
     };
 in

@@ -30,20 +30,17 @@
     let
       cfg = config.modules.claude-code;
 
-      kubernetes-mcp-server = pkgs.callPackage ../../packages/kubernetes-mcp-server.nix { };
-      flux-operator-mcp = pkgs.callPackage ../../packages/flux-operator-mcp.nix { };
-
       defaultMcpServers = {
         mcp-nixos = {
           command = "${pkgs.mcp-nixos}/bin/mcp-nixos";
           args = [ ];
         };
         kubernetes = {
-          command = "${kubernetes-mcp-server}/bin/kubernetes-mcp-server";
+          command = "${pkgs.kubernetes-mcp-server}/bin/kubernetes-mcp-server";
           args = [ ];
         };
         flux = {
-          command = "${flux-operator-mcp}/bin/flux-operator-mcp";
+          command = "${pkgs.flux-operator-mcp}/bin/flux-operator-mcp";
           args = [
             "serve"
             "--read-only"

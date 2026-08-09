@@ -3,6 +3,8 @@
   perSystem =
     { pkgs, ... }:
     {
-      packages.kubernetes-mcp-server = pkgs.callPackage ../../packages/kubernetes-mcp-server.nix { };
+      # Sourced from the `additions` overlay (modules/overlays/additions.nix) so
+      # there is a single place that defines this derivation.
+      packages.kubernetes-mcp-server = pkgs.kubernetes-mcp-server;
     };
 }

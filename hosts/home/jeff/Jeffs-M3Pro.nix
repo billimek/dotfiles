@@ -23,7 +23,7 @@
     };
 
     claude-code.extraMcpServers.victorialogs = {
-      command = lib.getExe (pkgs.callPackage ../../../packages/mcp-victorialogs.nix { });
+      command = lib.getExe pkgs.mcp-victorialogs;
       args = [ ];
       env = [
         "VL_INSTANCE_ENTRYPOINT=https://vlogs.eviljungle.com"

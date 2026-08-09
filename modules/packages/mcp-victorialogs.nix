@@ -5,6 +5,6 @@
     {
       # Sourced from the `additions` overlay (modules/overlays/additions.nix) so
       # there is a single place that defines this derivation.
-      packages.flux-operator-mcp = pkgs.flux-operator-mcp;
+      packages.mcp-victorialogs = pkgs.mcp-victorialogs;
     };
 }
