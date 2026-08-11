@@ -7,7 +7,82 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
+  update:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: cachix/install-nix-action@v27
+
+      - run: nix flake update
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: flake-lock
+          path: flake.lock
+
+  # Evaluate every config the updated lockfile would build before committing it,
+  # so a breaking upstream change is caught here instead of at `nh switch` time.
+  # work-laptop configs are excluded: they import ../../secrets.nix, which is
+  # git-crypt encrypted and unreadable to this runner, so evaluating them would
+  # fail for reasons unrelated to the lockfile bump.
+  #
+  # Split into a per-platform matrix because some configs need import-from-derivation
+  # to evaluate (e.g. modules.zmx pulls inputs.zmx.packages.${system}.default, which
+  # reads build.zig.zon via a helper derivation), so evaluation on a foreign-arch
+  # runner fails outright rather than just being slow.
+  eval:
+    needs: update
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - runner: ubuntu-latest
+            attrs: |
+              nixosConfigurations.nas.config.system.build.toplevel
+              nixosConfigurations.home.config.system.build.toplevel
+              homeConfigurations."jeff@home".activationPackage
+              homeConfigurations."nix@nas".activationPackage
+          - runner: ubuntu-24.04-arm
+            attrs: |
+              nixosConfigurations.cloud.config.system.build.toplevel
+              homeConfigurations."jeff@cloud".activationPackage
+          - runner: macos-latest
+            attrs: |
+              darwinConfigurations.Jeffs-M3Pro.config.system.build.toplevel
+              homeConfigurations."jeff@Jeffs-M3Pro".activationPackage
+    runs-on: ${{ matrix.runner }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/download-artifact@v4
+        with:
+          name: flake-lock
+          path: .
+
+      - uses: cachix/install-nix-action@v27
+        with:
+          extra_nix_config: |
+            extra-substituters = https://zmx.cachix.org
+            extra-trusted-public-keys = zmx.cachix.org-1:9E7zdDiSiG9PnSl8RFHbZ3AW2NmIy/7SPK9rRwed7r4=
+
+      - name: Evaluate updated configs
+        run: |
+          set -euo pipefail
+          while IFS= read -r attr; do
+            [ -z "$attr" ] && continue
+            echo "== .#$attr =="
+            nix eval --no-write-lock-file ".#$attr.drvPath"
+          done <<'ATTRS'
+          ${{ matrix.attrs }}
+          ATTRS
+
+  commit:
+    needs: eval
     runs-on: ubuntu-latest
 
     permissions:
@@ -20,31 +95,10 @@ jobs:
         with:
           fetch-depth: 0
 
-      - uses: cachix/install-nix-action@v27
-
-      - run: nix flake update
-
-      # Evaluate every config the updated lockfile would build before committing it,
-      # so a breaking upstream change is caught here instead of at `nh switch` time.
-      # work-laptop configs are excluded: they import ../../secrets.nix, which is
-      # git-crypt encrypted and unreadable to this runner, so evaluating them would
-      # fail for reasons unrelated to the lockfile bump.
-      - name: Evaluate updated configs
-        run: |
-          set -euo pipefail
-          for attr in \
-            nixosConfigurations.nas.config.system.build.toplevel \
-            nixosConfigurations.cloud.config.system.build.toplevel \
-            nixosConfigurations.home.config.system.build.toplevel \
-            darwinConfigurations.Jeffs-M3Pro.config.system.build.toplevel \
-            homeConfigurations."jeff@cloud".activationPackage \
-            homeConfigurations."jeff@home".activationPackage \
-            homeConfigurations."jeff@Jeffs-M3Pro".activationPackage \
-            homeConfigurations."nix@nas".activationPackage \
-          ; do
-            echo "== .#$attr =="
-            nix eval --no-write-lock-file ".#$attr.drvPath"
-          done
+      - uses: actions/download-artifact@v4
+        with:
+          name: flake-lock
+          path: .
 
       - uses: stefanzweifel/git-auto-commit-action@v5
         with:
