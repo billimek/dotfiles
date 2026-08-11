@@ -10,12 +10,20 @@ jobs:
   update:
     runs-on: ubuntu-latest
 
+    permissions:
+      # Required by magic-nix-cache-action to read/write the GitHub Actions cache.
+      id-token: write
+      contents: read
+
     steps:
       - uses: actions/checkout@v5
-        with:
-          fetch-depth: 0
 
-      - uses: cachix/install-nix-action@v27
+      - uses: DeterminateSystems/nix-installer-action@main
+
+      # Caches everything built/fetched in this job (and IFD derivations) in the
+      # native GitHub Actions cache, so repeat scheduled runs reuse work instead
+      # of rebuilding from scratch. Free, no secrets, scoped per-runner-arch.
+      - uses: DeterminateSystems/magic-nix-cache-action@main
 
       - run: nix flake update
 
@@ -36,6 +44,10 @@ jobs:
   # runner fails outright rather than just being slow.
   eval:
     needs: update
+    permissions:
+      # Required by magic-nix-cache-action to read/write the GitHub Actions cache.
+      id-token: write
+      contents: read
     strategy:
       fail-fast: false
       matrix:
@@ -71,24 +83,18 @@ jobs:
         if: matrix.runner == 'ubuntu-24.04-arm'
         run: sudo sysctl -w kernel.apparmor_restrict_unprivileged_userns=0
 
-      # macos-latest images ship with Nix partially preinstalled, which makes
-      # cachix/install-nix-action fail (eDSRecordAlreadyExists creating _nixbld1).
-      # The Determinate installer handles that state cleanly; it's already the
-      # trusted installer for Darwin hosts in this repo (see
-      # modules/darwin-modules/determinate.nix).
+      # The Determinate installer handles macos-latest's partially-preinstalled Nix
+      # cleanly (unlike cachix/install-nix-action, which failed there with
+      # eDSRecordAlreadyExists); it's already the trusted installer for Darwin
+      # hosts in this repo (see modules/darwin-modules/determinate.nix). Used on
+      # every leg for consistency and because magic-nix-cache-action pairs with it.
       - uses: DeterminateSystems/nix-installer-action@main
-        if: matrix.runner == 'macos-latest'
         with:
           extra-conf: |
             extra-substituters = https://zmx.cachix.org
             extra-trusted-public-keys = zmx.cachix.org-1:9E7zdDiSiG9PnSl8RFHbZ3AW2NmIy/7SPK9rRwed7r4=
 
-      - uses: cachix/install-nix-action@v27
-        if: matrix.runner != 'macos-latest'
-        with:
-          extra_nix_config: |
-            extra-substituters = https://zmx.cachix.org
-            extra-trusted-public-keys = zmx.cachix.org-1:9E7zdDiSiG9PnSl8RFHbZ3AW2NmIy/7SPK9rRwed7r4=
+      - uses: DeterminateSystems/magic-nix-cache-action@main
 
       - name: Evaluate updated configs
         run: |
@@ -112,8 +118,6 @@ jobs:
 
     steps:
       - uses: actions/checkout@v5
-        with:
-          fetch-depth: 0
 
       - uses: actions/download-artifact@v7
         with:
