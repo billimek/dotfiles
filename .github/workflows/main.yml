@@ -23,7 +23,11 @@ jobs:
       # Caches everything built/fetched in this job (and IFD derivations) in the
       # native GitHub Actions cache, so repeat scheduled runs reuse work instead
       # of rebuilding from scratch. Free, no secrets, scoped per-runner-arch.
+      # use-flakehub: false since this repo isn't registered on FlakeHub -- avoids
+      # a misleading FlakeHub login ##[error] line; GHA caching alone still works.
       - uses: DeterminateSystems/magic-nix-cache-action@main
+        with:
+          use-flakehub: false
 
       - run: nix flake update
 
@@ -95,6 +99,8 @@ jobs:
             extra-trusted-public-keys = zmx.cachix.org-1:9E7zdDiSiG9PnSl8RFHbZ3AW2NmIy/7SPK9rRwed7r4=
 
       - uses: DeterminateSystems/magic-nix-cache-action@main
+        with:
+          use-flakehub: false
 
       - name: Evaluate updated configs
         run: |
