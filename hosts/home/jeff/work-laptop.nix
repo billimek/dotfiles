@@ -28,6 +28,15 @@ in
         "Authorization: Token $(${pkgs._1password-cli}/bin/op read op://nix/leanix-mcp/token)"
       ];
     };
+
+    # Remote HTTP MCP server authenticated by an interactive OAuth flow
+    # (`/mcp` inside Claude Code), not a token we can resolve at activation —
+    # so no header, no secretspec, no `op read`. Credentials are stored by
+    # Claude Code itself, outside nix.
+    claude-code.extraMcpServers.miro = {
+      type = "http";
+      url = "https://mcp.miro.com";
+    };
   };
 
   home = {
