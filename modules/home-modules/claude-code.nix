@@ -64,7 +64,11 @@
         inputNeededNotifEnabled = true;
         tui = "fullscreen";
 
-        permissions.defaultMode = "plan";
+        # Auto mode became the Pro/Max/Team default 2026-08-14; the classifier
+        # gates destructive actions instead of prompting. Note: broad
+        # permissions.allow rules below are dormant under auto and reactivate
+        # in other modes.
+        permissions.defaultMode = "auto";
         permissions.allow = [
           # Modern CLI (per AGENTS.md preferences)
           "Bash(rg:*)"
