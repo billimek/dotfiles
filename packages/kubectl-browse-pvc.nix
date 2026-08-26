@@ -7,24 +7,21 @@
 
 buildGoModule rec {
   pname = "kubectl-browse-pvc";
-  version = "1.3.0";
+  version = "1.4.4";
 
   src = pkgs.fetchFromGitHub {
     owner = "clbx";
     repo = "kubectl-browse-pvc";
     rev = "v${version}";
-    sha256 = "sha256-8O36JLNfrh+/9JqJjeeSEO88uYkoo6OXCraK385tGvM=";
+    sha256 = "sha256-xWNyZoYbyjnx61qpud91K2BpS3+pJ77ay1b3vF43aW4=";
   };
 
-  vendorHash = "sha256-WwEFtiWP9rQnOjMNnY8nFBKvw0Gp29wcKrLrUqOr7DQ=";
+  vendorHash = "sha256-cL/5nNOpo8MM1/0D+vomB60KUeH6/YP5j4DJepUx9iE=";
 
   doCheck = false;
 
-  # Point to the correct source directory containing go.mod
-  sourceRoot = "source/src";
-
   postInstall = ''
-    mv $out/bin/kubectl-browse-pvc $out/bin/kubectl-browse_pvc
+    mv $out/bin/browse-pvc $out/bin/kubectl-browse_pvc
   '';
 
   meta = {

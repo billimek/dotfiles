@@ -6,7 +6,7 @@
 }:
 
 let
-  version = "0.0.62";
+  version = "0.0.66";
   plat =
     {
       "x86_64-linux" = {
@@ -27,7 +27,7 @@ let
       "aarch64-darwin" = {
         os = "darwin";
         arch = "arm64";
-        sha256 = "sha256-YOmBzkroApJ/o7kD6gfOAsIht5ssa4mp/mym6KwRHjo=";
+        sha256 = "sha256-Ueotf0Us+i+TBCXjsYcCM76vn5LiEF/JIwVWXyk8kio=";
       };
     }
     .${stdenvNoCC.hostPlatform.system};
