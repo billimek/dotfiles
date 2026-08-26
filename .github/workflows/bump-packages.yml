@@ -1,0 +1,150 @@
+name: Bump pinned packages
+
+on:
+  schedule:
+    - cron: "0 7 * * 1"
+
+  workflow_dispatch:
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+
+    permissions:
+      # Required by magic-nix-cache-action to read/write the GitHub Actions cache.
+      id-token: write
+      contents: read
+
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: DeterminateSystems/nix-installer-action@main
+
+      - uses: DeterminateSystems/magic-nix-cache-action@main
+        with:
+          use-flakehub: false
+
+      # Package list is discovered from packages/*.nix, not hardcoded here --
+      # see scripts/update-packages.sh for why nix-update alone isn't enough
+      # for the hand-rolled prebuilt-binary packages.
+      - name: Update pinned packages
+        run: |
+          nix shell nixpkgs#nix-update nixpkgs#jq nixpkgs#sd \
+            -c bash scripts/update-packages.sh
+
+      - uses: actions/upload-artifact@v6
+        with:
+          name: packages-dir
+          path: packages/
+
+  # Build every updated package on every system that can natively build it,
+  # then evaluate every host config the updated packages would build, so a
+  # breaking bump is caught here instead of at `nh switch` time. work-laptop
+  # configs are excluded: they import ../../secrets.nix, which is git-crypt
+  # encrypted and unreadable to this runner, so evaluating them would fail
+  # for reasons unrelated to the package bump. x86_64-darwin is skipped
+  # entirely: no host uses it and no GitHub-hosted runner can build it.
+  eval:
+    needs: update
+    permissions:
+      # Required by magic-nix-cache-action to read/write the GitHub Actions cache.
+      id-token: write
+      contents: read
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - runner: ubuntu-latest
+            system: x86_64-linux
+            attrs: |
+              nixosConfigurations.nas.config.system.build.toplevel
+              nixosConfigurations.home.config.system.build.toplevel
+              homeConfigurations."jeff@home".activationPackage
+              homeConfigurations."nix@nas".activationPackage
+          - runner: ubuntu-24.04-arm
+            system: aarch64-linux
+            attrs: |
+              nixosConfigurations.cloud.config.system.build.toplevel
+              homeConfigurations."jeff@cloud".activationPackage
+          - runner: macos-latest
+            system: aarch64-darwin
+            attrs: |
+              darwinConfigurations.Jeffs-M3Pro.config.system.build.toplevel
+              homeConfigurations."jeff@Jeffs-M3Pro".activationPackage
+    runs-on: ${{ matrix.runner }}
+
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/download-artifact@v7
+        with:
+          name: packages-dir
+          path: packages/
+
+      # ubuntu-24.04-arm restricts unprivileged user namespaces by default, which
+      # breaks bwrap-sandboxed IFD builds (e.g. zig2nix, needed by modules.zmx).
+      # This is the standard workaround for that GitHub Actions regression.
+      - name: Allow unprivileged user namespaces (arm sandboxed builds)
+        if: matrix.runner == 'ubuntu-24.04-arm'
+        run: sudo sysctl -w kernel.apparmor_restrict_unprivileged_userns=0
+
+      # The Determinate installer handles macos-latest's partially-preinstalled Nix
+      # cleanly (unlike cachix/install-nix-action, which failed there with
+      # eDSRecordAlreadyExists); it's already the trusted installer for Darwin
+      # hosts in this repo (see modules/darwin-modules/determinate.nix). Used on
+      # every leg for consistency and because magic-nix-cache-action pairs with it.
+      - uses: DeterminateSystems/nix-installer-action@main
+        with:
+          extra-conf: |
+            extra-substituters = https://zmx.cachix.org
+            extra-trusted-public-keys = zmx.cachix.org-1:9E7zdDiSiG9PnSl8RFHbZ3AW2NmIy/7SPK9rRwed7r4=
+
+      - uses: DeterminateSystems/magic-nix-cache-action@main
+        with:
+          use-flakehub: false
+
+      - name: Build updated packages
+        run: |
+          set -euo pipefail
+          for f in packages/*.nix; do
+            pkg=$(basename "$f" .nix)
+            echo "== .#packages.${{ matrix.system }}.$pkg =="
+            nix build --no-link ".#packages.${{ matrix.system }}.$pkg"
+          done
+
+      - name: Evaluate updated configs
+        run: |
+          set -euo pipefail
+          while IFS= read -r attr; do
+            [ -z "$attr" ] && continue
+            echo "== .#$attr =="
+            nix eval --no-write-lock-file ".#$attr.drvPath"
+          done <<'ATTRS'
+          ${{ matrix.attrs }}
+          ATTRS
+
+  commit:
+    needs: eval
+    runs-on: ubuntu-latest
+
+    permissions:
+      # Give the default GITHUB_TOKEN write permission to commit and push the
+      # added or changed files to the repository.
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/download-artifact@v7
+        with:
+          name: packages-dir
+          path: packages/
+
+      - uses: stefanzweifel/git-auto-commit-action@v7
+        with:
+          commit_message: Bump pinned packages
+          branch: master
+          commit_options: '--no-verify --signoff'
+          file_pattern: packages/*.nix
+          skip_dirty_check: false
+          skip_fetch: true
