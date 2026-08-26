@@ -36,6 +36,8 @@ in
       kustomize
       stern
       talhelper
+      topf
+      vals
       pkgs-unstable.talosctl
       (wrapHelm kubernetes-helm {
         plugins = with pkgs.kubernetes-helmPlugins; [
