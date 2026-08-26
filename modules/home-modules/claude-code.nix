@@ -56,7 +56,7 @@
       };
 
       defaultSettings = {
-        model = "opusplan";
+        model = "sonnet";
         effortLevel = "medium";
         remoteControlAtStartup = true;
         includeCoAuthoredBy = false;
