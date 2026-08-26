@@ -12,17 +12,17 @@ let
       "x86_64-linux" = {
         os = "linux";
         arch = "amd64";
-        sha256 = "sha256-Er41j0B6Lk4GInsDfXVWDG5kK8EUNNQCqNJAEIr9YEs=";
+        sha256 = "sha256-k/quiFsioh6Tnln9Di8Lhge5I68+0YUA6B9ppGC+Ut4=";
       };
       "aarch64-linux" = {
         os = "linux";
         arch = "arm64";
-        sha256 = "sha256-MzLiJNA6WGHuuPuHjjUtcpRV+9ui432vzzypwm/v05Y=";
+        sha256 = "sha256-YWG9loD9AJXm6siEKEaIvNHMecyNbIFeGdANGZhZxdU=";
       };
       "x86_64-darwin" = {
         os = "darwin";
         arch = "amd64";
-        sha256 = "sha256-zHfDZdrWm1rSlzJzh0uA2A/LHRuh5H6Mviry4pPd+gc=";
+        sha256 = "sha256-dMtGvE7uChyUnXL+tsPhoBXrdT3j/j2f5byB/aoNijg=";
       };
       "aarch64-darwin" = {
         os = "darwin";
