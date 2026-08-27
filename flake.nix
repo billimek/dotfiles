@@ -31,7 +31,6 @@
 
     hardware.url = "github:nixos/nixos-hardware";
     nix-colors.url = "github:misterio77/nix-colors";
-    talhelper.url = "github:budimanjojo/talhelper";
     opnix.url = "github:brizzbuzz/opnix";
     nvf.url = "github:notashelf/nvf";
     # Community fork of zmx with darwin support; upstream neurosnap/zmx fetches ghostty
