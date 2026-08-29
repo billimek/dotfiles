@@ -24,6 +24,7 @@
           helmfile
           just
           kail
+          kopiur
           ktop
           kubectl
           kubectl-browse-pvc
