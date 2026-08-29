@@ -20,6 +20,7 @@
         home.packages = with pkgs; [
           fluxcd
           go-task
+          gum
           helmfile
           just
           kail
