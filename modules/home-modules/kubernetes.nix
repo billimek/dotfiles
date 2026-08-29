@@ -21,6 +21,7 @@
           fluxcd
           go-task
           helmfile
+          just
           kail
           ktop
           kubectl
