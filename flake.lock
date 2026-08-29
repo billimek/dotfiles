@@ -644,11 +644,11 @@
         "utils": "utils"
       },
       "locked": {
-        "lastModified": 1787931295,
-        "narHash": "sha256-4eEGXlyWil2FxxzR91aDQHoDd/f6fL+ttL47Bk916K4=",
+        "lastModified": 1787992889,
+        "narHash": "sha256-6/7QOtmPdeBFXN+8Yc3f2eUpox2pw3mYo/TSe6VscNc=",
         "owner": "SaumonNet",
         "repo": "proxmox-nixos",
-        "rev": "78adec0f5c1102eb128a55dd3e1045232ce39480",
+        "rev": "baa4baa2c9293b534b04667f01e94fbfd37358e9",
         "type": "github"
       },
       "original": {
