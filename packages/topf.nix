@@ -5,18 +5,19 @@
   ...
 }:
 
-buildGoModule rec {
+(buildGoModule.override { go = pkgs.unstable.go; }) rec {
+  # go.mod requires go >= 1.26.7; pinned nixpkgs only has 1.26.6.
   pname = "topf";
-  version = "0.5.0";
+  version = "0.6.0";
 
   src = pkgs.fetchFromGitHub {
     owner = "postfinance";
     repo = "topf";
     rev = "v${version}";
-    sha256 = "sha256-q9Gr1UuFOxptui6ZOhE0qTMXXVAkLjkAX0n9rzlpaOU=";
+    sha256 = "sha256-NRKRROq6uxLlAHCtpT+s+eBVjFgf8qjjwlYGhdNApUs=";
   };
 
-  vendorHash = "sha256-TyrlEJjh3SwBaGowM+f096GM2WGfDcxW+RWqspAB7rU=";
+  vendorHash = "sha256-9xYy1Ep7bZ0nW63fmrxiqfOrHWt7Kcn+zGhcjBpdvYY=";
 
   doCheck = false;
 
