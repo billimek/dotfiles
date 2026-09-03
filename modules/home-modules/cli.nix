@@ -45,6 +45,7 @@
           jq
           jwt-cli
           lazygit
+          nix-update
           nixd
           nixfmt
           nvd
