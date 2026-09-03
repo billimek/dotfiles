@@ -34,7 +34,7 @@ for f in packages/*.nix; do
 
       if [ "$current_hash" != "$real_hash" ]; then
         echo "  backfilling $sys hash"
-        sd -- "$current_hash" "$real_hash" "$f"
+        sd -F -- "$current_hash" "$real_hash" "$f"
       fi
     done
   fi
