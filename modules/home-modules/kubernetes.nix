@@ -13,6 +13,8 @@
       cfg = config.modules.kubernetes;
     in
     {
+      imports = [ inputs.sofka.homeManagerModules.default ];
+
       options.modules.kubernetes = {
         enable = lib.mkEnableOption "kubernetes tools";
       };
@@ -42,7 +44,6 @@
           topf
           vals
           pkgs-unstable.talosctl
-          inputs.sofka.packages.${pkgs.system}.default
           (wrapHelm kubernetes-helm {
             plugins = with pkgs.kubernetes-helmPlugins; [
               helm-diff
@@ -50,16 +51,15 @@
           })
         ];
 
-        # sofka configuration -- replaces k9s (no home-manager module upstream,
-        # so managed here directly). :debug on a pod/node covers the old k9s
-        # debug-container plugin natively; no plugin needed.
-        xdg.configFile."sofka/config.toml".text = ''
-          [skin]
-          name = "tokyo-night"
-
-          [debug]
-          image = "nicolaka/netshoot:v0.13"
-        '';
+        # replaces k9s. :debug on a pod/node covers the old k9s debug-container
+        # plugin natively; no plugin needed.
+        programs.sofka = {
+          enable = true;
+          settings = {
+            skin.name = "tokyo-night";
+            debug.image = "nicolaka/netshoot:v0.13";
+          };
+        };
 
         # `default_namespace` in config.toml is only a fallback for the very first
         # launch in a context -- after that sofka remembers the last namespace
