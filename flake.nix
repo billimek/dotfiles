@@ -37,6 +37,10 @@
     # at build time which fails in the nix sandbox (neurosnap/zmx#16, #43).
     # Revisit when nixpkgs#468608 lands.
     zmx.url = "github:thrawny/zmx-flake";
+    sofka = {
+      url = "github:nklmilojevic/sofka";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     nix-index-database = {
       url = "github:nix-community/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";

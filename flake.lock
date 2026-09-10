@@ -673,7 +673,28 @@
         "nvf": "nvf",
         "opnix": "opnix",
         "proxmox-nixos": "proxmox-nixos",
+        "sofka": "sofka",
         "zmx": "zmx"
+      }
+    },
+    "sofka": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1789037659,
+        "narHash": "sha256-mt3CjVXOGnjQuxWNd3yGsdytpM58VWbffuG2Lxfwsb0=",
+        "owner": "nklmilojevic",
+        "repo": "sofka",
+        "rev": "67d994d0adb5350a497687a833625f40629782d0",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nklmilojevic",
+        "repo": "sofka",
+        "type": "github"
       }
     },
     "systems": {

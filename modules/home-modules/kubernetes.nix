@@ -6,6 +6,7 @@
       lib,
       pkgs,
       pkgs-unstable,
+      inputs,
       ...
     }:
     let
@@ -41,6 +42,7 @@
           topf
           vals
           pkgs-unstable.talosctl
+          inputs.sofka.packages.${pkgs.system}.default
           (wrapHelm kubernetes-helm {
             plugins = with pkgs.kubernetes-helmPlugins; [
               helm-diff
@@ -48,25 +50,23 @@
           })
         ];
 
-        # k9s configuration
-        programs.k9s = {
-          enable = true;
-          plugins = {
-            # https://github.com/derailed/k9s/blob/master/plugins/debug-container.yaml
-            debug = {
-              shortCut = "Shift-D";
-              description = "Add debug container";
-              dangerous = true;
-              scopes = [ "containers" ];
-              command = "bash";
-              background = false;
-              args = [
-                "-c"
-                "kubectl debug -it --context $CONTEXT -n=$NAMESPACE $POD --target=$NAME --image=nicolaka/netshoot:v0.13 --share-processes -- bash"
-              ];
-            };
-          };
-        };
+        # sofka configuration -- replaces k9s (no home-manager module upstream,
+        # so managed here directly). :debug on a pod/node covers the old k9s
+        # debug-container plugin natively; no plugin needed.
+        xdg.configFile."sofka/config.toml".text = ''
+          [skin]
+          name = "tokyo-night"
+
+          [debug]
+          image = "nicolaka/netshoot:v0.13"
+        '';
+
+        # `default_namespace` in config.toml is only a fallback for the very first
+        # launch in a context -- after that sofka remembers the last namespace
+        # picked per-context across restarts, so it can't reliably default to
+        # all namespaces on its own. Force it with -A on every invocation instead.
+        # Aliased to `k9s` since that's the muscle-memory name.
+        programs.fish.shellAliases.k9s = "sofka -A";
       };
     };
 }
