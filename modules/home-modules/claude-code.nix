@@ -60,6 +60,7 @@
         effortLevel = "medium";
         remoteControlAtStartup = true;
         includeCoAuthoredBy = false;
+        attribution.sessionUrl = false;
         agentPushNotifEnabled = true;
         inputNeededNotifEnabled = true;
         tui = "fullscreen";
