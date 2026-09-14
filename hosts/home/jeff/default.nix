@@ -56,6 +56,9 @@
     # Commit & PR Conventions
     - Never use emojis or em-dashes in commit messages, PR descriptions, or any git-related content.
     - Use plain ASCII punctuation only.
+
+    # Style
+    no mannered prose. use plain english and literal phrases.
   '';
 
   # Common git configuration for jeff
