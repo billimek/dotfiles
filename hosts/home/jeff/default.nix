@@ -59,6 +59,17 @@
 
     # Style
     no mannered prose. use plain english and literal phrases.
+
+    # Code Comments
+    - Comments describe what the code does, not why it was changed or the
+      incident/task that motivated it. No narrative, no history, no
+      "this fixes X" or "replaces Y because Z" -- that belongs in the commit
+      message, not the file.
+    - Default to no comment. Only add one for a non-obvious invariant a
+      reader couldn't infer from the code itself.
+    - Never write multi-line comment blocks explaining a decision. One line,
+      present tense, describing current behavior -- not reasoning, not
+      alternatives considered.
   '';
 
   # Common git configuration for jeff
