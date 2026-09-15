@@ -623,9 +623,11 @@
                     headerFlags = lib.concatMapStringsSep " " (h: ''-H "${h}"'') (server.headers or [ ]);
                     addCmd =
                       if (server.type or "") == "http" then
-                        "${claudeBin} mcp add -s user --transport http ${n} ${lib.escapeShellArg server.url}${
+                        # Double-quote url (not escapeShellArg) so bash evaluates any
+                        # $(...) (e.g. `op read`) at activation time, mirroring headers.
+                        ''${claudeBin} mcp add -s user --transport http ${n} "${server.url}"${
                           lib.optionalString (headerFlags != "") " ${headerFlags}"
-                        }"
+                        }''
                       else
                         "${claudeBin} mcp add -s user ${n} ${lib.escapeShellArg server.command} ${
                           lib.optionalString (envFlags != "") "${envFlags} "

@@ -12,6 +12,13 @@
     kubernetes.enable = true;
     zmx.enable = true;
 
+    # HTTP-transport MCP server whose secret URL is itself the credential
+    # (no separate header/token) -- resolved via `op read` at activation.
+    claude-code.extraMcpServers.homeassistant = {
+      type = "http";
+      url = "$(${pkgs._1password-cli}/bin/op read op://nix/ha-mcp/url)";
+    };
+
     zellij = {
       defaultLayout = "home";
       layouts.home = ''

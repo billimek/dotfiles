@@ -30,6 +30,13 @@
       ];
     };
 
+    # HTTP-transport MCP server whose secret URL is itself the credential
+    # (no separate header/token) -- resolved via `op read` at activation.
+    claude-code.extraMcpServers.homeassistant = {
+      type = "http";
+      url = "$(${pkgs._1password-cli}/bin/op read op://nix/ha-mcp/url)";
+    };
+
     claude-code.extraMcpServers.grafana = {
       command = lib.getExe pkgs-unstable.secretspec;
       args = config.modules.secretspec.wrapArgs ++ [
