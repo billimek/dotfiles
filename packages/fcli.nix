@@ -15,10 +15,10 @@ rustPlatform.buildRustPackage rec {
     owner = "perfectra1n";
     repo = "fcli";
     rev = "12fa9f1dd9d68de344ec51785f11220cec5b179d";
-    sha256 = lib.fakeHash;
+    sha256 = "sha256-7skkJdFj8lUHNM34uTApdiEn/SgukCSwnrElQOprUck=";
   };
 
-  cargoHash = lib.fakeHash;
+  cargoHash = "sha256-PfrW6LZK0r4WWwtH9zBWwoCNtgaragsDoAJzZQ4U14k=";
 
   cargoBuildFlags = [
     "-p"
