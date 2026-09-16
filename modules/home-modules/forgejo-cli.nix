@@ -5,6 +5,7 @@
     {
       config,
       lib,
+      pkgs,
       pkgs-unstable,
       ...
     }:
@@ -19,7 +20,9 @@
       };
 
       config = lib.mkIf cfg.enable {
-        home.packages = with pkgs-unstable; [ forgejo-cli ];
+        # fcli (github.com/perfectra1n/fcli) installed alongside forgejo-cli for
+        # evaluation -- unpackaged upstream, pinned via the `additions` overlay.
+        home.packages = (with pkgs-unstable; [ forgejo-cli ]) ++ (with pkgs; [ fcli ]);
       };
     };
 }

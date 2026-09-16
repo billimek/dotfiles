@@ -7,5 +7,6 @@
     flux-operator-mcp = final.callPackage ../../packages/flux-operator-mcp.nix { };
     mcp-victorialogs = final.callPackage ../../packages/mcp-victorialogs.nix { };
     topf = final.callPackage ../../packages/topf.nix { };
+    fcli = final.callPackage ../../packages/fcli.nix { };
   };
 }
