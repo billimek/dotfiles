@@ -18,7 +18,10 @@ rustPlatform.buildRustPackage rec {
     sha256 = "sha256-3vVDSJxOPcetr27pG9L/CUw9BajbU6FrTCNUrijehpw=";
   };
 
-  cargoHash = "sha256-KTs7v2t1pdw8Hka5Irwtz7OlR6Wnj9GpvB7K7v62tBc=";
+  # Vendored lockfile drives importCargoLock (curl) instead of fetchCargoVendor
+  # (python), whose Python 3.13 strict X.509 checks reject the corporate
+  # TLS-inspection proxy's leaf certs.
+  cargoLock.lockFile = ./fjo-Cargo.lock;
 
   cargoBuildFlags = [
     "-p"
