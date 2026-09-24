@@ -154,9 +154,9 @@
           # allowing `python3 -c ...` directly. The deny-list (rm/git push/nh) is
           # the real safety boundary.
           "Bash(nix-shell -p python3:*)"
-          "Bash(nix-shell -p python3Packages.*:*)"
-          "Bash(nix-shell -p 'python3.withPackages*':*)"
-          "Bash(nix-shell -p \"python3.withPackages*\":*)"
+          "Bash(nix-shell -p python3Packages.:*)"
+          "Bash(nix-shell -p 'python3.withPackages:*)"
+          "Bash(nix-shell -p \"python3.withPackages:*)"
 
           # Web
           "WebSearch"
