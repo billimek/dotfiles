@@ -16,11 +16,8 @@ in
     kubernetes.enable = true;
     zmx.enable = true;
 
-    # HTTP-transport MCP server: the token rides in an Authorization header
-    # string with no child process, so secretspec (which only wraps process
-    # launches) can't apply here. Stays on `op read` at activation time.
-    # Deliberately no `2>/dev/null`: a locked vault should fail loudly at
-    # `nh home switch` rather than silently register an empty token.
+    # No `2>/dev/null`: a locked vault fails `nh home switch` instead of
+    # registering an empty token.
     claude-code.extraMcpServers.leanix = {
       type = "http";
       url = "https://homedepot.leanix.net/services/mcp-server/v1/mcp";
@@ -31,7 +28,7 @@ in
 
     # Remote HTTP MCP server authenticated by an interactive OAuth flow
     # (`/mcp` inside Claude Code), not a token we can resolve at activation —
-    # so no header, no secretspec, no `op read`. Credentials are stored by
+    # so no header and no `op read`. Credentials are stored by
     # Claude Code itself, outside nix.
     claude-code.extraMcpServers.miro = {
       type = "http";

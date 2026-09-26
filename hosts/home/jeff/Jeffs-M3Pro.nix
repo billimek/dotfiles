@@ -3,7 +3,6 @@
   config,
   lib,
   pkgs,
-  pkgs-unstable,
   ...
 }:
 {
@@ -12,15 +11,6 @@
     dev.enable = true;
     kubernetes.enable = true;
     zmx.enable = true;
-
-    secretspec = {
-      enable = true;
-      secrets.GRAFANA_SERVICE_ACCOUNT_TOKEN = {
-        description = "Grafana service account token for the grafana MCP server";
-        item = "grafana-mcp";
-        field = "token";
-      };
-    };
 
     claude-code.extraMcpServers.victorialogs = {
       command = lib.getExe pkgs.mcp-victorialogs;
@@ -38,13 +28,11 @@
     };
 
     claude-code.extraMcpServers.grafana = {
-      command = lib.getExe pkgs-unstable.secretspec;
-      args = config.modules.secretspec.wrapArgs ++ [
-        (lib.getExe pkgs.mcp-grafana)
-        "--disable-write"
-      ];
+      command = lib.getExe pkgs.mcp-grafana;
+      args = [ "--disable-write" ];
       env = [
         "GRAFANA_URL=https://grafana.eviljungle.com"
+        "GRAFANA_SERVICE_ACCOUNT_TOKEN=$(${pkgs._1password-cli}/bin/op read op://nix/grafana-mcp/token)"
       ];
     };
   };
