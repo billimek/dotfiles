@@ -33,6 +33,9 @@
     hostName = "cloud";
     firewall.enable = false;
     networkmanager.enable = true;
+    # OCI advertises IPv6 RA on this VCN without functional IPv6 egress,
+    # which black-holes connections that prefer IPv6 (e.g. zig's fetch client).
+    enableIPv6 = false;
   };
 
   # Allow wheel group to use sudo without password
