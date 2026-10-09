@@ -58,6 +58,12 @@
           settings = {
             skin.name = "tokyo-night";
             debug.image = "nicolaka/netshoot:v0.13";
+            views."v1/pods".columns = [
+              {
+                name = "NODE";
+                path = "/spec/nodeName";
+              }
+            ];
           };
         };
 
