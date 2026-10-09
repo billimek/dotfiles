@@ -70,7 +70,10 @@ jobs:
             attrs: |
               darwinConfigurations.Jeffs-M3Pro.config.system.build.toplevel
               homeConfigurations."jeff@Jeffs-M3Pro".activationPackage
+            build: true
     runs-on: ${{ matrix.runner }}
+    env:
+      CACHIX_AUTH_TOKEN: ${{ secrets.CACHIX_AUTH_TOKEN }}
 
     steps:
       - uses: actions/checkout@v5
@@ -102,6 +105,14 @@ jobs:
         with:
           use-flakehub: false
 
+      # Pushes everything built in this job to Cachix when the job ends.
+      # Skipped until the CACHIX_AUTH_TOKEN secret exists.
+      - uses: cachix/cachix-action@v16
+        if: ${{ matrix.build && env.CACHIX_AUTH_TOKEN != '' }}
+        with:
+          name: billimek-dotfiles
+          authToken: ${{ env.CACHIX_AUTH_TOKEN }}
+
       - name: Evaluate updated configs
         run: |
           set -euo pipefail
@@ -109,6 +120,18 @@ jobs:
             [ -z "$attr" ] && continue
             echo "== .#$attr =="
             nix eval --no-write-lock-file ".#$attr.drvPath"
+          done <<'ATTRS'
+          ${{ matrix.attrs }}
+          ATTRS
+
+      - name: Build updated configs
+        if: ${{ matrix.build }}
+        run: |
+          set -euo pipefail
+          while IFS= read -r attr; do
+            [ -z "$attr" ] && continue
+            echo "== build .#$attr =="
+            nix build --no-write-lock-file --no-link ".#$attr"
           done <<'ATTRS'
           ${{ matrix.attrs }}
           ATTRS
@@ -138,3 +161,22 @@ jobs:
           file_pattern: flake.lock
           skip_dirty_check: false
           skip_fetch: true
+
+  notify:
+    needs: [update, eval, commit]
+    if: ${{ always() && contains(needs.*.result, 'failure') }}
+    runs-on: ubuntu-latest
+    steps:
+      # Slack incoming webhook; a Discord webhook URL with /slack appended also works.
+      - name: Send failure alert
+        env:
+          WEBHOOK_URL: ${{ secrets.ALERT_WEBHOOK_URL }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          if [ -z "$WEBHOOK_URL" ]; then
+            echo "ALERT_WEBHOOK_URL not set; skipping alert"
+            exit 0
+          fi
+          curl -fsS -X POST -H 'Content-Type: application/json' \
+            --data "{\"text\": \"dotfiles: flake.lock bump failed, lock not committed. $RUN_URL\"}" \
+            "$WEBHOOK_URL"
