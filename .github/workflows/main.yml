@@ -11,23 +11,12 @@ jobs:
     runs-on: ubuntu-latest
 
     permissions:
-      # Required by magic-nix-cache-action to read/write the GitHub Actions cache.
-      id-token: write
       contents: read
 
     steps:
       - uses: actions/checkout@v5
 
       - uses: DeterminateSystems/nix-installer-action@main
-
-      # Caches everything built/fetched in this job (and IFD derivations) in the
-      # native GitHub Actions cache, so repeat scheduled runs reuse work instead
-      # of rebuilding from scratch. Free, no secrets, scoped per-runner-arch.
-      # use-flakehub: false since this repo isn't registered on FlakeHub -- avoids
-      # a misleading FlakeHub login ##[error] line; GHA caching alone still works.
-      - uses: DeterminateSystems/magic-nix-cache-action@main
-        with:
-          use-flakehub: false
 
       - run: nix flake update
 
@@ -49,8 +38,6 @@ jobs:
   eval:
     needs: update
     permissions:
-      # Required by magic-nix-cache-action to read/write the GitHub Actions cache.
-      id-token: write
       contents: read
     strategy:
       fail-fast: false
@@ -94,16 +81,12 @@ jobs:
       # cleanly (unlike cachix/install-nix-action, which failed there with
       # eDSRecordAlreadyExists); it's already the trusted installer for Darwin
       # hosts in this repo (see modules/darwin-modules/determinate.nix). Used on
-      # every leg for consistency and because magic-nix-cache-action pairs with it.
+      # every leg for consistency.
       - uses: DeterminateSystems/nix-installer-action@main
         with:
           extra-conf: |
             extra-substituters = https://zmx.cachix.org
             extra-trusted-public-keys = zmx.cachix.org-1:9E7zdDiSiG9PnSl8RFHbZ3AW2NmIy/7SPK9rRwed7r4=
-
-      - uses: DeterminateSystems/magic-nix-cache-action@main
-        with:
-          use-flakehub: false
 
       # Pushes everything built in this job to Cachix when the job ends.
       # Skipped until the CACHIX_AUTH_TOKEN secret exists.
