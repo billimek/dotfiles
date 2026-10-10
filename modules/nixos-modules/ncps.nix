@@ -87,6 +87,11 @@
                 proxy_read_timeout 600s;
               '';
             };
+            # Priority 50 makes clients prefer cache.nixos.org (40) and use this cache for misses.
+            locations."= /nix-cache-info".extraConfig = ''
+              default_type text/x-nix-cache-info;
+              return 200 "StoreDir: /nix/store\nWantMassQuery: 1\nPriority: 50\n";
+            '';
             # Everything else is read-only.
             locations."/" = {
               proxyPass = upstream;
