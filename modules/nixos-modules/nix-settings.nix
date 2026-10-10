@@ -40,13 +40,13 @@ in
           "https://nix-community.cachix.org"
           "https://nixpkgs-unfree.cachix.org"
           "https://cache.saumon.network/proxmox-nixos"
-          "https://billimek-dotfiles.cachix.org"
+          "https://cloud.drake-eel.ts.net:8443"
         ];
         trusted-public-keys = [
           "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
           "nixpkgs-unfree.cachix.org-1:hqvoInulhbV4nJ9yJOEr+4wxhDV4xq2d1DK7S6Nj6rs="
           "proxmox-nixos:D9RYSWpQQC/msZUWphOY2I5RLH5Dd6yQcaHIuug7dWM="
-          "billimek-dotfiles.cachix.org-1:qUeMkOdWyFtExm/cPvLgk20edCbKmJP7glwIvAG+8Qw="
+          "nixcache.eviljungle.com-1:1EyGst/zffjPb5do7BPi72cNqGR9ji3OGa5d+RQQpSo="
         ];
       };
 
