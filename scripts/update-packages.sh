@@ -17,25 +17,41 @@ cd "$(git rev-parse --show-toplevel)"
 systems=(x86_64-linux aarch64-linux x86_64-darwin aarch64-darwin)
 native_system=$(nix eval --raw --impure --expr builtins.currentSystem)
 
-for f in packages/*.nix; do
-  pkg=$(basename "$f" .nix)
-  echo "== $pkg =="
-  nix-update --flake "$pkg"
+update_package() {
+  local f=$1 pkg=$2
+  nix-update --flake "$pkg" || return 1
 
   if grep -q "hostPlatform.system" "$f"; then
+    local sys current_hash url real_hash
     for sys in "${systems[@]}"; do
       [ "$sys" = "$native_system" ] && continue
 
       if ! current_hash=$(nix eval --raw ".#packages.${sys}.${pkg}.src.outputHash" 2>/dev/null); then
         continue
       fi
-      url=$(nix eval --raw ".#packages.${sys}.${pkg}.src.url")
-      real_hash=$(nix store prefetch-file --json "$url" | jq -r .hash)
+      url=$(nix eval --raw ".#packages.${sys}.${pkg}.src.url") || return 1
+      real_hash=$(nix store prefetch-file --json "$url" | jq -r .hash) || return 1
 
       if [ "$current_hash" != "$real_hash" ]; then
         echo "  backfilling $sys hash"
-        sd -F -- "$current_hash" "$real_hash" "$f"
+        sd -F -- "$current_hash" "$real_hash" "$f" || return 1
       fi
     done
   fi
+}
+
+# A failing package is reverted and skipped so it cannot block the others.
+failed=()
+for f in packages/*.nix; do
+  pkg=$(basename "$f" .nix)
+  echo "== $pkg =="
+  if ! (update_package "$f" "$pkg"); then
+    git checkout -- "$f"
+    failed+=("$pkg")
+    echo "::warning::update of $pkg failed and was skipped"
+  fi
 done
+
+if [ "${#failed[@]}" -gt 0 ]; then
+  echo "skipped: ${failed[*]}"
+fi
