@@ -72,11 +72,11 @@ jobs:
           name: flake-lock
           path: .
 
-      # ubuntu-24.04-arm restricts unprivileged user namespaces by default, which
+      # Ubuntu 24.04 runners restrict unprivileged user namespaces by default, which
       # breaks bwrap-sandboxed IFD builds (e.g. zig2nix, needed by modules.zmx).
       # This is the standard workaround for that GitHub Actions regression.
-      - name: Allow unprivileged user namespaces (arm sandboxed builds)
-        if: matrix.runner == 'ubuntu-24.04-arm'
+      - name: Allow unprivileged user namespaces (sandboxed builds)
+        if: runner.os == 'Linux'
         run: sudo sysctl -w kernel.apparmor_restrict_unprivileged_userns=0
 
       - name: Free disk space (linux builds)
