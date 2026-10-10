@@ -49,10 +49,12 @@ jobs:
               nixosConfigurations.home.config.system.build.toplevel
               homeConfigurations."jeff@home".activationPackage
               homeConfigurations."nix@nas".activationPackage
+            build: true
           - runner: ubuntu-24.04-arm
             attrs: |
               nixosConfigurations.cloud.config.system.build.toplevel
               homeConfigurations."jeff@cloud".activationPackage
+            build: true
           - runner: macos-latest
             attrs: |
               darwinConfigurations.Jeffs-M3Pro.config.system.build.toplevel
@@ -77,6 +79,12 @@ jobs:
         if: matrix.runner == 'ubuntu-24.04-arm'
         run: sudo sysctl -w kernel.apparmor_restrict_unprivileged_userns=0
 
+      - name: Free disk space (linux builds)
+        if: ${{ matrix.build && runner.os == 'Linux' }}
+        run: |
+          sudo rm -rf /usr/share/dotnet /usr/local/lib/android /opt/ghc /opt/hostedtoolcache /usr/local/share/boost
+          df -h /
+
       # The Determinate installer handles macos-latest's partially-preinstalled Nix
       # cleanly (unlike cachix/install-nix-action, which failed there with
       # eDSRecordAlreadyExists); it's already the trusted installer for Darwin
@@ -85,8 +93,8 @@ jobs:
       - uses: DeterminateSystems/nix-installer-action@main
         with:
           extra-conf: |
-            extra-substituters = https://zmx.cachix.org
-            extra-trusted-public-keys = zmx.cachix.org-1:9E7zdDiSiG9PnSl8RFHbZ3AW2NmIy/7SPK9rRwed7r4=
+            extra-substituters = https://zmx.cachix.org https://nix-community.cachix.org https://nixpkgs-unfree.cachix.org https://cache.saumon.network/proxmox-nixos
+            extra-trusted-public-keys = zmx.cachix.org-1:9E7zdDiSiG9PnSl8RFHbZ3AW2NmIy/7SPK9rRwed7r4= nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs= nixpkgs-unfree.cachix.org-1:hqvoInulhbV4nJ9yJOEr+4wxhDV4xq2d1DK7S6Nj6rs= proxmox-nixos:D9RYSWpQQC/msZUWphOY2I5RLH5Dd6yQcaHIuug7dWM=
 
       # Pushes everything built in this job to Cachix when the job ends.
       # Skipped until the CACHIX_AUTH_TOKEN secret exists.
