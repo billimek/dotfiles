@@ -11,18 +11,12 @@ jobs:
     runs-on: ubuntu-latest
 
     permissions:
-      # Required by magic-nix-cache-action to read/write the GitHub Actions cache.
-      id-token: write
       contents: read
 
     steps:
       - uses: actions/checkout@v5
 
       - uses: DeterminateSystems/nix-installer-action@main
-
-      - uses: DeterminateSystems/magic-nix-cache-action@main
-        with:
-          use-flakehub: false
 
       # Package list is discovered from packages/*.nix, not hardcoded here --
       # see scripts/update-packages.sh for why nix-update alone isn't enough
@@ -47,8 +41,6 @@ jobs:
   eval:
     needs: update
     permissions:
-      # Required by magic-nix-cache-action to read/write the GitHub Actions cache.
-      id-token: write
       contents: read
     strategy:
       fail-fast: false
@@ -72,6 +64,10 @@ jobs:
               darwinConfigurations.Jeffs-M3Pro.config.system.build.toplevel
               homeConfigurations."jeff@Jeffs-M3Pro".activationPackage
     runs-on: ${{ matrix.runner }}
+    env:
+      NCPS_HOST: cloud.drake-eel.ts.net:8443
+      NCPS_USER: ${{ secrets.NCPS_USER }}
+      NCPS_PASSWORD: ${{ secrets.NCPS_PASSWORD }}
 
     steps:
       - uses: actions/checkout@v5
@@ -81,27 +77,23 @@ jobs:
           name: packages-dir
           path: packages/
 
-      # ubuntu-24.04-arm restricts unprivileged user namespaces by default, which
+      # Ubuntu 24.04 runners restrict unprivileged user namespaces by default, which
       # breaks bwrap-sandboxed IFD builds (e.g. zig2nix, needed by modules.zmx).
       # This is the standard workaround for that GitHub Actions regression.
-      - name: Allow unprivileged user namespaces (arm sandboxed builds)
-        if: matrix.runner == 'ubuntu-24.04-arm'
+      - name: Allow unprivileged user namespaces (sandboxed builds)
+        if: runner.os == 'Linux'
         run: sudo sysctl -w kernel.apparmor_restrict_unprivileged_userns=0
 
       # The Determinate installer handles macos-latest's partially-preinstalled Nix
       # cleanly (unlike cachix/install-nix-action, which failed there with
       # eDSRecordAlreadyExists); it's already the trusted installer for Darwin
       # hosts in this repo (see modules/darwin-modules/determinate.nix). Used on
-      # every leg for consistency and because magic-nix-cache-action pairs with it.
+      # every leg for consistency.
       - uses: DeterminateSystems/nix-installer-action@main
         with:
           extra-conf: |
-            extra-substituters = https://zmx.cachix.org
-            extra-trusted-public-keys = zmx.cachix.org-1:9E7zdDiSiG9PnSl8RFHbZ3AW2NmIy/7SPK9rRwed7r4=
-
-      - uses: DeterminateSystems/magic-nix-cache-action@main
-        with:
-          use-flakehub: false
+            extra-substituters = https://cloud.drake-eel.ts.net:8443 https://zmx.cachix.org
+            extra-trusted-public-keys = ${{ secrets.NCPS_PUBLIC_KEY }} zmx.cachix.org-1:9E7zdDiSiG9PnSl8RFHbZ3AW2NmIy/7SPK9rRwed7r4=
 
       - name: Build updated packages
         run: |
@@ -110,6 +102,18 @@ jobs:
             pkg=$(basename "$f" .nix)
             echo "== .#packages.${{ matrix.system }}.$pkg =="
             nix build --no-link ".#packages.${{ matrix.system }}.$pkg"
+          done
+
+      - name: Push built packages to ncps
+        if: ${{ env.NCPS_PASSWORD != '' }}
+        run: |
+          set -euo pipefail
+          printf 'machine %s\nlogin %s\npassword %s\n' "${NCPS_HOST%%:*}" "$NCPS_USER" "$NCPS_PASSWORD" > "$RUNNER_TEMP/ncps.netrc"
+          chmod 600 "$RUNNER_TEMP/ncps.netrc"
+          for f in packages/*.nix; do
+            pkg=$(basename "$f" .nix)
+            nix copy --option netrc-file "$RUNNER_TEMP/ncps.netrc" \
+              --to "https://$NCPS_HOST/upload" ".#packages.${{ matrix.system }}.$pkg"
           done
 
       - name: Evaluate updated configs
