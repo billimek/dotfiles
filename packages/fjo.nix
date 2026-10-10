@@ -9,7 +9,7 @@
 rustPlatform.buildRustPackage rec {
   pname = "fjo";
   # No tagged release yet (repo created 2026-09-13); pinned to latest main.
-  version = "0.2.5";
+  version = "0.2.6";
 
   src = fetchFromGitHub {
     owner = "perfectra1n";
