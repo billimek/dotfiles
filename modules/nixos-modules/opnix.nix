@@ -61,6 +61,21 @@ in
             mode = "0600";
           };
         })
+        # ncps secrets - only when ncps module is enabled
+        (lib.mkIf config.modules.ncps.enable {
+          ncpsSigningKey = {
+            reference = "op://nix/ncps/signing-key";
+            owner = "ncps";
+            group = "ncps";
+            mode = "0400";
+          };
+          ncpsUploadAuth = {
+            reference = "op://nix/ncps/upload-htpasswd";
+            owner = "nginx";
+            group = "nginx";
+            mode = "0400";
+          };
+        })
         # NUT secrets - only when NUT module is enabled
         (lib.mkIf config.modules.nut.enable {
           nutUpsmonPassword = {

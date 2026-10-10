@@ -18,6 +18,10 @@
     docker.enable = true;
     fish.enable = true;
     gatus.enable = true;
+    ncps = {
+      enable = true;
+      hostName = "nixcache.eviljungle.com";
+    };
     nfs-mounts.media.enable = true;
     nfs-mounts.ssdtank.enable = true;
     opnix.enable = true;
