@@ -5,7 +5,7 @@
 }:
 let
   pname = "kopiur";
-  version = "0.10.12";
+  version = "0.10.13";
 
   selectSystem =
     attrs:
@@ -20,10 +20,10 @@ let
   };
 
   hash = selectSystem {
-    x86_64-linux = "sha256-/evb8GLxUwXwVE5kCARCAs9pyfo8lKHfyQyRdgjdH1M=";
-    aarch64-linux = "sha256-6VM+D2h71tliXN8r+U++PFsk+caEwmxvGgYKBkQ+4a8=";
-    x86_64-darwin = "sha256-hd+zGUPzSOXScr6HRvlt7VFN4w1zpmBSDdkTO1jfWJQ=";
-    aarch64-darwin = "sha256-xmjg0u84baNjtXarxDVoOihMVXu06DNwfHNjNR7HPuI=";
+    x86_64-linux = "sha256-knH0tBVq/5UH3W9LPVV15GmdnnGwcBRLe5v0LfTY8aY=";
+    aarch64-linux = "sha256-g+QQW4v/UV6opQzZ1ukBrGHlpdIqSC4UH/6JE+6BI04=";
+    x86_64-darwin = "sha256-uFsbbiG8yxPe+Fg+MWTyO56dAhDIuU3AXE883G3cmZ8=";
+    aarch64-darwin = "sha256-V1Fd/3yk6z5zq7/YxkUmFEnokuIz0X/LefCi/f1ap4Y=";
   };
 in
 stdenvNoCC.mkDerivation {
