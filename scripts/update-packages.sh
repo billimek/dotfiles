@@ -55,3 +55,6 @@ done
 if [ "${#failed[@]}" -gt 0 ]; then
   echo "skipped: ${failed[*]}"
 fi
+if [ -n "${GITHUB_OUTPUT:-}" ]; then
+  echo "skipped=${failed[*]:-}" >> "$GITHUB_OUTPUT"
+fi

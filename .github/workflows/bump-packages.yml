@@ -9,6 +9,8 @@ on:
 jobs:
   update:
     runs-on: ubuntu-latest
+    outputs:
+      skipped: ${{ steps.bump.outputs.skipped }}
 
     permissions:
       contents: read
@@ -22,6 +24,7 @@ jobs:
       # see scripts/update-packages.sh for why nix-update alone isn't enough
       # for the hand-rolled prebuilt-binary packages.
       - name: Update pinned packages
+        id: bump
         run: |
           nix shell nixpkgs#nix-update nixpkgs#jq nixpkgs#sd \
             -c bash scripts/update-packages.sh
@@ -152,3 +155,29 @@ jobs:
           file_pattern: packages/*.nix
           skip_dirty_check: false
           skip_fetch: true
+
+  notify:
+    needs: [update, eval, commit]
+    if: ${{ always() && (contains(needs.*.result, 'failure') || needs.update.outputs.skipped != '') }}
+    runs-on: ubuntu-latest
+    steps:
+      # Slack incoming webhook; a Discord webhook URL with /slack appended also works.
+      - name: Send alert
+        env:
+          WEBHOOK_URL: ${{ secrets.ALERT_WEBHOOK_URL }}
+          SKIPPED: ${{ needs.update.outputs.skipped }}
+          FAILED: ${{ contains(needs.*.result, 'failure') }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          if [ -z "$WEBHOOK_URL" ]; then
+            echo "ALERT_WEBHOOK_URL not set; skipping alert"
+            exit 0
+          fi
+          if [ "$FAILED" = "true" ]; then
+            msg="dotfiles: package bump failed, nothing committed. $RUN_URL"
+          else
+            msg="dotfiles: package bump skipped (update failed, see the Update pinned packages log): $SKIPPED. $RUN_URL"
+          fi
+          curl -fsS -X POST -H 'Content-Type: application/json' \
+            --data "{\"text\": \"$msg\"}" \
+            "$WEBHOOK_URL"
