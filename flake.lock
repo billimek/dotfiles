@@ -501,11 +501,11 @@
     },
     "nixpkgs-stable": {
       "locked": {
-        "lastModified": 1788405554,
-        "narHash": "sha256-r2f1oUwixlgq9zOdYLqJLfS/lWBT60/IITjhTKI59JU=",
+        "lastModified": 1791765022,
+        "narHash": "sha256-ZGq3ptZzA+oO0N/Wi/F+GbuTijLkYExD01LvpNFAvr0=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "a5cc6f2c37bf518436dc8d1c288ccd0c43c2f4c4",
+        "rev": "7993f34ee47e28a3d607a525aadc6c94b73be728",
         "type": "github"
       },
       "original": {
@@ -684,15 +684,16 @@
         "utils": "utils"
       },
       "locked": {
-        "lastModified": 1791890350,
-        "narHash": "sha256-cn063w5UhJYXLmMqUdTjkHLVL3dvuQ8901xcusj9g7k=",
-        "owner": "SaumonNet",
+        "lastModified": 1792022116,
+        "narHash": "sha256-stHk/4dfKwfCapNYZUG3Unn5E8JXz362Ju4YjodaTgQ=",
+        "owner": "booxter",
         "repo": "proxmox-nixos",
-        "rev": "a9bdb14ed571ca60f3a69cb90e3a4a881762be52",
+        "rev": "0308a80324e3f70a159e8c4fe272927cd62845c8",
         "type": "github"
       },
       "original": {
-        "owner": "SaumonNet",
+        "owner": "booxter",
+        "ref": "fix-flake-update",
         "repo": "proxmox-nixos",
         "type": "github"
       }
