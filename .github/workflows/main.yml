@@ -61,6 +61,7 @@ jobs:
               homeConfigurations."jeff@Jeffs-M3Pro".activationPackage
             build: true
     runs-on: ${{ matrix.runner }}
+    timeout-minutes: 90
     env:
       NCPS_HOST: cloud.drake-eel.ts.net:8443
       NCPS_USER: ${{ secrets.NCPS_USER }}
