@@ -100,6 +100,7 @@ jobs:
             extra-trusted-public-keys = ${{ secrets.NCPS_PUBLIC_KEY }} zmx.cachix.org-1:9E7zdDiSiG9PnSl8RFHbZ3AW2NmIy/7SPK9rRwed7r4= nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs= nixpkgs-unfree.cachix.org-1:hqvoInulhbV4nJ9yJOEr+4wxhDV4xq2d1DK7S6Nj6rs= proxmox-nixos:D9RYSWpQQC/msZUWphOY2I5RLH5Dd6yQcaHIuug7dWM=
 
       - name: Evaluate updated configs
+        timeout-minutes: 30
         run: |
           set -euo pipefail
           while IFS= read -r attr; do
@@ -110,8 +111,12 @@ jobs:
           ${{ matrix.attrs }}
           ATTRS
 
+      # Build failures and timeouts do not block the lock commit; they alert below.
       - name: Build updated configs
+        id: build
         if: ${{ matrix.build }}
+        continue-on-error: true
+        timeout-minutes: 60
         run: |
           set -euo pipefail
           while IFS= read -r attr; do
@@ -122,9 +127,24 @@ jobs:
           ${{ matrix.attrs }}
           ATTRS
 
+      - name: Alert on build failure
+        if: ${{ steps.build.outcome == 'failure' }}
+        env:
+          WEBHOOK_URL: ${{ secrets.ALERT_WEBHOOK_URL }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          LEG: ${{ matrix.runner }}
+        run: |
+          if [ -z "$WEBHOOK_URL" ]; then
+            echo "ALERT_WEBHOOK_URL not set; skipping alert"
+            exit 0
+          fi
+          curl -fsS -X POST -H 'Content-Type: application/json' \
+            --data "{\"text\": \"dotfiles: build failed on $LEG, lock still committed. $RUN_URL\"}" \
+            "$WEBHOOK_URL"
+
       # Pushes the full closure; paths ncps already has are skipped.
       - name: Push built paths to ncps
-        if: ${{ matrix.build && env.NCPS_PASSWORD != '' }}
+        if: ${{ steps.build.outcome == 'success' && env.NCPS_PASSWORD != '' }}
         run: |
           set -euo pipefail
           printf 'machine %s\nlogin %s\npassword %s\n' "${NCPS_HOST%%:*}" "$NCPS_USER" "$NCPS_PASSWORD" > "$RUNNER_TEMP/ncps.netrc"
