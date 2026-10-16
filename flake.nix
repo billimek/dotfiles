@@ -27,7 +27,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    proxmox-nixos.url = "github:booxter/proxmox-nixos/fix-flake-update";
+    proxmox-nixos = {
+      url = "github:booxter/proxmox-nixos/fix-flake-update";
+      inputs.nixpkgs-stable.url = "github:NixOS/nixpkgs/a5cc6f2c37bf518436dc8d1c288ccd0c43c2f4c4";
+    };
 
     hardware.url = "github:nixos/nixos-hardware";
     nix-colors.url = "github:misterio77/nix-colors";
