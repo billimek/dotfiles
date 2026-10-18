@@ -259,11 +259,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1791938526,
-        "narHash": "sha256-yNYK2pdk3bCtJrpblrNYA6hZKdybWUeyTtx74+OEJFo=",
+        "lastModified": 1792274446,
+        "narHash": "sha256-AM1HmBeDnB2B3dSiXuCYeu7Me+lHNpz/P39lVxGJBuQ=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "32904dfe1cf86039f3c8c9f41f94e1cfd76dbb34",
+        "rev": "ab3823b4b24c0c3ca984c1f3ee577fd6d667424c",
         "type": "github"
       },
       "original": {
@@ -394,11 +394,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1791711434,
-        "narHash": "sha256-LpIhxnuO0tYeZ4k7BbNMxsPs2zJpB4hWXO1jdhUuE7Q=",
+        "lastModified": 1792309949,
+        "narHash": "sha256-2DAEMk8YkV8OF6N2uw9jQ016cYoNkcgnq50AShwWxNw=",
         "owner": "nix-community",
         "repo": "nix-index-database",
-        "rev": "9a2dd40780eeab8543aa97c59c26f11267025616",
+        "rev": "1b4d1758fa6053c5d6284254a793134fa602fbff",
         "type": "github"
       },
       "original": {
@@ -726,11 +726,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1792228612,
-        "narHash": "sha256-L1OdJq/IKTAtcAt7Q1rE2pgLEbuUUZcFrUp/1DKO6o0=",
+        "lastModified": 1792265581,
+        "narHash": "sha256-ZLtMHPb0b2CF797NwdB0MXp4Eg5jQkPEMNZrJ/e2Q6k=",
         "owner": "nklmilojevic",
         "repo": "sofka",
-        "rev": "819d410bf99cbd42c71a5f897c4b8d0a1ab13202",
+        "rev": "957201638a70bfe26ac1a6370e86a684680602cd",
         "type": "github"
       },
       "original": {
@@ -828,11 +828,11 @@
         "zmx-src-main": "zmx-src-main"
       },
       "locked": {
-        "lastModified": 1792168627,
-        "narHash": "sha256-CT36O9Z7x5aRwnEdzY8keNMUgtli9zXZD7oIlrwfZag=",
+        "lastModified": 1792251047,
+        "narHash": "sha256-HU4Mvs9yugKCfVnBiBokfAJMrzNajVftVwRNixvE5Bc=",
         "owner": "thrawny",
         "repo": "zmx-flake",
-        "rev": "97f9613d060121ce9fbc2b3e28e8c066b71acaab",
+        "rev": "6f9c748caef5023883bae6a27e58d42285ed87c5",
         "type": "github"
       },
       "original": {
@@ -861,11 +861,11 @@
     "zmx-src-main": {
       "flake": false,
       "locked": {
-        "lastModified": 1792162052,
-        "narHash": "sha256-tiMmB4ahzrB4CrrHtzURHayp3IQElaiWxPkvdLxRw/E=",
+        "lastModified": 1792181729,
+        "narHash": "sha256-kUvK8GX0SXY6hKd+ROmlAs7IEGS09ndDkO3Y1uass7w=",
         "owner": "neurosnap",
         "repo": "zmx",
-        "rev": "35b8783af0ba7e268f06deb2fe944c68e1ed4fab",
+        "rev": "0a18bee7d3555b7822d1cb79cca2304d6ef2711b",
         "type": "github"
       },
       "original": {
