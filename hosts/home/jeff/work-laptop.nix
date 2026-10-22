@@ -3,6 +3,7 @@
   config,
   lib,
   pkgs,
+  pkgs-unstable,
   ...
 }:
 let
@@ -53,6 +54,8 @@ in
       terminal-notifier # send notifications to macOS notification center
       temurin-bin
       terraform
+      trivy
+      pkgs-unstable.grype
     ];
   };
 
