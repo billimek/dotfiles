@@ -65,6 +65,7 @@
         inputNeededNotifEnabled = true;
         tui = "fullscreen";
         outputStyle = "Concise";
+        skipWorkflowUsageWarning = true;
 
         # Auto mode became the Pro/Max/Team default 2026-08-14; the classifier
         # gates destructive actions instead of prompting. Note: broad
