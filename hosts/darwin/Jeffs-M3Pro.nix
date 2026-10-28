@@ -24,6 +24,7 @@
   # Additional homebrew packages specific to this machine
   homebrew = {
     casks = [
+      "battle-net"
       "google-chrome"
       "discord"
       "microsoft-office"
