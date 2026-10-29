@@ -29,7 +29,7 @@
             webhook-url: "''${DISCORD_WEBHOOK_URL}"
             default-alert:
               enabled: true
-              failure-threshold: 3
+              failure-threshold: 5
               success-threshold: 2
               send-on-resolved: true
           ntfy:
@@ -40,7 +40,7 @@
             click: "https://cloud.drake-eel.ts.net"
             default-alert:
               enabled: true
-              failure-threshold: 3
+              failure-threshold: 5
               success-threshold: 2
               send-on-resolved: true
 
@@ -78,7 +78,7 @@
               dns-resolver: "udp://1.1.1.1:53"
             conditions:
               - "[STATUS] == 200"
-              - "[RESPONSE_TIME] < 5000"
+              - "[RESPONSE_TIME] < 10000"
               - "[CERTIFICATE_EXPIRATION] > 48h"
             alerts:
               - type: discord
@@ -91,7 +91,7 @@
               dns-resolver: "udp://1.1.1.1:53"
             conditions:
               - "[STATUS] == 200"
-              - "[RESPONSE_TIME] < 5000"
+              - "[RESPONSE_TIME] < 10000"
               - "[CERTIFICATE_EXPIRATION] > 48h"
             alerts:
               - type: discord
@@ -104,7 +104,7 @@
               dns-resolver: "udp://1.1.1.1:53"
             conditions:
               - "[STATUS] == any(200, 401)"
-              - "[RESPONSE_TIME] < 5000"
+              - "[RESPONSE_TIME] < 10000"
               - "[CERTIFICATE_EXPIRATION] > 48h"
             alerts:
               - type: discord
@@ -117,7 +117,7 @@
               dns-resolver: "udp://1.1.1.1:53"
             conditions:
               - "[STATUS] == any(200, 404)"
-              - "[RESPONSE_TIME] < 5000"
+              - "[RESPONSE_TIME] < 10000"
               - "[CERTIFICATE_EXPIRATION] > 48h"
             alerts:
               - type: discord
@@ -130,7 +130,7 @@
               dns-resolver: "udp://1.1.1.1:53"
             conditions:
               - "[STATUS] == any(200, 401)"
-              - "[RESPONSE_TIME] < 5000"
+              - "[RESPONSE_TIME] < 10000"
               - "[CERTIFICATE_EXPIRATION] > 48h"
             alerts:
               - type: discord
@@ -143,7 +143,7 @@
               dns-resolver: "udp://1.1.1.1:53"
             conditions:
               - "[STATUS] == 200"
-              - "[RESPONSE_TIME] < 5000"
+              - "[RESPONSE_TIME] < 10000"
               - "[CERTIFICATE_EXPIRATION] > 48h"
             alerts:
               - type: discord
@@ -156,7 +156,7 @@
               dns-resolver: "udp://1.1.1.1:53"
             conditions:
               - "[STATUS] == 200"
-              - "[RESPONSE_TIME] < 5000"
+              - "[RESPONSE_TIME] < 10000"
               - "[CERTIFICATE_EXPIRATION] > 48h"
             alerts:
               - type: discord
