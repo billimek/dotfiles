@@ -142,6 +142,11 @@ jobs:
     steps:
       - uses: actions/checkout@v5
 
+      - name: Sync with latest master
+        run: |
+          git fetch origin master
+          git reset --hard origin/master
+
       - uses: actions/download-artifact@v7
         with:
           name: packages-dir
