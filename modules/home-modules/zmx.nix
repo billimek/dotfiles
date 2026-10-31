@@ -34,9 +34,9 @@
             if type -q zmx
               zmx completions fish | source
             end
-            # Use stable symlink for SSH agent so forwarding survives session re-attach
+            # Fixed agent socket held open by the ssh control master
             if set -q ZMX_SESSION
-              set -gx SSH_AUTH_SOCK ~/.ssh/ssh_auth_sock
+              set -gx SSH_AUTH_SOCK ~/.ssh/agent.sock
             end
           '';
         })
