@@ -5,10 +5,19 @@
     {
       config,
       lib,
+      pkgs,
       ...
     }:
     let
       cfg = config.modules.ssh;
+      localAgent = "%d/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock";
+      # Darwin clients forward the 1Password agent to a fixed remote socket owned by the control master
+      agentFwd =
+        user:
+        if pkgs.stdenv.isDarwin then
+          { RemoteForward = "/home/${user}/.ssh/agent.sock \"${localAgent}\""; }
+        else
+          { ForwardAgent = "yes"; };
     in
     {
       options.modules.ssh = {
@@ -50,10 +59,9 @@
               };
             };
             # zmx session hosts -- e.g. "ssh nas.shell" attaches to zmx session "nas.shell"
-            "nas.*" = {
+            "nas.*" = agentFwd "nix" // {
               Hostname = "nas";
               User = "nix";
-              ForwardAgent = "yes";
               ControlMaster = "auto";
               ControlPath = "~/.ssh/cm-%r@%h:%p";
               ControlPersist = "10m";
@@ -62,10 +70,9 @@
               RequestTTY = "yes";
               RemoteCommand = "zmx attach %n";
             };
-            "cloud.*" = {
+            "cloud.*" = agentFwd "jeff" // {
               Hostname = "cloud";
               User = "jeff";
-              ForwardAgent = "yes";
               ControlMaster = "auto";
               ControlPath = "~/.ssh/cm-%r@%h:%p";
               ControlPersist = "10m";
