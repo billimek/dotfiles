@@ -113,6 +113,8 @@
             kubectl = mkIf hasKubecolor "kubecolor";
             ll = lib.mkForce "lsd -la";
             llrt = "lsd -lart";
+            dysk = "dysk --remote-stats=no";
+            duf = "dysk --remote-stats=no";
           };
           functions = {
             fish_greeting = "";

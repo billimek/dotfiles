@@ -30,7 +30,7 @@
           dig
           doggo
           dust
-          duf
+          dysk
           envsubst
           eza
           fastfetch
