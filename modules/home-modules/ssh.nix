@@ -49,19 +49,7 @@
                 is_vscode = "1";
               };
             };
-            # zmx session hosts -- e.g. "ssh home.shell" attaches to zmx session "home.shell"
-            "home.*" = {
-              Hostname = "home";
-              User = "jeff";
-              ForwardAgent = "yes";
-              ControlMaster = "auto";
-              ControlPath = "~/.ssh/cm-%r@%h:%p";
-              ControlPersist = "10m";
-              ServerAliveInterval = 60;
-              ServerAliveCountMax = 3;
-              RequestTTY = "yes";
-              RemoteCommand = "zmx attach %n";
-            };
+            # zmx session hosts -- e.g. "ssh nas.shell" attaches to zmx session "nas.shell"
             "nas.*" = {
               Hostname = "nas";
               User = "nix";
