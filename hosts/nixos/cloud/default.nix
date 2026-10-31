@@ -45,7 +45,7 @@
   # Allow wheel group to use sudo without password
   security.sudo.wheelNeedsPassword = false;
 
-  # need to disable this for aarch64 due to https://github.com/NixOS/nixpkgs/issues/258515
+  # TEMP-PATCH: nixpkgs#258515 (enableAllTerminfo breaks aarch64)
   environment.enableAllTerminfo = lib.mkForce false;
 
   systemd.services.NetworkManager-wait-online.enable = lib.mkForce false;

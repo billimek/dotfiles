@@ -28,6 +28,7 @@
     };
 
     proxmox-nixos = {
+      # TEMP-PATCH: booxter/proxmox-nixos fix-flake-update branch and nixpkgs-stable pin
       url = "github:booxter/proxmox-nixos/fix-flake-update";
       inputs.nixpkgs-stable.url = "github:NixOS/nixpkgs/a5cc6f2c37bf518436dc8d1c288ccd0c43c2f4c4";
     };

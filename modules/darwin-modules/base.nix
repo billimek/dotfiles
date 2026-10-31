@@ -34,10 +34,7 @@
           config = {
             allowUnfree = true;
           };
-          # Workaround for aarch64-darwin codesigning bug (nixpkgs#208951 / #507531):
-          # fish binaries from the binary cache occasionally have invalid ad-hoc
-          # signatures on Apple Silicon. Forcing a local rebuild ensures codesigning
-          # is applied on this machine with a valid signature.
+          # TEMP-PATCH: nixpkgs#208951 nixpkgs#507531 (fish cache signatures invalid on aarch64-darwin); also in modules/overlays/fish-codesign-fix.nix
           overlays = [
             (_final: prev: {
               fish =
@@ -64,9 +61,7 @@
             pkgs.git
             pkgs.vim
             pkgs.home-manager
-            # nixos-26.05 pins nix-output-monitor 2.1.8; 2.2.0 adds per-download
-            # progress bars. Override just nh's bundled nom -- nh wraps it with a
-            # `--prefix PATH`, so a newer nom in systemPackages would be shadowed.
+            # TEMP-PATCH: nixos-26.05 has nix-output-monitor 2.1.8; nh gets unstable (2.2.0+) nom
             (pkgs.nh.override { nix-output-monitor = pkgs-unstable.nix-output-monitor; })
             inputs.opnix.packages.${pkgs.stdenv.hostPlatform.system}.default
           ];

@@ -75,6 +75,9 @@ are caught only at local build time.
   produce a symlink.
 - Commit messages use `scope: description` format. Common scopes: `flake`, `home`, `darwin`, `nixos`, `nas`, `cloud`, `docs`. Multi-scope example: `flake,home,darwin: ...`.
 
+## Temporary upstream workarounds
+Every workaround for an upstream bug carries a one-line `# TEMP-PATCH: <upstream link or failure>` comment. `rg TEMP-PATCH .` lists them. Run `/audit-temp-patches` to test which ones can be removed. Add the marker to any new workaround.
+
 ## Git staging for flake evaluation
 Before running `nh`, `nix flake check`, or any flake build, `git add` any new files. Nix flakes only evaluate git-tracked files; untracked new modules will silently be missing from the evaluation.
 

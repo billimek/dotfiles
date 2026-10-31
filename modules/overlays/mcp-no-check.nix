@@ -1,8 +1,6 @@
 { ... }:
 {
-  # Skip test suites that fail in the nixpkgs build of mcp-nixos and its dependency fastmcp:
-  # fastmcp 3.2.3 stateful proxy tests (anyio cancel scope RuntimeError), and
-  # mcp-nixos test_read_text_file (reads an arbitrary /nix/store file).
+  # TEMP-PATCH: fastmcp stateful proxy tests (anyio cancel scope error) and mcp-nixos test_read_text_file (reads /nix/store) fail
   flake.overlays.mcp-no-check = _final: prev: {
     pythonPackagesExtensions = (prev.pythonPackagesExtensions or [ ]) ++ [
       (_pyFinal: pyPrev: {

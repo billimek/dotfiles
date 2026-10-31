@@ -69,9 +69,7 @@
           # terminfo, ncurses apps (htop, esp. under sudo) refuse to start.
           # Added individually because enableAllTerminfo is off on the cloud host.
           pkgs.ghostty.terminfo
-          # nixos-26.05 pins nix-output-monitor 2.1.8; 2.2.0 adds per-download
-          # progress bars. Override just nh's bundled nom -- nh wraps it with a
-          # `--prefix PATH`, so a newer nom in systemPackages would be shadowed.
+          # TEMP-PATCH: nixos-26.05 has nix-output-monitor 2.1.8; nh gets unstable (2.2.0+) nom
           (pkgs.nh.override { nix-output-monitor = pkgs.unstable.nix-output-monitor; })
         ];
 
