@@ -74,7 +74,38 @@
     options zfs zfs_arc_max=68719476736
   '';
 
-  services.smartd.enable = true;
+  services.smartd = {
+    enable = true;
+    # Monthly extended (long) self-test per HDD, staggered across days so the pool never loses
+    # more than one disk's worth of IO headroom at once. Days 1-2 are skipped: the monthly ZFS
+    # scrub starts on the 1st and runs ~20h. SSDs keep the default DEVICESCAN (no scheduled tests).
+    devices = [
+      {
+        device = "/dev/disk/by-id/wwn-0x5000cca2a3dde3ac";
+        options = "-s (L/../05/./03)";
+      } # WD140 (tank mirror-3)
+      {
+        device = "/dev/disk/by-id/wwn-0x5000cca28fc19d74";
+        options = "-s (L/../08/./03)";
+      } # WD140 (tank mirror-3)
+      {
+        device = "/dev/disk/by-id/wwn-0x5000cca2b6d482bf";
+        options = "-s (L/../11/./03)";
+      } # WD180 (tank mirror-0)
+      {
+        device = "/dev/disk/by-id/wwn-0x5000cca2b6d4e51c";
+        options = "-s (L/../14/./03)";
+      } # WD180 (tank mirror-0)
+      {
+        device = "/dev/disk/by-id/wwn-0x5000c500e9f0fe07";
+        options = "-s (L/../17/./03)";
+      } # ST22000 (tank mirror-1)
+      {
+        device = "/dev/disk/by-id/wwn-0x5000c500e9f9fcb3";
+        options = "-s (L/../20/./03)";
+      } # ST22000 (tank mirror-1)
+    ];
+  };
 
   services.sanoid.datasets = {
     # Parent dataset: all regular directories with conservative snapshots
