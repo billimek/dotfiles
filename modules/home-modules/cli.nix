@@ -6,6 +6,7 @@
       config,
       lib,
       pkgs,
+      inputs,
       ...
     }:
     let
@@ -59,6 +60,7 @@
           unzip
           wget
           yq-go
+          inputs.omnidiff.packages.${pkgs.system}.default
         ];
       };
     };
