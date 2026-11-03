@@ -43,6 +43,7 @@ in
     packages = with pkgs; [
       _1password-cli
       act
+      azure-cli
       cloudfoundry-cli
       crane
       (google-cloud-sdk.withExtraComponents [ google-cloud-sdk.components.gke-gcloud-auth-plugin ])
