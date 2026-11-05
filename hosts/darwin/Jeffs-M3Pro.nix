@@ -1,9 +1,5 @@
 # Darwin configuration for Jeff's personal M3 Pro MacBook
-{
-  pkgs,
-  ...
-}:
-{
+{pkgs, ...}: {
   # Enable modules (base and homebrew are auto-enabled)
   modules = {
     # All base darwin modules are auto-enabled
@@ -37,6 +33,7 @@
       "slack"
       "steam"
       "VIA"
+      "wowup-cf"
       "zoom"
     ];
     masApps = {
