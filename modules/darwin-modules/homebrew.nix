@@ -52,6 +52,7 @@
             "consent-o-matic" = 1606897889;
             "Kagi Search for Safari" = 1622835804;
             "Wipr2 for Safari" = 1662217862;
+            "Xcode" = 497799835;
           };
         };
       };
