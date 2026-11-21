@@ -7,6 +7,8 @@
 
   environment.darwinConfig = "$HOME/src/dotfiles/hosts/darwin/Jeffs-M3Pro.nix";
 
+  environment.systemPackages = [ pkgs.docker-credential-helpers ];
+
   networking.hostName = "Jeffs-M3Pro";
 
   system.primaryUser = "jeff";
